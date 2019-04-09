@@ -14,5 +14,10 @@
         android:id="@+id/nav_account"
         android:icon="@drawable/icon_account"
         android:title="Account" />
+    <item
+        android:id="@+id/nav_chores"
+        android:icon="@drawable/icon_chores"
+        android:title="Chores" />
+
 
 </menu>
