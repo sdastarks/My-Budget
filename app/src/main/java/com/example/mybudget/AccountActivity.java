@@ -42,6 +42,10 @@ public class AccountActivity extends AppCompatActivity {
 
                     case R.id.nav_account:
                         break;
+                    case R.id.nav_chores:
+                        Intent intent3 = new Intent(AccountActivity.this, ChoresActivity.class);
+                        startActivity(intent3);
+                        break;
 
                 }
                 return false;

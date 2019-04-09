@@ -41,6 +41,10 @@ public class WishlistActivity extends AppCompatActivity {
                         Intent intent2 = new Intent(WishlistActivity.this, AccountActivity.class);
                         startActivity(intent2);
                         break;
+                    case R.id.nav_chores:
+                        Intent intent3 = new Intent(WishlistActivity.this, ChoresActivity.class);
+                        startActivity(intent3);
+                        break;
 
                 }
                 return false;
