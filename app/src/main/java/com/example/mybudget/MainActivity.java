@@ -1,5 +1,12 @@
 package com.example.mybudget;
-
+/**
+ *
+ * Main class
+ *
+ * Displays a progress bar
+ *
+ * @author Daniel Beadleson
+ */
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +14,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.BottomNavigationView;
+import android.widget.TextView;
+
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,8 +62,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setProgressBar();
 
-
-
+    }
+    /*
+     * Method sets the status of the progress bar
+     */
+    public void setProgressBar(){
+        int progress=60; // data received from database
+        CircularProgressBar circularProgressBar = (CircularProgressBar)findViewById(R.id.progressBar);
+        circularProgressBar.setProgress(progress);
+        TextView progresstxt = findViewById(R.id.txtProgress);
+        progresstxt.setText(progress+"%");
     }
 }
