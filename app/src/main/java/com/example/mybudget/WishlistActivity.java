@@ -20,8 +20,8 @@ public class WishlistActivity extends AppCompatActivity {
     private static final String TAG = "WishlistActivity";
     private ArrayList <String> mWishNames = new ArrayList<>();
     private ArrayList <String> mImageUrls = new ArrayList<>();
-    private ArrayList <Double> mWishPrices = new ArrayList<>();
-    private ArrayList <ProgressBar> progressBarHorizontal = new ArrayList<>();
+    private ArrayList <Integer> mWishPrices = new ArrayList<>();
+    private ArrayList <Integer> mSavingProgress = new ArrayList<>();
 
 
     @Override
@@ -64,40 +64,41 @@ public class WishlistActivity extends AppCompatActivity {
         initImageBitmaps();
     }
 
+
+    /*
+     * Method creates a pathway to the other
+     * activities via a navigation bar
+     */
     private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps");
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mWishNames.add("Havasu Falls");
-
-        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mWishNames.add("Trondheim");
+        mImageUrls.add("https://www.girlsdressline.com/image/data/products/burgundy-lace-pleated-flower-girl-dresses-GG-3527-BG.jpg");
+        mWishNames.add("Dress");
+        mWishPrices.add(200);
+        mSavingProgress.add(40);
 
         mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mWishNames.add("Portugal");
-
-        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mWishNames.add("Rocky Mountain National Park");
-
+        mWishNames.add("Keds");
+        mWishPrices.add(340);
+        mSavingProgress.add(60);
 
         mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mWishNames.add("Mahahual");
+        mWishNames.add("Jimmys present");
+        mWishPrices.add(50);
+        mSavingProgress.add(40);
 
-        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mWishNames.add("Frozen Lake");
+        mImageUrls.add("https://static.thenounproject.com/png/971099-200.png");
+        mWishNames.add("Add your dream");
+        mWishPrices.add(0);
+        mSavingProgress.add(0);
         initRecyclerView();
-
-
     }
 
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: recycler view init");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishNames, mWishPrices, mImageUrls, progressBarHorizontal,this );
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishNames, mWishPrices, mImageUrls, mSavingProgress,this );
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
     }
 }

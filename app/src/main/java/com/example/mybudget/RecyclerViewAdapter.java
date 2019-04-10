@@ -31,17 +31,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG = "RecyclerViewAdapter";
 
     private ArrayList<String> mWishNames = new ArrayList<>();
-    private ArrayList<Double> mWishPrices = new ArrayList<>();
+    private ArrayList<Integer> mWishPrices = new ArrayList<>();
     private ArrayList<String> mWishImages = new ArrayList<>();
-    private ArrayList<ProgressBar> mProgressBars = new ArrayList<>();
+    private ArrayList<Integer> mSavingProgress = new ArrayList<>();
     private Context mContext;
 
 
-    public RecyclerViewAdapter(ArrayList<String> mWishNames, ArrayList<Double> mWishPrices, ArrayList<String> mWishImages, ArrayList<ProgressBar> mProgressBars, Context mContext) {
+    public RecyclerViewAdapter(ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices, ArrayList<String> mWishImages, ArrayList<Integer> mSavingProgress, Context mContext) {
         this.mWishNames = mWishNames;
         this.mWishPrices = mWishPrices;
         this.mWishImages = mWishImages;
-        this.mProgressBars = mProgressBars;
+        this.mSavingProgress = mSavingProgress;
         this.mContext = mContext;
     }
 
@@ -65,17 +65,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(viewHolder.wishImage);
 
         viewHolder.wishName.setText(mWishNames.get(i));
-        //viewHolder.wishPrice.setText(mWishPrices.get(i));
-//        viewHolder.progressBarHorizontal.getProgress(i);
+        viewHolder.wishPrice.setText("Price: " + mWishPrices.get(i) + " Kr");
+        viewHolder.progressBarHorizontal.setMax(mWishPrices.get(i));
+        viewHolder.savingProgress.setText("Saved: " + mSavingProgress.get(i) + " Kr");
+        viewHolder.progressBarHorizontal.setProgress(mSavingProgress.get(i));
+        viewHolder.progressBarHorizontal.setScaleY(5f);
+        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-//        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                //Place holder method. Need to add intent to send to the fragment
-//
-//            }
-//        });
+                //Place holder method. Need to add intent to send to the fragment
+
+            }
+        });
 
 
     }
@@ -89,7 +91,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         ImageView wishImage;
         TextView wishName;
-        EditText wishPrice;
+        TextView wishPrice;
+        TextView savingProgress;
         ProgressBar progressBarHorizontal;
         ConstraintLayout parentLayout;
 
@@ -98,8 +101,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             wishImage = itemView.findViewById(R.id.wish_image);
             wishName = itemView.findViewById(R.id.text_wish_name);
-            // wishPrice = itemView.findViewById(R.id.wish_price);
-            // progressBarHorizontal = itemView.findViewById(R.id.wish_progressBar);
+            wishPrice = itemView.findViewById(R.id.wish_price);
+            savingProgress = itemView.findViewById(R.id.saving_progress);
+            progressBarHorizontal = itemView.findViewById(R.id.wish_progressBar);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
