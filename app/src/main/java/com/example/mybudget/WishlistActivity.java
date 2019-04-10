@@ -66,8 +66,8 @@ public class WishlistActivity extends AppCompatActivity {
 
 
     /*
-     * Method creates a pathway to the other
-     * activities via a navigation bar
+     * Method adds placeholder values to Wish list
+     * will be replaced with data base
      */
     private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps");
@@ -93,6 +93,8 @@ public class WishlistActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+
+    //Method initializes List view with values for Wish List
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: recycler view init");
 

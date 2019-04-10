@@ -45,6 +45,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mContext = mContext;
     }
 
+
+
+     //Method creates a Layout view for the Wish List
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -55,6 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
+     // Method pass Wish values to the wish section
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Log.d(TAG, "onBindViewHolder: called item added");
@@ -82,11 +86,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     }
 
+
+     // Method returns size of the WishList
     @Override
     public int getItemCount() {
+
         return mWishNames.size();
     }
 
+
+     //View Holder class initiates elements inside the Wish section
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView wishImage;
