@@ -5,15 +5,30 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
+import java.util.ArrayList;
 
 public class WishlistActivity extends AppCompatActivity {
+    private static final String TAG = "WishlistActivity";
+    private ArrayList <String> mWishNames = new ArrayList<>();
+    private ArrayList <String> mImageUrls = new ArrayList<>();
+    private ArrayList <Integer> mWishPrices = new ArrayList<>();
+    private ArrayList <Integer> mSavingProgress = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
+        Log.d(TAG, "onCreate: startec");
         /*
          * Method creates a pathway to the other
          * activities via a navigation bar
@@ -50,5 +65,46 @@ public class WishlistActivity extends AppCompatActivity {
                 return false;
             }
         });
+        initImageBitmaps();
+    }
+
+
+    /*
+     * Method adds placeholder values to Wish list
+     * will be replaced with data base
+     */
+    private void initImageBitmaps() {
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps");
+        mImageUrls.add("https://www.girlsdressline.com/image/data/products/burgundy-lace-pleated-flower-girl-dresses-GG-3527-BG.jpg");
+        mWishNames.add("Dress");
+        mWishPrices.add(200);
+        mSavingProgress.add(40);
+
+        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+        mWishNames.add("Keds");
+        mWishPrices.add(340);
+        mSavingProgress.add(60);
+
+        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
+        mWishNames.add("Jimmys present");
+        mWishPrices.add(50);
+        mSavingProgress.add(40);
+
+        mImageUrls.add("https://static.thenounproject.com/png/971099-200.png");
+        mWishNames.add("Add your dream");
+        mWishPrices.add(0);
+        mSavingProgress.add(0);
+        initRecyclerView();
+    }
+
+
+    //Method initializes List view with values for Wish List
+    private void initRecyclerView() {
+        Log.d(TAG, "initRecyclerView: recycler view init");
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishNames, mWishPrices, mImageUrls, mSavingProgress,this );
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
