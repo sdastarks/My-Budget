@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InflowOutflowFragment"
+    android:background="#FFFFFF"
+    >
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="140dp"
+        android:textSize="20dp"
+        android:hint="Enter a Description"
+        android:maxLines="1"
+        android:inputType="text"
+        />
+    <TextView
+        android:id="@+id/SEK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_alignLeft="@+id/description"
+        android:textSize="40dp"
+        android:text="SEK"
+        android:textColor="@android:color/black"        />
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_toRightOf="@+id/SEK"
+        android:layout_alignBottom="@+id/SEK"
+        android:layout_marginLeft="10dp"
+        android:textSize="30dp"
+        android:hint="0.00"
+        android:inputType="number"/>
+    <ImageView
+        android:id="@+id/image_inflow_outflow"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/SEK"
+        android:layout_alignBottom="@+id/SEK"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_cancelIncome"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:fabCustomSize="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="105dp"
+        android:clickable="true"
+        android:src="@drawable/icon_cancel_white" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_saveIncome"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="287dp"
+        android:clickable="true"
+        android:src="@drawable/icon_done_white"
+        app:fabCustomSize="40dp" />
+
+
+</RelativeLayout>

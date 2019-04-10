@@ -1,15 +1,28 @@
 package com.example.mybudget;
-
+/**
+ *
+ * Main class
+ *
+ * Displays a progress bar
+ *
+ * @author Daniel Beadleson
+ */
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.BottomNavigationView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static  final String TAG= "MainActivity";
+    protected Boolean inflow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +65,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setProgressBar();
 
-
-
+    }
+    /*
+     * Method sets the status of the progress bar
+     */
+    public void setProgressBar(){
+        int progress=60; // data received from database
+        CircularProgressBar circularProgressBar = (CircularProgressBar)findViewById(R.id.progressBar);
+        circularProgressBar.setProgress(progress);
+        TextView progresstxt = findViewById(R.id.txt_progressBar);
+        progresstxt.setText(progress+"%");
+    }
+    /*
+     * Method initialises a fragment allowing the
+     * user to enter an inflow
+     */
+    public void onAddSelected(View view) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
+        inflow =true;
+        ft.commit();
+    }
+    /*
+     * Method initialises a fragment allowing the
+     * user to enter an outflow
+     */
+    public void onMinusSelected(View view) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
+        inflow =false;
+        ft.commit();
     }
 }
