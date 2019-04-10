@@ -1,16 +1,18 @@
 package com.example.mybudget.Models;
 
-import android.icu.util.LocaleData;
+import java.util.Date;
 
 public class Entry {
 
     private int enteryId;
-    private LocaleData date;
+    private Date date;
     private float amount;
-    private Type typeOfEntry;
+    // expenditures = 0; income = 1; spendOnWish = 2; earnedFromChore = 3;
+    private int typeOfEntry;
 
     public Entry(){}
-    public Entry(int enteryId, LocaleData date, float amount, Type typeOfEntry){
+
+    public Entry(int enteryId, Date date, float amount, int typeOfEntry){
         this.enteryId = enteryId;
         this.date = date;
         this.amount = amount;
@@ -21,7 +23,7 @@ public class Entry {
         return enteryId;
     }
 
-    public LocaleData getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -29,7 +31,7 @@ public class Entry {
         return amount;
     }
 
-    public Type getTypeOfEntry() {
+    public int getTypeOfEntry() {
         return typeOfEntry;
     }
 
@@ -37,7 +39,7 @@ public class Entry {
         this.enteryId = enteryId;
     }
 
-    public void setDate(LocaleData date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -45,7 +47,7 @@ public class Entry {
         this.amount = amount;
     }
 
-    public void setTypeOfEntry(Type typeOfEntry) {
+    public void setTypeOfEntry(int typeOfEntry) {
         this.typeOfEntry = typeOfEntry;
     }
 }

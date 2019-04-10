@@ -4,7 +4,6 @@ public class WishList {
     private int WishListId;
     private String title;
     private float cost;
-    //private Date date;
     //private int categoryId;
 
     public WishList(){}
@@ -12,7 +11,6 @@ public class WishList {
         this.WishListId = WishListId;
         this.title = title;
         this.cost = cost;
-        //this.date = date;
         //this.categoryId = categoryId;
     }
 
@@ -28,9 +26,6 @@ public class WishList {
         return cost;
     }
 
-//    public Date getDate() {
-//        return date;
-//    }
 
 //    public int getCategoryId() {
 //        return categoryId;
@@ -47,10 +42,6 @@ public class WishList {
     public void setCost(float cost) {
         this.cost = cost;
     }
-
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
 
 //    public void setCategoryId(int categoryId) {
 //        this.categoryId = categoryId;
