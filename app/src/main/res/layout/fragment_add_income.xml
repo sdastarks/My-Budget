@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddIncomeFragment"
+    android:background="#FFFFFF"    >
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:hint="Enter a Description"
+        android:maxLines="1"
+        android:inputType="text"
+        />
+    <TextView
+        android:id="@+id/SEK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_alignLeft="@+id/description"
+        android:textSize="40dp"
+        android:text="SEK"
+        android:textColor="@android:color/black"        />
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_toRightOf="@+id/SEK"
+        android:layout_alignBottom="@+id/SEK"
+        android:layout_marginLeft="10dp"
+        android:textSize="30dp"
+        android:hint="0.00"
+        android:inputType="number"/>
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/image_income"
+        android:layout_toLeftOf="@+id/SEK"
+        android:layout_alignBottom="@+id/SEK"/>
+    <Button
+        android:id="@+id/btn_saveIncome"
+        android:layout_below="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Save" />
+</RelativeLayout>
