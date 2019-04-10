@@ -37,6 +37,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="65dp"
         android:clickable="true"
+        android:onClick="onMinusSelected"
         app:srcCompat="@drawable/icon_minus" />
 
     <RelativeLayout

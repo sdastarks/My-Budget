@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddIncomeFragment"
+    tools:context=".InflowOutflowFragment"
     android:background="#FFFFFF"
     >
 
@@ -40,11 +40,10 @@
         android:hint="0.00"
         android:inputType="number"/>
     <ImageView
-        android:id="@+id/image_income_icon"
+        android:id="@+id/image_inflow_outflow"
         android:layout_width="70dp"
         android:layout_height="100dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/image_income"
         android:layout_toLeftOf="@+id/SEK"
         android:layout_alignBottom="@+id/SEK"/>
 
