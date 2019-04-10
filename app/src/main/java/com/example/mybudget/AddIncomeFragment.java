@@ -46,7 +46,7 @@ public class AddIncomeFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState){
         Log.v(TAG, "onViewCreated inititialsed");
-        Button saveButton= view.findViewById(R.id.btn_saveIncome);
+        FloatingActionButton saveButton= view.findViewById(R.id.floatingActionButton_saveIncome);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
              * Method gets the description and amount of the income
@@ -66,6 +66,16 @@ public class AddIncomeFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        FloatingActionButton cancelButton = view.findViewById(R.id.floatingActionButton_cancelIncome);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "cancel button initialised");
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
