@@ -11,10 +11,14 @@ import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
+/**
+ * Class to handle database connections and update
+ * @author Dawnie Safar
+ */
 public class myDbHelper extends SQLiteOpenHelper {
 
     public SQLiteDatabase db;
@@ -34,6 +38,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     public static final String ENTRY_DATE = "date";
     public static final String AMOUNT = "amount";
     public static final String TYPEOFENTRY = "typeOfEntry";
+    public static final String DESC = "description";
 
 
   /*  public void onConfigure(SQLiteDatabase db){
@@ -50,16 +55,17 @@ public class myDbHelper extends SQLiteOpenHelper {
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS "
                     + WISH_LIST + " ("
-                    + WISHLISTID + " INTEGER PRIMARY KEY,"
+                    + WISHLISTID + " INTEGER PRIMARY KEY NOT NULL,"
                     + TITLE + " TEXT NOT NULL,"
                     + COST + " FLOAT);");
 
             db.execSQL("CREATE TABLE IF NOT EXISTS "
                     + ENTRY + " ("
-                    + ENTRYID + " INTEGER PRIMARY KEY,"
+                    + ENTRYID + " INTEGER PRIMARY KEY NOT NULL,"
                     + ENTRY_DATE + " TEXT NOT NULL,"
                     + AMOUNT + " FLOAT NOT NULL,"
-                    + TYPEOFENTRY + " INTEGER);");
+                    + TYPEOFENTRY + " INTEGER,"
+                    + DESC + " TEXT NOT NULL);");
             this.db=db;
         }catch (SQLException e){
             e.printStackTrace();
@@ -171,10 +177,11 @@ public class myDbHelper extends SQLiteOpenHelper {
     public void addEntry(Entry entry){
         open_db();
         ContentValues values = new ContentValues();
-        values.put(ENTRYID, entry.getEnteryId());
+        values.put(ENTRYID, autoIdGenerator(entry));
         values.put(ENTRY_DATE, String.valueOf(entry.getDate()));
         values.put(AMOUNT, entry.getAmount());
         values.put(TYPEOFENTRY, entry.getTypeOfEntry());
+        values.put(DESC, entry.getDesc());
 
         db.insert(ENTRY, null, values);
         close_db();
@@ -182,7 +189,6 @@ public class myDbHelper extends SQLiteOpenHelper {
 
     /**
      * @return  list of all entries
-     * @throws ParseException
      */
     public ArrayList<Entry> allEntries() throws ParseException {
     open_db();
@@ -197,8 +203,12 @@ public class myDbHelper extends SQLiteOpenHelper {
             entry.setEnteryId(cursor.getInt(0));
             entry.setAmount(cursor.getFloat(2));
             entry.setTypeOfEntry(cursor.getInt(3));
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(cursor.getString(1));
+            String date1 = cursor.getString(1);
+            DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate date = LocalDate.parse(date1, formate);
+
             entry.setDate(date);
+            entry.setDesc(cursor.getString(4));
             allReconrds.add(entry);
         }
         return allReconrds;
@@ -211,5 +221,17 @@ public class myDbHelper extends SQLiteOpenHelper {
 
     public void close_db(){
         db.close();
+    }
+
+    public int autoIdGenerator(Object o){
+        String query = "";
+         if (o.getClass() == Entry.class) {
+             query = "SELECT " + ENTRYID + " FROM " + ENTRY;
+         }
+        else if(o.getClass() == WishList.class){
+            query = "SELECT " + WISHLISTID + " FROM " + WISH_LIST;
+         }
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor.getCount() + 1;
     }
 }
