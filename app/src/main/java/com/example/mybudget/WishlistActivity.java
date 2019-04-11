@@ -3,6 +3,8 @@ package com.example.mybudget;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,12 +18,14 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
-public class WishlistActivity extends AppCompatActivity {
+public class WishlistActivity extends AppCompatActivity implements RecyclerViewAdapter.OnWishListener {
     private static final String TAG = "WishlistActivity";
     private ArrayList <String> mWishNames = new ArrayList<>();
     private ArrayList <String> mImageUrls = new ArrayList<>();
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
+    private FloatingActionButton addWish;
+    int index;
 
 
     @Override
@@ -65,13 +69,16 @@ public class WishlistActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        addWish = findViewById(R.id.add_wish);
+        addWish.show();
         initImageBitmaps();
     }
 
 
     /*
      * Method adds placeholder values to Wish list
-     * will be replaced with data base
+     * will be replaced with actual data base values
      */
     private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps");
@@ -97,14 +104,29 @@ public class WishlistActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
-
+ 
     //Method initializes List view with values for Wish List
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: recycler view init");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishNames, mWishPrices, mImageUrls, mSavingProgress,this );
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishNames, mWishPrices, mImageUrls,
+                mSavingProgress,this, this );
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+    // Method navigates to selected wish fragment
+    @Override
+    public void onWishClick(int position) {
+        Log.d(TAG, "onWishClick: clicked : " + position);
+        addWish.hide();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frame_wish_fragment, new WishFragment());
+        index = position ;
+        ft.commit();
+
+    }
+
+
 }

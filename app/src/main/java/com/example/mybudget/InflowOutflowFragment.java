@@ -39,7 +39,12 @@ public class InflowOutflowFragment extends Fragment {
 
         // the boolean expression inflow will show if the input by the user
         //  is an income or spending
-        inflow =((MainActivity) getActivity()).inflow;
+
+            inflow =((MainActivity) getActivity()).inflow;
+
+
+
+
 
         ImageView image =view.findViewById(R.id.image_inflow_outflow);
         if(inflow){

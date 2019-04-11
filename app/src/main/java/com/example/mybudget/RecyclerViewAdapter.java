@@ -35,14 +35,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mWishImages = new ArrayList<>();
     private ArrayList<Integer> mSavingProgress = new ArrayList<>();
     private Context mContext;
+    private OnWishListener mOnWishListener;
 
 
-    public RecyclerViewAdapter(ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices, ArrayList<String> mWishImages, ArrayList<Integer> mSavingProgress, Context mContext) {
+    public RecyclerViewAdapter(ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
+                               ArrayList<String> mWishImages, ArrayList<Integer> mSavingProgress,
+                               Context mContext, OnWishListener onWishListener) {
         this.mWishNames = mWishNames;
         this.mWishPrices = mWishPrices;
         this.mWishImages = mWishImages;
         this.mSavingProgress = mSavingProgress;
         this.mContext = mContext;
+        this.mOnWishListener = onWishListener;
     }
 
 
@@ -53,7 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_wish_list_item, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, mOnWishListener);
         return viewHolder;
     }
 
@@ -69,34 +73,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(viewHolder.wishImage);
 
         viewHolder.wishName.setText(mWishNames.get(i));
-        viewHolder.wishPrice.setText("Price: " + mWishPrices.get(i) + " Kr");
+        viewHolder.wishPrice.setText("Price: " + mWishPrices.get(i) + " sek");
         viewHolder.progressBarHorizontal.setMax(mWishPrices.get(i));
-        viewHolder.savingProgress.setText("Saved: " + mSavingProgress.get(i) + " Kr");
+        viewHolder.savingProgress.setText("Saved: " + mSavingProgress.get(i) + " sek");
         viewHolder.progressBarHorizontal.setProgress(mSavingProgress.get(i));
         viewHolder.progressBarHorizontal.setScaleY(5f);
-        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Place holder method. Need to add intent to send to the fragment
-
-            }
-        });
-
-
     }
 
 
      // Method returns size of the WishList
     @Override
     public int getItemCount() {
-
         return mWishNames.size();
     }
 
 
      //View Holder class initiates elements inside the Wish section
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView wishImage;
         TextView wishName;
@@ -104,8 +97,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView savingProgress;
         ProgressBar progressBarHorizontal;
         ConstraintLayout parentLayout;
+        OnWishListener onWishListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnWishListener onWishListener) {
             super(itemView);
 
             wishImage = itemView.findViewById(R.id.wish_image);
@@ -114,7 +108,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             savingProgress = itemView.findViewById(R.id.saving_progress);
             progressBarHorizontal = itemView.findViewById(R.id.wish_progressBar);
             parentLayout = itemView.findViewById(R.id.parent_layout);
+            this.onWishListener = onWishListener;
+
+            itemView.setOnClickListener(this);
         }
+
+         @Override
+         public void onClick(View v) {
+            onWishListener.onWishClick(getAdapterPosition());
+
+         }
+     }
+
+    public interface OnWishListener {
+        void onWishClick(int position);
     }
 }
 

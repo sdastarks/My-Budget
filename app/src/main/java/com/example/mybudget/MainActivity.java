@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import static com.example.mybudget.R.id.fragment_placeholder;
+
 public class MainActivity extends AppCompatActivity {
     private static  final String TAG= "MainActivity";
     protected Boolean inflow;
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onAddSelected(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
+        ft.replace(fragment_placeholder, new InflowOutflowFragment());
         inflow =true;
         ft.commit();
     }
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onMinusSelected(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
+        ft.replace(fragment_placeholder, new InflowOutflowFragment());
         inflow =false;
         ft.commit();
     }
