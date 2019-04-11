@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mybudget.Models.Entry;
+
+import java.time.LocalDate;
+
 
 /**
  * Fragment allows the user to enter
@@ -27,6 +31,7 @@ public class InflowOutflowFragment extends Fragment {
     EditText mDescription;
     EditText mAmount;
     Boolean inflow;
+    //myDbHelper db = new myDbHelper(InflowOutflowFragment.this, "myDb.db", null, 1);
     /*
      * Method creates the initial state of the
      * fragment
@@ -82,6 +87,23 @@ public class InflowOutflowFragment extends Fragment {
                 else{
                     int amount= Integer.parseInt(sAmount);
                     Log.v(TAG, "amount: "+ amount);
+
+                    Log.v(TAG, "inflow: "+inflow);
+
+                    //DAWNIE...
+                    Entry entry = new Entry();
+                    //inflow ? entry.setTypeOfEntry(1) : entry.setTypeOfEntry(0);
+
+                    if(inflow)
+                        entry.setTypeOfEntry(1);
+                    else if(!inflow)
+                        entry.setTypeOfEntry(0);
+
+                    entry.setAmount(Float.parseFloat(sAmount));
+                    entry.setDate(LocalDate.now());
+                    entry.setDesc(description);
+                    ((MainActivity) getActivity()).db.addEntry(entry);
+
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }
