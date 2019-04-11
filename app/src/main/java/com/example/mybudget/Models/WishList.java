@@ -6,6 +6,10 @@ public class WishList {
     private float cost;
     //private int categoryId;
 
+    /**
+     * Model holding the info regarding wishes
+     * @author Dawnie Safar
+     */
     public WishList(){}
     public WishList(int WishListId, String title, float cost){
         this.WishListId = WishListId;

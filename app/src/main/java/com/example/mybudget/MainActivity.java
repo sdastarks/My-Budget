@@ -20,9 +20,11 @@ import android.widget.TextView;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+
 public class MainActivity extends AppCompatActivity {
     private static  final String TAG= "MainActivity";
     protected Boolean inflow;
+    myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
