@@ -99,8 +99,6 @@ public class InflowOutflowFragment extends Fragment {
                     entry.setDesc(description);
                     ((MainActivity) getActivity()).db.addEntry(entry);
 
-
-
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }

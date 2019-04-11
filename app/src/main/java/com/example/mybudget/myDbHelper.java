@@ -2,6 +2,7 @@ package com.example.mybudget;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -40,10 +41,6 @@ public class myDbHelper extends SQLiteOpenHelper {
     public static final String TYPEOFENTRY = "typeOfEntry";
     public static final String DESC = "description";
 
-
-  /*  public void onConfigure(SQLiteDatabase db){
-            super.onConfigure(db);
-        }*/
 
     public myDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int Version){
         super(context, DATABASE_NAME, null, VERSION);
@@ -105,15 +102,15 @@ public class myDbHelper extends SQLiteOpenHelper {
 
     /**
      * method to add wishes to database
-     * @param wishList
+     * @param wish
      */
-    public void addWish(WishList wishList){
+    public void addWish(WishList wish){
 
        open_db();
         ContentValues values = new ContentValues();
-        values.put(WISHLISTID, wishList.getWishListId());
-        values.put(TITLE, wishList.getTitle());
-        values.put(COST, wishList.getCost());
+        values.put(WISHLISTID, autoIdGenerator(wish));
+        values.put(TITLE, wish.getTitle());
+        values.put(COST, wish.getCost());
 
         db.insert(WISH_LIST, null, values);
         close_db();
@@ -139,26 +136,22 @@ public class myDbHelper extends SQLiteOpenHelper {
         return wishList;
     }
 
-    public boolean deleteWish(int Id){
-        boolean result = false;
-        String query = "Select * from " + WISH_LIST + "WHERE " + WISHLISTID + " = '" +
-                String.valueOf(WISHLISTID) + "'";
+    /**
+     * deleting a wish from wishlist
+     * @param wishId
+     * @return
+     */
+    public boolean deleteWish(int wishId){
         open_db();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        WishList wishList = new WishList();
-        if(cursor.moveToFirst()){
-            wishList.setWishListId(Integer.parseInt(cursor.getString(0)));
-            db.delete(WISH_LIST, WISHLISTID + "=?",
-                    new String[] {
-                            String.valueOf(wishList.getWishListId())
-            });
+        Cursor cursor = db.rawQuery("SELECT " + WISHLISTID + " FROM " + WISH_LIST, null);
+        if(cursor.getCount() > 0){
+            String id = Integer.toString(wishId);
+            db.delete(WISH_LIST, WISHLISTID + "=" + id, null);
             cursor.close();
-            result = true;
+            close_db();
+            return true;
         }
-        close_db();
-        return result;
+        else return false;
     }
 
     public boolean updateWish(int Id, String title, Float cost){
@@ -185,6 +178,19 @@ public class myDbHelper extends SQLiteOpenHelper {
 
         db.insert(ENTRY, null, values);
         close_db();
+    }
+
+    public boolean deleteEntry(int entryId){
+        open_db();
+        Cursor cursor = db.rawQuery("SELECT " + ENTRYID + " FROM " + ENTRY, null);
+        if(cursor.getCount() > 0) {
+            String id = Integer.toString(entryId);
+             db.delete(ENTRY, ENTRYID + "=" + id, null);
+             cursor.close();
+             close_db();
+            return true;
+        }
+        else return false;
     }
 
     /**
