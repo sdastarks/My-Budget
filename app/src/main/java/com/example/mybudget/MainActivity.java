@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onAddSelected(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(fragment_placeholder, new InflowOutflowFragment());
+        ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow =true;
         ft.commit();
     }
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onMinusSelected(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(fragment_placeholder, new InflowOutflowFragment());
+        ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow =false;
         ft.commit();
     }
