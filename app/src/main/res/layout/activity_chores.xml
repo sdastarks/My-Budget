@@ -5,14 +5,125 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChoresActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chores!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TableLayout
+        android:layout_width="413dp"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/laundry"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_laundry" />
+
+            <ImageButton
+                android:id="@+id/dishwasher"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_dishwasher" />
+
+            <ImageButton
+                android:id="@+id/book"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_book" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/vacuum"
+
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_vacuum" />
+
+            <ImageButton
+                android:id="@+id/beingNice"
+
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_beingnice" />
+
+            <ImageButton
+                android:id="@+id/dog"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_dog" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageButton
+                android:id="@+id/grass"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_grass" />
+
+            <ImageButton
+                android:id="@+id/mop"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_mop" />
+
+            <ImageButton
+                android:id="@+id/goodGrade"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_goodgrade" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageButton
+                android:id="@+id/cook"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_cook" />
+
+            <ImageButton
+                android:id="@+id/baby"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_baby" />
+
+            <ImageButton
+                android:id="@+id/plus"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                app:srcCompat="@drawable/button_plus" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
