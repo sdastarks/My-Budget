@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewWishFragment"
+    android:background="#FFFFFF"
+    android:id="@+id/wish_fragment">
+
+
+    <TextView
+        android:id="@+id/SEK2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_alignLeft="@+id/description"
+        android:layout_marginStart="24dp"
+        android:text="SEK"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editText_cost"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="Enter the name of your wish"
+        android:inputType="textPersonName"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wish_picture" />
+
+    <EditText
+        android:id="@+id/editText_cost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="50dp"
+        android:ems="10"
+        android:hint="Enter the cost"
+        android:inputType="number"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/SEK2"
+        app:layout_constraintTop_toBottomOf="@+id/editText_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/wish_picture"
+        android:layout_width="352dp"
+        android:layout_height="206dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="24dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/dream"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_exit_new_wish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:src="@drawable/icon_cancel_white"
+        app:fabSize="mini"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
