@@ -48,6 +48,7 @@
             android:layout_height="160dp"
             android:layout_centerHorizontal="true"
             android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="55dp"
             android:gravity="center"
             android:text="220 sek"
             android:textAlignment="center"
@@ -61,7 +62,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="65dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="95dp"
             android:clickable="true"
             android:onClick="onAddSelected"
             app:srcCompat="@drawable/icon_add" />
@@ -72,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="135dp"
             android:layout_marginEnd="65dp"
             android:clickable="true"
             android:onClick="onMinusSelected"
@@ -81,7 +82,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_monkey"
+            android:layout_marginTop="350dp"
             android:layout_centerHorizontal="true">
 
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -112,13 +113,6 @@
             android:layout_height="match_parent"
             android:layout_marginTop="160dp"></FrameLayout>
 
-        <ImageView
-            android:id="@+id/image_monkey"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="75dp"
-            android:src="@drawable/image_monkey" />
 
 
         <android.support.design.widget.BottomNavigationView
