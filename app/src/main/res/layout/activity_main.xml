@@ -24,20 +24,9 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </LinearLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/side_navigation_header"
-        app:menu="@menu/drawer_menu" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,8 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_centerHorizontal="true"
-            android:background="@color/colorPrimaryDark"
             android:layout_marginTop="55dp"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:text="220 sek"
             android:textAlignment="center"
@@ -82,8 +71,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="350dp"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="350dp">
 
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                 android:id="@+id/progressBar"
@@ -111,8 +100,7 @@
             android:id="@+id/fragment_placeholder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="160dp"></FrameLayout>
-
+            android:layout_marginTop="215dp"></FrameLayout>
 
 
         <android.support.design.widget.BottomNavigationView
@@ -126,4 +114,12 @@
             app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
     </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/side_navigation_header"
+        app:menu="@menu/drawer_menu" />
 </android.support.v4.widget.DrawerLayout>
