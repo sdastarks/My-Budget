@@ -4,6 +4,7 @@ public class WishList {
     private int WishListId;
     private String title;
     private float cost;
+    private float saved;
     //private int categoryId;
 
     /**
@@ -11,10 +12,11 @@ public class WishList {
      * @author Dawnie Safar
      */
     public WishList(){}
-    public WishList(int WishListId, String title, float cost){
+    public WishList(int WishListId, String title, float cost, float saved){
         this.WishListId = WishListId;
         this.title = title;
         this.cost = cost;
+        this.saved = saved;
         //this.categoryId = categoryId;
     }
 
@@ -28,6 +30,10 @@ public class WishList {
 
     public float getCost() {
         return cost;
+    }
+
+    public float getSaved(){
+        return saved;
     }
 
 
@@ -45,6 +51,10 @@ public class WishList {
 
     public void setCost(float cost) {
         this.cost = cost;
+    }
+
+    public void setSaved(float saved){
+        this.saved = saved;
     }
 
 //    public void setCategoryId(int categoryId) {
