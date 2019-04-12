@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -129,4 +130,11 @@ public class WishlistActivity extends AppCompatActivity implements RecyclerViewA
     }
 
 
+    public void onAddWish(View view) {
+        Log.d(TAG, "onAddWish: clicked : " );
+        addWish.hide();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.new_wish_frame, new NewWishFragment());
+        ft.commit();
+    }
 }
