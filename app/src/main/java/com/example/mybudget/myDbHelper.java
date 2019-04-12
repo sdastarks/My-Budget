@@ -2,7 +2,6 @@ package com.example.mybudget;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,6 +30,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     public static final String WISHLISTID = "wishListId";
     public static final String TITLE = "title";
     public static final String COST = "cost";
+    public static final String SAVED = "saved";
 
     //Entry Table
     public static final String ENTRY = "entry";
@@ -49,7 +48,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     public static final String USER_AVATAR = "UserAvatar";
 
 
-    public myDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int Version){
+    public myDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int Version) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
@@ -61,7 +60,8 @@ public class myDbHelper extends SQLiteOpenHelper {
                     + WISH_LIST + " ("
                     + WISHLISTID + " INTEGER PRIMARY KEY NOT NULL,"
                     + TITLE + " TEXT NOT NULL,"
-                    + COST + " FLOAT);");
+                    + COST + " FLOAT, "
+            + SAVED + " FLOAT);");
 
             db.execSQL("CREATE TABLE IF NOT EXISTS "
                     + ENTRY + " ("
@@ -71,6 +71,7 @@ public class myDbHelper extends SQLiteOpenHelper {
                     + TYPEOFENTRY + " INTEGER,"
                     + DESC + " TEXT NOT NULL);");
 
+
             db.execSQL("CREATE TABLE IF NOT EXISTS "
                     + USER_PROFILE + " ("
                     + USERID + " INTEGER PRIMARY KEY,"
@@ -79,6 +80,7 @@ public class myDbHelper extends SQLiteOpenHelper {
                     + USER_AVATAR + "BLOB); ");
             this.db=db;
         }catch (SQLException e){
+
             e.printStackTrace();
         }
     }
@@ -92,21 +94,22 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
-            this.onUpgrade(db, 1,1);
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        this.onUpgrade(db, 1, 1);
     }
 
-    public String loadWishes(){
+    public String loadWishes() {
         String result = "";
         String query = "SELECT * FROM " + WISH_LIST + ";";
         open_db();
 
         Cursor cursor = db.rawQuery(query, null);
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String title = cursor.getString(1);
             float cost = cursor.getFloat(2);
+            float saved = cursor.getFloat(3);
             result += String.valueOf(id + " " + title + " " + cost);
             //System.getProperty("line.separator");
         }
@@ -117,33 +120,36 @@ public class myDbHelper extends SQLiteOpenHelper {
 
     /**
      * method to add wishes to database
+     *
      * @param wish
      */
-    public void addWish(WishList wish){
+    public void addWish(WishList wish) {
 
-       open_db();
+        open_db();
         ContentValues values = new ContentValues();
         values.put(WISHLISTID, autoIdGenerator(wish));
         values.put(TITLE, wish.getTitle());
         values.put(COST, wish.getCost());
+        values.put(SAVED, wish.getSaved());
 
         db.insert(WISH_LIST, null, values);
         close_db();
     }
 
-    public WishList findWishList(String title){
+    public WishList findWishList(String title) {
         String query = "Select * from " + WISH_LIST + "WHERE " + TITLE + " = " +
                 "'" + title + "'";
-       open_db();
+        open_db();
         Cursor cursor = db.rawQuery(query, null);
 
         WishList wishList = new WishList();
 
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             cursor.moveToFirst();
             wishList.setWishListId(Integer.parseInt(cursor.getString(0)));
             wishList.setTitle(cursor.getString(1));
             wishList.setCost(Float.parseFloat(cursor.getString(2)));
+            wishList.setSaved(Float.parseFloat(cursor.getString(3)));
         } else {
             wishList = null;
         }
@@ -153,36 +159,38 @@ public class myDbHelper extends SQLiteOpenHelper {
 
     /**
      * deleting a wish from wishlist
+     *
      * @param wishId
      * @return
      */
-    public boolean deleteWish(int wishId){
+    public boolean deleteWish(int wishId) {
         open_db();
         Cursor cursor = db.rawQuery("SELECT " + WISHLISTID + " FROM " + WISH_LIST, null);
-        if(cursor.getCount() > 0){
+        if (cursor.getCount() > 0) {
             String id = Integer.toString(wishId);
             db.delete(WISH_LIST, WISHLISTID + "=" + id, null);
             cursor.close();
             close_db();
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
-    public boolean updateWish(int Id, String title, Float cost){
+    public boolean updateWish(int Id, String title, float cost, float saved) {
         ContentValues args = new ContentValues();
         open_db();
         //args.put(WISHLISTID, Id);
         args.put(TITLE, title);
         args.put(COST, cost);
+        args.put(SAVED, saved);
         return db.update(WISH_LIST, args, WISHLISTID + "=" + Id, null) > 0;
     }
 
     /**
      * this method to add enteries to database
+     *
      * @param entry
      */
-    public void addEntry(Entry entry){
+    public void addEntry(Entry entry) {
         open_db();
         ContentValues values = new ContentValues();
         values.put(ENTRYID, autoIdGenerator(entry));
@@ -195,31 +203,30 @@ public class myDbHelper extends SQLiteOpenHelper {
         close_db();
     }
 
-    public boolean deleteEntry(int entryId){
+    public boolean deleteEntry(int entryId) {
         open_db();
         Cursor cursor = db.rawQuery("SELECT " + ENTRYID + " FROM " + ENTRY, null);
-        if(cursor.getCount() > 0) {
+        if (cursor.getCount() > 0) {
             String id = Integer.toString(entryId);
-             db.delete(ENTRY, ENTRYID + "=" + id, null);
-             cursor.close();
-             close_db();
+            db.delete(ENTRY, ENTRYID + "=" + id, null);
+            cursor.close();
+            close_db();
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     /**
-     * @return  list of all entries
+     * @return list of all entries
      */
-    public ArrayList<Entry> allEntries() throws ParseException {
-    open_db();
+    public ArrayList<Entry> allEntries() {
+        open_db();
         ArrayList<Entry> allReconrds = new ArrayList<>();
         String query = "SELECT * FROM " + ENTRY + ";";
 
         Cursor cursor = db.rawQuery(query, null);
         Entry entry = new Entry();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             entry.setEnteryId(cursor.getInt(0));
             entry.setAmount(cursor.getFloat(2));
@@ -235,24 +242,141 @@ public class myDbHelper extends SQLiteOpenHelper {
         return allReconrds;
     }
 
-    public myDbHelper open_db(){
+    public myDbHelper open_db() {
         db = this.getWritableDatabase();
         return this;
     }
 
-    public void close_db(){
+    public void close_db() {
         db.close();
     }
 
-    public int autoIdGenerator(Object o){
+    /**
+     * method genertates an auto id for tables according to its type of object
+     *
+     * @param o
+     * @return
+     */
+    public int autoIdGenerator(Object o) {
         String query = "";
-         if (o.getClass() == Entry.class) {
-             query = "SELECT " + ENTRYID + " FROM " + ENTRY;
-         }
-        else if(o.getClass() == WishList.class){
+        if (o.getClass() == Entry.class) {
+            query = "SELECT " + ENTRYID + " FROM " + ENTRY;
+        } else if (o.getClass() == WishList.class) {
             query = "SELECT " + WISHLISTID + " FROM " + WISH_LIST;
-         }
+        }
         Cursor cursor = db.rawQuery(query, null);
         return cursor.getCount() + 1;
+    }
+
+    /**
+     * @return total amount of expneses
+     */
+    public float calculateExpenses() {
+        ArrayList<Entry> allEntries = allEntries();
+        float total = 0;
+        for (Entry e : allEntries) {
+            if (e.getTypeOfEntry() == 0)
+                total += e.getAmount();
+        }
+        return total;
+    }
+
+    /**
+     * @return total amount of income
+     */
+        public float calcIncome(){
+            ArrayList<Entry> allEntries = allEntries();
+            float total = 0;
+            for(Entry e : allEntries){
+                if(e.getTypeOfEntry() == 1)
+                    total += e.getAmount();
+            }
+            return total;
+        }
+
+    /**
+     * @return total amount spend on wishes
+     */
+        public float calcWish(){
+            ArrayList<Entry> allEntries = allEntries();
+            float total = 0;
+            for(Entry e : allEntries){
+                if(e.getTypeOfEntry() == 2)
+                    total += e.getAmount();
+            }
+            return total;
+        }
+
+    /**
+     * @return total amount of earnings
+     */
+        public float calcEarning(){
+        ArrayList<Entry> allEntries = allEntries();
+        float total = 0;
+        for(Entry e : allEntries){
+            if(e.getTypeOfEntry() == 3)
+                total += e.getAmount();
+        }
+        return total;
+        }
+
+    /**
+     * @return all expenses entries
+     */
+    public ArrayList<Entry> expensesEntries(){
+        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allExpenses = new ArrayList<>();
+
+        for (Entry e : allEntries) {
+            if(e.getTypeOfEntry() == 0) {
+                allExpenses.add(e);
+            }
+        }
+        return allExpenses;
+    }
+
+    /**
+     * @return all income entries
+     */
+    public ArrayList<Entry> incomeEntries(){
+        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allIncome = new ArrayList<>();
+
+        for (Entry e : allEntries) {
+            if(e.getTypeOfEntry() == 1) {
+                allIncome.add(e);
+            }
+        }
+        return allIncome;
+    }
+
+    /**
+     * @return all wishes alocated entries
+     */
+    public ArrayList<Entry> wishEntries(){
+        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allWishes = new ArrayList<>();
+
+        for (Entry e : allEntries) {
+            if(e.getTypeOfEntry() == 2) {
+                allWishes.add(e);
+            }
+        }
+        return allWishes;
+    }
+
+    /**
+     * @return all earnings entries
+     */
+    public ArrayList<Entry> earningsEntries(){
+        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allEarnings = new ArrayList<>();
+
+        for (Entry e : allEntries) {
+            if(e.getTypeOfEntry() == 3) {
+                allEarnings.add(e);
+            }
+        }
+        return allEarnings;
     }
 }
