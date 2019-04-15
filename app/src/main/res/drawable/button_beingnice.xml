@@ -6,7 +6,7 @@
         </shape>
     </item>
     <item
-        android:drawable="@drawable/beingnice"
+        android:drawable="@drawable/icon_beingnice"
         android:bottom="20dp"
         android:left="20dp"
         android:right="20dp"
