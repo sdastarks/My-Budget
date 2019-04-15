@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InflowOutflowFragment"
+    tools:context=".addChoresMoney"
     android:background="#FFFFFF"
     >
 
@@ -28,45 +28,47 @@
         android:textSize="40dp"
         android:text="SEK"
         android:textColor="@android:color/black"        />
+
     <EditText
-        android:id="@+id/amount"
+        android:id="@+id/choresAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/choresDescription"
-        android:layout_toRightOf="@+id/choresSEK"
         android:layout_alignBottom="@+id/choresSEK"
         android:layout_marginLeft="10dp"
-        android:textSize="30dp"
+        android:layout_toRightOf="@+id/choresSEK"
         android:hint="0.00"
-        android:inputType="number"/>
+        android:inputType="numberDecimal"
+        android:textSize="30dp" />
+
     <ImageView
-        android:id="@+id/image_inflow_outflow"
+        android:id="@+id/choresImage_inflow_outflow"
         android:layout_width="70dp"
         android:layout_height="100dp"
+        android:layout_alignBottom="@+id/choresSEK"
         android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/choresSEK"
-        android:layout_alignBottom="@+id/choresSEK"/>
+        android:layout_toLeftOf="@+id/choresSEK" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_cancelIncome"
+        android:id="@+id/choresFloatingActionButton_cancelIncome"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:fabCustomSize="40dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="50dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="105dp"
+        android:layout_marginEnd="50dp"
         android:clickable="true"
-        android:src="@drawable/icon_cancel_white" />
+        android:src="@drawable/icon_cancel_white"
+        app:fabCustomSize="40dp" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_saveIncome"
+        android:id="@+id/choresFloatingActionButton_saveIncome"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="50dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="287dp"
+        android:layout_marginEnd="50dp"
         android:clickable="true"
         android:src="@drawable/icon_done_white"
         app:fabCustomSize="40dp" />
