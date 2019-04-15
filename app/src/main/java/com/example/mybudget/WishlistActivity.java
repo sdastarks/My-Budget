@@ -140,7 +140,7 @@ public class WishlistActivity extends AppCompatActivity implements RecyclerViewA
         Log.d(TAG, "onAddWish: clicked : " );
         addWish.hide();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.new_wish_frame, new NewWishFragment());
+        ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
         ft.commit();
     }
 
