@@ -103,11 +103,12 @@ public class myDbHelper extends SQLiteOpenHelper {
     public ArrayList<WishList> loadWishes() {
         open_db();
         ArrayList<WishList> result = new ArrayList<>();
-        WishList wish = new WishList();
+
 
         Cursor cursor = db.rawQuery("select * from " + WISH_LIST, null);
 
         while (cursor.moveToNext()) {
+            WishList wish = new WishList();
             wish.setWishListId(cursor.getInt(0));
             wish.setTitle(cursor.getString(1));
             wish.setCost(cursor.getInt(2));
@@ -225,24 +226,26 @@ public class myDbHelper extends SQLiteOpenHelper {
     public ArrayList<Entry> allEntries() {
         open_db();
         ArrayList<Entry> allReconrds = new ArrayList<>();
-        String query = "SELECT * FROM " + ENTRY + ";";
+        String query = "SELECT * FROM " + ENTRY;
 
         Cursor cursor = db.rawQuery(query, null);
-        Entry entry = new Entry();
+
 
         while (cursor.moveToNext()) {
-
+            Entry entry = new Entry();
             entry.setEnteryId(cursor.getInt(0));
-            entry.setAmount(cursor.getFloat(2));
+            entry.setAmount(cursor.getInt(2));
             entry.setTypeOfEntry(cursor.getInt(3));
             String date1 = cursor.getString(1);
-            DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate date = LocalDate.parse(date1, formate);
 
             entry.setDate(date);
             entry.setDesc(cursor.getString(4));
             allReconrds.add(entry);
         }
+        cursor.close();
+        close_db();
         return allReconrds;
     }
 
@@ -273,14 +276,20 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * @return the amount of balance
+     */
+    public int balance(){
+        return calcIncome() + calcEarning() - calcExpenses() - calcWish();
+    }
+    /**
      * @return total amount of expneses
      */
-    public float calculateExpenses() {
+    public int calcExpenses() {
         ArrayList<Entry> allEntries = allEntries();
-        float total = 0;
+        int  total = 0;
         for (Entry e : allEntries) {
-            if (e.getTypeOfEntry() == 0)
-                total += e.getAmount();
+            if (e.getTypeOfEntry() == 0){
+                total += e.getAmount();}
         }
         return total;
     }
@@ -288,12 +297,12 @@ public class myDbHelper extends SQLiteOpenHelper {
     /**
      * @return total amount of income
      */
-        public float calcIncome(){
+        public int calcIncome(){
             ArrayList<Entry> allEntries = allEntries();
-            float total = 0;
+            int total = 0;
             for(Entry e : allEntries){
-                if(e.getTypeOfEntry() == 1)
-                    total += e.getAmount();
+                if(e.getTypeOfEntry() == 1){
+                    total += e.getAmount();}
             }
             return total;
         }
@@ -301,12 +310,12 @@ public class myDbHelper extends SQLiteOpenHelper {
     /**
      * @return total amount spend on wishes
      */
-        public float calcWish(){
+        public int calcWish(){
             ArrayList<Entry> allEntries = allEntries();
-            float total = 0;
+            int total = 0;
             for(Entry e : allEntries){
-                if(e.getTypeOfEntry() == 2)
-                    total += e.getAmount();
+                if(e.getTypeOfEntry() == 2){
+                    total += e.getAmount();}
             }
             return total;
         }
@@ -314,12 +323,12 @@ public class myDbHelper extends SQLiteOpenHelper {
     /**
      * @return total amount of earnings
      */
-        public float calcEarning(){
+        public int calcEarning(){
         ArrayList<Entry> allEntries = allEntries();
-        float total = 0;
+        int total = 0;
         for(Entry e : allEntries){
-            if(e.getTypeOfEntry() == 3)
-                total += e.getAmount();
+            if(e.getTypeOfEntry() == 3){
+                total += e.getAmount();}
         }
         return total;
         }

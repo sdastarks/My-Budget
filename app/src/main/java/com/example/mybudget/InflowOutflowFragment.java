@@ -99,7 +99,7 @@ public class InflowOutflowFragment extends Fragment {
                     else if(!inflow)
                         entry.setTypeOfEntry(0);
 
-                    entry.setAmount(Float.parseFloat(sAmount));
+                    entry.setAmount(amount);
                     entry.setDate(LocalDate.now());
                     entry.setDesc(description);
                     ((MainActivity) getActivity()).db.addEntry(entry);
