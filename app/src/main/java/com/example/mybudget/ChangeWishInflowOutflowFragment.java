@@ -85,7 +85,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_wish_balance_change, new WishFragment())
+                        .replace(R.id.frame_wish_fragment, new WishFragment())
                         .commit();
             }
         });
@@ -102,7 +102,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_wish_balance_change, new WishFragment())
+                        .replace(R.id.frame_wish_fragment, new WishFragment())
                         .commit();
             }
         });
