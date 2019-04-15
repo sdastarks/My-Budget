@@ -80,33 +80,45 @@ public class InflowOutflowFragment extends Fragment {
                 String description = mDescription.getText().toString();
                 Log.v(TAG,"description: " +description);
                 String sAmount= mAmount.getText().toString();
-
+                int amount= Integer.parseInt(sAmount);
                 if (description.isEmpty() | sAmount.isEmpty()){
                     Toast.makeText(getActivity(),"Both fields must be filled",Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    int amount= Integer.parseInt(sAmount);
+                else if (amount > ((MainActivity) getActivity()).db.balance() &&!inflow){
+                    Toast.makeText(getActivity(), "You don't have enough money on your account", Toast.LENGTH_SHORT).show();
+                }
+                else if( amount > 5000 && inflow){
+                    Toast.makeText(getActivity(), "Are you a high roller", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
                     Log.v(TAG, "amount: "+ amount);
 
                     Log.v(TAG, "inflow: "+inflow);
 
+                    Log.v(TAG, "balance: "+((MainActivity) getActivity()).updateBalance());
+
                     //DAWNIE...
                     Entry entry = new Entry();
+
                     //inflow ? entry.setTypeOfEntry(1) : entry.setTypeOfEntry(0);
 
                     if(inflow)
-                        entry.setTypeOfEntry(1);
-                    else if(!inflow)
-                        entry.setTypeOfEntry(0);
+                    {   entry.setTypeOfEntry(1);
+                        addEntry(amount, description, entry);
+                        ((MainActivity) getActivity()).db.addEntry(entry);
+                    }
 
-                    entry.setAmount(amount);
-                    entry.setDate(LocalDate.now());
-                    entry.setDesc(description);
-                    ((MainActivity) getActivity()).db.addEntry(entry);
+                    else if(!inflow){
+                        entry.setTypeOfEntry(0);
+                        addEntry(amount, description, entry);
+                        ((MainActivity) getActivity()).db.addEntry(entry);
+                    }
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }
+
             }
         });
 
@@ -124,6 +136,13 @@ public class InflowOutflowFragment extends Fragment {
             }
         });
 
+    }
+
+    public Entry addEntry(int amount, String desc, Entry entry){
+        entry.setAmount(amount);
+        entry.setDesc(desc);
+        entry.setDate(LocalDate.now());
+        return entry;
     }
 
 }

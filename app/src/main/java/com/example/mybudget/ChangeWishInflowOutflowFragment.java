@@ -84,31 +84,30 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 } else if (Integer.parseInt(sAmount) > balance) {
                     Toast.makeText(getActivity(), "You don't have enough money on your account", Toast.LENGTH_SHORT).show();
                 } else {
+                    //Adding an entry to log
                     int amount = Integer.parseInt(sAmount);
                     Log.v(TAG, "TransactionAmount: " + amount);
+                    String wish = "";
+                    Entry entry = new Entry();
+                    entry.setDate(LocalDate.now());
+                    entry.setAmount(Integer.parseInt(sAmount));
+
+                    if (inflow) {
+                        entry.setTypeOfEntry(2);
+                        wish = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
+                                + " wishlist transfer";
+                    }
+                    else if (!inflow) {
+                        entry.setTypeOfEntry(1);
+                        wish = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
+                                + " wishlist return to balance";
+                    }
+                    entry.setDesc(wish);
+
+                    Log.v(TAG, "wish: "+wish);
+
+                    ((WishlistActivity) getActivity()).db.addEntry(entry);
                 }
-
-                //Adding an entry to log
-                String wish = "";
-                Entry entry = new Entry();
-                entry.setDate(LocalDate.now());
-                entry.setAmount(Integer.parseInt(sAmount));
-
-                if (inflow) {
-                    entry.setTypeOfEntry(2);
-                    wish = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
-                            + " wishlist transfer";
-                }
-                else if (!inflow) {
-                    entry.setTypeOfEntry(1);
-                    wish = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
-                            + " wishlist return to balance";
-                }
-                entry.setDesc(wish);
-
-                Log.v(TAG, "wish: "+wish);
-
-                ((WishlistActivity) getActivity()).db.addEntry(entry);
 
                 getFragmentManager()
                         .beginTransaction()
