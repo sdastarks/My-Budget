@@ -4,124 +4,214 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChoresActivity">
+    tools:context=".ChoresActivity"
+    android:id="@+id/check">
 
 
     <TableLayout
         android:layout_width="413dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="40dp"
+        android:weightSum="4"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_weight="1"
+            android:weightSum="3">
 
             <ImageButton
-                android:id="@+id/laundry"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
+                android:id="@+id/laudry"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_laundry" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_laundry"
+
+
+
+                />
 
             <ImageButton
                 android:id="@+id/dishwasher"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_dishwasher" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_dishwasher"
+                />
 
             <ImageButton
                 android:id="@+id/book"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_book" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_book"
+
+                />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="3">
 
             <ImageButton
                 android:id="@+id/vacuum"
-
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_vacuum" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_vacuum"
+                />
 
             <ImageButton
                 android:id="@+id/beingNice"
 
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_beingnice" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_beingnice"
+                />
 
             <ImageButton
                 android:id="@+id/dog"
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_dog" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_dog"
+                />
 
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="3">
 
             <ImageButton
                 android:id="@+id/grass"
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_grass" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_grass"
+                />
 
             <ImageButton
                 android:id="@+id/mop"
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_mop" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_mop"
+                />
 
             <ImageButton
                 android:id="@+id/goodGrade"
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_goodgrade" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_goodgrade"
+                />
         </TableRow>
 
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="118dp"
+            android:layout_weight="1"
+            android:weightSum="3">
 
             <ImageButton
                 android:id="@+id/cook"
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_cook" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_cook"
+                />
 
             <ImageButton
                 android:id="@+id/baby"
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_baby" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_baby"
+                />
 
             <ImageButton
                 android:id="@+id/plus"
-                android:layout_height="match_parent"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
                 android:background="#fff"
-                app:srcCompat="@drawable/button_plus" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="addMoney"
+                app:srcCompat="@drawable/button_plus"
+             />
 
         </TableRow>
 
     </TableLayout>
-
 
 
     <android.support.design.widget.BottomNavigationView
