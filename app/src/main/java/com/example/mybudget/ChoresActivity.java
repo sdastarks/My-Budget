@@ -13,6 +13,7 @@ import android.view.View;
 public class ChoresActivity extends AppCompatActivity {
     protected Boolean inflow;
     private static  final String TAG= "ChoresActivity";
+    myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
