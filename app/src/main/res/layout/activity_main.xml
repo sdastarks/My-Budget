@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimary"
         android:text="220 sek"
         android:gravity="center"
         android:textAlignment="center"
@@ -51,15 +51,15 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_centerInParent="true"
-            app:cpb_background_progressbar_color="@color/colorPrimaryDark"
+            app:cpb_background_progressbar_color="?attr/colorPrimaryDark"
             app:cpb_background_progressbar_width="5dp"
-            app:cpb_progressbar_color="@color/colorPrimary"
+            app:cpb_progressbar_color="?attr/colorPrimary"
             app:cpb_progressbar_width="15dp" />
         <TextView
             android:id="@+id/txt_progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="?attr/colorAccent"
             android:layout_alignBottom="@+id/progressBar"
             android:layout_centerInParent="true"
             android:textSize="30dp"
@@ -90,7 +90,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/border_button"
         app:itemIconTint="@drawable/bottom_nav_colours"
-        app:itemTextColor="@color/colorAccent"
+        app:itemTextColor="?attr/colorAccent"
         app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
 

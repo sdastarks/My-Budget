@@ -131,7 +131,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/border_button"
         app:itemIconTint="@drawable/bottom_nav_colours"
-        app:itemTextColor="@color/colorAccent"
+        app:itemTextColor="?attr/colorAccent"
         app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
 

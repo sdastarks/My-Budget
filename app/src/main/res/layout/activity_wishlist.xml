@@ -29,7 +29,7 @@
         android:layout_marginBottom="8dp"
         android:onClick="onAddWish"
         android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="@android:dimen/app_icon_size" />
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border_button"
         app:itemIconTint="@drawable/bottom_nav_colours"
-        app:itemTextColor="@color/colorAccent"
+        app:itemTextColor="?attr/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
