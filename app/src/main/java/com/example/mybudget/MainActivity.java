@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private TextView tvBalance;
 
+
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -167,12 +168,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     public void updateBalance(){
         tvBalance = findViewById(R.id.tvBalance);
-        int balance = 0;
         int income = db.calcIncome();
-        int expense = db.calcIncome();
+        int expense = db.calcExpenses();
         int wishes = db.calcWish();
         int earning = db.calcEarning();
-        balance = income + earning - expense - wishes;
+        int balance = income + earning - expense - wishes;
         tvBalance.setText(String.valueOf(balance));
     }
 }

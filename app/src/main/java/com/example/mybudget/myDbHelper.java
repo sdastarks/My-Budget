@@ -226,15 +226,15 @@ public class myDbHelper extends SQLiteOpenHelper {
     public ArrayList<Entry> allEntries() {
         open_db();
         ArrayList<Entry> allReconrds = new ArrayList<>();
-        String query = "SELECT * FROM " + ENTRY + ";";
+        String query = "SELECT * FROM " + ENTRY;
 
         Cursor cursor = db.rawQuery(query, null);
-        Entry entry = new Entry();
+
 
         while (cursor.moveToNext()) {
-
+            Entry entry = new Entry();
             entry.setEnteryId(cursor.getInt(0));
-            entry.setAmount(cursor.getFloat(2));
+            entry.setAmount(cursor.getInt(2));
             entry.setTypeOfEntry(cursor.getInt(3));
             String date1 = cursor.getString(1);
             DateTimeFormatter formate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -244,6 +244,8 @@ public class myDbHelper extends SQLiteOpenHelper {
             entry.setDesc(cursor.getString(4));
             allReconrds.add(entry);
         }
+        cursor.close();
+        close_db();
         return allReconrds;
     }
 
@@ -312,8 +314,8 @@ public class myDbHelper extends SQLiteOpenHelper {
             ArrayList<Entry> allEntries = allEntries();
             int total = 0;
             for(Entry e : allEntries){
-                if(e.getTypeOfEntry() == 2)
-                    total += e.getAmount();
+                if(e.getTypeOfEntry() == 2){
+                    total += e.getAmount();}
             }
             return total;
         }
@@ -325,8 +327,8 @@ public class myDbHelper extends SQLiteOpenHelper {
         ArrayList<Entry> allEntries = allEntries();
         int total = 0;
         for(Entry e : allEntries){
-            if(e.getTypeOfEntry() == 3)
-                total += e.getAmount();
+            if(e.getTypeOfEntry() == 3){
+                total += e.getAmount();}
         }
         return total;
         }
