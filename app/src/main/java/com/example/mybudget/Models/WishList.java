@@ -3,8 +3,9 @@ package com.example.mybudget.Models;
 public class WishList {
     private int WishListId;
     private String title;
-    private float cost;
-    private float saved;
+    private int cost;
+    private int saved;
+    private String image;
     //private int categoryId;
 
     /**
@@ -12,7 +13,7 @@ public class WishList {
      * @author Dawnie Safar
      */
     public WishList(){}
-    public WishList(int WishListId, String title, float cost, float saved){
+    public WishList(int WishListId, String title, int cost, int saved){
         this.WishListId = WishListId;
         this.title = title;
         this.cost = cost;
@@ -28,13 +29,15 @@ public class WishList {
         return title;
     }
 
-    public float getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public float getSaved(){
+    public int getSaved(){
         return saved;
     }
+
+    public String getImage() {return image; }
 
 
 //    public int getCategoryId() {
@@ -49,13 +52,15 @@ public class WishList {
         this.title = title;
     }
 
-    public void setCost(float cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 
-    public void setSaved(float saved){
+    public void setSaved(int saved){
         this.saved = saved;
     }
+
+    public void setImage(String image){ this.image = image; }
 
 //    public void setCategoryId(int categoryId) {
 //        this.categoryId = categoryId;
