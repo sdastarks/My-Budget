@@ -10,14 +10,14 @@ public class Entry {
 
     private int enteryId;
     private LocalDate date;
-    private float amount;
+    private int amount;
     // expenditures = 0; income = 1; spendOnWish = 2; earnedFromChore = 3;
     private int typeOfEntry;
     private String desc;
 
     public Entry(){}
 
-    public Entry(int enteryId, LocalDate date, float amount, int typeOfEntry, String desc){
+    public Entry(int enteryId, LocalDate date, int amount, int typeOfEntry, String desc){
         this.enteryId = enteryId;
         this.date = date;
         this.amount = amount;
@@ -34,7 +34,7 @@ public class Entry {
         return date;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -52,7 +52,7 @@ public class Entry {
         this.date = date;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

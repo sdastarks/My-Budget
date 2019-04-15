@@ -230,7 +230,6 @@ public class myDbHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-
         while (cursor.moveToNext()) {
             Entry entry = new Entry();
             entry.setEnteryId(cursor.getInt(0));

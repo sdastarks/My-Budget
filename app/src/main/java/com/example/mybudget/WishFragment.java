@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mybudget.Models.Entry;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
+import java.time.LocalDate;
 
 import static com.example.mybudget.R.id.edit_wish_fragment;
 import static com.example.mybudget.R.id.fragment_placeholder;
@@ -63,6 +66,9 @@ public class WishFragment extends Fragment {
         txtAvailableBalance = view.findViewById(R.id.txt_available_balance);
 
         //assign value by index from DB
+        //DAWNIE
+        int bal = ((WishlistActivity) getActivity()).db.balance();
+        balance.setText(String.valueOf(bal));
 
         int progress = 60; // data received from database
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
