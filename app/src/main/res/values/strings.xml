@@ -6,7 +6,13 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="available_balance">Available balance</string>
+
+    <string name="costHint">Enter the cost</string>
+    <string name="wish_name_hint">Enter the name of your wish</string>
+    <string name="currency">SEK</string>
+
     <string name="hint_name">Name</string>
     <string name="hint_email">Email</string>
     <string name="text_register">Register</string>
+
 </resources>

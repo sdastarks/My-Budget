@@ -1,6 +1,8 @@
 <resources>
 
     <!-- Base application theme. -->
+
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -8,10 +10,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Robot" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/scienceMonsterColorPrimary</item>
+        <item name="colorPrimaryDark">@color/scienceMonsterColorPrimaryDark</item>
+        <item name="colorAccent">@color/scienceMonsterMonsterColorAccent</item>
+    </style>
+
+    <style name="AppTheme.CookieMonster" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/cookieMonsterColorPrimary</item>
+        <item name="colorPrimaryDark">@color/cookieMonsterColorPrimaryDark</item>
+        <item name="colorAccent">@color/cookieMonsterColorAccent</item>
+    </style>
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
 
 </resources>

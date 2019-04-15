@@ -26,6 +26,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     EditText mAmount;
     Boolean inflow;
     int index;
+    int balance;
 
     /*
      * Method creates the initial state of the
@@ -73,6 +74,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
                 if (sAmount.isEmpty()){
                     Toast.makeText(getActivity(),"You have transfered 0 sek",Toast.LENGTH_SHORT).show();
+                } else if (Integer.parseInt(sAmount) > balance) {
+                    Toast.makeText(getActivity(), "You don't have enough money on your account", Toast.LENGTH_SHORT).show();
                 } else {
                     int amount = Integer.parseInt(sAmount);
                     Log.v(TAG, "TransactionAmount: " + amount);
