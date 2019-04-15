@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int expense = db.calcExpenses();
         int wishes = db.calcWish();
         int earning = db.calcEarning();
-        int balance = income + earning - expense - wishes;
+        int balance = (income + earning) - (expense + wishes);
         tvBalance.setText(String.valueOf(balance));
     }
 }

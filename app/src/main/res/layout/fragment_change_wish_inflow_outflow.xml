@@ -2,18 +2,16 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wish_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChangeWishInflowOutflowFragment"
     android:background="#FFFFFF"
-    android:id="@+id/wish_fragment">
+    tools:context=".ChangeWishInflowOutflowFragment">
 
     <TextView
         android:id="@+id/SEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/description"
-        android:layout_alignLeft="@+id/description"
         android:layout_marginStart="8dp"
         android:text="SEK"
         android:textColor="@android:color/black"
@@ -25,7 +23,6 @@
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/description"
         android:layout_alignBottom="@+id/SEK"
         android:layout_marginStart="28dp"
         android:layout_toRightOf="@+id/SEK"
@@ -54,14 +51,11 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:src="@drawable/icon_cancel_white"
         app:fabCustomSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/SEK"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toEndOf="@+id/SEK" />
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_saveTransfer"
+        app:layout_constraintTop_toTopOf="@+id/image_inflow_outflow" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_saveTransfer"
@@ -69,15 +63,15 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="70dp"
         android:clickable="true"
         android:src="@drawable/icon_done_white"
         app:fabCustomSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_cancelTransaction"
+        app:layout_constraintStart_toEndOf="@+id/SEK"
         app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_cancelTransaction"
         app:layout_constraintVertical_bias="0.0" />
-
 
 
 </android.support.constraint.ConstraintLayout>
