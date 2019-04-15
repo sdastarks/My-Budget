@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         setProgressBar();
 
+
+
     }
     /*
      * Method sets the status of the progress bar

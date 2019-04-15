@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.mybudget.Models.WishList;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Integer> mWishPrices = new ArrayList<>();
     private ArrayList<String> mWishImages = new ArrayList<>();
     private ArrayList<Integer> mSavingProgress = new ArrayList<>();
+
+
     private Context mContext;
     private OnWishListener mOnWishListener;
 
@@ -41,13 +44,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter(ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
                                ArrayList<String> mWishImages, ArrayList<Integer> mSavingProgress,
                                Context mContext, OnWishListener onWishListener) {
-        this.mWishNames = mWishNames;
-        this.mWishPrices = mWishPrices;
-        this.mWishImages = mWishImages;
-        this.mSavingProgress = mSavingProgress;
-        this.mContext = mContext;
-        this.mOnWishListener = onWishListener;
-    }
+
+        //added the database instance to retreive all added wished to display
+//         myDbHelper db = new myDbHelper(mContext, "myDb.db", null, 1);
+//         ArrayList<WishList> wishlist = db.loadWishes();
+//
+//         for(WishList wl : wishlist) {
+
+             this.mWishNames = mWishNames;
+             this.mWishPrices = mWishPrices;
+             this.mWishImages = mWishImages;
+             this.mSavingProgress = mSavingProgress;
+             this.mContext = mContext;
+             this.mOnWishListener = onWishListener;
+         }
 
 
 

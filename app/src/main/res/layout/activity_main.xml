@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <TextView
+        android:id="@+id/tvBalance"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="220 sek"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:textSize="30dp"
         android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFF"/>
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="220 sek"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_add"

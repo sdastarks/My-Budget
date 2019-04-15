@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.mybudget.Models.WishList;
+
 
 /**
  * Fragment allows user to create new Wish
@@ -23,6 +25,7 @@ public class NewWishFragment extends Fragment {
     private EditText title;
     private EditText cost;
     private ImageView wishPicture;
+    private FloatingActionButton floatingActionButton_save_wish;
 
 
     public NewWishFragment() {
@@ -38,6 +41,22 @@ public class NewWishFragment extends Fragment {
         title = view.findViewById(R.id.editText_title);
         cost = view.findViewById(R.id.editText_cost);
         wishPicture = view.findViewById(R.id.wish_picture);
+        floatingActionButton_save_wish = view.findViewById(R.id.floatingActionButton_save_wish);
+
+        floatingActionButton_save_wish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WishList wish = new WishList();
+                wish.setTitle(title.getText().toString());
+                wish.setCost(Integer.parseInt(cost.getText().toString()));
+                wish.setSaved(0);
+                //wish.setImage(wishPicture);
+                ((WishlistActivity) getActivity()).db.addWish(wish);
+                Intent intent = new Intent (getActivity(), WishlistActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         //Method to exit fragment
