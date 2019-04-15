@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -34,6 +35,7 @@ public class WishlistActivity extends AppCompatActivity implements RecyclerViewA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
         Log.d(TAG, "onCreate: startec");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         /*
          * Method creates a pathway to the other
          * activities via a navigation bar
