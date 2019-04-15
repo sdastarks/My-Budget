@@ -40,6 +40,13 @@ public class myDbHelper extends SQLiteOpenHelper {
     public static final String TYPEOFENTRY = "typeOfEntry";
     public static final String DESC = "description";
 
+    //User Table
+    public static final String USER_PROFILE = "UserProfile";
+    public static final String USERID = "userId";
+    public static final String USER_NAME = "UserName";
+    public static final String USER_EMAIL = "UserEmail";
+    public static final String USER_AVATAR = "UserAvatar";
+
 
     public myDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int Version) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -63,8 +70,17 @@ public class myDbHelper extends SQLiteOpenHelper {
                     + AMOUNT + " FLOAT NOT NULL,"
                     + TYPEOFENTRY + " INTEGER,"
                     + DESC + " TEXT NOT NULL);");
-            this.db = db;
-        } catch (SQLException e) {
+
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS "
+                    + USER_PROFILE + " ("
+                    + USERID + " INTEGER PRIMARY KEY,"
+                    + USER_NAME + " TEXT NOT NULL,"
+                    + USER_EMAIL + " TEXT NOT NULL,"
+                    + USER_AVATAR + "BLOB); ");
+            this.db=db;
+        }catch (SQLException e){
+
             e.printStackTrace();
         }
     }
@@ -73,6 +89,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + WISH_LIST);
         db.execSQL("DROP TABLE IF EXISTS " + ENTRY);
+        db.execSQL("DROP TABLE IF EXISTS " + USER_PROFILE);
         this.onCreate(db);
     }
 

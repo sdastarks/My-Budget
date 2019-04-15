@@ -23,14 +23,11 @@
     </style>
 
 
-    <!--style name="Widget.Button.Primary"
-        parent="Widget.AppCompat.Button">
-        <item name="colorButtonNormal">?attr/ButtonNormalColor</item>
-        <item name="colorControlHighlight">
-            ?attr/ButtonHighlightColor
-        </item>
-
-    </style-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 
 
 </resources>
