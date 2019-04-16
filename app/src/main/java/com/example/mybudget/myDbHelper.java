@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @author Dawnie Safar
  */
 public class myDbHelper extends SQLiteOpenHelper {
-
+    private static final String TAG = "myDbHelperLog";
     public SQLiteDatabase db;
 
     public static final int VERSION = 1;
@@ -148,8 +148,29 @@ public class myDbHelper extends SQLiteOpenHelper {
         close_db();
     }
 
+    public WishList returnWish(int id){
+        open_db();
+        Log.v(TAG,"id: "+id);
+
+        String query = "select * from " + WISH_LIST + " where " + WISHLISTID + "="
+               + id;
+
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        WishList wish = new WishList();
+        wish.setWishListId(cursor.getInt(0));
+        wish.setTitle(cursor.getString(1));
+        wish.setCost(cursor.getInt(2));
+        wish.setSaved(cursor.getInt(3));
+        wish.setImage(cursor.getString(4));
+        cursor.close();
+        close_db();
+        return wish;
+    }
+
     public WishList findWishList(String title) {
-        String query = "Select * from " + WISH_LIST + "WHERE " + TITLE + " = " +
+        String query = "Select * from " + WISH_LIST + " WHERE " + TITLE + " = " +
                 "'" + title + "'";
         open_db();
         Cursor cursor = db.rawQuery(query, null);

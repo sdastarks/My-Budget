@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.Models.WishList;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.time.LocalDate;
@@ -53,6 +54,10 @@ public class WishFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        int dbid =((WishlistActivity) getActivity()).id;
+        Log.v(TAG, "id: "+dbid);
+        WishList wishwish = ((WishlistActivity) getActivity()).db.returnWish(dbid);
+        Log.v(TAG, "Title: "+wishwish.getTitle());
 
 
         index = ((WishlistActivity) getActivity()).index;

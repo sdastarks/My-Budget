@@ -31,6 +31,7 @@ Author: Anastasija Gurejeva
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 
+    private ArrayList<Integer> mWishId = new ArrayList<>();
     private ArrayList<String> mWishNames = new ArrayList<>();
     private ArrayList<Integer> mWishPrices = new ArrayList<>();
     private ArrayList<String> mWishImages = new ArrayList<>();
@@ -41,16 +42,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private OnWishListener mOnWishListener;
 
 
-    public RecyclerViewAdapter(ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
+    public RecyclerViewAdapter(ArrayList<Integer> mWishId ,ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
                                ArrayList<String> mWishImages, ArrayList<Integer> mSavingProgress,
                                Context mContext, OnWishListener onWishListener) {
 
         //added the database instance to retreive all added wished to display
-//         myDbHelper db = new myDbHelper(mContext, "myDb.db", null, 1);
-//         ArrayList<WishList> wishlist = db.loadWishes();
-//
-//         for(WishList wl : wishlist) {
-
+             this.mWishId = mWishId;
              this.mWishNames = mWishNames;
              this.mWishPrices = mWishPrices;
              this.mWishImages = mWishImages;
