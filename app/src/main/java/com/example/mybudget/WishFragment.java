@@ -53,6 +53,7 @@ public class WishFragment extends Fragment {
     private FloatingActionButton editWishFragment;
     private FloatingActionButton deleteWishFragment;
     private FloatingActionButton favouriteWish;
+    WishList wishSelected;
 
 
     @Override
@@ -74,8 +75,9 @@ public class WishFragment extends Fragment {
         int bal = ((WishlistActivity) getActivity()).db.balance();
         balance.setText(String.valueOf(bal));
 
-        //selected wish database id
+        //selected wish database id and Wish
         dbid = ((WishlistActivity) getActivity()).id;
+        wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
@@ -84,6 +86,7 @@ public class WishFragment extends Fragment {
         deleteWishFragment = view. findViewById(R.id.floatingActionButton_delete_wish_fragment);
         favouriteWish = view. findViewById(R.id.floatingActionButton_favourite_wish_fragment);
 
+        setTitle();
         calcProgress();
         setProgressBar();
         activateOnAddSelected();
@@ -96,12 +99,18 @@ public class WishFragment extends Fragment {
         return view;
     }
     /*
+     * Method sets the title of the
+     * selected wish
+     */
+    public void setTitle(){
+        wishTitle.setText(wishSelected.getTitle());
+    }
+    /*
      * Method calculates the progress of the
      * selected wish
      */
     public void calcProgress(){
         int wishPrice=((WishlistActivity) getActivity()).wishPrice;
-        WishList wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         int wishSaved= wishSelected.getSaved();
         progress=wishSaved*100/wishPrice;
     }
