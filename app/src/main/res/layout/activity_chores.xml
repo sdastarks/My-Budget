@@ -33,7 +33,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_laundry"
+                app:srcCompat="@drawable/button_white_laundry"
 
 
 
@@ -49,7 +49,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_dishwasher"
+                app:srcCompat="@drawable/button_white_dishwasher"
                 />
 
             <ImageButton
@@ -62,7 +62,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_book"
+                app:srcCompat="@drawable/button_white_book"
 
                 />
 
@@ -84,7 +84,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_vacuum"
+                app:srcCompat="@drawable/button_white_vacuum"
                 />
 
             <ImageButton
@@ -98,7 +98,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_beingnice"
+                app:srcCompat="@drawable/button_white_beingnice"
                 />
 
             <ImageButton
@@ -111,7 +111,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_dog"
+                app:srcCompat="@drawable/button_white_dog"
                 />
 
 
@@ -133,7 +133,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_grass"
+                app:srcCompat="@drawable/button_white_grass"
                 />
 
             <ImageButton
@@ -146,7 +146,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_mop"
+                app:srcCompat="@drawable/button_white_mop"
                 />
 
             <ImageButton
@@ -159,7 +159,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_goodgrade"
+                app:srcCompat="@drawable/button_white_goodgrade"
                 />
         </TableRow>
 
@@ -180,7 +180,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_cook"
+                app:srcCompat="@drawable/button_white_cook"
                 />
 
             <ImageButton
@@ -193,7 +193,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_baby"
+                app:srcCompat="@drawable/button_white_baby"
                 />
 
             <ImageButton
@@ -206,7 +206,7 @@
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_plus"
+                app:srcCompat="@drawable/button_white_plus"
              />
 
         </TableRow>
