@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class WishlistActivity extends SettingsActivity implements RecyclerViewAdapter.OnWishListener {
     private static final String TAG = "WishlistActivity";
-    private ArrayList <String> mWishNames = new ArrayList<>();
+    protected ArrayList <String> mWishNames = new ArrayList<>();
     private ArrayList <String> mImageUrls = new ArrayList<>();
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();

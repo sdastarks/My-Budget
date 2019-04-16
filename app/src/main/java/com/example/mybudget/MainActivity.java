@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,10 +58,20 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //heroImage = findViewById(R.id.imageViewHero);
+
+        Button register_button = findViewById(R.id.register_demobutton);
+        register_button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
+                startActivity(intent_register);
+
+            }
+        });
 
 
-        /*
+                /*
          * Method creates a pathway to the other
          * activities via a navigation bar
          */
@@ -176,13 +187,14 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
      * Updates the balance with every entry
      * @auth DAWNIE
      */
-    public void updateBalance(){
+    public int updateBalance(){
         tvBalance = findViewById(R.id.tvBalance);
         int income = db.calcIncome();
         int expense = db.calcExpenses();
         int wishes = db.calcWish();
         int earning = db.calcEarning();
-        int balance = income + earning - expense - wishes;
+        int balance = (income + earning) - (expense + wishes);
         tvBalance.setText(String.valueOf(balance));
+        return balance;
     }
 }
