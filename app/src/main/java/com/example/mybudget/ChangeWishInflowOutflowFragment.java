@@ -78,8 +78,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             public void onClick(View v) {
 
                 String sAmount = mAmount.getText().toString();
-
-
                 if (sAmount.isEmpty()) {
                     Toast.makeText(getActivity(), "You have transferred 0 sek", Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(sAmount) > balance) {
@@ -91,15 +89,14 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     Entry entry = new Entry();
                     entry.setDate(LocalDate.now());
                     entry.setAmount(Integer.parseInt(sAmount));
-
                     int dbid = ((WishlistActivity) getActivity()).id;
                     WishList wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
 
                     if (inflow) {
-                        addInflow(entry, amount, wish2Update, dbid);
+                        addMoney2Wish(entry, amount, wish2Update, dbid);
 
                     } else if (!inflow) {
-                        addOutflow(entry, amount, wish2Update, dbid);
+                        takeMoneyFromWish(entry, amount, wish2Update, dbid);
                     }
                 }
 
@@ -128,8 +125,12 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         });
 
     }
-
-    public void addInflow(Entry entry, Integer amount, WishList wish2Update, int dbid) {
+    /*
+     * Method adds money to the wish
+     * if the amount doesnt exceed the total price
+     * of the wish
+     */
+    public void addMoney2Wish(Entry entry, Integer amount, WishList wish2Update, int dbid) {
         entry.setTypeOfEntry(2);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
                 + " wishlist transfer";
@@ -147,8 +148,12 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             ((WishlistActivity) getActivity()).db.addEntry(entry);
         }
     }
-
-    public void addOutflow(Entry entry, Integer amount, WishList wish2Update, int dbid) {
+    /*
+     * Method takes away money from the list
+     * if the amount doesnt exceed the total
+     * amount of money allocated to the wish
+     */
+    public void takeMoneyFromWish(Entry entry, Integer amount, WishList wish2Update, int dbid) {
         entry.setTypeOfEntry(1);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
                 + " wishlist return to balance";
@@ -159,7 +164,10 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
         } else {
-            Toast.makeText(getActivity(), "Try a different number!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Gotta be less than "+
+                            (wish2Update.getSaved())+
+                    " SEK"
+                    , Toast.LENGTH_SHORT).show();
         }
     }
 }

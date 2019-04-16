@@ -36,6 +36,7 @@ import static com.example.mybudget.R.id.frame_wish_fragment;
 public class WishFragment extends Fragment {
     private static final String TAG = "WishFragment";
 
+    private View view;
     private CircularProgressBar circularProgressBar;
     private TextView wishTitle;
     private TextView wishPrice;
@@ -61,7 +62,7 @@ public class WishFragment extends Fragment {
         index = ((WishlistActivity) getActivity()).index;
         Log.d(TAG, "onCreateView: view infaled. Index passed " + index);
 
-        View view = inflater.inflate(R.layout.fragment_wish, container, false);
+        view = inflater.inflate(R.layout.fragment_wish, container, false);
         wishTitle = view.findViewById(R.id.wish_title);
         wishPrice = view.findViewById(R.id.wish_price);
         balance = view.findViewById(R.id.balance);
@@ -76,8 +77,6 @@ public class WishFragment extends Fragment {
         //selected wish database id
         dbid = ((WishlistActivity) getActivity()).id;
 
-        calcProgress(view);
-
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
         cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
@@ -85,6 +84,8 @@ public class WishFragment extends Fragment {
         deleteWishFragment = view. findViewById(R.id.floatingActionButton_delete_wish_fragment);
         favouriteWish = view. findViewById(R.id.floatingActionButton_favourite_wish_fragment);
 
+        calcProgress();
+        setProgressBar();
         activateOnAddSelected();
         activateOnMinusSelected();
         activateEditWishFragment();
@@ -94,17 +95,25 @@ public class WishFragment extends Fragment {
 
         return view;
     }
-
-    public void calcProgress(View view){
+    /*
+     * Method calculates the progress of the
+     * selected wish
+     */
+    public void calcProgress(){
         int wishPrice=((WishlistActivity) getActivity()).wishPrice;
         WishList wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         int wishSaved= wishSelected.getSaved();
         progress=wishSaved*100/wishPrice;
+    }
+    /*
+     * Method sets the state of the progress
+     * bar
+     */
+    public void setProgressBar(){
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
         circularProgressBar.setProgress(progress);
         TextView progresstxt = view.findViewById(R.id.txt_progressBar);
         progresstxt.setText(progress + "%");
-
     }
 
     //Floating button calls a new fragment,
