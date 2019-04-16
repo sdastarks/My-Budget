@@ -8,7 +8,9 @@ package com.example.mybudget;
  */
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -110,15 +112,22 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 return false;
             }
         });
-
-        setProgressBar();
+        int favWish_dbID= getFavouriteWish();
+        setProgressBar(favWish_dbID);
         updateBalance();
+    }
+    public int getFavouriteWish(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        int favWish_dbID= sharedPref.getInt("favouriteWish",0);
+        Log.v(TAG, "favWish_dbID: "+favWish_dbID);
+        return favWish_dbID;
     }
 
     /*
      * Method sets the status of the progress bar
      */
-    public void setProgressBar() {
+    public void setProgressBar(int favWish_dbID) {
+        
         int progress = 60; // data received from database
         CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.progressBar);
         circularProgressBar.setProgress(progress);

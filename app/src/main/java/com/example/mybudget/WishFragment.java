@@ -3,8 +3,10 @@ package com.example.mybudget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
@@ -48,10 +51,8 @@ public class WishFragment extends Fragment {
     private FloatingActionButton cancelWishFragment;
     private FloatingActionButton editWishFragment;
     private FloatingActionButton deleteWishFragment;
+    private FloatingActionButton favouriteWish;
 
-    public WishFragment() {
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,6 +73,9 @@ public class WishFragment extends Fragment {
         int bal = ((WishlistActivity) getActivity()).db.balance();
         balance.setText(String.valueOf(bal));
 
+        //selected wish database id
+        dbid = ((WishlistActivity) getActivity()).id;
+
         calcProgress(view);
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
@@ -79,19 +83,20 @@ public class WishFragment extends Fragment {
         cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
         editWishFragment = view. findViewById(R.id.floatingActionButton_edit_wish_fragment);
         deleteWishFragment = view. findViewById(R.id.floatingActionButton_delete_wish_fragment);
+        favouriteWish = view. findViewById(R.id.floatingActionButton_favourite_wish_fragment);
 
         activateOnAddSelected();
         activateOnMinusSelected();
         activateEditWishFragment();
         activateCancelWishFragment();
         activateDeleteWishFragment();
+        activateFavouriteWish();
 
         return view;
     }
 
     public void calcProgress(View view){
         int wishPrice=((WishlistActivity) getActivity()).wishPrice;
-        dbid = ((WishlistActivity) getActivity()).id;
         WishList wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         int wishSaved= wishSelected.getSaved();
         progress=wishSaved*100/wishPrice;
@@ -191,6 +196,19 @@ public class WishFragment extends Fragment {
                 ((WishlistActivity) getActivity()).db.deleteWish(dbid);
                 Intent intent = new Intent(getActivity(), WishlistActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void activateFavouriteWish(){
+        favouriteWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "dbid: "+ dbid);
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                sharedPref.edit().putInt("favouriteWish", dbid).apply();
+                Toast.makeText(getActivity(), "Your new favourite wish!", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
