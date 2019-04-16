@@ -29,7 +29,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
     EditText mAmount;
-    Boolean inflow;
+    Boolean addingMoney2Wish;
     int index;
     int balance;
 
@@ -44,35 +44,28 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
 
         balance = ((WishlistActivity) getActivity()).db.balance();
-        Log.v(TAG, "balance: " + balance);
-
-        // the boolean expression inflow will show if the input by the user
-        // is an transfer to savings or removing from savings to balance
-        // boolean is passed from wish fragment
-
-        inflow = getArguments().getBoolean("inflow");
+        addingMoney2Wish = getArguments().getBoolean("inflow");
         index = getArguments().getInt("index");
-        Log.d(TAG, "onCreateView: index passe " + index);
-
         ImageView image = view.findViewById(R.id.image_inflow_outflow);
-        if (inflow) {
+        if (addingMoney2Wish) {
             image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
         } else {
             image.setImageDrawable(getResources().getDrawable(R.drawable.image_outflow));
         }
-
         mAmount = view.findViewById(R.id.amount);
         return view;
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
-        Log.v(TAG, "inflow" + inflow);
+        Log.v(TAG, "inflow" + addingMoney2Wish);
 
         FloatingActionButton saveButton = view.findViewById(R.id.floatingActionButton_saveTransfer);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
-             * Method gets the transaction amount
+             * Method either adds or takes away money from the wish
+             * if the user has enough money from their balance
+             * and has not entered 0 SEK
              */
             @Override
             public void onClick(View v) {
@@ -92,10 +85,10 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     int dbid = ((WishlistActivity) getActivity()).id;
                     WishList wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
 
-                    if (inflow) {
+                    if (addingMoney2Wish) {
                         addMoney2Wish(entry, amount, wish2Update, dbid);
 
-                    } else if (!inflow) {
+                    } else if (!addingMoney2Wish) {
                         takeMoneyFromWish(entry, amount, wish2Update, dbid);
                     }
                 }
@@ -123,7 +116,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                         .commit();
             }
         });
-
     }
     /*
      * Method adds money to the wish
@@ -164,9 +156,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
         } else {
-            Toast.makeText(getActivity(), "Gotta be less than "+
-                            (wish2Update.getSaved())+
-                    " SEK"
+            Toast.makeText(getActivity(), "Gotta be less than " +
+                            (wish2Update.getSaved()) +
+                            " SEK"
                     , Toast.LENGTH_SHORT).show();
         }
     }
