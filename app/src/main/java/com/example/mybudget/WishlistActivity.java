@@ -31,6 +31,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
     private FloatingActionButton addWish;
     protected int id;
+    protected int wishPrice;
     protected Integer progress;
     int index;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -103,8 +104,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         Log.d(TAG, "onWishClick: clicked : " + position);
         addWish.hide();
         id =mWishId.get(position);
-        progress= mSavingProgress.get(position)*100/mWishPrices.get(position);
-        Log.v(TAG, "progress: "+progress);
+        wishPrice=mWishPrices.get(position);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_wish_fragment, new WishFragment());
         index = position ;

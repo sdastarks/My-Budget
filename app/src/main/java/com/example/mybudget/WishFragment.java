@@ -40,6 +40,8 @@ public class WishFragment extends Fragment {
     private TextView savingProgress;
     private TextView txtAvailableBalance;
     private int index;
+    private int progress;
+    private int dbid;
     protected Boolean inflow;
     private FloatingActionButton onAddSelected;
     private FloatingActionButton onMinusSelected;
@@ -70,12 +72,7 @@ public class WishFragment extends Fragment {
         int bal = ((WishlistActivity) getActivity()).db.balance();
         balance.setText(String.valueOf(bal));
 
-        int progress = ((WishlistActivity) getActivity()).progress; // data received from database
-        circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
-        circularProgressBar.setProgress(progress);
-        TextView progresstxt = view.findViewById(R.id.txt_progressBar);
-        progresstxt.setText(progress + "%");
-
+        calcProgress(view);
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
@@ -90,6 +87,19 @@ public class WishFragment extends Fragment {
         activateDeleteWishFragment();
 
         return view;
+    }
+
+    public void calcProgress(View view){
+        int wishPrice=((WishlistActivity) getActivity()).wishPrice;
+        dbid = ((WishlistActivity) getActivity()).id;
+        WishList wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
+        int wishSaved= wishSelected.getSaved();
+        progress=wishSaved*100/wishPrice;
+        circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
+        circularProgressBar.setProgress(progress);
+        TextView progresstxt = view.findViewById(R.id.txt_progressBar);
+        progresstxt.setText(progress + "%");
+
     }
 
     //Floating button calls a new fragment,
