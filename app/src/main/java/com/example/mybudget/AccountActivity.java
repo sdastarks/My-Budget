@@ -21,6 +21,7 @@ import java.util.List;
 
 public class AccountActivity extends AppCompatActivity {
     private static final String TAG = "AccountActivityLog";
+
     RecyclerView mRecyclerView;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
     @Override

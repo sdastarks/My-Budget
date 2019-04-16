@@ -8,6 +8,7 @@ package com.example.mybudget;
  */
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -22,16 +23,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends SettingsActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private TextView tvBalance;
+
 
 
     private static final String TAG = "MainActivityLog";
@@ -54,7 +58,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /*
+
+        Button register_button = findViewById(R.id.register_demobutton);
+        register_button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
+                startActivity(intent_register);
+
+            }
+        });
+
+
+                /*
          * Method creates a pathway to the other
          * activities via a navigation bar
          */
@@ -83,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.nav_chores:
                         Intent intent3 = new Intent(MainActivity.this, ChoresActivity.class);
                         startActivity(intent3);
+                        break;
+                    case R.id.nav_settings:
+                        Intent intent4 = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(intent4);
                         break;
 
                 }

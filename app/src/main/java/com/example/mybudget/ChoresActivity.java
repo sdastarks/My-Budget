@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ChoresActivity extends AppCompatActivity {
+public class ChoresActivity extends SettingsActivity {
     protected Boolean inflow;
     private static  final String TAG= "ChoresActivity";
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
