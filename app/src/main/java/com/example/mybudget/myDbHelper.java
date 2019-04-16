@@ -278,7 +278,7 @@ public class myDbHelper extends SQLiteOpenHelper {
 
         cursor.close();
         close_db();
-        return allReconrds;
+        return allRecords;
 
     }
 
@@ -341,10 +341,7 @@ public class myDbHelper extends SQLiteOpenHelper {
                     total += e.getAmount();}
             }
             return total;
-
         }
-        return total;
-    }
 
     /**
      * @return total amount spend on wishes
@@ -360,8 +357,6 @@ public class myDbHelper extends SQLiteOpenHelper {
             return total;
 
         }
-        return total;
-    }
 
     /**
      * @return total amount of earnings
