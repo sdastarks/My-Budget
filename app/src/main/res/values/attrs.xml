@@ -10,6 +10,8 @@
         <!--format="reference"/>-->
     <!--<attr name="primaryButtonTheme"-->
         <!--format="reference"/>-->
+    <attr name="ColorSecondary"
+   format="reference"/>
 
 
 
