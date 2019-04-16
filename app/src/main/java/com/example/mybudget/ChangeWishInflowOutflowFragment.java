@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
@@ -29,7 +30,10 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
     EditText mAmount;
+    TextView wishTitle;
     Boolean addingMoney2Wish;
+    WishList wish2Update;
+    int dbid;
     int index;
     int balance;
 
@@ -42,6 +46,11 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
+        dbid = ((WishlistActivity) getActivity()).id;
+        wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
+
+        wishTitle= view.findViewById(R.id.wish_title2);
+        wishTitle.setText(wish2Update.getTitle());
 
         balance = ((WishlistActivity) getActivity()).db.balance();
         addingMoney2Wish = getArguments().getBoolean("inflow");
@@ -82,8 +91,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     Entry entry = new Entry();
                     entry.setDate(LocalDate.now());
                     entry.setAmount(Integer.parseInt(sAmount));
-                    int dbid = ((WishlistActivity) getActivity()).id;
-                    WishList wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
 
                     if (addingMoney2Wish) {
                         addMoney2Wish(entry, amount, wish2Update, dbid);
