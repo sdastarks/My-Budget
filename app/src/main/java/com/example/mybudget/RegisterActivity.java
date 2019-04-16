@@ -8,18 +8,20 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.Toast;
+
+import com.example.mybudget.Models.User;
 
 import static com.example.mybudget.myDbHelper.USER_PROFILE;
 
 
 /**
- * Fragment allows the user to enter
- * an income, that will affect the balance
+ * The activity is used to register user
  *
  * @author Benish
- *
  */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,15 +29,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private final AppCompatActivity activity = RegisterActivity.this;
     private ScrollView scrollView;
 
-    private TextInputLayout textInputLayoutName;
+    private TextInputLayout textInputLayoutFirstName;
+    private TextInputLayout textInputLayoutLastName;
     private TextInputLayout textInputLayoutEmail;
+    private TextInputLayout textInputLayoutAge;
 
-    private TextInputEditText textInputEditTextName;
+    private TextInputEditText textInputEditTextFirstName;
+    private TextInputEditText textInputEditTextLastName;
     private TextInputEditText textInputEditTextEmail;
+    private TextInputEditText textInputEditTextAge;
     private AppCompatButton appCompatButtonRegister;
 
     private myDbHelper databaseHelper;
-    SQLiteDatabase db;
+    User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +58,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void initializeViews() {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
-        textInputLayoutName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
+        textInputLayoutFirstName = (TextInputLayout) findViewById(R.id.textInputLayoutFirstName);
+        textInputLayoutLastName = (TextInputLayout) findViewById(R.id.textInputLayoutLastName);
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutAge = (TextInputLayout) findViewById(R.id.textInputLayoutAge);
 
-        textInputEditTextName = (TextInputEditText) findViewById(R.id.textInputEditTextName);
+        textInputEditTextFirstName = (TextInputEditText) findViewById(R.id.textInputEditTextFirstName);
+        textInputEditTextLastName = (TextInputEditText) findViewById(R.id.textInputEditTextLastName);
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextAge = (TextInputEditText) findViewById(R.id.textInputEditTextAge);
 
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
     }
@@ -72,71 +82,97 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * This method is to initialize objects to be used
      */
     private void initializeObjects() {
-        databaseHelper = new myDbHelper(this,"userdb.db",null,1);
+        databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
     }
 
-    public void onClick(View view){
+    public void onClick(View view) {
         inputValidation();
+        addUser(user);
     }
+
     /**
      * This method is to validate the input text fields and post data to SQLite
      */
     private void postDataToSQLite() {
         //if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, getString(R.string.error_message_name))) {
-         //   return;
-        }
+        //   return;
+    }
 
 
-    /**Validate the input entered by user
-     *
+    /**
+     * Validate the input entered by user
      */
-    private boolean inputValidation(){
-        String value =  textInputEditTextName.getText().toString().trim();
-        if(value.isEmpty()){
-            //textInputLayoutName.setError();
-            return false;
+    private boolean inputValidation() {
+        initializeViews();
+        boolean valid = true;
+
+        String valueFirstName = textInputEditTextFirstName.getText().toString().trim();
+        String valueLastName = textInputEditTextLastName.getText().toString().trim();
+        String valueAge = textInputEditTextAge.getText().toString().trim();
+        String valueEmail = textInputEditTextEmail.getText().toString();
+
+        if (valueFirstName.isEmpty() || valueFirstName.length() < 3) {
+            textInputEditTextFirstName.setError("at least 3 characters");
+            valid = false;
+        } else {
+            textInputEditTextFirstName.setError(null);
         }
-        return true;
+
+        if (valueLastName.isEmpty() || valueLastName.length() < 3) {
+            textInputEditTextLastName.setError("at least 3 characters");
+            valid = false;
+        } else {
+            textInputEditTextLastName.setError(null);
+        }
+
+        if (valueAge.isEmpty()) {
+            textInputEditTextAge.setError("enter your age");
+            valid = false;
+        } else {
+            textInputEditTextAge.setError(null);
+        }
+
+        if (!valueEmail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(valueEmail).matches()) {
+            textInputEditTextEmail.setError("enter a valid email address");
+            valid = false;
+        } else {
+            textInputEditTextEmail.setError(null);
+        }
+
+        return valid;
     }
 
     /**
      * This method is to empty all input edit text
      */
     private void emptyInputEditText() {
-        textInputEditTextName.setText(null);
+        textInputEditTextFirstName.setText(null);
+        textInputEditTextLastName.setText(null);
         textInputEditTextEmail.setText(null);
+        textInputEditTextAge.setText(null);
     }
 
     //CRUD operations for user
-    public void addUser(){
+    public void addUser(User user) {
         initializeViews();
-        databaseHelper.open_db();
-        ContentValues values = new ContentValues();
-        String name, email;
-        name = textInputEditTextName.getText().toString();
-        email = textInputEditTextEmail.getText().toString();
-        if(!(name.isEmpty()) && !(email.isEmpty())){
-            //values.put(USER_NAME,name);
-            //values.put(USER_EMAIL,email);
-            //values.put(USER_AVATAR,avatar);
-        }
-        databaseHelper.close_db();
+        String valueFirstName = textInputEditTextFirstName.getText().toString();
+        String valueLastName = textInputEditTextLastName.getText().toString();
+        String valueAge = textInputEditTextAge.getText().toString();
+        int valueAge1 = Integer.parseInt(valueAge);
+        String valueEmail = textInputEditTextEmail.getText().toString();
+        User userObj = new User(valueFirstName, valueLastName, valueEmail, valueAge1);
+
+        databaseHelper.addUser(userObj);
     }
 
-    /**
-     * This method to update user record
-     *
-     * @param
 
-    public void updateUser(){
+    public void updateUser(User user) {
         initializeViews();
-        databaseHelper.open_db();
-        ContentValues values = new ContentValues();
-        String name, email;
 
-        db.update(USER_PROFILE, values, USERID  + " = ?",
-                new String[]{String.valueOf(user.getId())});
-        databaseHelper.close();
+        // if(inputValidation()){ databaseHelper.updateUser();}
+        //else  { Toast.makeText(this, " All fields must be filled", Toast.LENGTH_SHORT).show(); }
+
+
     }
 
     /**
@@ -145,12 +181,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * @param user
 
     public void deleteUser(){
-        initializeViews();
-        databaseHelper.open_db();
+    initializeViews();
+    databaseHelper.open_db();
 
-        db.delete(USER_PROFILE, values, USERID  + " = ?",
-                new String[]{String.valueOf(user.getId())});
-        databaseHelper.close();
+    db.delete(USER_PROFILE, values, USERID  + " = ?",
+    new String[]{String.valueOf(user.getId())});
+    databaseHelper.close();
     }*/
 
 }
