@@ -6,8 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.Models.User;
 import com.example.mybudget.Models.WishList;
 
 import java.time.LocalDate;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 
 /**
  * Class to handle database connections and update
+ *
  * @author Dawnie Safar
  */
 public class myDbHelper extends SQLiteOpenHelper {
@@ -44,8 +47,10 @@ public class myDbHelper extends SQLiteOpenHelper {
     //User Table
     public static final String USER_PROFILE = "UserProfile";
     public static final String USERID = "userId";
-    public static final String USER_NAME = "UserName";
+    public static final String USER_FISRT_NAME = "UserFirstName";
+    public static final String USER_LAST_NAME = "UserLastName";
     public static final String USER_EMAIL = "UserEmail";
+    public static final String USER_AGE = "UserAge";
     public static final String USER_AVATAR = "UserAvatar";
 
 
@@ -61,9 +66,11 @@ public class myDbHelper extends SQLiteOpenHelper {
                     + WISH_LIST + " ("
                     + WISHLISTID + " INTEGER PRIMARY KEY NOT NULL,"
                     + TITLE + " TEXT NOT NULL,"
+
                     + COST + " INTEGER, "
                     + SAVED + " INTEGER, "
                     + IMAGE + " TEXT);");
+
 
             db.execSQL("CREATE TABLE IF NOT EXISTS "
                     + ENTRY + " ("
@@ -77,11 +84,13 @@ public class myDbHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE IF NOT EXISTS "
                     + USER_PROFILE + " ("
                     + USERID + " INTEGER PRIMARY KEY,"
-                    + USER_NAME + " TEXT NOT NULL,"
-                    + USER_EMAIL + " TEXT NOT NULL,"
+                    + USER_FISRT_NAME + " TEXT NOT NULL,"
+                    + USER_LAST_NAME + " TEXT NOT NULL,"
+                    + USER_EMAIL + " TEXT ,"
+                    + USER_AGE + " INTEGER,"
                     + USER_AVATAR + "BLOB); ");
-            this.db=db;
-        }catch (SQLException e){
+            this.db = db;
+        } catch (SQLException e) {
 
             e.printStackTrace();
         }
@@ -225,8 +234,10 @@ public class myDbHelper extends SQLiteOpenHelper {
      */
     public ArrayList<Entry> allEntries() {
         open_db();
+
         ArrayList<Entry> allReconrds = new ArrayList<>();
         String query = "SELECT * FROM " + ENTRY;
+
 
         Cursor cursor = db.rawQuery(query, null);
 
@@ -241,11 +252,13 @@ public class myDbHelper extends SQLiteOpenHelper {
 
             entry.setDate(date);
             entry.setDesc(cursor.getString(4));
-            allReconrds.add(entry);
+            allRecords.add(entry);
         }
+
         cursor.close();
         close_db();
         return allReconrds;
+
     }
 
     public myDbHelper open_db() {
@@ -269,6 +282,8 @@ public class myDbHelper extends SQLiteOpenHelper {
             query = "SELECT " + ENTRYID + " FROM " + ENTRY;
         } else if (o.getClass() == WishList.class) {
             query = "SELECT " + WISHLISTID + " FROM " + WISH_LIST;
+        } else if (o.getClass() == User.class) {
+            query = "SELECT " + USERID + " FROM " + USER_PROFILE;
         }
         Cursor cursor = db.rawQuery(query, null);
         return cursor.getCount() + 1;
@@ -296,6 +311,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     /**
      * @return total amount of income
      */
+
         public int calcIncome(){
             ArrayList<Entry> allEntries = allEntries();
             int total = 0;
@@ -304,11 +320,15 @@ public class myDbHelper extends SQLiteOpenHelper {
                     total += e.getAmount();}
             }
             return total;
+
         }
+        return total;
+    }
 
     /**
      * @return total amount spend on wishes
      */
+
         public int calcWish(){
             ArrayList<Entry> allEntries = allEntries();
             int total = 0;
@@ -317,30 +337,35 @@ public class myDbHelper extends SQLiteOpenHelper {
                     total += e.getAmount();}
             }
             return total;
+
         }
+        return total;
+    }
 
     /**
      * @return total amount of earnings
      */
+
         public int calcEarning(){
         ArrayList<Entry> allEntries = allEntries();
         int total = 0;
         for(Entry e : allEntries){
             if(e.getTypeOfEntry() == 3){
                 total += e.getAmount();}
+
         }
         return total;
-        }
+    }
 
     /**
      * @return all expenses entries
      */
-    public ArrayList<Entry> expensesEntries(){
+    public ArrayList<Entry> expensesEntries() {
         ArrayList<Entry> allEntries = allEntries();
         ArrayList<Entry> allExpenses = new ArrayList<>();
 
         for (Entry e : allEntries) {
-            if(e.getTypeOfEntry() == 0) {
+            if (e.getTypeOfEntry() == 0) {
                 allExpenses.add(e);
             }
         }
@@ -350,12 +375,12 @@ public class myDbHelper extends SQLiteOpenHelper {
     /**
      * @return all income entries
      */
-    public ArrayList<Entry> incomeEntries(){
+    public ArrayList<Entry> incomeEntries() {
         ArrayList<Entry> allEntries = allEntries();
         ArrayList<Entry> allIncome = new ArrayList<>();
 
         for (Entry e : allEntries) {
-            if(e.getTypeOfEntry() == 1) {
+            if (e.getTypeOfEntry() == 1) {
                 allIncome.add(e);
             }
         }
@@ -365,12 +390,12 @@ public class myDbHelper extends SQLiteOpenHelper {
     /**
      * @return all wishes alocated entries
      */
-    public ArrayList<Entry> wishEntries(){
+    public ArrayList<Entry> wishEntries() {
         ArrayList<Entry> allEntries = allEntries();
         ArrayList<Entry> allWishes = new ArrayList<>();
 
         for (Entry e : allEntries) {
-            if(e.getTypeOfEntry() == 2) {
+            if (e.getTypeOfEntry() == 2) {
                 allWishes.add(e);
             }
         }
@@ -380,15 +405,64 @@ public class myDbHelper extends SQLiteOpenHelper {
     /**
      * @return all earnings entries
      */
-    public ArrayList<Entry> earningsEntries(){
+    public ArrayList<Entry> earningsEntries() {
         ArrayList<Entry> allEntries = allEntries();
         ArrayList<Entry> allEarnings = new ArrayList<>();
 
         for (Entry e : allEntries) {
-            if(e.getTypeOfEntry() == 3) {
+            if (e.getTypeOfEntry() == 3) {
                 allEarnings.add(e);
             }
         }
         return allEarnings;
     }
+
+    //Methods to add, update and delete user account
+    public void addUser(User user) {
+        open_db();
+        ContentValues values = new ContentValues();
+        values.put(USERID, autoIdGenerator(user));
+        values.put(USER_FISRT_NAME, user.getUserFirstName());
+        values.put(USER_LAST_NAME, user.getUserLastName());
+        values.put(USER_EMAIL, user.getUserMail());
+        values.put(USER_AGE, user.getUserAge());
+        //values.put(USER_AVATAR, user.)
+        Log.e("data inserted", "in database");
+        db.insert(USER_PROFILE, null, values);
+        close_db();
+    }
+
+    public boolean updateUser(User user) {
+        ContentValues values = new ContentValues();
+        open_db();
+        values.put(USERID, autoIdGenerator(user));
+        values.put(USER_FISRT_NAME, user.getUserFirstName());
+        values.put(USER_LAST_NAME, user.getUserLastName());
+        values.put(USER_EMAIL, user.getUserMail());
+        values.put(USER_AGE, user.getUserAge());
+        return db.update(USER_PROFILE, values, USERID + "=" + user.getUserId(), null) > 0;
+    }
+
+
+    public boolean deleteUser(int userId) {
+        open_db();
+        Cursor cursor = db.rawQuery("SELECT " + USERID + " FROM " + USER_PROFILE, null);
+        if (cursor.getCount() > 0) {
+            String id = Integer.toString(userId);
+            db.delete(USER_PROFILE, USERID + "=" + id, null);
+            cursor.close();
+            close_db();
+            Log.e("record", "is deleted");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Get user record from DB
+    //public User getUser(){
+    //   open_db();
+    //    User user = new User();
+
+    //}
 }

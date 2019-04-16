@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +55,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /*
+        Button register_button = findViewById(R.id.register_demobutton);
+        register_button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
+                startActivity(intent_register);
+
+            }
+        });
+
+
+                /*
          * Method creates a pathway to the other
          * activities via a navigation bar
          */
