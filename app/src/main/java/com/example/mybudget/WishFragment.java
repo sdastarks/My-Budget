@@ -70,7 +70,7 @@ public class WishFragment extends Fragment {
         int bal = ((WishlistActivity) getActivity()).db.balance();
         balance.setText(String.valueOf(bal));
 
-        int progress = 60; // data received from database
+        int progress = ((WishlistActivity) getActivity()).progress; // data received from database
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
         circularProgressBar.setProgress(progress);
         TextView progresstxt = view.findViewById(R.id.txt_progressBar);
