@@ -81,59 +81,26 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
 
                 if (sAmount.isEmpty()) {
-                    Toast.makeText(getActivity(), "You have transfered 0 sek", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "You have transferred 0 sek", Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(sAmount) > balance) {
-                    Toast.makeText(getActivity(), "You don't have enough money on your account", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "You don't have enough money in your account", Toast.LENGTH_SHORT).show();
                 } else {
                     //Adding an entry to log
                     int amount = Integer.parseInt(sAmount);
-                    Log.v(TAG, "TransactionAmount: " + amount);
-                    String wishName = "";
-
+                    String wishName;
                     Entry entry = new Entry();
                     entry.setDate(LocalDate.now());
                     entry.setAmount(Integer.parseInt(sAmount));
+
                     int dbid = ((WishlistActivity) getActivity()).id;
                     WishList wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-                    
-                    if (inflow) {
-                        entry.setTypeOfEntry(2);
-                        wishName = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
-                                + " wishlist transfer";
-                        if (amount > (wish2Update.getCost() - wish2Update.getSaved())) {
-                            Toast.makeText(getActivity(), "Your goal doesnt need that much money, try "+
-                                    (wish2Update.getCost() - wish2Update.getSaved())+" SEK", Toast.LENGTH_LONG).show();
-                        }
-                        else if((wish2Update.getCost() - wish2Update.getSaved())==0){
-                            //TODO show some avatar when reach the goal
-                            Toast.makeText(getActivity(), "You have reached your goal", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
-                            , wish2Update.getCost(), amount + wish2Update.getSaved(),
-                            wish2Update.getImage());
 
-                            entry.setDesc(wishName);
-                            ((WishlistActivity) getActivity()).db.addEntry(entry);
-                        }
+                    if (inflow) {
+                        addInflow(entry, amount, wish2Update, dbid);
 
                     } else if (!inflow) {
-                        entry.setTypeOfEntry(1);
-                        wishName = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
-                                + " wishlist return to balance";
-                        if (amount < wish2Update.getSaved()) {
-                            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
-                             , wish2Update.getCost(), wish2Update.getSaved() - amount,
-                             wish2Update.getImage());
-
-                            entry.setDesc(wishName);
-                            ((WishlistActivity) getActivity()).db.addEntry(entry);
-                        } else {
-                            Toast.makeText(getActivity(), "Numbers to big!", Toast.LENGTH_SHORT).show();
-                        }
-
+                        addOutflow(entry, amount, wish2Update, dbid);
                     }
-
                 }
 
                 getFragmentManager()
@@ -162,4 +129,37 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
     }
 
+    public void addInflow(Entry entry, Integer amount, WishList wish2Update, int dbid) {
+        entry.setTypeOfEntry(2);
+        String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
+                + " wishlist transfer";
+        if (amount > (wish2Update.getCost() - wish2Update.getSaved())) {
+            Toast.makeText(getActivity(), "Your goal doesn' t need that much money, try " +
+                    (wish2Update.getCost() - wish2Update.getSaved()) + " SEK", Toast.LENGTH_LONG).show();
+        } else if ((wish2Update.getCost() - wish2Update.getSaved()) == 0) {
+            //TODO show some avatar when reach the goal
+            Toast.makeText(getActivity(), "You have reached your goal", Toast.LENGTH_SHORT).show();
+        } else {
+            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
+                    , wish2Update.getCost(), amount + wish2Update.getSaved(),
+                    wish2Update.getImage());
+            entry.setDesc(entryDescription);
+            ((WishlistActivity) getActivity()).db.addEntry(entry);
+        }
+    }
+
+    public void addOutflow(Entry entry, Integer amount, WishList wish2Update, int dbid) {
+        entry.setTypeOfEntry(1);
+        String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
+                + " wishlist return to balance";
+        if (amount < wish2Update.getSaved()) {
+            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
+                    , wish2Update.getCost(), wish2Update.getSaved() - amount,
+                    wish2Update.getImage());
+            entry.setDesc(entryDescription);
+            ((WishlistActivity) getActivity()).db.addEntry(entry);
+        } else {
+            Toast.makeText(getActivity(), "Try a different number!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
