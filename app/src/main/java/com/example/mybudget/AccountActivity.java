@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.mybudget.Models.Entry;
 
@@ -23,6 +24,7 @@ public class AccountActivity extends AppCompatActivity {
     private static final String TAG = "AccountActivityLog";
 
     RecyclerView mRecyclerView;
+    TextView tvBalance;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class AccountActivity extends AppCompatActivity {
 
         //create recycler view
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        //Viewing Balance
+        tvBalance = findViewById(R.id.tvBalance);
+        int balance = db.balance();
+        tvBalance.setText("Balance: " + String.valueOf(balance));
 
         List<AccountsRow> data = fill_with_data();
 
@@ -92,29 +98,6 @@ public class AccountActivity extends AppCompatActivity {
 
             row.add(new AccountsRow( e.getDate(), e.getDesc(), e.getAmount(), typeOfEntry));
         }
-
-        // DAWNIE database
-//        row.add(new AccountsRow( currentDate, "Bike", 2300,"saved"));
-//        row.add(new AccountsRow( currentDate, "hoverboard", 5300,"saved"));
-//        row.add(new AccountsRow( currentDate, "from mommy", 300,"received"));
-//        row.add(new AccountsRow( currentDate, "pen", 35,"spent"));
-//        row.add(new AccountsRow( currentDate, "class", 23000,"saved"));
-//        row.add(new AccountsRow( currentDate, "candy", 20,"spent"));
-//        row.add(new AccountsRow( currentDate, "new jeans", 350,"saved"));
-//        row.add(new AccountsRow( currentDate, "donut", 25,"spent"));
-//        row.add(new AccountsRow( currentDate, "ice cream", 50,"spent"));
-//        row.add(new AccountsRow( currentDate, "ball", 270,"saved"));
-//        row.add(new AccountsRow( currentDate, "doll house", 600,"saved"));
-//        row.add(new AccountsRow( currentDate, "laptop", 8000,"saved"));
-//        row.add(new AccountsRow( currentDate, "ice cream", 45,"spent"));
-//        row.add(new AccountsRow( currentDate, "cola", 50,"spent"));
-//        row.add(new AccountsRow( currentDate, "chips", 20,"spent"));
-//        row.add(new AccountsRow( currentDate, "ticket to grandma", 350,"saved"));
-//        row.add(new AccountsRow( currentDate, "donut", 25,"spent"));
-//        row.add(new AccountsRow( currentDate, "ice cream", 40,"spent"));
-//        row.add(new AccountsRow( currentDate, "juice", 30,"spent"));
-
-
         return row;
     }
 
