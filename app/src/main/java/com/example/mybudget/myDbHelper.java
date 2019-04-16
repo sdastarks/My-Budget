@@ -193,31 +193,32 @@ public class myDbHelper extends SQLiteOpenHelper {
 
     /**
      * deleting a wish from wishlist
-     *
-     * @param wishId
-     * @return
+     * @param wishId specifies which wish will be deleted.
      */
-    public boolean deleteWish(int wishId) {
+    public void deleteWish(int wishId) {
         open_db();
-        Cursor cursor = db.rawQuery("SELECT " + WISHLISTID + " FROM " + WISH_LIST, null);
-        if (cursor.getCount() > 0) {
-            String id = Integer.toString(wishId);
-            db.delete(WISH_LIST, WISHLISTID + "=" + id, null);
-            cursor.close();
-            close_db();
-            return true;
-        } else return false;
+        db.execSQL("delete from " + WISH_LIST + " where " + WISHLISTID + " = " + wishId);
+        close_db();
     }
 
-    public boolean updateWish(int Id, String title, int cost, int saved, String image) {
+    /**
+     * @param Id specifies which wish to be updated
+     * @param title new wish title
+     * @param cost new wish cost
+     * @param saved already saved money amount
+     * @param image
+     */
+    public void updateWish(int Id, String title, int cost, int saved, String image) {
         ContentValues args = new ContentValues();
         open_db();
-        //args.put(WISHLISTID, Id);
+
+        args.put(WISHLISTID, Id);
         args.put(TITLE, title);
         args.put(COST, cost);
         args.put(SAVED, saved);
         args.put(IMAGE, image);
-        return db.update(WISH_LIST, args, WISHLISTID + "=" + Id, null) > 0;
+        db.update(WISH_LIST, args, WISHLISTID + " = " + Id, null);
+        close_db();
     }
 
     /**
@@ -238,7 +239,7 @@ public class myDbHelper extends SQLiteOpenHelper {
         close_db();
     }
 
-    public boolean deleteEntry(int entryId) {
+    public void deleteEntry(int entryId) {
         open_db();
         Cursor cursor = db.rawQuery("SELECT " + ENTRYID + " FROM " + ENTRY, null);
         if (cursor.getCount() > 0) {
@@ -246,8 +247,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             db.delete(ENTRY, ENTRYID + "=" + id, null);
             cursor.close();
             close_db();
-            return true;
-        } else return false;
+        }
     }
 
     /**

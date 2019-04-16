@@ -45,7 +45,7 @@ public class WishFragment extends Fragment {
     private FloatingActionButton onMinusSelected;
     private FloatingActionButton cancelWishFragment;
     private FloatingActionButton editWishFragment;
-
+    private FloatingActionButton deleteWishFragment;
 
     public WishFragment() {
 
@@ -54,11 +54,6 @@ public class WishFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        int dbid =((WishlistActivity) getActivity()).id;
-        Log.v(TAG, "id: "+dbid);
-        WishList wishwish = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-        Log.v(TAG, "Title: "+wishwish.getTitle());
-
 
         index = ((WishlistActivity) getActivity()).index;
         Log.d(TAG, "onCreateView: view infaled. Index passed " + index);
@@ -86,11 +81,13 @@ public class WishFragment extends Fragment {
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
         cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
         editWishFragment = view. findViewById(R.id.floatingActionButton_edit_wish_fragment);
+        deleteWishFragment = view. findViewById(R.id.floatingActionButton_delete_wish_fragment);
 
         activateOnAddSelected();
         activateOnMinusSelected();
         activateEditWishFragment();
         activateCancelWishFragment();
+        activateDeleteWishFragment();
 
         return view;
     }
@@ -171,6 +168,19 @@ public class WishFragment extends Fragment {
                         .commit();
                 editWishFragmentCall.setArguments(args);
 
+            }
+        });
+    }
+
+    public void activateDeleteWishFragment(){
+        deleteWishFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO a windows to pop up asking: are you sure you want to delete your wish?
+                int dbid =((WishlistActivity) getActivity()).id;
+                ((WishlistActivity) getActivity()).db.deleteWish(dbid);
+                Intent intent = new Intent(getActivity(), WishlistActivity.class);
+                startActivity(intent);
             }
         });
     }
