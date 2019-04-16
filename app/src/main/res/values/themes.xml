@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <!--default theme-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+    </style>
+
+    <!--Robot theme-->
+    <style name="AppTheme.Science" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/scienceMonsterColorPrimary</item>
+        <item name="colorPrimaryDark">@color/scienceMonsterColorPrimaryDark</item>
+        <item name="colorAccent">@color/scienceMonsterColorAccent</item>
+        <item name="colorSecondary">@color/scienceMonsterColorSecondary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.CookieMonster" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/cookieMonsterColorPrimary</item>
+        <item name="colorPrimaryDark">@color/cookieMonsterColorPrimaryDark</item>
+        <item name="colorAccent">@color/cookieMonsterColorAccent</item>
+        <item name="colorSecondary">@color/cookieMonsterColorSecondary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.GirlMonster" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/girlMonsterColorPrimary</item>
+        <item name="colorPrimaryDark">@color/girlMonsterColorPrimaryDark</item>
+        <item name="colorAccent">@color/girlMonsterColorAccent</item>
+        <item name="colorSecondary">@color/girlMonsterColorSecondary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+
+
+
+</resources>

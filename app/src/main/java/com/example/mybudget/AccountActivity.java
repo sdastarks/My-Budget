@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountActivity extends SettingsActivity {
     RecyclerView mRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
