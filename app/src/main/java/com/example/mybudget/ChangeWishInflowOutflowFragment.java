@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mybudget.Models.Entry;
+
+import java.time.LocalDate;
+
 
 /**
  * Fragment allows the user to transfer
@@ -26,6 +30,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     EditText mAmount;
     Boolean inflow;
     int index;
+    int balance;
 
     /*
      * Method creates the initial state of the
@@ -36,6 +41,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
+
+       balance= ((WishlistActivity) getActivity()).db.balance();
+       Log.v(TAG, "balance: "+balance);
 
         // the boolean expression inflow will show if the input by the user
         // is an transfer to savings or removing from savings to balance
@@ -73,16 +81,37 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
                 if (sAmount.isEmpty()){
                     Toast.makeText(getActivity(),"You have transfered 0 sek",Toast.LENGTH_SHORT).show();
+                } else if (Integer.parseInt(sAmount) > balance) {
+                    Toast.makeText(getActivity(), "You don't have enough money on your account", Toast.LENGTH_SHORT).show();
                 } else {
+                    //Adding an entry to log
                     int amount = Integer.parseInt(sAmount);
                     Log.v(TAG, "TransactionAmount: " + amount);
-                }
+                    String wish = "";
+                    Entry entry = new Entry();
+                    entry.setDate(LocalDate.now());
+                    entry.setAmount(Integer.parseInt(sAmount));
 
-                //need to update balance
+                    if (inflow) {
+                        entry.setTypeOfEntry(2);
+                        wish = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
+                                + " wishlist transfer";
+                    }
+                    else if (!inflow) {
+                        entry.setTypeOfEntry(1);
+                        wish = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
+                                + " wishlist return to balance";
+                    }
+                    entry.setDesc(wish);
+
+                    Log.v(TAG, "wish: "+wish);
+
+                    ((WishlistActivity) getActivity()).db.addEntry(entry);
+                }
 
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_wish_balance_change, new WishFragment())
+                        .replace(R.id.frame_wish_fragment, new WishFragment())
                         .commit();
             }
         });
@@ -99,7 +128,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_wish_balance_change, new WishFragment())
+                        .replace(R.id.frame_wish_fragment, new WishFragment())
                         .commit();
             }
         });

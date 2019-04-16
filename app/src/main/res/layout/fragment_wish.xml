@@ -117,9 +117,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:cpb_background_progressbar_color="@color/colorPrimaryDark"
+        app:cpb_background_progressbar_color="?attr/colorPrimaryDark"
         app:cpb_background_progressbar_width="5dp"
-        app:cpb_progressbar_color="@color/colorPrimary"
+        app:cpb_progressbar_color="?attr/colorPrimary"
         app:cpb_progressbar_width="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +133,7 @@
         android:layout_alignBottom="@+id/progressBar"
         android:layout_centerInParent="true"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/colorAccent"
+        android:textColor="?attr/colorAccent"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
@@ -164,6 +164,32 @@
         app:layout_constraintBottom_toBottomOf="@+id/wish_title"
         app:layout_constraintEnd_toEndOf="@+id/wish_title"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_edit_wish_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_create_24px"
+        app:fabSize="mini"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_cancel_wish_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_cancel_wish_fragment" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_delete_wish_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_delete_24px"
+        app:fabSize="mini"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton_edit_wish_fragment"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wish_title" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -32,6 +32,8 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    private TextView tvBalance;
+
 
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -102,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         setProgressBar();
+        updateBalance();
     }
 
     /*
@@ -170,5 +173,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    /**
+     * Updates the balance with every entry
+     * @auth DAWNIE
+     */
+    public int updateBalance(){
+        tvBalance = findViewById(R.id.tvBalance);
+        int income = db.calcIncome();
+        int expense = db.calcExpenses();
+        int wishes = db.calcWish();
+        int earning = db.calcEarning();
+        int balance = (income + earning) - (expense + wishes);
+        tvBalance.setText(String.valueOf(balance));
+        return balance;
     }
 }

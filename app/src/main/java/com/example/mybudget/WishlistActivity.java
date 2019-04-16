@@ -13,27 +13,31 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import com.example.mybudget.Models.WishList;
 
 import java.util.ArrayList;
 
 public class WishlistActivity extends AppCompatActivity implements RecyclerViewAdapter.OnWishListener {
     private static final String TAG = "WishlistActivity";
-    private ArrayList <String> mWishNames = new ArrayList<>();
+    protected ArrayList <String> mWishNames = new ArrayList<>();
     private ArrayList <String> mImageUrls = new ArrayList<>();
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
     private FloatingActionButton addWish;
     int index;
-
+    myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
         Log.d(TAG, "onCreate: startec");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         /*
          * Method creates a pathway to the other
          * activities via a navigation bar
@@ -73,7 +77,9 @@ public class WishlistActivity extends AppCompatActivity implements RecyclerViewA
 
         addWish = findViewById(R.id.add_wish);
         addWish.show();
-        initImageBitmaps();
+        loadDataToRecycle();
+        initRecyclerView();
+        //initImageBitmaps();
     }
 
 
@@ -81,29 +87,29 @@ public class WishlistActivity extends AppCompatActivity implements RecyclerViewA
      * Method adds placeholder values to Wish list
      * will be replaced with actual data base values
      */
-    private void initImageBitmaps() {
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps");
-        mImageUrls.add("https://www.girlsdressline.com/image/data/products/burgundy-lace-pleated-flower-girl-dresses-GG-3527-BG.jpg");
-        mWishNames.add("Dress");
-        mWishPrices.add(200);
-        mSavingProgress.add(40);
-
-        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mWishNames.add("Keds");
-        mWishPrices.add(340);
-        mSavingProgress.add(60);
-
-        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mWishNames.add("Jimmys present");
-        mWishPrices.add(50);
-        mSavingProgress.add(40);
-
-        mImageUrls.add("https://static.thenounproject.com/png/971099-200.png");
-        mWishNames.add("Add your dream");
-        mWishPrices.add(0);
-        mSavingProgress.add(0);
-        initRecyclerView();
-    }
+//    private void initImageBitmaps() {
+//        Log.d(TAG, "initImageBitmaps: preparing bitmaps");
+//        mImageUrls.add("https://www.girlsdressline.com/image/data/products/burgundy-lace-pleated-flower-girl-dresses-GG-3527-BG.jpg");
+//        mWishNames.add("Dress");
+//        mWishPrices.add(200);
+//        mSavingProgress.add(40);
+//
+//        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+//        mWishNames.add("Keds");
+//        mWishPrices.add(340);
+//        mSavingProgress.add(60);
+//
+//        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
+//        mWishNames.add("Jimmys present");
+//        mWishPrices.add(50);
+//        mSavingProgress.add(40);
+//
+//        mImageUrls.add("https://static.thenounproject.com/png/971099-200.png");
+//        mWishNames.add("Add your dream");
+//        mWishPrices.add(0);
+//        mSavingProgress.add(0);
+//        initRecyclerView();
+//    }
 
  
     //Method initializes List view with values for Wish List
@@ -134,7 +140,23 @@ public class WishlistActivity extends AppCompatActivity implements RecyclerViewA
         Log.d(TAG, "onAddWish: clicked : " );
         addWish.hide();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.new_wish_frame, new NewWishFragment());
+        ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
         ft.commit();
+    }
+
+    /**
+     * Loading all wishes in the list from the database
+     * @auth DAWNIE Safar
+     */
+    public void loadDataToRecycle(){
+
+        ArrayList<WishList> loadwishes = db.loadWishes();
+
+        for(WishList wl : loadwishes){
+            mWishNames.add(wl.getTitle());
+            mImageUrls.add(wl.getImage());
+            mWishPrices.add(wl.getCost());
+            mSavingProgress.add(wl.getSaved());
+        }
     }
 }

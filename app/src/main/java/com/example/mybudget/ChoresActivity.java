@@ -3,12 +3,17 @@ package com.example.mybudget;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class ChoresActivity extends AppCompatActivity {
+    protected Boolean inflow;
+    private static  final String TAG= "ChoresActivity";
+    myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +27,7 @@ public class ChoresActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         Menu menu = navigation.getMenu();
-        MenuItem menuItem =menu.getItem(3);
+        MenuItem menuItem = menu.getItem(3);
         menuItem.setChecked(true);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -31,7 +36,7 @@ public class ChoresActivity extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.nav_home:
-                        Intent intent1= new Intent(ChoresActivity.this, MainActivity.class);
+                        Intent intent1 = new Intent(ChoresActivity.this, MainActivity.class);
                         startActivity(intent1);
                         break;
 
@@ -51,5 +56,13 @@ public class ChoresActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    public void addMoney(View view) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.check, new addChoresMoney());
+        inflow = true;
+        ft.commit();
     }
 }

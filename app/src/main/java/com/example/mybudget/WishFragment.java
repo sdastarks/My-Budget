@@ -14,10 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mybudget.Models.Entry;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.time.LocalDate;
+
+import static com.example.mybudget.R.id.edit_wish_fragment;
 import static com.example.mybudget.R.id.fragment_placeholder;
-import static com.example.mybudget.R.id.fragment_wish_balance_change;
 import static com.example.mybudget.R.id.frame_wish_fragment;
 
 /**
@@ -37,6 +40,10 @@ public class WishFragment extends Fragment {
     private TextView txtAvailableBalance;
     private int index;
     protected Boolean inflow;
+    private FloatingActionButton onAddSelected;
+    private FloatingActionButton onMinusSelected;
+    private FloatingActionButton cancelWishFragment;
+    private FloatingActionButton editWishFragment;
 
 
     public WishFragment() {
@@ -59,6 +66,9 @@ public class WishFragment extends Fragment {
         txtAvailableBalance = view.findViewById(R.id.txt_available_balance);
 
         //assign value by index from DB
+        //DAWNIE
+        int bal = ((WishlistActivity) getActivity()).db.balance();
+        balance.setText(String.valueOf(bal));
 
         int progress = 60; // data received from database
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
@@ -67,10 +77,24 @@ public class WishFragment extends Fragment {
         progresstxt.setText(progress + "%");
 
 
-        ///Floating button calls a new fragment,
-        // where you can make a transaction to add saved amount
+        onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
+        onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
+        cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
+        editWishFragment = view. findViewById(R.id.floatingActionButton_edit_wish_fragment);
 
-        FloatingActionButton onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
+        activateOnAddSelected();
+        activateOnMinusSelected();
+        activateEditWishFragment();
+        activateCancelWishFragment();
+
+        return view;
+    }
+
+    //Floating button calls a new fragment,
+    // where you can make a transaction to add saved amount
+
+    public void activateOnAddSelected() {
+
         onAddSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,17 +109,18 @@ public class WishFragment extends Fragment {
                 //calling new fragment
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_wish_balance_change, changeWishInflowOutflowFragment)
+                        .replace(R.id.frame_wish_fragment, changeWishInflowOutflowFragment)
                         .commit();
                 changeWishInflowOutflowFragment.setArguments(args);
                 Log.d(TAG, "onClick: arguments passed to fragment.");
             }
         });
+    }
 
-        ///Floating button calls a new fragment,
-        // where you can make a transaction to minus saved amount
+    ///Floating button calls a new fragment,
+    // where you can make a transaction to minus saved amount
 
-        FloatingActionButton onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
+    public void activateOnMinusSelected() {
         onMinusSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,15 +135,15 @@ public class WishFragment extends Fragment {
                 //calling new fragment
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_wish_balance_change, changeWishInflowOutflowFragment)
+                        .replace(R.id.frame_wish_fragment, changeWishInflowOutflowFragment)
                         .commit();
                 changeWishInflowOutflowFragment.setArguments(args);
                 Log.d(TAG, "onClick: arguments passed to fragment.");
             }
         });
+    }
 
-
-        FloatingActionButton cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
+    public void activateCancelWishFragment() {
         cancelWishFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +151,23 @@ public class WishFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-        return view;
     }
+
+    public void activateEditWishFragment() {
+        editWishFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditWishFragment editWishFragmentCall = new EditWishFragment();
+                Bundle args = new Bundle();
+                args.putInt("indexEdit", index);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_wish_fragment, editWishFragmentCall)
+                        .commit();
+                editWishFragmentCall.setArguments(args);
+
+            }
+        });
+    }
+
 }

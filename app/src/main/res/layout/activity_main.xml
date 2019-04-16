@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
@@ -27,17 +27,17 @@
 
     </LinearLayout>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tvBalance"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="55dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="?attr/colorPrimaryDark"
             android:gravity="center"
             android:text="220 sek"
             android:textAlignment="center"
@@ -55,6 +55,7 @@
             android:clickable="true"
             android:onClick="onAddSelected"
             app:srcCompat="@drawable/icon_add" />
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton_minus"
@@ -79,9 +80,9 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_centerInParent="true"
-                app:cpb_background_progressbar_color="@color/colorPrimaryDark"
+                app:cpb_background_progressbar_color="?attr/colorPrimaryDark"
                 app:cpb_background_progressbar_width="5dp"
-                app:cpb_progressbar_color="@color/colorPrimary"
+                app:cpb_progressbar_color="?attr/colorPrimary"
                 app:cpb_progressbar_width="15dp" />
 
             <TextView
@@ -91,7 +92,7 @@
                 android:layout_alignBottom="@+id/progressBar"
                 android:layout_centerInParent="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/colorAccent"
+                android:textColor="?attr/colorAccent"
                 android:textSize="30dp" />
             <Button
                 android:id="@+id/register_demobutton"
@@ -101,11 +102,13 @@
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
 
+
         <FrameLayout
             android:id="@+id/fragment_placeholder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="215dp"></FrameLayout>
+
 
 
         <android.support.design.widget.BottomNavigationView
@@ -115,7 +118,7 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/border_button"
             app:itemIconTint="@drawable/bottom_nav_colours"
-            app:itemTextColor="@color/colorAccent"
+            app:itemTextColor="?attr/colorAccent"
             app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
     </RelativeLayout>

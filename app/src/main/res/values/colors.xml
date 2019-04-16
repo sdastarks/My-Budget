@@ -3,4 +3,14 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="cookieMonsterColorPrimary">#CC5D02</color>
+    <color name="cookieMonsterColorPrimaryDark">#B53D00</color>
+    <color name="cookieMonsterColorAccent">#DFB335</color>
+    <color name="cookieMonsterPrimaryText">#FFFFFF</color>
+
+    <color name="scienceMonsterColorPrimary">#0C4DCE</color>
+    <color name="scienceMonsterColorPrimaryDark">#052B66</color>
+    <color name="scienceMonsterMonsterColorAccent">#F06292</color>
+    <color name="scienceMonsterMonsterPrimaryText">#FFFFFF</color>
 </resources>
