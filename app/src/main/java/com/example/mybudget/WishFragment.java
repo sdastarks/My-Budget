@@ -58,6 +58,8 @@ public class WishFragment extends Fragment {
         Log.v(TAG, "id: "+dbid);
         WishList wishwish = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         Log.v(TAG, "Title: "+wishwish.getTitle());
+
+
         index = ((WishlistActivity) getActivity()).index;
         Log.d(TAG, "onCreateView: view infaled. Index passed " + index);
 

@@ -144,9 +144,11 @@ public class myDbHelper extends SQLiteOpenHelper {
         open_db();
         Log.v(TAG,"id: "+id);
 
-        String query = "Select * from " + WISH_LIST + " WHERE " + WISHLISTID + " = " +
-               + id + ";";
+        String query = "select * from " + WISH_LIST + " where " + WISHLISTID + "="
+               + id;
+
         Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
 
         WishList wish = new WishList();
         wish.setWishListId(cursor.getInt(0));
