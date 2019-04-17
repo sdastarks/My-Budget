@@ -121,9 +121,13 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 return false;
             }
         });
+
         int favWish_dbID= getFavouriteWishID();
         calcProgress(favWish_dbID);
         setProgressBar(favWish_dbID);
+        setTitle(favWish_dbID);
+        setCost(favWish_dbID);
+        setSaved(favWish_dbID);
         updateBalance();
     }
     /*
@@ -144,6 +148,30 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
             int wishPrice=favWish.getCost();
             int wishSaved=favWish.getSaved();
             progress =wishSaved*100/wishPrice;
+        }
+    }
+
+    public void setTitle(int favWish_dbID){
+        if (favWish_dbID !=0){
+            TextView favWishTitle = findViewById(R.id.favWishTitle);
+            WishList favWish = db.returnWish(favWish_dbID);
+            favWishTitle.setText(favWish.getTitle());
+        }
+    }
+
+    public void setCost(int favWish_dbID){
+        if (favWish_dbID !=0){
+            TextView favWishCost = findViewById(R.id.favWishCost);
+            WishList favWish = db.returnWish(favWish_dbID);
+            favWishCost.setText(favWish.getCost() + " SEK");
+        }
+    }
+
+    public void setSaved(int favWish_dbID){
+        if (favWish_dbID !=0){
+            TextView favWishSaved = findViewById(R.id.favWishSavedProgress);
+            WishList favWish = db.returnWish(favWish_dbID);
+            favWishSaved.setText(favWish.getSaved() + " SEK");
         }
     }
     /*
@@ -226,7 +254,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         int wishes = db.calcWish();
         int earning = db.calcEarning();
         int balance = (income + earning) - (expense + wishes);
-        tvBalance.setText(String.valueOf(balance));
+        tvBalance.setText(String.valueOf(balance) + " SEK");
         return balance;
     }
 }

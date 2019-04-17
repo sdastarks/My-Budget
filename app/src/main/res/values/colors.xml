@@ -6,28 +6,28 @@
     <color name="colorSecondary">#E788AB</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="cookieMonsterColorPrimary">#D87330</color>
-    <color name="cookieMonsterColorPrimaryDark">#bd521f</color>
+    <color name="cookieMonsterColorPrimary">#DF7835</color>
+    <color name="cookieMonsterColorPrimaryDark">#C75F2C</color>
     <color name="cookieMonsterColorAccent">#FCB338</color>
-    <color name="cookieMonsterColorSecondary">#EEA943</color>
+    <color name="cookieMonsterColorSecondary">#EEAD4D</color>
     <color name="cookieMonsterPrimaryText">#FFFFFF</color>
 
-    <color name="scienceMonsterColorPrimary">#20519B</color>
-    <color name="scienceMonsterColorPrimaryDark">#0D3572</color>
-    <color name="scienceMonsterColorAccent">#46acf1</color>
-    <color name="scienceMonsterColorSecondary">#3897e2</color>
+    <color name="scienceMonsterColorPrimary">#2D5B9E</color>
+    <color name="scienceMonsterColorPrimaryDark">#1C4079</color>
+    <color name="scienceMonsterColorAccent">#46A5E6</color>
+    <color name="scienceMonsterColorSecondary">#4393D3</color>
     <color name="scienceMonsterPrimaryText">#FFFFFF</color>
 
-    <color name="girlMonsterColorPrimary">#701b94</color>
-    <color name="girlMonsterColorPrimaryDark">#4b0272</color>
-    <color name="girlMonsterColorAccent">#d955df</color>
-    <color name="girlMonsterColorSecondary">#aa54ce</color>
-    <color name="girlMonsterMonsterPrimaryText">#FFFFFF</color>
-
-    <color name="CrazyMonsterColorPrimary">#07965C</color>
-    <color name="CrazyMonsterColorPrimaryDark">#035A38</color>
-    <color name="CrazyMonsterColorAccent">#4FD198</color>
-    <color name="CrazyMonsterColorSecondary">#4AC987</color>
+    <color name="CrazyMonsterColorPrimary">#7844B3</color>
+    <color name="CrazyMonsterColorPrimaryDark">#4B2C85</color>
+    <color name="CrazyMonsterColorAccent">#B68CF0</color>
+    <color name="CrazyMonsterColorSecondary">#A97AD8</color>
     <color name="CrazyMonsterMonsterPrimaryText">#FFFFFF</color>
+
+    <color name="girlMonsterColorPrimary">#E0596E</color>
+    <color name="girlMonsterColorPrimaryDark">#A83A4E</color>
+    <color name="girlMonsterColorAccent">#FFA2A2</color>
+    <color name="girlMonsterColorSecondary">#E49292</color>
+    <color name="girlMonsterMonsterPrimaryText">#FFFFFF</color>
 
 </resources>
