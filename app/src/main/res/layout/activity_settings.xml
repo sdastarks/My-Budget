@@ -38,6 +38,16 @@
         app:layout_constraintStart_toStartOf="@+id/btn_science"
         app:layout_constraintTop_toBottomOf="@+id/btn_science" />
 
+    <Button
+        android:id="@+id/btn_crazy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:text="crazy"
+        app:layout_constraintStart_toStartOf="@+id/btn_girl"
+        app:layout_constraintTop_toBottomOf="@+id/btn_girl" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
