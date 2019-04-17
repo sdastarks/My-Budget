@@ -32,5 +32,14 @@
     <string name="money_received">Money Received</string>
     <string name="text_for_fav_wish">Your savings progress</string>
 
+    <string-array name="filter">
+        <item>Everything</item>
+        <item>Expenditures</item>
+        <item>Income</item>
+        <item>Spend on wish</item>
+        <item>Earned from chore</item>
+    </string-array>
+
+
 
 </resources>
