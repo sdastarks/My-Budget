@@ -1,11 +1,10 @@
-package com.example.mybudget;
+package com.example.mybudget.WishList;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
+import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.R;
+import com.example.mybudget.SettingsActivity;
+import com.example.mybudget.myDbHelper;
 
 import java.util.ArrayList;
 
