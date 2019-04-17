@@ -204,16 +204,16 @@ public class WishFragment extends Fragment {
             }
         });
     }
-
+   /*
+    * Method creates a dialog fragment allowing the user
+    * to delete a wish or abort the procedure
+    */
     public void activateDeleteWishFragment(){
         deleteWishFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO a windows to pop up asking: are you sure you want to delete your wish?
-                int dbid =((WishlistActivity) getActivity()).id;
-                ((WishlistActivity) getActivity()).db.deleteWish(dbid);
-                Intent intent = new Intent(getActivity(), WishlistActivity.class);
-                startActivity(intent);
+                DeleteWishDialog deleteDialog = new DeleteWishDialog();
+                deleteDialog.show(getActivity().getSupportFragmentManager(), "delete dialog");
             }
         });
     }
