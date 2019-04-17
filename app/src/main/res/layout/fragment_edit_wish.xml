@@ -2,11 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/edit_wish_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WishList.EditWishFragment"
     android:background="#FFFFFF"
-    android:id="@+id/edit_wish_fragment">
+    tools:context=".WishList.EditWishFragment">
 
     <TextView
         android:id="@+id/title_edit_wish"
@@ -15,10 +15,10 @@
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:gravity="center_vertical"
+        android:text="Edit Wish"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="25dp"
-        android:text="Edit Wish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,8 +27,8 @@
         android:id="@+id/btn_cancel_edit_wish"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/icon_cancel_white"
         android:clickable="true"
@@ -108,9 +108,17 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-
-
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_delete_wish"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="62dp"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_delete_24px"
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
