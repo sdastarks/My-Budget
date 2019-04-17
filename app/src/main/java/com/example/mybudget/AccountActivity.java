@@ -178,49 +178,30 @@ public class AccountActivity extends AppCompatActivity {
         if (typeOfEntry == 1) {
             entries = db.expensesEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Expense"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 2) {
             entries = db.incomeEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Income"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 3) {
             entries = db.wishEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Spent on wish"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 4) {
             entries = db.earningsEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Earned from chore"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 0){
             entries = db.allEntries();
-            String entry = "";
             for (Entry e : entries) {
-                if (e.getTypeOfEntry() == 0)
-                    entry = "Expense";
-                else if (e.getTypeOfEntry() == 1)
-                    entry = "Income";
-                else if (e.getTypeOfEntry() == 2)
-                    entry = "Transferred to Wish";
-                else if (e.getTypeOfEntry() == 3)
-                    entry = "Earned from Chore";
-
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), entry));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         }
         return row;
     }
-
-
-
-
-    //ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AccountActivity.this,
-    //        android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filter));
-    //myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown);
-    //mySpinner.setAdapter(myAdapter);
-
 }
 
