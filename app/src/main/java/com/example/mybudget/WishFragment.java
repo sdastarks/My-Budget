@@ -3,8 +3,10 @@ package com.example.mybudget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,8 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.Models.WishList;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.time.LocalDate;
@@ -32,6 +36,7 @@ import static com.example.mybudget.R.id.frame_wish_fragment;
 public class WishFragment extends Fragment {
     private static final String TAG = "WishFragment";
 
+    private View view;
     private CircularProgressBar circularProgressBar;
     private TextView wishTitle;
     private TextView wishPrice;
@@ -39,26 +44,26 @@ public class WishFragment extends Fragment {
     private TextView savingProgress;
     private TextView txtAvailableBalance;
     private int index;
+    private int progress;
+    private int dbid;
     protected Boolean inflow;
     private FloatingActionButton onAddSelected;
     private FloatingActionButton onMinusSelected;
     private FloatingActionButton cancelWishFragment;
     private FloatingActionButton editWishFragment;
+    private FloatingActionButton deleteWishFragment;
+    private FloatingActionButton favouriteWish;
+    WishList wishSelected;
 
-
-    public WishFragment() {
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         index = ((WishlistActivity) getActivity()).index;
         Log.d(TAG, "onCreateView: view infaled. Index passed " + index);
 
-        View view = inflater.inflate(R.layout.fragment_wish, container, false);
+        view = inflater.inflate(R.layout.fragment_wish, container, false);
         wishTitle = view.findViewById(R.id.wish_title);
         wishPrice = view.findViewById(R.id.wish_price);
         balance = view.findViewById(R.id.balance);
@@ -70,24 +75,54 @@ public class WishFragment extends Fragment {
         int bal = ((WishlistActivity) getActivity()).db.balance();
         balance.setText(String.valueOf(bal));
 
-        int progress = 60; // data received from database
-        circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
-        circularProgressBar.setProgress(progress);
-        TextView progresstxt = view.findViewById(R.id.txt_progressBar);
-        progresstxt.setText(progress + "%");
-
+        //selected wish database id and Wish
+        dbid = ((WishlistActivity) getActivity()).id;
+        wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
         cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
         editWishFragment = view. findViewById(R.id.floatingActionButton_edit_wish_fragment);
+        deleteWishFragment = view. findViewById(R.id.floatingActionButton_delete_wish_fragment);
+        favouriteWish = view. findViewById(R.id.floatingActionButton_favourite_wish_fragment);
 
+        setTitle();
+        calcProgress();
+        setProgressBar();
         activateOnAddSelected();
         activateOnMinusSelected();
         activateEditWishFragment();
         activateCancelWishFragment();
+        activateDeleteWishFragment();
+        activateFavouriteWish();
 
         return view;
+    }
+    /*
+     * Method sets the title of the
+     * selected wish
+     */
+    public void setTitle(){
+        wishTitle.setText(wishSelected.getTitle());
+    }
+    /*
+     * Method calculates the progress of the
+     * selected wish
+     */
+    public void calcProgress(){
+        int wishPrice=((WishlistActivity) getActivity()).wishPrice;
+        int wishSaved= wishSelected.getSaved();
+        progress=wishSaved*100/wishPrice;
+    }
+    /*
+     * Method sets the state of the progress
+     * bar
+     */
+    public void setProgressBar(){
+        circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
+        circularProgressBar.setProgress(progress);
+        TextView progresstxt = view.findViewById(R.id.txt_progressBar);
+        progresstxt.setText(progress + "%");
     }
 
     //Floating button calls a new fragment,
@@ -165,6 +200,32 @@ public class WishFragment extends Fragment {
                         .replace(R.id.frame_wish_fragment, editWishFragmentCall)
                         .commit();
                 editWishFragmentCall.setArguments(args);
+
+            }
+        });
+    }
+   /*
+    * Method creates a dialog fragment allowing the user
+    * to delete a wish or abort the procedure
+    */
+    public void activateDeleteWishFragment(){
+        deleteWishFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteWishDialog deleteDialog = new DeleteWishDialog();
+                deleteDialog.show(getActivity().getSupportFragmentManager(), "delete dialog");
+            }
+        });
+    }
+
+    public void activateFavouriteWish(){
+        favouriteWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "dbid: "+ dbid);
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                sharedPref.edit().putInt("favouriteWish", dbid).apply();
+                Toast.makeText(getActivity(), "Your new favourite wish!", Toast.LENGTH_SHORT).show();
 
             }
         });

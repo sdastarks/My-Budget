@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +29,8 @@ public class EditWishFragment extends Fragment {
     private FloatingActionButton floatingActionButton_save_wish;
     private FloatingActionButton exitEditWish;
     private int index;
-
-
-    public EditWishFragment() {
-
-    }
+    private int dbid;
+    private  WishList wish2Edit;
 
 
     @Override
@@ -43,22 +41,19 @@ public class EditWishFragment extends Fragment {
 
         index = getArguments().getInt("indexEdit");
         editTitle = view.findViewById(R.id.edit_title);
-//      Todo  Dawnie: Set Hint as current wish title
-                // editTitle.setHint(data from DB by index);
         editCost = view.findViewById(R.id.edit_cost);
 
-        //Todo  Dawnie: Set Hint as current wish price
-            //editCost.setHint(data from DB by index);
+        dbid = ((WishlistActivity) getActivity()).id;
+        wish2Edit=((WishlistActivity) getActivity()).db.returnWish(dbid);
+
+        editTitle.setHint(wish2Edit.getTitle());
+        editCost.setHint(""+wish2Edit.getCost());
         editWishPicture = view.findViewById(R.id.edit_wish_picture);
         exitEditWish = view.findViewById(R.id.floatingActionButton_exit_edit_wish);
         floatingActionButton_save_wish = view.findViewById(R.id.floatingActionButton_save_edit_wish);
 
-//
-
-
-        //Method to exit fragment
-
         activateOnExitEditWish();
+        activateOnSaveEditWish();
 
         return view;
     }
@@ -75,24 +70,19 @@ public class EditWishFragment extends Fragment {
 
     }
 
-
-//Todo  Dawnie: Update Wish in data base
-//    private void activateOnSaveEditWish() {
-//        floatingActionButton_save_wish.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                WishList wish = new WishList();
-//                wish.setTitle(title.getText().toString());
-//                wish.setCost(Integer.parseInt(cost.getText().toString()));
-//                wish.setSaved(0);
-//                //wish.setImage(wishPicture);
-//                ((WishlistActivity) getActivity()).db.addWish(wish);
-//                Intent intent = new Intent(getActivity(), WishlistActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
+    private void activateOnSaveEditWish() {
+        floatingActionButton_save_wish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int dbid =((WishlistActivity) getActivity()).id;
+                WishList wish = ((WishlistActivity) getActivity()).db.returnWish(dbid);
+                String title = editTitle.getText().toString();
+                int cost = Integer.parseInt(editCost.getText().toString());
+                Log.d(TAG, "EditWish: " + title);
+                ((WishlistActivity) getActivity()).db.updateWish(dbid, title, cost, wish.getSaved(), wish.getImage());
+                Intent intent = new Intent(getActivity(), WishlistActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
-
-
-

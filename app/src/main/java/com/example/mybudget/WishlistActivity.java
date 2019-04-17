@@ -24,11 +24,15 @@ import java.util.ArrayList;
 
 public class WishlistActivity extends SettingsActivity implements RecyclerViewAdapter.OnWishListener {
     private static final String TAG = "WishlistActivity";
+    protected ArrayList<Integer> mWishId = new ArrayList<>();
     protected ArrayList <String> mWishNames = new ArrayList<>();
     private ArrayList <String> mImageUrls = new ArrayList<>();
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
     private FloatingActionButton addWish;
+    protected int id;
+    protected int wishPrice;
+    protected Integer progress;
     int index;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
@@ -88,7 +92,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         Log.d(TAG, "initRecyclerView: recycler view init");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishNames, mWishPrices, mImageUrls,
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishId ,mWishNames, mWishPrices, mImageUrls,
                 mSavingProgress,this, this );
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -99,6 +103,8 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     public void onWishClick(int position) {
         Log.d(TAG, "onWishClick: clicked : " + position);
         addWish.hide();
+        id =mWishId.get(position);
+        wishPrice=mWishPrices.get(position);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_wish_fragment, new WishFragment());
         index = position ;
@@ -124,6 +130,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         ArrayList<WishList> loadwishes = db.loadWishes();
 
         for(WishList wl : loadwishes){
+            mWishId.add(wl.getWishListId());
             mWishNames.add(wl.getTitle());
             mImageUrls.add(wl.getImage());
             mWishPrices.add(wl.getCost());
