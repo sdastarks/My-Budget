@@ -43,9 +43,9 @@ public class WishFragment extends Fragment {
 
     private Button cancelWishFragment;
     private Button editWishFragment;
-
+    private Button favouriteWish_btn;
     private Button deleteWishFragment;
-    private FloatingActionButton favouriteWish;
+
     WishList wishSelected;
 
 
@@ -80,7 +80,7 @@ public class WishFragment extends Fragment {
         editWishFragment = view. findViewById(R.id.edit_wish);
 
         deleteWishFragment = view. findViewById(R.id.delete_wish);
-        favouriteWish = view. findViewById(R.id.floatingActionButton_favourite_wish_fragment);
+        favouriteWish_btn=view.findViewById(R.id.favourite_wish_btn);
 
 
         setTitle();
@@ -216,7 +216,7 @@ public class WishFragment extends Fragment {
     }
 
     public void activateFavouriteWish(){
-        favouriteWish.setOnClickListener(new View.OnClickListener() {
+        favouriteWish_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "dbid: "+ dbid);
