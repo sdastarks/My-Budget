@@ -5,22 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChoresActivity"
-    android:id="@+id/check">
+    android:id="@+id/check"
+    android:background="?attr/colorPrimary"
 
+    >
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="false"
+        android:background="?attr/colorSecondary"
+        android:gravity="center"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:text="Earn more money with chores!"
+        android:textSize="18dp"
+        android:textColor="#fff"></TextView>
 
     <TableLayout
         android:layout_width="413dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:weightSum="4"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="69dp"
+            android:layout_weight="0"
             android:weightSum="3">
 
             <ImageButton
@@ -28,13 +43,12 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:background="?attr/colorPrimary"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_laundry"
-
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/button_white_laundry"
 
 
                 />
@@ -44,26 +58,60 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:background="?attr/colorPrimary"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_dishwasher"
-                />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/button_white_dishwasher" />
 
             <ImageButton
                 android:id="@+id/book"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:background="?attr/colorPrimary"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_book"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/button_white_book"
 
+                />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:text="fixing laundry"
+                android:gravity="center"
+                android:textColor="#fff"
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:text="dishwasher"
+                android:gravity="center"
+                android:textColor="#fff"
+
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="reading book"
+                android:paddingTop="3dp"
+                android:textColor="#fff"
+                android:gravity="center"
                 />
 
         </TableRow>
@@ -71,7 +119,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:weightSum="3">
 
             <ImageButton
@@ -79,26 +127,26 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_vacuum"
+                app:srcCompat="@drawable/button_white_vacuum"
                 />
 
             <ImageButton
-                android:id="@+id/beingNice"
+                android:id="@+id/beingVeryNice"
 
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_beingnice"
+                app:srcCompat="@drawable/button_white_beingnice"
                 />
 
             <ImageButton
@@ -106,34 +154,70 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_dog"
+                app:srcCompat="@drawable/button_white_dog"
                 />
 
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="vacuum"
+                android:paddingTop="3dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="being nice"
+                android:paddingTop="3dp"
+                android:textColor="#fff"
+                android:gravity="center"
+
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="walk the pet"
+                android:textColor="#fff"
+                android:paddingTop="3dp"
+                android:gravity="center"
+                />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:weightSum="3">
+
 
             <ImageButton
                 android:id="@+id/grass"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_grass"
+                app:srcCompat="@drawable/button_white_grass"
                 />
 
             <ImageButton
@@ -141,12 +225,12 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_mop"
+                app:srcCompat="@drawable/button_white_mop"
                 />
 
             <ImageButton
@@ -154,20 +238,55 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_goodgrade"
+                app:srcCompat="@drawable/button_white_goodgrade"
                 />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="cut the grass"
+                android:paddingTop="3dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="floor mopping"
+                android:paddingTop="3dp"
+                android:textColor="#fff"
+                android:gravity="center"
+
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="excellent grade"
+                android:textColor="#fff"
+                android:paddingTop="3dp"
+                android:gravity="center"
+                />
+
         </TableRow>
 
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="118dp"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:weightSum="3">
 
             <ImageButton
@@ -175,12 +294,12 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_cook"
+                app:srcCompat="@drawable/button_white_cook"
                 />
 
             <ImageButton
@@ -188,12 +307,12 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_baby"
+                app:srcCompat="@drawable/button_white_baby"
                 />
 
             <ImageButton
@@ -201,17 +320,58 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="?attr/colorPrimary"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:onClick="addMoney"
-                app:srcCompat="@drawable/button_plus"
+                app:srcCompat="@drawable/button_white_plus"
              />
 
         </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:layout_weight="1"
+            android:weightSum="3">
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="cook"
+                android:paddingTop="3dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="helping sibling"
+                android:paddingTop="3dp"
+                android:textColor="#fff"
+                android:gravity="center"
+
+                />
+
+            <TextView
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:text="other"
+                android:textColor="#fff"
+                android:paddingTop="3dp"
+                android:gravity="center"
+                />
+
+        </TableRow>
+
+
+
+
+
 
     </TableLayout>
+
 
 
     <android.support.design.widget.BottomNavigationView
@@ -221,7 +381,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/border_button"
         app:itemIconTint="@drawable/bottom_nav_colours"
-        app:itemTextColor="?attr/colorAccent"
+        app:itemTextColor="?attr/colorPrimary"
         app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
 

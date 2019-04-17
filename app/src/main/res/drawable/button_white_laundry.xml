@@ -2,11 +2,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <solid android:color="?attr/colorPrimary"/>
+            <solid android:color="?attr/colorSecondary"/>
+            <stroke
+                android:width="2dp"
+                android:color="#fff"/>
         </shape>
     </item>
     <item
-        android:drawable="@drawable/icon_dishwasher"
+        android:drawable="@drawable/icon_white_laundry"
         android:bottom="20dp"
         android:left="20dp"
         android:right="20dp"
