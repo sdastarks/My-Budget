@@ -9,6 +9,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.text.Editable;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -17,6 +18,9 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.mybudget.Models.User;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import static com.example.mybudget.myDbHelper.USER_PROFILE;
 
@@ -28,6 +32,7 @@ import static com.example.mybudget.myDbHelper.USER_PROFILE;
  */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
     private static final String TAG = "RegisterActivityLog";
     private final AppCompatActivity activity = RegisterActivity.this;
     private ScrollView scrollView;
@@ -44,7 +49,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private AppCompatButton appCompatButtonRegister;
     private ImageView avatar_image;
     private myDbHelper databaseHelper;
-    User user = new User();
+    User user;
+    private boolean switchValue;
+    boolean valid = true;
+
+    private String userFirstName;
+    private String userLastName;
+    private String userEmail;
+    private int userAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +66,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initializeViews();
         initializeObjects();
         initializeListeners();
+
+        //if(savedInstanceState == null){
+          //  Bundle extra = getIntent().getExtras();
+          //  switchValue = extra.getBoolean("createProfile");
+            //Log.v(TAG,"switch activity use" + switchValue);
+//
+        //}
     }
 
     /**
@@ -66,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
           public void onClick(View v) {
               Log.d(TAG, "Select Avatar: activated");
               FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-              ft.replace(R.id.fragment_avatar_layout, new NewWishFragment());
+              ft.replace(R.id.fragment_avatar_layout, new AvatarFragment());
               ft.commit();
           }
       });
@@ -97,6 +116,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void initializeObjects() {
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
+        User user = new User();
     }
 
     /**
@@ -106,23 +126,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         appCompatButtonRegister.setOnClickListener(this);
     }
 
+    /**
+     *
+     * @param view This method is executed on registration button click
+     */
     public void onClick(View view) {
-        inputValidation();
-        addUser(user);
+        if(inputValidation()){
+                addUser(user);
+        }
     }
     /**
      * Validate the input entered by user
      */
     private boolean inputValidation() {
-        initializeViews();
-        boolean valid = true;
-
-        String valueFirstName = textInputEditTextFirstName.getText().toString().trim();
-        String valueLastName = textInputEditTextLastName.getText().toString().trim();
-        String valueAge = textInputEditTextAge.getText().toString().trim();
         String valueEmail = textInputEditTextEmail.getText().toString();
         Boolean valueInteger;
-
+        if(!valueEmail.isEmpty() && validateEmail() && validateFirstname() && validateLastname() && validateAge()){
+            return true;
+        }
+        else if (validateFirstname() && validateLastname() && validateAge())
+            return true;
         /*try{
             Integer.parseInt(valueFirstName);
             valueInteger=true;
@@ -133,40 +156,74 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         Log.v(TAG, "valueInteger: "+valueInteger);*/
+        else{ return false;}
+    }
 
-        if (valueFirstName.isEmpty() || valueFirstName.length() < 3) {
-            textInputEditTextFirstName.setError("at least 3 characters");
-            valid = false;
-
-        }
+    private boolean validateFirstname(){
+        initializeViews();
+        String valueFirstName = textInputEditTextFirstName.getText().toString().trim();
+        if (valueFirstName.isEmpty()){ textInputEditTextFirstName.setError("Field cannot be empty");  valid = false;}
+        else if(valueFirstName.length() < 3 ) { textInputEditTextFirstName.setError("Name cannot be less then 3 characters"); valid = false; }
+        else if(valueFirstName.length() > 15 ) { textInputEditTextFirstName.setError("Name cannot be more then 15 characters");  valid = false;}
         else {
             textInputEditTextFirstName.setError(null);
+            valid = true;
         }
-
-        if (valueLastName.isEmpty() || valueLastName.length() < 3) {
-            textInputEditTextLastName.setError("at least 3 characters");
-            valid = false;
-        } else {
-            textInputEditTextLastName.setError(null);
-        }
-
-        if (valueAge.isEmpty()) {
-            textInputEditTextAge.setError("enter your age");
-            valid = false;
-        } else {
-            textInputEditTextAge.setError(null);
-        }
-
-        if (!valueEmail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(valueEmail).matches()) {
-            textInputEditTextEmail.setError("enter a valid email address");
-            valid = false;
-        } else {
-            textInputEditTextEmail.setError(null);
-        }
-
         return valid;
     }
 
+    private boolean validateLastname(){
+        initializeViews();
+        String valueLastName = textInputEditTextLastName.getText().toString().trim();
+        if (valueLastName.isEmpty()){ textInputEditTextLastName.setError("Field cannot be empty");  valid = false;}
+        else if(valueLastName.length() < 3 ) { textInputEditTextLastName.setError("Name cannot be less then 3 characters"); valid = false; }
+        else if(valueLastName.length() > 15 ) { textInputEditTextLastName.setError("Name cannot be more then 15 characters");  valid = false;}
+        else {
+            textInputEditTextLastName.setError(null);
+            valid = true;
+        }
+        return valid;
+    }
+
+    private boolean validateEmail(){
+        initializeViews();
+        String valueEmail = textInputEditTextEmail.getText().toString();
+        if (valueEmail.isEmpty()){ textInputEditTextEmail.setError("Field cannot be empty");  valid = false;}
+        else if(!Patterns.EMAIL_ADDRESS.matcher(valueEmail).matches() ) { textInputEditTextEmail.setError("Invalid email address"); valid = false; }
+        else {
+            textInputEditTextLastName.setError(null);
+            valid = true;
+        }
+        return valid;
+    }
+
+    private boolean validateAge(){
+        initializeViews();
+        String valueAge = textInputEditTextAge.getText().toString();
+        int valueAge1 = Integer.parseInt(valueAge);
+        try {
+            if (valueAge.isEmpty()) {
+                textInputEditTextLastName.setError("Field cannot be empty");
+                valid = false;}
+
+             else if(valueAge.length() > 2){
+                textInputEditTextLastName.setError("Invalid value");
+                valid = false;
+            }
+            else if(valueAge1 == 0){
+                textInputEditTextLastName.setError("Invalid value");
+                valid = false;
+            }
+            else{
+                 valid = true;
+            }
+
+            return valid;
+        } catch (Exception e){
+            e.printStackTrace();
+            return valid = false;
+        }
+    }
     /**
      * This method is to empty all input edit text
      */
@@ -196,9 +253,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         // if(inputValidation()){ databaseHelper.updateUser();}
         //else  { Toast.makeText(this, " All fields must be filled", Toast.LENGTH_SHORT).show(); }
-
-
     }
+    /*private void setValues() {
+        initializeViews();
+        user = databaseHelper.getUser();
+        userFirstName = user.getUserFirstName();
+        userLastName = user.getUserLastName();
+        userEmail = user.getUserMail();
+        userAge = user.getUserAge();
+
+        textFirstName.setText(userFirstName);
+        textLastName.setText(userLastName);
+        textEmail.setText(userEmail);
+        textAge.setText("" + userAge);
+    }*/
 
     /**
      * This method is to delete user record

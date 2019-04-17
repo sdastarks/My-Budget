@@ -34,6 +34,8 @@ import java.util.ArrayList;
  * @author Benish
  */
 public class ProfileActivity extends AppCompatActivity {
+    private static final String TAG = "ProfileActivityLog";
+
     public static final String PREFS_NAME = "user_name";
     User user = new User();
     private myDbHelper databaseHelper;
@@ -48,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String userLastName;
     private String userEmail;
     private int userAge;
+    private boolean switchValue;
 
     /*
     private static final int CAMERA_TAKE_REQUEST = 200;
