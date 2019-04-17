@@ -357,6 +357,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             return total;
     }
 
+
     /**
      * @return total amount of earnings
      */
@@ -475,9 +476,22 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
     //Get user record from DB
-    //public User getUser(){
-    //   open_db();
-    //    User user = new User();
+    public User getUser(){
+        open_db();
+        ArrayList<WishList> userRecord = new ArrayList<>();
+        String query = "SELECT * FROM " + USER_PROFILE;
+        Cursor cursor = db.rawQuery(query, null);
+        User user = new User();
 
-    //}
+        if(cursor != null){
+            cursor.moveToFirst();
+            user.setUserFirstName(cursor.getString(1));
+            user.setUserLastName(cursor.getString(2));
+            user.setUserMail(cursor.getString(3));
+            user.setUserAge(cursor.getInt(4));
+            //userRecord.add(user);
+        }
+        close_db();
+        return user;
+    }
 }

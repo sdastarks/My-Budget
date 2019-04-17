@@ -180,7 +180,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         Log.v(TAG, "navagation item selected");
         switch (menuItem.getItemId()) {
             case R.id.side_nav_my_profile:
-                Toast.makeText(this, "My Profile", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.side_nav_edit_profile:
                 Toast.makeText(this, "Edit Profile", Toast.LENGTH_SHORT).show();
