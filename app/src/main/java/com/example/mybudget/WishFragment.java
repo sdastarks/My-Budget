@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +50,14 @@ public class WishFragment extends Fragment {
     protected Boolean inflow;
     private FloatingActionButton onAddSelected;
     private FloatingActionButton onMinusSelected;
-    private FloatingActionButton cancelWishFragment;
-    private FloatingActionButton editWishFragment;
+
+    private Button cancelWishFragment;
+    private Button editWishFragment;
+
     private FloatingActionButton deleteWishFragment;
     private FloatingActionButton favouriteWish;
     WishList wishSelected;
+
 
 
     @Override
@@ -81,10 +85,13 @@ public class WishFragment extends Fragment {
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
-        cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
-        editWishFragment = view. findViewById(R.id.floatingActionButton_edit_wish_fragment);
+
+        cancelWishFragment = view. findViewById(R.id.cancel_wish_fragment);
+        editWishFragment = view. findViewById(R.id.edit_wish);
+
         deleteWishFragment = view. findViewById(R.id.floatingActionButton_delete_wish_fragment);
         favouriteWish = view. findViewById(R.id.floatingActionButton_favourite_wish_fragment);
+
 
         setTitle();
         calcProgress();

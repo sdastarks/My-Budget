@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,64 +12,78 @@
         android:id="@+id/choresDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:layout_marginLeft="140dp"
-        android:textSize="20dp"
+        android:layout_marginStart="16dp"
         android:hint="Enter a Description"
-        android:maxLines="1"
         android:inputType="text"
-        />
+        android:maxLines="1"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/image_inflow_outflow"
+        app:layout_constraintTop_toTopOf="@+id/image_inflow_outflow" />
+
     <TextView
-        android:id="@+id/choresSEK"
+        android:id="@+id/SEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/choresDescription"
-        android:layout_alignLeft="@+id/choresDescription"
-        android:textSize="40dp"
+        android:layout_marginStart="16dp"
         android:text="SEK"
-        android:textColor="@android:color/black"        />
+        android:textColor="?attr/colorPrimary"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_inflow_outflow"
+        app:layout_constraintStart_toEndOf="@+id/image_inflow_outflow" />
+
     <EditText
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/choresDescription"
-        android:layout_toRightOf="@+id/choresSEK"
-        android:layout_alignBottom="@+id/choresSEK"
-        android:layout_marginLeft="10dp"
-        android:textSize="30dp"
+        android:layout_marginEnd="8dp"
         android:hint="0.00"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/SEK"
+        app:layout_constraintEnd_toEndOf="@+id/choresDescription" />
+
     <ImageView
         android:id="@+id/image_inflow_outflow"
         android:layout_width="70dp"
         android:layout_height="100dp"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/choresSEK"
-        android:layout_alignBottom="@+id/choresSEK"/>
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_cancelIncome"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:fabCustomSize="40dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="105dp"
+        android:layout_alignParentEnd="true"
         android:clickable="true"
-        android:src="@drawable/icon_cancel_white" />
+        android:src="@drawable/icon_cancel_white"
+        app:fabCustomSize="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_saveIncome"
+        app:layout_constraintTop_toTopOf="@+id/choresDescription" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_saveIncome"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="287dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:src="@drawable/icon_done_white"
-        app:fabCustomSize="40dp" />
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/amount"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_cancelIncome" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
