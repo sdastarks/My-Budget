@@ -9,14 +9,14 @@
     tools:context=".Home.InflowOutflowFragment">
 
     <TextView
-        android:id="@+id/wish_title"
+        android:id="@+id/fragment_title"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:gravity="center_vertical"
+        android:text="Details"
         android:textAlignment="center"
-        android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -24,6 +24,37 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/wish_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="YHYHYH"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="@+id/fragment_title"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_title" />
+
+    <TextView
+        android:id="@+id/wish_price_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="price"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="@+id/wish_title"
+        app:layout_constraintTop_toBottomOf="@+id/wish_title" />
 
     <TextView
         android:id="@+id/wish_price"
@@ -37,23 +68,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton_addTransaction"
         app:layout_constraintStart_toEndOf="@+id/wish_price_txt"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-
-    <TextView
-        android:id="@+id/wish_price_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
-        android:text="cost"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton_minusTransaction"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_title" />
 
     <TextView
         android:id="@+id/saving_progress_txt"
@@ -190,7 +205,7 @@
         android:background="@drawable/icon_cancel_white"
         android:clickable="true"
         android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/wish_title"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -204,7 +219,7 @@
         android:background="@drawable/ic_baseline_create_24px"
         android:clickable="true"
         android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/wish_title"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -219,7 +234,7 @@
         android:background="@drawable/icon_wishlist"
         android:clickable="true"
         android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/wish_title"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_title"
         app:layout_constraintStart_toEndOf="@+id/cancel_wish_fragment"
         app:layout_constraintTop_toTopOf="parent" />
 
