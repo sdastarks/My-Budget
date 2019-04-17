@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorSecondary">#E788AB</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="cookieMonsterColorPrimary">#D87330</color>
     <color name="cookieMonsterColorPrimaryDark">#C25825</color>
