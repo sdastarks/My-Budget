@@ -62,19 +62,9 @@ public class AccountActivity extends AppCompatActivity {
                 Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
 
                 data =fill_with_data(position);
-                if (data.isEmpty()){
-                    System.out.println("empty");
-                }else{
-                    System.out.println("not empty");
-                }
-                for(AccountsRow e : data)
-                {
-                    System.out.println(e.title);
-                }
                 adapter = new AccountsRecyclerViewAdapter(data, getApplication());
                 mRecyclerView.setAdapter(adapter);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
             }
 
             @Override
