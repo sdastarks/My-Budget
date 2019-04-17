@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Home;
 
 
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.R;
 
 import java.time.LocalDate;
 
@@ -45,11 +46,7 @@ public class InflowOutflowFragment extends Fragment {
         // the boolean expression inflow will show if the input by the user
         //  is an income or spending
 
-            inflow =((MainActivity) getActivity()).inflow;
-
-
-
-
+        inflow =((MainActivity) getActivity()).inflow;
 
         ImageView image =view.findViewById(R.id.image_inflow_outflow);
         if(inflow){
@@ -80,18 +77,19 @@ public class InflowOutflowFragment extends Fragment {
                 String description = mDescription.getText().toString();
                 Log.v(TAG,"description: " +description);
                 String sAmount= mAmount.getText().toString();
-                int amount= Integer.parseInt(sAmount);
+
+
                 if (description.isEmpty() | sAmount.isEmpty()){
                     Toast.makeText(getActivity(),"Both fields must be filled",Toast.LENGTH_SHORT).show();
                 }
-                else if (amount > ((MainActivity) getActivity()).db.balance() &&!inflow){
+                else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() &&!inflow){
                     Toast.makeText(getActivity(), "You don't have enough money on your account", Toast.LENGTH_SHORT).show();
                 }
-                else if( amount > 5000 && inflow){
+                else if( Integer.parseInt(sAmount) > 5000 && inflow){
                     Toast.makeText(getActivity(), "Are you a high roller", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                    int amount= Integer.parseInt(sAmount);
                     Log.v(TAG, "amount: "+ amount);
 
                     Log.v(TAG, "inflow: "+inflow);

@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Chores;
 
 
 import android.content.Intent;
@@ -13,7 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.R;
 
 import java.time.LocalDate;
 
@@ -30,6 +33,7 @@ public class addChoresMoney extends Fragment {
     EditText choresDescription;
     EditText choresAmount;
     Boolean inflow;
+    private Bundle bundle;
 
     /*
      * Method creates the initial state of the
@@ -46,13 +50,11 @@ public class addChoresMoney extends Fragment {
         inflow = ((ChoresActivity) getActivity()).inflow;
 
         ImageView image = view.findViewById(R.id.choresImage_inflow_outflow);
-        if (inflow) {
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
-        } else {
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_outflow));
-        }
+        image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
         choresDescription = (EditText) view.findViewById(R.id.choresDescription);
         choresAmount = view.findViewById(R.id.choresAmount);
+        choresDescription.setText(getArguments().getString("title"));
+        choresAmount.setText((getArguments().getInt("amount"))+"");
 
         return view;
 
@@ -107,5 +109,4 @@ public class addChoresMoney extends Fragment {
         });
 
     }
-
 }
