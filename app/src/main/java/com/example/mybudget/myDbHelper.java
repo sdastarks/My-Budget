@@ -235,7 +235,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     public ArrayList<Entry> allEntries() {
         open_db();
 
-        ArrayList<Entry> allReconrds = new ArrayList<>();
+        ArrayList<Entry> allRecords = new ArrayList<>();
         String query = "SELECT * FROM " + ENTRY;
 
 
@@ -257,7 +257,7 @@ public class myDbHelper extends SQLiteOpenHelper {
 
         cursor.close();
         close_db();
-        return allReconrds;
+        return allRecords;
 
     }
 
@@ -322,8 +322,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             return total;
 
         }
-        return total;
-    }
+
 
     /**
      * @return total amount spend on wishes
@@ -338,8 +337,6 @@ public class myDbHelper extends SQLiteOpenHelper {
             }
             return total;
 
-        }
-        return total;
     }
 
     /**

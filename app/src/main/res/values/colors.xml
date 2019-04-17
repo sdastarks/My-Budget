@@ -5,22 +5,23 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorSecondary">#E788AB</color>
 
-    <color name="cookieMonsterColorPrimary">#CC5D02</color>
-    <color name="cookieMonsterColorPrimaryDark">#B53D00</color>
-    <color name="cookieMonsterColorAccent">#DFB335</color>
-    <color name="cookieMonsterColorSecondary">#D59436</color>
+    <color name="cookieMonsterColorPrimary">#D87330</color>
+    <color name="cookieMonsterColorPrimaryDark">#C25825</color>
+    <color name="cookieMonsterColorAccent">#FCB338</color>
+    <color name="cookieMonsterColorSecondary">#F0B051</color>
     <color name="cookieMonsterPrimaryText">#FFFFFF</color>
 
-    <color name="scienceMonsterColorPrimary">#0C4DCE</color>
-    <color name="scienceMonsterColorPrimaryDark">#052B66</color>
-    <color name="scienceMonsterColorAccent">#F06292</color>
-    <color name="scienceMonsterColorSecondary">#62B2F0</color>
+    <color name="scienceMonsterColorPrimary">#164B9B</color>
+    <color name="scienceMonsterColorPrimaryDark">#0D3572</color>
+    <color name="scienceMonsterColorAccent">#1794BB</color>
+    <color name="scienceMonsterColorSecondary">#3A93D8</color>
     <color name="scienceMonsterPrimaryText">#FFFFFF</color>
 
 
-    <color name="girlMonsterColorPrimary">#510B8F</color>
-    <color name="girlMonsterColorPrimaryDark">#9347A0</color>
-    <color name="girlMonsterColorAccent">#F74BDA</color>
-    <color name="girlMonsterColorSecondary">#F1ADE6</color>
+    <color name="girlMonsterColorPrimary">#6C1FA3</color>
+    <color name="girlMonsterColorPrimaryDark">#621F6F</color>
+    <color name="girlMonsterColorAccent">#FA72E3</color>
+    <color name="girlMonsterColorSecondary">#B05CD1</color>
     <color name="girlMonsterMonsterPrimaryText">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 </resources>

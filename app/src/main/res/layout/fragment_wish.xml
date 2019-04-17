@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InflowOutflowFragment"
-    android:background="#FFFFFF"
+    android:background="@drawable/gradient"
     android:id="@+id/wish_fragment">
 
     <TextView
@@ -17,10 +17,11 @@
         android:gravity="center_vertical"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@android:color/background_light"
+        android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,37 +29,60 @@
         android:id="@+id/wish_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton_addTransaction"
+        app:layout_constraintStart_toEndOf="@+id/wish_price_txt"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/wish_price_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="cost"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButton_minusTransaction"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/saving_progress_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="saved"
+        android:textAllCaps="true"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="@+id/wish_price_txt"
+        app:layout_constraintTop_toBottomOf="@+id/wish_price_txt" />
 
     <TextView
         android:id="@+id/saving_progress"
-        android:layout_width="3dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
+        android:textColor="?attr/colorPrimaryDark"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wish_price"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/saving_progress_txt"
+        app:layout_constraintEnd_toEndOf="@+id/wish_price"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/saving_progress_txt" />
 
 
     <TextView
@@ -68,7 +92,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="top"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +110,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="?attr/colorAccent"
         android:clickable="true"
+        app:borderWidth="@dimen/default_background_stroke_width"
         app:layout_constraintBottom_toBottomOf="@+id/saving_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
@@ -117,9 +143,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:cpb_background_progressbar_color="?attr/colorPrimaryDark"
+        app:cpb_background_progressbar_color="?attr/colorAccent"
         app:cpb_background_progressbar_width="5dp"
-        app:cpb_progressbar_color="?attr/colorPrimary"
+        app:cpb_progressbar_color="?attr/colorPrimaryDark"
         app:cpb_progressbar_width="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +159,7 @@
         android:layout_alignBottom="@+id/progressBar"
         android:layout_centerInParent="true"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?attr/colorAccent"
+        android:textColor="@color/white"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
@@ -146,50 +172,55 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/available_balance"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/balance"
         app:layout_constraintStart_toStartOf="@+id/balance"
         app:layout_constraintTop_toBottomOf="@+id/wish_title" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_cancel_wish_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/cancel_wish_fragment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
-        android:src="@drawable/icon_cancel_white"
-        app:fabSize="mini"
+        android:background="@drawable/icon_cancel_white"
+        android:text=" "
         app:layout_constraintBottom_toBottomOf="@+id/wish_title"
-        app:layout_constraintEnd_toEndOf="@+id/wish_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_edit_wish_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_create_24px"
-        app:fabSize="mini"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_cancel_wish_fragment"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_cancel_wish_fragment" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_delete_wish_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/edit_wish"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/ic_baseline_create_24px"
         android:clickable="true"
-        android:src="@drawable/ic_baseline_delete_24px"
-        app:fabSize="mini"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton_edit_wish_fragment"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="@+id/wish_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wish_title" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/delete_wish"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/ic_baseline_delete_24px"
+        android:clickable="true"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="@+id/wish_title"
+        app:layout_constraintStart_toEndOf="@+id/edit_wish"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
