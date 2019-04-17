@@ -4,12 +4,15 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -25,7 +28,7 @@ import static com.example.mybudget.myDbHelper.USER_PROFILE;
  */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-
+    private static final String TAG = "RegisterActivityLog";
     private final AppCompatActivity activity = RegisterActivity.this;
     private ScrollView scrollView;
 
@@ -39,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextAge;
     private AppCompatButton appCompatButtonRegister;
-
+    private ImageView avatar_image;
     private myDbHelper databaseHelper;
     User user = new User();
 
@@ -51,6 +54,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initializeViews();
         initializeObjects();
         initializeListeners();
+    }
+
+    /**
+     * This method is to initialize Image onClick
+     */
+    public void selectAvatar(){
+        avatar_image = (ImageView) findViewById(R.id.avatarImage);
+        avatar_image.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Log.d(TAG, "Select Avatar: activated");
+              FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+              ft.replace(R.id.fragment_avatar_layout, new NewWishFragment());
+              ft.commit();
+          }
+      });
     }
 
     /**
@@ -68,14 +87,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
         textInputEditTextAge = (TextInputEditText) findViewById(R.id.textInputEditTextAge);
 
-        appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
-    }
+        avatar_image = (ImageView) findViewById(R.id.avatarImage);
 
-    /**
-     * This method is to initialize listeners
-     */
-    private void initializeListeners() {
-        appCompatButtonRegister.setOnClickListener(this);
+        appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
     }
 
     /**
@@ -85,20 +99,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
     }
 
+    /**
+     * This method is to initialize listeners
+     */
+    private void initializeListeners() {
+        appCompatButtonRegister.setOnClickListener(this);
+    }
+
     public void onClick(View view) {
         inputValidation();
         addUser(user);
     }
-
-    /**
-     * This method is to validate the input text fields and post data to SQLite
-     */
-    private void postDataToSQLite() {
-        //if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, getString(R.string.error_message_name))) {
-        //   return;
-    }
-
-
     /**
      * Validate the input entered by user
      */
@@ -110,11 +121,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String valueLastName = textInputEditTextLastName.getText().toString().trim();
         String valueAge = textInputEditTextAge.getText().toString().trim();
         String valueEmail = textInputEditTextEmail.getText().toString();
+        Boolean valueInteger;
+
+        try{
+            Integer.parseInt(valueFirstName);
+            valueInteger=true;
+
+        }
+        catch (Exception e){
+            valueInteger=false;
+        }
+
+        Log.v(TAG, "valueInteger: "+valueInteger);
 
         if (valueFirstName.isEmpty() || valueFirstName.length() < 3) {
             textInputEditTextFirstName.setError("at least 3 characters");
             valid = false;
-        } else {
+
+        }
+        else {
             textInputEditTextFirstName.setError(null);
         }
 

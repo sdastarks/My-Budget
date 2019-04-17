@@ -42,6 +42,15 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="AppTheme.CrazyMonster" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/CrazyMonsterColorPrimary</item>
+        <item name="colorPrimaryDark">@color/CrazyMonsterColorPrimaryDark</item>
+        <item name="colorAccent">@color/CrazyMonsterColorAccent</item>
+        <item name="colorSecondary">@color/CrazyMonsterColorSecondary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 
 
 

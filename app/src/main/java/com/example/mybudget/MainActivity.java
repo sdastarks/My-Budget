@@ -8,7 +8,9 @@ package com.example.mybudget;
  */
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -28,6 +30,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Models.WishList;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 
@@ -35,7 +38,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
 
     private DrawerLayout drawer;
     private TextView tvBalance;
-
+    private int progress;
 
 
     private static final String TAG = "MainActivityLog";
@@ -71,7 +74,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         });
 
 
-                /*
+        /*
          * Method creates a pathway to the other
          * activities via a navigation bar
          */
@@ -110,22 +113,42 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 return false;
             }
         });
-
-        setProgressBar();
+        int favWish_dbID= getFavouriteWishID();
+        calcProgress(favWish_dbID);
+        setProgressBar(favWish_dbID);
         updateBalance();
     }
-
     /*
-     * Method sets the status of the progress bar
+     * Method gets the database id of the favourite wish
      */
-    public void setProgressBar() {
-        int progress = 60; // data received from database
-        CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.progressBar);
-        circularProgressBar.setProgress(progress);
-        TextView progresstxt = findViewById(R.id.txt_progressBar);
-        progresstxt.setText(progress + "%");
+    public int getFavouriteWishID(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        int favWish_dbID= sharedPref.getInt("favouriteWish",0);
+        Log.v(TAG, "favWish_dbID: "+favWish_dbID);
+        return favWish_dbID;
     }
-
+    /*
+     * Method calculates the progress of the favourite wish
+     */
+    public void calcProgress(int favWish_dbID){
+        if (favWish_dbID !=0){
+            WishList favWish = db.returnWish(favWish_dbID);
+            int wishPrice=favWish.getCost();
+            int wishSaved=favWish.getSaved();
+            progress =wishSaved*100/wishPrice;
+        }
+    }
+    /*
+     * Method sets the state of the progress bar
+     */
+    public void setProgressBar(int favWish_dbID) {
+        if (favWish_dbID !=0){
+            CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.progressBar);
+            circularProgressBar.setProgress(progress);
+            TextView progresstxt = findViewById(R.id.txt_progressBar);
+            progresstxt.setText(progress + "%");
+        }
+    }
     /*
      * Method initialises a fragment allowing the
      * user to enter an inflow
@@ -157,7 +180,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         Log.v(TAG, "navagation item selected");
         switch (menuItem.getItemId()) {
             case R.id.side_nav_my_profile:
-                Toast.makeText(this, "My Profile", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.side_nav_edit_profile:
                 Toast.makeText(this, "Edit Profile", Toast.LENGTH_SHORT).show();
