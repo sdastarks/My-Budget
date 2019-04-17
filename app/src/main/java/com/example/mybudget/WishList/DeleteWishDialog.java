@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.WishList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,6 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
+
+import com.example.mybudget.R;
+import com.example.mybudget.WishList.WishFragment;
+import com.example.mybudget.WishList.WishlistActivity;
+
 /**
  * Fragment creates a dialog allowing the user
  * to delete a wish or abort the procedure

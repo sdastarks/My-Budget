@@ -1,7 +1,6 @@
-package com.example.mybudget;
+package com.example.mybudget.Account;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.R;
+import com.example.mybudget.WishList.WishlistActivity;
+import com.example.mybudget.myDbHelper;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AccountActivity extends AppCompatActivity {

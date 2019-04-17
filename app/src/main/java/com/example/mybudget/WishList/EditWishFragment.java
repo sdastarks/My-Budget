@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
@@ -14,8 +14,7 @@ import android.widget.ImageView;
 
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
-
-import java.util.Set;
+import com.example.mybudget.WishList.WishlistActivity;
 
 /**
  * A simple {@link Fragment} subclass.

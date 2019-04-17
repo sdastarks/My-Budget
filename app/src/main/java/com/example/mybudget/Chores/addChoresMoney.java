@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Chores;
 
 
 import android.content.Intent;
@@ -13,7 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.R;
 
 import java.time.LocalDate;
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".ChangeWishInflowOutflowFragment">
+    tools:context=".WishList.ChangeWishInflowOutflowFragment">
 
     <TextView
         android:id="@+id/wish_title2"
