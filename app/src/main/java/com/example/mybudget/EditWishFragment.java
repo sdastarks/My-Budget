@@ -29,14 +29,13 @@ public class EditWishFragment extends Fragment {
     private FloatingActionButton floatingActionButton_save_wish;
     private FloatingActionButton exitEditWish;
     private int index;
-
+    private int dbid;
+    private  WishList wish2Edit;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
 
         View view = inflater.inflate(R.layout.fragment_edit_wish, container, false);
 
@@ -44,15 +43,16 @@ public class EditWishFragment extends Fragment {
         editTitle = view.findViewById(R.id.edit_title);
         editCost = view.findViewById(R.id.edit_cost);
 
-        //Todo  Dawnie: Set Hint as current wish price
-            //editCost.setHint(data from DB by index);
+        dbid = ((WishlistActivity) getActivity()).id;
+        wish2Edit=((WishlistActivity) getActivity()).db.returnWish(dbid);
+
+        editTitle.setHint(wish2Edit.getTitle());
+        editCost.setHint(""+wish2Edit.getCost());
         editWishPicture = view.findViewById(R.id.edit_wish_picture);
         exitEditWish = view.findViewById(R.id.floatingActionButton_exit_edit_wish);
         floatingActionButton_save_wish = view.findViewById(R.id.floatingActionButton_save_edit_wish);
 
-        //Method to exit fragment
         activateOnExitEditWish();
-
         activateOnSaveEditWish();
 
         return view;
@@ -70,8 +70,6 @@ public class EditWishFragment extends Fragment {
 
     }
 
-
-//Todo  Dawnie: Update Wish in data base
     private void activateOnSaveEditWish() {
         floatingActionButton_save_wish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +86,3 @@ public class EditWishFragment extends Fragment {
         });
     }
 }
-
-
-
