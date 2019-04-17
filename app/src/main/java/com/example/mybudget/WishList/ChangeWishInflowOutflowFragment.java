@@ -34,21 +34,17 @@ import java.time.LocalDate;
 public class ChangeWishInflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
-    EditText mAmount;
-    TextView fragmentTitle;
-    TextView wishTitle;
-    Boolean addingMoney2Wish;
-    WishList wish2Update;
-    ImageView imageViewHero;
-
-    Button btn_cancelTransaction;
-    Button btn_saveTransfer;
-
-
-    int dbid;
-    int index;
-    int balance;
-
+    private EditText mAmount;
+    private TextView mfragmentTitle;
+    private ImageView mimageViewHero;
+    private Boolean addingMoney2Wish;
+    private WishList wish2Update;
+    private Button btn_cancelTransaction;
+    private Button btn_saveTransfer;
+    private View view;
+    private int dbid;
+    private int index;
+    private int balance;
     /*
      * Method creates the initial state of the
      * fragment
@@ -57,39 +53,41 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
-        dbid = ((WishlistActivity) getActivity()).id;
-        wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
+        view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
 
-
-        fragmentTitle=view.findViewById(R.id.title_change_money_fragment);
-
+        mfragmentTitle=view.findViewById(R.id.title_change_money_fragment);
+        mimageViewHero=view.findViewById(R.id.imageViewHero_wishlist);
+        mAmount = view.findViewById(R.id.amount);
         btn_cancelTransaction=view.findViewById(R.id.btn_cancelTransaction);
         btn_saveTransfer=view.findViewById(R.id.btn_saveTransfer);
-
-        wishTitle= view.findViewById(R.id.wish_title_2);
-        wishTitle.setText(wish2Update.getTitle());
-
+        dbid = ((WishlistActivity) getActivity()).id;
+        wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         balance = ((WishlistActivity) getActivity()).db.balance();
         addingMoney2Wish = getArguments().getBoolean("inflow");
         index = getArguments().getInt("index");
 
         if (addingMoney2Wish) {
-            fragmentTitle.setText("Add Money to Wish");
+            mfragmentTitle.setText("Add Money to Wish");
         } else {
-            fragmentTitle.setText("Remove Money from Wish");
+            mfragmentTitle.setText("Remove Money from Wish");
         }
 
-        imageViewHero=view.findViewById(R.id.imageViewHero_wishlist);
+        setAvatar();
+
+
+        return view;
+    }
+    /*
+     * Method sets the avatar image from system
+     * preferences
+     */
+    public void setAvatar(){
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);
         if(imageResId != -1){
             Drawable d=getActivity().getDrawable(imageResId);
-            imageViewHero.setImageDrawable(d);
+            mimageViewHero.setImageDrawable(d);
         }
-
-        mAmount = view.findViewById(R.id.amount);
-        return view;
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {

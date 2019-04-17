@@ -78,24 +78,6 @@
         app:layout_constraintTop_toBottomOf="@+id/title_change_money_fragment"
         app:srcCompat="@drawable/icon_thinking_bubble" />
 
-    <TextView
-        android:id="@+id/wish_title_2"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginBottom="16dp"
-        android:text="holiday"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="?attr/colorPrimaryDark"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
-        app:layout_constraintEnd_toEndOf="@+id/thinking_frame"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame" />
-
-
     <EditText
         android:id="@+id/amount"
         android:layout_width="55dp"
