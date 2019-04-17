@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,9 +32,15 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
     EditText mAmount;
+    TextView fragmentTitle;
     TextView wishTitle;
     Boolean addingMoney2Wish;
     WishList wish2Update;
+
+    Button btn_cancelTransaction;
+    Button btn_saveTransfer;
+
+
     int dbid;
     int index;
     int balance;
@@ -50,7 +57,13 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
 
-        wishTitle= view.findViewById(R.id.wish_title2);
+
+        fragmentTitle=view.findViewById(R.id.title_change_money_fragment);
+
+        btn_cancelTransaction=view.findViewById(R.id.btn_cancelTransaction);
+        btn_saveTransfer=view.findViewById(R.id.btn_saveTransfer);
+
+        wishTitle= view.findViewById(R.id.wish_title_2);
         wishTitle.setText(wish2Update.getTitle());
 
         balance = ((WishlistActivity) getActivity()).db.balance();
@@ -59,8 +72,10 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         ImageView image = view.findViewById(R.id.image_inflow_outflow);
         if (addingMoney2Wish) {
             image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
+            fragmentTitle.setText("Add Money to Wish");
         } else {
             image.setImageDrawable(getResources().getDrawable(R.drawable.image_outflow));
+            fragmentTitle.setText("Remove Money from Wish");
         }
         mAmount = view.findViewById(R.id.amount);
         return view;
@@ -70,8 +85,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + addingMoney2Wish);
 
-        FloatingActionButton saveButton = view.findViewById(R.id.floatingActionButton_saveTransfer);
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        btn_saveTransfer.setOnClickListener(new View.OnClickListener() {
             /*
              * Method either adds or takes away money from the wish
              * if the user has enough money from their balance
@@ -108,8 +122,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             }
         });
 
-        FloatingActionButton cancelTransactionButton = view.findViewById(R.id.floatingActionButton_cancelTransaction);
-        cancelTransactionButton.setOnClickListener(new View.OnClickListener() {
+
+        btn_cancelTransaction.setOnClickListener(new View.OnClickListener() {
             /*
              * Method sends the user back to the previous fragment
              * when the cancel button is initialised

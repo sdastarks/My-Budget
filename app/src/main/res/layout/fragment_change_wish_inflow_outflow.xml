@@ -5,24 +5,95 @@
     android:id="@+id/wish_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/gradient"
     tools:context=".WishList.ChangeWishInflowOutflowFragment">
 
     <TextView
-        android:id="@+id/wish_title2"
+        android:id="@+id/title_change_money_fragment"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:gravity="center_vertical"
         android:textAlignment="center"
-        android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textSize="25dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_cancelTransaction"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/icon_cancel_white"
+        android:clickable="true"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="@+id/title_change_money_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_saveTransfer"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/icon_done_white"
+        android:clickable="true"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="@+id/title_change_money_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewHero_wishlist"
+        android:layout_width="0dp"
+        android:layout_height="132dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_change_money_fragment"
+        app:srcCompat="@drawable/cookie" />
+
+    <ImageView
+        android:id="@+id/thinking_frame"
+        android:layout_width="362dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_change_money_fragment"
+        app:srcCompat="@drawable/icon_thinking_bubble" />
+
+    <TextView
+        android:id="@+id/wish_title_2"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageViewHero"
+        android:textAlignment="center"
+
+        android:layout_marginBottom="16dp"
+        android:text="holiday"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame" />
 
     <TextView
         android:id="@+id/SEK"
@@ -30,10 +101,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="SEK"
-        android:textColor="@android:color/black"
+        android:textColor="@color/white"
         android:textSize="40dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/amount"
         app:layout_constraintStart_toEndOf="@+id/amount" />
+
 
     <EditText
         android:id="@+id/amount"
@@ -45,6 +117,7 @@
         android:hint="0.00"
         android:inputType="number"
         android:textSize="30dp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/image_inflow_outflow"
         app:layout_constraintStart_toEndOf="@+id/image_inflow_outflow" />
 
@@ -60,34 +133,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_cancelTransaction"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:clickable="true"
-        android:src="@drawable/icon_cancel_white"
-        app:fabCustomSize="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_saveTransfer"
-        app:layout_constraintTop_toTopOf="@+id/image_inflow_outflow" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_saveTransfer"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="70dp"
-        android:clickable="true"
-        android:src="@drawable/icon_done_white"
-        app:fabCustomSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SEK"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_cancelTransaction"
-        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>
