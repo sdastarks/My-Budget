@@ -97,6 +97,15 @@ public class SettingsActivity extends AppCompatActivity {
                 //heroImage.setImageDrawable(getDrawable(R.drawable.girl));
             }
         });
+        Button themeSwitchCrazy = findViewById(R.id.btn_crazy);
+        themeSwitchCrazy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveAndSwitchTheme(R.style.AppTheme_CrazyMonster);
+                //heroImage.setImageDrawable(getDrawable(R.drawable.crazy));
+            }
+        });
+
 
     }
 
