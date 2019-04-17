@@ -7,27 +7,27 @@
     <color name="white">#FFFFFF</color>
 
     <color name="cookieMonsterColorPrimary">#D87330</color>
-    <color name="cookieMonsterColorPrimaryDark">#C25825</color>
+    <color name="cookieMonsterColorPrimaryDark">#BD521F</color>
     <color name="cookieMonsterColorAccent">#FCB338</color>
-    <color name="cookieMonsterColorSecondary">#F0B051</color>
+    <color name="cookieMonsterColorSecondary">#EEA943</color>
     <color name="cookieMonsterPrimaryText">#FFFFFF</color>
 
-    <color name="scienceMonsterColorPrimary">#164B9B</color>
+    <color name="scienceMonsterColorPrimary">#20519B</color>
     <color name="scienceMonsterColorPrimaryDark">#0D3572</color>
-    <color name="scienceMonsterColorAccent">#1794BB</color>
-    <color name="scienceMonsterColorSecondary">#3A93D8</color>
+    <color name="scienceMonsterColorAccent">#46ACF1</color>
+    <color name="scienceMonsterColorSecondary">#3897E2</color>
     <color name="scienceMonsterPrimaryText">#FFFFFF</color>
 
-    <color name="girlMonsterColorPrimary">#6A188D</color>
-    <color name="girlMonsterColorPrimaryDark">#510B8F</color>
-    <color name="girlMonsterColorAccent">#F74BDA</color>
-    <color name="girlMonsterColorSecondary">#ae52d4</color>
+    <color name="girlMonsterColorPrimary">#701B94</color>
+    <color name="girlMonsterColorPrimaryDark">#4B0272</color>
+    <color name="girlMonsterColorAccent">#D955DF</color>
+    <color name="girlMonsterColorSecondary">#AA54CE</color>
     <color name="girlMonsterMonsterPrimaryText">#FFFFFF</color>
 
-    <color name="CrazyMonsterColorPrimary">#64D165</color>
-    <color name="CrazyMonsterColorPrimaryDark">#0B8F0D</color>
-    <color name="CrazyMonsterColorAccent">#A1F74B</color>
-    <color name="CrazyMonsterColorSecondary">#76DA76</color>
+    <color name="CrazyMonsterColorPrimary">#07965c</color>
+    <color name="CrazyMonsterColorPrimaryDark">#035a38</color>
+    <color name="CrazyMonsterColorAccent">#4fd198</color>
+    <color name="CrazyMonsterColorSecondary">#4ac987</color>
     <color name="CrazyMonsterMonsterPrimaryText">#FFFFFF</color>
 
 </resources>

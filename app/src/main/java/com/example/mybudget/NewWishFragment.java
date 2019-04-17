@@ -73,4 +73,10 @@ public class NewWishFragment extends Fragment {
         return view;
     }
 
+    public void bike(View view){
+          wishPicture.setImageResource();
+          
+
+    }
+
 }
