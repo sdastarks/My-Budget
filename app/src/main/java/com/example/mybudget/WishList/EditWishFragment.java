@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -25,8 +26,8 @@ public class EditWishFragment extends Fragment {
     private EditText editTitle;
     private EditText editCost;
     private ImageView editWishPicture;
-    private FloatingActionButton floatingActionButton_save_wish;
-    private FloatingActionButton exitEditWish;
+    private Button btn_exitEditWish;
+    private Button btn_saveEditWish;
     private int index;
     private int dbid;
     private  WishList wish2Edit;
@@ -39,8 +40,11 @@ public class EditWishFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit_wish, container, false);
 
         index = getArguments().getInt("indexEdit");
+
         editTitle = view.findViewById(R.id.edit_title);
         editCost = view.findViewById(R.id.edit_cost);
+        btn_exitEditWish= view.findViewById(R.id.btn_cancel_edit_wish);
+        btn_saveEditWish=view.findViewById(R.id.btn_save__edit_wish);
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Edit=((WishlistActivity) getActivity()).db.returnWish(dbid);
@@ -48,8 +52,7 @@ public class EditWishFragment extends Fragment {
         editTitle.setHint(wish2Edit.getTitle());
         editCost.setHint(""+wish2Edit.getCost());
         editWishPicture = view.findViewById(R.id.edit_wish_picture);
-        exitEditWish = view.findViewById(R.id.floatingActionButton_exit_edit_wish);
-        floatingActionButton_save_wish = view.findViewById(R.id.floatingActionButton_save_edit_wish);
+
 
         activateOnExitEditWish();
         activateOnSaveEditWish();
@@ -59,7 +62,7 @@ public class EditWishFragment extends Fragment {
 
     private void activateOnExitEditWish() {
 
-        exitEditWish.setOnClickListener(new View.OnClickListener() {
+        btn_exitEditWish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), WishlistActivity.class);
@@ -70,7 +73,7 @@ public class EditWishFragment extends Fragment {
     }
 
     private void activateOnSaveEditWish() {
-        floatingActionButton_save_wish.setOnClickListener(new View.OnClickListener() {
+        btn_saveEditWish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int dbid =((WishlistActivity) getActivity()).id;
