@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.Home.MainActivity;
@@ -20,6 +22,12 @@ public class ChoresActivity extends SettingsActivity {
     protected Boolean inflow;
     private static  final String TAG= "ChoresActivity";
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
+
+    //Initilaizing ImagesButtons
+    ImageButton laundry, dishwashing, readingBook, vacuum, beingNice, petting, grass, mopping,
+            goodGrade, cooking, baby, other;
+    String title = "";
+    int amount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +71,127 @@ public class ChoresActivity extends SettingsActivity {
             }
         });
 
+        laundry = findViewById(R.id.laudry);
+        laundry.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                 title = "Laundry";
+                 amount = 50;
+                 addMoney(title,amount);
+            }
+        });
+
+        dishwashing = findViewById(R.id.dishwashing);
+        dishwashing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Dish washing";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+
+        readingBook = findViewById(R.id.readingBook);
+        readingBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Reading a book";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        vacuum = findViewById(R.id.vacuum);
+        vacuum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Doing the vacuum";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        beingNice = findViewById(R.id.beingNice);
+        beingNice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Being nice ";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        petting = findViewById(R.id.petting);
+        petting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "taking care of our pet";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        grass = findViewById(R.id.grass);
+        grass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Do the grading";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        mopping = findViewById(R.id.mopping);
+        mopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Do the mopping";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        goodGrade = findViewById(R.id.goodGrade);
+        goodGrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Get a high grade at class";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        cooking = findViewById(R.id.cooking);
+        cooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Cook a small dish";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        baby = findViewById(R.id.baby);
+        baby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "take care of your little sibling";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
+        other = findViewById(R.id.other);
+        other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 title = "Specify here!";
+                 amount = 50;
+                addMoney(title,amount);
+            }
+        });
     }
 
-    public void addMoney(View view) {
+    public void addMoney(String title, int amount) {
+
+        addChoresMoney add = new addChoresMoney();
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putInt("amount", amount);
+        add.setArguments(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.check, new addChoresMoney());
+        ft.replace(R.id.check, add);
         inflow = true;
         ft.commit();
     }
