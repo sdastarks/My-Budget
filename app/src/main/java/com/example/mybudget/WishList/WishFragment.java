@@ -30,9 +30,9 @@ public class WishFragment extends Fragment {
     private View view;
     private CircularProgressBar circularProgressBar;
     private TextView wishTitle;
-    private TextView wishPrice;
+    private TextView mwishPrice;
     private TextView balance;
-    private TextView savingProgress;
+    private TextView msavingProgress;
     private TextView txtAvailableBalance;
     private int index;
     private int progress;
@@ -58,9 +58,9 @@ public class WishFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_wish, container, false);
         wishTitle = view.findViewById(R.id.wish_title);
-        wishPrice = view.findViewById(R.id.wish_price);
+        mwishPrice = view.findViewById(R.id.wish_price);
         balance = view.findViewById(R.id.balance);
-        savingProgress = view.findViewById(R.id.saving_progress);
+        msavingProgress = view.findViewById(R.id.saving_progress);
         txtAvailableBalance = view.findViewById(R.id.txt_available_balance);
 
         //assign value by index from DB
@@ -105,7 +105,9 @@ public class WishFragment extends Fragment {
      */
     public void calcProgress(){
         int wishPrice=((WishlistActivity) getActivity()).wishPrice;
+        mwishPrice.setText(wishPrice+" SEK");
         int wishSaved= wishSelected.getSaved();
+        msavingProgress.setText(wishSaved+" SEK");
         progress=wishSaved*100/wishPrice;
     }
     /*

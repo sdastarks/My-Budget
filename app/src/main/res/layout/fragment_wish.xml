@@ -32,7 +32,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="8dp"
-        android:text="YHYHYH"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -68,7 +67,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton_addTransaction"
         app:layout_constraintStart_toEndOf="@+id/wish_price_txt"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_title" />
+        app:layout_constraintTop_toBottomOf="@+id/wish_title" />
 
     <TextView
         android:id="@+id/saving_progress_txt"
@@ -99,7 +98,19 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/saving_progress_txt" />
 
-
+    <TextView
+        android:id="@+id/txt_available_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/available_balance"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/balance"
+        app:layout_constraintStart_toStartOf="@+id/wish_title"
+        app:layout_constraintTop_toBottomOf="@+id/saving_progress" />
     <TextView
         android:id="@+id/balance"
         android:layout_width="match_parent"
@@ -115,6 +126,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_available_balance"
         app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/txt_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_addTransaction"
@@ -165,35 +191,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/wish_title" />
+        app:layout_constraintTop_toTopOf="@+id/balance" />
 
-    <TextView
-        android:id="@+id/txt_progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/progressBar"
-        android:layout_centerInParent="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
-    <TextView
-        android:id="@+id/txt_available_balance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/available_balance"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/balance"
-        app:layout_constraintStart_toStartOf="@+id/balance"
-        app:layout_constraintTop_toBottomOf="@+id/wish_title" />
+
 
     <Button
         android:id="@+id/cancel_wish_fragment"
