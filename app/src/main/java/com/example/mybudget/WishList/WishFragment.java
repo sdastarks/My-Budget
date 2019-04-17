@@ -44,7 +44,6 @@ public class WishFragment extends Fragment {
     private Button cancelWishFragment;
     private Button editWishFragment;
     private Button favouriteWish_btn;
-    private Button deleteWishFragment;
 
     WishList wishSelected;
 
@@ -79,7 +78,6 @@ public class WishFragment extends Fragment {
         cancelWishFragment = view. findViewById(R.id.cancel_wish_fragment);
         editWishFragment = view. findViewById(R.id.edit_wish);
 
-        deleteWishFragment = view. findViewById(R.id.delete_wish);
         favouriteWish_btn=view.findViewById(R.id.favourite_wish_btn);
 
 
@@ -90,7 +88,6 @@ public class WishFragment extends Fragment {
         activateOnMinusSelected();
         activateEditWishFragment();
         activateCancelWishFragment();
-        activateDeleteWishFragment();
         activateFavouriteWish();
 
         return view;
@@ -201,20 +198,6 @@ public class WishFragment extends Fragment {
             }
         });
     }
-   /*
-    * Method creates a dialog fragment allowing the user
-    * to delete a wish or abort the procedure
-    */
-    public void activateDeleteWishFragment(){
-        deleteWishFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeleteWishDialog deleteDialog = new DeleteWishDialog();
-                deleteDialog.show(getActivity().getSupportFragmentManager(), "delete dialog");
-            }
-        });
-    }
-
     public void activateFavouriteWish(){
         favouriteWish_btn.setOnClickListener(new View.OnClickListener() {
             @Override
