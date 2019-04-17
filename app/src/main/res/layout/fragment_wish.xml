@@ -184,29 +184,30 @@
         android:id="@+id/cancel_wish_fragment"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/icon_cancel_white"
         android:clickable="true"
         android:text=" "
         app:layout_constraintBottom_toBottomOf="@+id/wish_title"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/edit_wish"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_baseline_create_24px"
         android:clickable="true"
         android:text=" "
         app:layout_constraintBottom_toBottomOf="@+id/wish_title"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/favourite_wish_btn"
@@ -219,9 +220,8 @@
         android:clickable="true"
         android:text=" "
         app:layout_constraintBottom_toBottomOf="@+id/wish_title"
-        app:layout_constraintStart_toEndOf="@+id/edit_wish"
+        app:layout_constraintStart_toEndOf="@+id/cancel_wish_fragment"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
 </android.support.constraint.ConstraintLayout>
