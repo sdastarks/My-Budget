@@ -1,7 +1,6 @@
-package com.example.mybudget;
+package com.example.mybudget.WishList;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.R;
 
 import java.time.LocalDate;
 

@@ -1,9 +1,11 @@
-package com.example.mybudget;
+package com.example.mybudget.Account;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.mybudget.R;
 
 public class AccountsViewHolder extends RecyclerView.ViewHolder {
     CardView cv;

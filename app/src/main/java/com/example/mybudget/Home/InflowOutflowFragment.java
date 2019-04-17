@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Home;
 
 
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.R;
 
 import java.time.LocalDate;
 

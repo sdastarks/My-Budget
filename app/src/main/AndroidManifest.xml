@@ -15,13 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ChoresActivity" />
-        <activity android:name=".AccountActivity" />
-        <activity android:name=".WishlistActivity" />
+        <activity android:name=".Profile.ProfileActivity" />
+        <activity android:name=".Profile.RegisterActivity" />
+        <activity android:name=".Chores.ChoresActivity" />
+        <activity android:name=".Account.AccountActivity" />
+        <activity android:name=".WishList.WishlistActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Home.MainActivity"
             android:theme="@style/AppTheme.CookieMonster">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
