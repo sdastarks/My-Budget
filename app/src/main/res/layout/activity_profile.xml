@@ -21,7 +21,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp" />
 
-        <android.support.design.widget.TextInputLayout
+        <TextView
             android:id="@+id/textFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -478,7 +478,6 @@ public class myDbHelper extends SQLiteOpenHelper {
     //Get user record from DB
     public User getUser(){
         open_db();
-        ArrayList<WishList> userRecord = new ArrayList<>();
         String query = "SELECT * FROM " + USER_PROFILE;
         Cursor cursor = db.rawQuery(query, null);
         User user = new User();
@@ -492,6 +491,6 @@ public class myDbHelper extends SQLiteOpenHelper {
             //userRecord.add(user);
         }
         close_db();
-        return user;
+    return user;
     }
 }

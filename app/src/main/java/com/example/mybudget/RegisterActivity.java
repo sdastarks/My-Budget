@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String valueEmail = textInputEditTextEmail.getText().toString();
         Boolean valueInteger;
 
-        try{
+        /*try{
             Integer.parseInt(valueFirstName);
             valueInteger=true;
 
@@ -132,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             valueInteger=false;
         }
 
-        Log.v(TAG, "valueInteger: "+valueInteger);
+        Log.v(TAG, "valueInteger: "+valueInteger);*/
 
         if (valueFirstName.isEmpty() || valueFirstName.length() < 3) {
             textInputEditTextFirstName.setError("at least 3 characters");

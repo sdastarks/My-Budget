@@ -178,6 +178,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Log.v(TAG, "navagation item selected");
+        boolean value = false;
         switch (menuItem.getItemId()) {
             case R.id.side_nav_my_profile:
                 Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
