@@ -9,23 +9,32 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.awt.font.TextAttribute;
+
 
 public class SettingsActivity extends AppCompatActivity {
+    private static final String TAG = "SettingsActivityLog";
     public static final String PREFS_NAME = "themePreferenceFile";
     public static final String KEY_THEME_RES_ID = "themeResId";
+    public static final String KEY_DRAWABLE_RES_ID = "imageResId";
+    protected int imageResId;
+    protected int themeResId;
+
     protected ImageView heroImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        int themeResId = settings.getInt(KEY_THEME_RES_ID, -1);
+        themeResId = settings.getInt(KEY_THEME_RES_ID, -1);
+        imageResId = settings.getInt(KEY_DRAWABLE_RES_ID, -1);
         if (themeResId != -1) {
             setTheme(themeResId);
         }
@@ -74,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
         themeSwitchCookie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveAndSwitchTheme(R.style.AppTheme_CookieMonster);
+                saveAndSwitchTheme(R.style.AppTheme_CookieMonster, R.drawable.cookie);
                 //heroImage.setImageDrawable(getDrawable(R.drawable.cookie));
 
             }
@@ -84,7 +93,7 @@ public class SettingsActivity extends AppCompatActivity {
         themeSwitchRobot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveAndSwitchTheme(R.style.AppTheme_Science);
+                saveAndSwitchTheme(R.style.AppTheme_Science, R.drawable.science);
                // heroImage.setImageDrawable(getDrawable(R.drawable.science));
             }
         });
@@ -93,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
         themeSwitchGirl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveAndSwitchTheme(R.style.AppTheme_GirlMonster);
+                saveAndSwitchTheme(R.style.AppTheme_GirlMonster, R.drawable.girl);
                 //heroImage.setImageDrawable(getDrawable(R.drawable.girl));
             }
         });
@@ -101,7 +110,7 @@ public class SettingsActivity extends AppCompatActivity {
         themeSwitchCrazy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveAndSwitchTheme(R.style.AppTheme_CrazyMonster);
+                saveAndSwitchTheme(R.style.AppTheme_CrazyMonster, R.drawable.crazy);
                 //heroImage.setImageDrawable(getDrawable(R.drawable.crazy));
             }
         });
@@ -109,10 +118,11 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void saveAndSwitchTheme(@StyleRes int themeRes) {
+    private void saveAndSwitchTheme(@StyleRes int themeRes, int imageRes) {
         SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putInt(KEY_THEME_RES_ID, themeRes);
+        editor.putInt(KEY_DRAWABLE_RES_ID, imageRes);
         editor.apply();
         recreate();
     }

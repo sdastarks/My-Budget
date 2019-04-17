@@ -9,6 +9,7 @@ package com.example.mybudget;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -39,7 +40,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private DrawerLayout drawer;
     private TextView tvBalance;
     private int progress;
-
+    private ImageView imageViewHero;
 
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -49,6 +50,13 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.v("SettingsActivityLog","imageResId2: "+imageResId);
+
+        imageViewHero=findViewById(R.id.imageViewHero);
+        if(imageResId != -1){
+            Drawable d=getDrawable(imageResId);
+            imageViewHero.setImageDrawable(d);
+        }
 
         //Sets the state of the drawer navigation bar
         Toolbar toolbar = findViewById(R.id.toolbar);
