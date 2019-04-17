@@ -1,6 +1,8 @@
 package com.example.mybudget.WishList;
 
 
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
@@ -36,6 +39,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     TextView wishTitle;
     Boolean addingMoney2Wish;
     WishList wish2Update;
+    ImageView imageViewHero;
 
     Button btn_cancelTransaction;
     Button btn_saveTransfer;
@@ -69,14 +73,21 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         balance = ((WishlistActivity) getActivity()).db.balance();
         addingMoney2Wish = getArguments().getBoolean("inflow");
         index = getArguments().getInt("index");
-        ImageView image = view.findViewById(R.id.image_inflow_outflow);
+
         if (addingMoney2Wish) {
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
             fragmentTitle.setText("Add Money to Wish");
         } else {
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_outflow));
             fragmentTitle.setText("Remove Money from Wish");
         }
+
+        imageViewHero=view.findViewById(R.id.imageViewHero_wishlist);
+        SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
+        int imageResId = settings.getInt("imageResId", -1);
+        if(imageResId != -1){
+            Drawable d=getActivity().getDrawable(imageResId);
+            imageViewHero.setImageDrawable(d);
+        }
+
         mAmount = view.findViewById(R.id.amount);
         return view;
     }
