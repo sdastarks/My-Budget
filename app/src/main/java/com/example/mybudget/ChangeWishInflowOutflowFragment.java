@@ -25,6 +25,7 @@ import java.time.LocalDate;
  * money from balance to wish savings
  *
  * @author Anastasija Gurejeva
+ * @author Daniel Beadleson
  */
 public class ChangeWishInflowOutflowFragment extends Fragment {
 
