@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Profile;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybudget.Models.User;
+import com.example.mybudget.R;
+import com.example.mybudget.myDbHelper;
 
 import java.io.File;
 import java.util.ArrayList;

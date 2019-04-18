@@ -1,31 +1,22 @@
-package com.example.mybudget;
+package com.example.mybudget.WishList;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
-
-import java.time.LocalDate;
-
-import static com.example.mybudget.R.id.edit_wish_fragment;
-import static com.example.mybudget.R.id.fragment_placeholder;
-import static com.example.mybudget.R.id.frame_wish_fragment;
 
 /**
  * Fragment allows user to view information about current status of savings for selected item
@@ -39,9 +30,9 @@ public class WishFragment extends Fragment {
     private View view;
     private CircularProgressBar circularProgressBar;
     private TextView wishTitle;
-    private TextView wishPrice;
+    private TextView mwishPrice;
     private TextView balance;
-    private TextView savingProgress;
+    private TextView msavingProgress;
     private TextView txtAvailableBalance;
     private int index;
     private int progress;
@@ -49,11 +40,13 @@ public class WishFragment extends Fragment {
     protected Boolean inflow;
     private FloatingActionButton onAddSelected;
     private FloatingActionButton onMinusSelected;
-    private FloatingActionButton cancelWishFragment;
-    private FloatingActionButton editWishFragment;
-    private FloatingActionButton deleteWishFragment;
-    private FloatingActionButton favouriteWish;
+
+    private Button cancelWishFragment;
+    private Button editWishFragment;
+    private Button favouriteWish_btn;
+
     WishList wishSelected;
+
 
 
     @Override
@@ -64,10 +57,10 @@ public class WishFragment extends Fragment {
         Log.d(TAG, "onCreateView: view infaled. Index passed " + index);
 
         view = inflater.inflate(R.layout.fragment_wish, container, false);
-        wishTitle = view.findViewById(R.id.wish_title);
-        wishPrice = view.findViewById(R.id.wish_price);
+        //wishTitle = view.findViewById(R.id.wish_title);
+        mwishPrice = view.findViewById(R.id.wish_price);
         balance = view.findViewById(R.id.balance);
-        savingProgress = view.findViewById(R.id.saving_progress);
+        msavingProgress = view.findViewById(R.id.saving_progress);
         txtAvailableBalance = view.findViewById(R.id.txt_available_balance);
 
         //assign value by index from DB
@@ -81,19 +74,20 @@ public class WishFragment extends Fragment {
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
-        cancelWishFragment = view. findViewById(R.id.floatingActionButton_cancel_wish_fragment);
-        editWishFragment = view. findViewById(R.id.floatingActionButton_edit_wish_fragment);
-        deleteWishFragment = view. findViewById(R.id.floatingActionButton_delete_wish_fragment);
-        favouriteWish = view. findViewById(R.id.floatingActionButton_favourite_wish_fragment);
 
-        setTitle();
+        cancelWishFragment = view. findViewById(R.id.cancel_wish_fragment);
+        editWishFragment = view. findViewById(R.id.edit_wish);
+
+        favouriteWish_btn=view.findViewById(R.id.favourite_wish_btn);
+
+
+        //setTitle();
         calcProgress();
         setProgressBar();
         activateOnAddSelected();
         activateOnMinusSelected();
         activateEditWishFragment();
         activateCancelWishFragment();
-        activateDeleteWishFragment();
         activateFavouriteWish();
 
         return view;
@@ -111,7 +105,9 @@ public class WishFragment extends Fragment {
      */
     public void calcProgress(){
         int wishPrice=((WishlistActivity) getActivity()).wishPrice;
+        mwishPrice.setText(wishPrice+" SEK");
         int wishSaved= wishSelected.getSaved();
+        msavingProgress.setText(wishSaved+" SEK");
         progress=wishSaved*100/wishPrice;
     }
     /*
@@ -122,7 +118,7 @@ public class WishFragment extends Fragment {
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
         circularProgressBar.setProgress(progress);
         TextView progresstxt = view.findViewById(R.id.txt_progressBar);
-        progresstxt.setText(progress + "%");
+        progresstxt.setText("("+progress + "%)");
     }
 
     //Floating button calls a new fragment,
@@ -204,22 +200,8 @@ public class WishFragment extends Fragment {
             }
         });
     }
-   /*
-    * Method creates a dialog fragment allowing the user
-    * to delete a wish or abort the procedure
-    */
-    public void activateDeleteWishFragment(){
-        deleteWishFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeleteWishDialog deleteDialog = new DeleteWishDialog();
-                deleteDialog.show(getActivity().getSupportFragmentManager(), "delete dialog");
-            }
-        });
-    }
-
     public void activateFavouriteWish(){
-        favouriteWish.setOnClickListener(new View.OnClickListener() {
+        favouriteWish_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "dbid: "+ dbid);

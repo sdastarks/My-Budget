@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.R;
+import com.example.mybudget.WishList.WishlistActivity;
 
 
 /**
@@ -71,6 +73,12 @@ public class NewWishFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void bike(View view){
+          //wishPicture.setImageResource();
+          
+
     }
 
 }

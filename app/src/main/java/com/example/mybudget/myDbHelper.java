@@ -341,7 +341,9 @@ public class myDbHelper extends SQLiteOpenHelper {
                     total += e.getAmount();}
             }
             return total;
+
     }
+
 
     /**
      * @return total amount spend on wishes
@@ -377,7 +379,7 @@ public class myDbHelper extends SQLiteOpenHelper {
      * @return all expenses entries
      */
     public ArrayList<Entry> expensesEntries() {
-        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allEntries =  allEntries();
         ArrayList<Entry> allExpenses = new ArrayList<>();
 
         for (Entry e : allEntries) {
@@ -392,7 +394,7 @@ public class myDbHelper extends SQLiteOpenHelper {
      * @return all income entries
      */
     public ArrayList<Entry> incomeEntries() {
-        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allEntries =  allEntries();
         ArrayList<Entry> allIncome = new ArrayList<>();
 
         for (Entry e : allEntries) {
@@ -407,7 +409,7 @@ public class myDbHelper extends SQLiteOpenHelper {
      * @return all wishes alocated entries
      */
     public ArrayList<Entry> wishEntries() {
-        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allEntries =  allEntries();
         ArrayList<Entry> allWishes = new ArrayList<>();
 
         for (Entry e : allEntries) {
@@ -422,7 +424,7 @@ public class myDbHelper extends SQLiteOpenHelper {
      * @return all earnings entries
      */
     public ArrayList<Entry> earningsEntries() {
-        ArrayList<Entry> allEntries = allEntries();
+        ArrayList<Entry> allEntries =  allEntries();
         ArrayList<Entry> allEarnings = new ArrayList<>();
 
         for (Entry e : allEntries) {

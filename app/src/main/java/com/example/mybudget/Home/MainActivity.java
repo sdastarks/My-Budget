@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Home;
 /**
  * Main class
  * <p>
@@ -7,10 +7,9 @@ package com.example.mybudget;
  * @author Daniel Beadleson
  */
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -18,7 +17,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,7 +29,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.Profile.ProfileActivity;
+import com.example.mybudget.R;
+import com.example.mybudget.Profile.RegisterActivity;
+import com.example.mybudget.SettingsActivity;
+import com.example.mybudget.WishList.WishlistActivity;
+import com.example.mybudget.myDbHelper;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 
@@ -40,7 +46,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private DrawerLayout drawer;
     private TextView tvBalance;
     private int progress;
-
+    private ImageView imageViewHero;
 
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -50,18 +56,25 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.v("SettingsActivityLog","imageResId2: "+imageResId);
+
+        imageViewHero=findViewById(R.id.imageViewHero);
+        if(imageResId != -1){
+            Drawable d=getDrawable(imageResId);
+            imageViewHero.setImageDrawable(d);
+        }
 
         //Sets the state of the drawer navigation bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+       ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
 
         Button register_button = findViewById(R.id.register_demobutton);
         register_button.setOnClickListener(new View.OnClickListener(){
@@ -114,9 +127,13 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 return false;
             }
         });
+
         int favWish_dbID= getFavouriteWishID();
         calcProgress(favWish_dbID);
         setProgressBar(favWish_dbID);
+        setTitle(favWish_dbID);
+        setCost(favWish_dbID);
+        setSaved(favWish_dbID);
         updateBalance();
     }
     /*
@@ -137,6 +154,30 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
             int wishPrice=favWish.getCost();
             int wishSaved=favWish.getSaved();
             progress =wishSaved*100/wishPrice;
+        }
+    }
+
+    public void setTitle(int favWish_dbID){
+        if (favWish_dbID !=0){
+            TextView favWishTitle = findViewById(R.id.favWishTitle);
+            WishList favWish = db.returnWish(favWish_dbID);
+            favWishTitle.setText(favWish.getTitle());
+        }
+    }
+
+    public void setCost(int favWish_dbID){
+        if (favWish_dbID !=0){
+            TextView favWishCost = findViewById(R.id.favWishCost);
+            WishList favWish = db.returnWish(favWish_dbID);
+            favWishCost.setText(favWish.getCost() + " SEK");
+        }
+    }
+
+    public void setSaved(int favWish_dbID){
+        if (favWish_dbID !=0){
+            TextView favWishSaved = findViewById(R.id.favWishSavedProgress);
+            WishList favWish = db.returnWish(favWish_dbID);
+            favWishSaved.setText(favWish.getSaved() + " SEK");
         }
     }
     /*
@@ -222,7 +263,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         int wishes = db.calcWish();
         int earning = db.calcEarning();
         int balance = (income + earning) - (expense + wishes);
-        tvBalance.setText(String.valueOf(balance));
+        tvBalance.setText(String.valueOf(balance) + " SEK");
         return balance;
     }
 }
