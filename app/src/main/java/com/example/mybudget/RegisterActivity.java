@@ -15,6 +15,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybudget.Models.User;
@@ -47,6 +48,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextAge;
     private AppCompatButton appCompatButtonRegister;
+    private AppCompatButton appCompatButtonUpdateUser;
+
+    private TextView appCompatTextViewLoginLink;
     private ImageView avatar_image;
     private myDbHelper databaseHelper;
     User user;
@@ -63,16 +67,30 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        initializeViews();
-        initializeObjects();
-        initializeListeners();
 
-        //if(savedInstanceState == null){
-          //  Bundle extra = getIntent().getExtras();
-          //  switchValue = extra.getBoolean("createProfile");
-            //Log.v(TAG,"switch activity use" + switchValue);
-//
-        //}
+            Bundle extra = getIntent().getExtras();
+            if(extra != null) { // to avoid the NullPointerException
+                switchValue = extra.getBoolean("editProfile");
+                Log.v(TAG, "switch activity use" + switchValue);
+
+                if (!switchValue) {
+                    initializeViews();
+                    initializeObjects();
+                   // initializeListeners();
+                    appCompatButtonUpdateUser.setVisibility(View.GONE);
+
+                }
+            }
+                else if (switchValue) {
+                setContentView(R.layout.activity_register);
+                initializeViews();
+                initializeObjects();
+                //initializeListeners();
+                setValues();
+                appCompatButtonRegister.setVisibility(View.GONE);
+                appCompatTextViewLoginLink.setVisibility(View.GONE);
+                appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
+                }
     }
 
     /**
@@ -109,6 +127,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         avatar_image = (ImageView) findViewById(R.id.avatarImage);
 
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
+        appCompatButtonUpdateUser = (AppCompatButton) findViewById(R.id.appCompatButtonUpdateUser);
+        appCompatTextViewLoginLink = (TextView)findViewById(R.id.appCompatTextViewLoginLink);
+
+        appCompatButtonRegister.setOnClickListener(this);
+        appCompatButtonUpdateUser.setOnClickListener(this);
     }
 
     /**
@@ -121,42 +144,56 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     /**
      * This method is to initialize listeners
-     */
+
     private void initializeListeners() {
+        initializeViews();
         appCompatButtonRegister.setOnClickListener(this);
-    }
+        appCompatButtonUpdateUser.setOnClickListener(this);
+    }*/
 
     /**
      *
-     * @param view This method is executed on registration button click
+     * @param view This method will execute onClick method depending on which button has been clicked
      */
     public void onClick(View view) {
-        if(inputValidation()){
-                addUser(user);
+        //initializeListeners();
+        try {
+            switch (view.getId()) {
+                case R.id.appCompatButtonRegister: {
+                    if (inputValidation()) {
+                        addUser(user);
+                        Log.v(TAG, "whatup");
+                    }
+                }
+                break;
+
+                case R.id.appCompatButtonUpdateUser: {
+                    if (inputValidation()) {
+                        updateUser(user);
+                        Log.v(TAG, "on no");
+                    }
+                }
+                break;
+            }
+        }catch(NullPointerException e){
+            e.printStackTrace();
         }
     }
     /**
      * Validate the input entered by user
      */
     private boolean inputValidation() {
-        String valueEmail = textInputEditTextEmail.getText().toString();
-        Boolean valueInteger;
-        if(!valueEmail.isEmpty() && validateEmail() && validateFirstname() && validateLastname() && validateAge()){
+
+        if(textInputEditTextEmail.getText().length() > 0){
+            String valueEmail = textInputEditTextEmail.getText().toString();
+            if (validateEmail() && validateFirstname() && validateLastname() && validateAge()) { return true; }
             return true;
         }
-        else if (validateFirstname() && validateLastname() && validateAge())
+        else if(textInputEditTextEmail.getText().length() == 0) {
+            if (validateFirstname() && validateLastname() && validateAge()) { return true; }
             return true;
-        /*try{
-            Integer.parseInt(valueFirstName);
-            valueInteger=true;
-
         }
-        catch (Exception e){
-            valueInteger=false;
-        }
-
-        Log.v(TAG, "valueInteger: "+valueInteger);*/
-        else{ return false;}
+        else return false;
     }
 
     private boolean validateFirstname(){
@@ -250,11 +287,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void updateUser(User user) {
         initializeViews();
+        String valueFirstName = textInputEditTextFirstName.getText().toString();
+        String valueLastName = textInputEditTextLastName.getText().toString();
+        String valueAge = textInputEditTextAge.getText().toString();
+        int valueAge1 = Integer.parseInt(valueAge);
+        String valueEmail = textInputEditTextEmail.getText().toString();
+        User userObj = new User(valueFirstName, valueLastName, valueEmail, valueAge1);
+        databaseHelper.updateUser(userObj);
 
-        // if(inputValidation()){ databaseHelper.updateUser();}
-        //else  { Toast.makeText(this, " All fields must be filled", Toast.LENGTH_SHORT).show(); }
     }
-    /*private void setValues() {
+    private void setValues() {
         initializeViews();
         user = databaseHelper.getUser();
         userFirstName = user.getUserFirstName();
@@ -262,11 +304,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         userEmail = user.getUserMail();
         userAge = user.getUserAge();
 
-        textFirstName.setText(userFirstName);
-        textLastName.setText(userLastName);
-        textEmail.setText(userEmail);
-        textAge.setText("" + userAge);
-    }*/
+        textInputEditTextFirstName.setText(userFirstName);
+        textInputEditTextLastName.setText(userLastName);
+        textInputEditTextEmail.setText(userEmail);
+        textInputEditTextAge.setText("" + userAge);
+
+    }
+
 
     /**
      * This method is to delete user record

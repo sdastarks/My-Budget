@@ -460,19 +460,10 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean deleteUser(int userId) {
+    public void deleteUser() {
         open_db();
-        Cursor cursor = db.rawQuery("SELECT " + USERID + " FROM " + USER_PROFILE, null);
-        if (cursor.getCount() > 0) {
-            String id = Integer.toString(userId);
-            db.delete(USER_PROFILE, USERID + "=" + id, null);
-            cursor.close();
-            close_db();
-            Log.e("record", "is deleted");
-            return true;
-        } else {
-            return false;
-        }
+        db.execSQL("delete from " + USER_PROFILE );
+        close_db();
     }
 
     //Get user record from DB
@@ -482,14 +473,14 @@ public class myDbHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         User user = new User();
 
-        if(cursor != null){
-            cursor.moveToFirst();
+        if(cursor != null && cursor.moveToFirst()){
             user.setUserFirstName(cursor.getString(1));
             user.setUserLastName(cursor.getString(2));
             user.setUserMail(cursor.getString(3));
             user.setUserAge(cursor.getInt(4));
             //userRecord.add(user);
         }
+        //cursor.close();
         close_db();
     return user;
     }

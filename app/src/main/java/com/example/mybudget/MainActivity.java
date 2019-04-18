@@ -7,6 +7,7 @@ package com.example.mybudget;
  * @author Daniel Beadleson
  */
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
@@ -185,8 +186,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 startActivity(intent1);
                 break;
             case R.id.side_nav_edit_profile:
-                Intent intent2 = new Intent(MainActivity.this, ProfileActivity.class);
-                intent2.putExtra("createProfile", true);
+                Intent intent2 = new Intent(MainActivity.this, RegisterActivity.class);
+                intent2.putExtra("editProfile", true);
                 startActivity(intent2);
                 break;
             case R.id.side_nav_settings:
