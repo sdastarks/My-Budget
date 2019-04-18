@@ -29,11 +29,9 @@ public class WishFragment extends Fragment {
 
     private View view;
     private CircularProgressBar circularProgressBar;
-    private TextView wishTitle;
+    private TextView mwishTitle;
     private TextView mwishPrice;
-    private TextView balance;
     private TextView msavingProgress;
-    private TextView txtAvailableBalance;
     private int index;
     private int progress;
     private int dbid;
@@ -57,16 +55,10 @@ public class WishFragment extends Fragment {
         Log.d(TAG, "onCreateView: view infaled. Index passed " + index);
 
         view = inflater.inflate(R.layout.fragment_wish, container, false);
-        //wishTitle = view.findViewById(R.id.wish_title);
+        mwishTitle = view.findViewById(R.id.wish_title_wish_frag);
         mwishPrice = view.findViewById(R.id.wish_price);
-        balance = view.findViewById(R.id.balance);
         msavingProgress = view.findViewById(R.id.saving_progress);
-        txtAvailableBalance = view.findViewById(R.id.txt_available_balance);
 
-        //assign value by index from DB
-        //DAWNIE
-        int bal = ((WishlistActivity) getActivity()).db.balance();
-        balance.setText(String.valueOf(bal));
 
         //selected wish database id and Wish
         dbid = ((WishlistActivity) getActivity()).id;
@@ -81,7 +73,7 @@ public class WishFragment extends Fragment {
         favouriteWish_btn=view.findViewById(R.id.favourite_wish_btn);
 
 
-        //setTitle();
+        setTitle();
         calcProgress();
         setProgressBar();
         activateOnAddSelected();
@@ -97,7 +89,7 @@ public class WishFragment extends Fragment {
      * selected wish
      */
     public void setTitle(){
-        wishTitle.setText(wishSelected.getTitle());
+        mwishTitle.setText(wishSelected.getTitle());
     }
     /*
      * Method calculates the progress of the
@@ -105,10 +97,10 @@ public class WishFragment extends Fragment {
      */
     public void calcProgress(){
         int wishPrice=((WishlistActivity) getActivity()).wishPrice;
-        mwishPrice.setText(wishPrice+" SEK");
+        mwishPrice.setText("price: "+wishPrice+" SEK");
         int wishSaved= wishSelected.getSaved();
-        msavingProgress.setText(wishSaved+" SEK");
         progress=wishSaved*100/wishPrice;
+        msavingProgress.setText("savings: "+wishSaved+" SEK ("+progress+"%)");
     }
     /*
      * Method sets the state of the progress
@@ -117,8 +109,6 @@ public class WishFragment extends Fragment {
     public void setProgressBar(){
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
         circularProgressBar.setProgress(progress);
-        TextView progresstxt = view.findViewById(R.id.txt_progressBar);
-        progresstxt.setText("("+progress + "%)");
     }
 
     //Floating button calls a new fragment,
