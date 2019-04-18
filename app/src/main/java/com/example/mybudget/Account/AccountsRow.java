@@ -6,9 +6,9 @@ public class AccountsRow {
     public LocalDate date;
     public String title;
     public int amount;
-    public String status;
+    public int status;
 
-    AccountsRow(LocalDate date, String title, int amount, String status) {
+    AccountsRow(LocalDate date, String title, int amount, int status) {
         this.date = date;
         this.title = title;
         this.amount = amount;
