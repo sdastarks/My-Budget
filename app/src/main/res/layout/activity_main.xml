@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -24,6 +25,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:clickable="true"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -125,19 +127,8 @@
             app:maxImageSize="@android:dimen/app_icon_size"
             app:srcCompat="@drawable/icon_add" />
 
-        <Button
-            android:id="@+id/register_demobutton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/ic_outline_account_circle_24px"
-            android:text=""
-            app:layout_constraintEnd_toEndOf="@+id/toolbar"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+
 
         <TextView
             android:id="@+id/textView2"
@@ -236,6 +227,14 @@
 
         </FrameLayout>
 
+        <Button
+            android:id="@+id/registerbutton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_outline_account_circle_24px"
+            android:clickable="true"
+            app:layout_constraintBaseline_toBaselineOf="@+id/toolbar"
+            tools:layout_editor_absoluteX="376dp" />
 
 
         <android.support.design.widget.BottomNavigationView
@@ -247,10 +246,7 @@
             app:itemIconTint="@drawable/bottom_nav_colours"
             app:itemTextColor="?attr/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_menu">
-
 
         </android.support.design.widget.BottomNavigationView>
 
@@ -268,5 +264,6 @@
         app:menu="@menu/drawer_menu">
 
     </android.support.design.widget.NavigationView>
+
 
 </android.support.v4.widget.DrawerLayout>
