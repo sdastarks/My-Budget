@@ -25,29 +25,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/wish_picture_fragment"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/button_wish_iceskate"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/fragment_title"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_minusTransaction" />
-
 
     <TextView
         android:id="@+id/wish_price_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginStart="8dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="8dp"
-
         android:text="price"
         android:textAllCaps="true"
         android:textColor="?attr/colorAccent"
@@ -56,14 +41,13 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"
-        app:layout_constraintStart_toEndOf="@+id/wish_picture_fragment"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <TextView
         android:id="@+id/wish_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="YHYHYH"
         android:textAllCaps="false"
         android:textColor="?attr/colorAccent"
         android:textSize="22sp"
@@ -103,14 +87,29 @@
         app:layout_constraintStart_toEndOf="@+id/saving_progress_txt" />
 
     <TextView
-        android:id="@+id/txt_available_balance"
-        android:textAlignment="center"
+        android:id="@+id/txt_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/progressBar"
         android:layout_centerInParent="true"
+        android:layout_marginStart="2dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?attr/colorAccent"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/saving_progress"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toEndOf="@+id/saving_progress" />
+
+
+    <TextView
+        android:id="@+id/txt_available_balance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/available_balance"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/balance"
@@ -133,20 +132,17 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_available_balance"
         app:layout_constraintVertical_bias="0.0" />
 
-
-    <TextView
-        android:id="@+id/txt_progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/progressBar"
-        android:layout_centerInParent="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/white"
-        android:textSize="30dp"
+    <ImageView
+        android:id="@+id/wish_picture_fragment"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_wish_iceskate"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="@+id/progressBar"
         app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_addTransaction"

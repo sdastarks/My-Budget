@@ -118,7 +118,7 @@ public class WishFragment extends Fragment {
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
         circularProgressBar.setProgress(progress);
         TextView progresstxt = view.findViewById(R.id.txt_progressBar);
-        progresstxt.setText(progress + "%");
+        progresstxt.setText("("+progress + "%)");
     }
 
     //Floating button calls a new fragment,
