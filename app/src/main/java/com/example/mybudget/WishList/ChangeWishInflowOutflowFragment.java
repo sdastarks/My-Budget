@@ -36,6 +36,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private static final String TAG = "InflowOutflowFragment";
     private EditText mAmount;
     private TextView mfragmentTitle;
+    private TextView mbalance;
     private ImageView mimageViewHero;
     private Boolean addingMoney2Wish;
     private WishList wish2Update;
@@ -60,9 +61,12 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         mAmount = view.findViewById(R.id.amount);
         btn_cancelTransaction=view.findViewById(R.id.btn_cancelTransaction);
         btn_saveTransfer=view.findViewById(R.id.btn_saveTransfer);
+        mbalance=view.findViewById(R.id.balance);
+
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         balance = ((WishlistActivity) getActivity()).db.balance();
+        mbalance.setText(String.valueOf(balance));
         addingMoney2Wish = getArguments().getBoolean("inflow");
         index = getArguments().getInt("index");
 
@@ -73,7 +77,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         }
 
         setAvatar();
-
 
         return view;
     }
@@ -130,7 +133,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                         .commit();
             }
         });
-
 
         btn_cancelTransaction.setOnClickListener(new View.OnClickListener() {
             /*
