@@ -1,11 +1,13 @@
 package com.example.mybudget.Profile;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -47,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private ImageView avatar_image;
     private myDbHelper databaseHelper;
     User user;
-    private boolean switchValue;
+    private String switchValue;
     boolean valid = true;
 
     private String userFirstName;
@@ -61,29 +63,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
 
-            Bundle extra = getIntent().getExtras();
-            if(extra != null) { // to avoid the NullPointerException
-                switchValue = extra.getBoolean("editProfile");
+            Intent intent = getIntent();
+            switchValue = intent.getStringExtra("editProfile");
+            if(intent != null) { // to avoid the NullPointerException
+
                 Log.v(TAG, "switch activity use" + switchValue);
 
-                if (!switchValue) {
+                if (switchValue.equals("add")) {
                     initializeViews();
                     initializeObjects();
+                    System.out.println("ee");
                    // initializeListeners();
                     appCompatButtonUpdateUser.setVisibility(View.GONE);
 
+                }else if (switchValue.equals("update")) {
+                    setContentView(R.layout.activity_register);
+                    initializeViews();
+                    initializeObjects();
+                    System.out.println("wwwww");
+                    //initializeListeners();
+                    setValues();
+                    appCompatButtonRegister.setVisibility(View.GONE);
+                    appCompatTextViewLoginLink.setVisibility(View.GONE);
+                    appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
                 }
             }
-                else if (switchValue) {
-                setContentView(R.layout.activity_register);
-                initializeViews();
-                initializeObjects();
-                //initializeListeners();
-                setValues();
-                appCompatButtonRegister.setVisibility(View.GONE);
-                appCompatTextViewLoginLink.setVisibility(View.GONE);
-                appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
-                }
     }
 
     /**
@@ -176,17 +180,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * Validate the input entered by user
      */
     private boolean inputValidation() {
+           try{
+                String valueEmail=textInputEditTextEmail.getText().toString();
+                if (valueEmail.isEmpty()){
+                    throw new NullPointerException();
+                }
+               if (validateEmail() && validateFirstname() && validateLastname() && validateAge()) {
+                   System.out.println("gerer");
+                   return true;
+               }
 
-        if(textInputEditTextEmail.getText().length() > 0){
-            String valueEmail = textInputEditTextEmail.getText().toString();
-            if (validateEmail() && validateFirstname() && validateLastname() && validateAge()) { return true; }
-            return true;
-        }
-        else if(textInputEditTextEmail.getText().length() == 0) {
-            if (validateFirstname() && validateLastname() && validateAge()) { return true; }
-            return true;
-        }
-        else return false;
+            }catch (NullPointerException e){
+
+               if (validateFirstname() && validateLastname() && validateAge()) {
+                   return true;
+               }
+            }
+            return false;
     }
 
     private boolean validateFirstname(){
