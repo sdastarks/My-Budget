@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybudget.Chores.ChoresActivity;
@@ -31,6 +32,8 @@ public class AccountActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     private List<AccountsRow> data;
     private AccountsRecyclerViewAdapter adapter;
+    private TextView tvBalance;
+    private int currentlog = 0;
 
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
@@ -38,6 +41,10 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        tvBalance = findViewById(R.id.tvBalance);
+        currentlog = db.balance();
+        tvBalance.setText("Available: " + String.valueOf(currentlog));
+
 
         //create recycler view
         mRecyclerView = findViewById(R.id.recyclerview);
@@ -61,12 +68,33 @@ public class AccountActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
 
+                if(position == 0){
+                    currentlog = db.balance();
+                    tvBalance.setText("Available: " + String.valueOf(currentlog));
+                }
+                else if(position == 1)
+                {
+                    currentlog = db.calcExpenses();
+                    tvBalance.setText("Earned: " + String.valueOf(currentlog));
+                }
+                else if (position == 2){
+                    currentlog = db.calcIncome();
+                    tvBalance.setText("Income: " + String.valueOf(currentlog));
+                }
+                else if(position == 3){
+                    currentlog = db.calcWish();
+                    tvBalance.setText("On wish: " + String.valueOf(currentlog));
+                }
+                else if(position == 4){
+                    currentlog = db.calcEarning();
+                    tvBalance.setText("Chore Money: " + String.valueOf(currentlog));
+                }
+
                 data =fill_with_data(position);
                 adapter = new AccountsRecyclerViewAdapter(data, getApplication());
                 mRecyclerView.setAdapter(adapter);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
