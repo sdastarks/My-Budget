@@ -38,10 +38,11 @@ public class WishFragment extends Fragment {
     protected Boolean inflow;
     private FloatingActionButton onAddSelected;
     private FloatingActionButton onMinusSelected;
+    private FloatingActionButton favouriteWish_btn;
 
     private Button cancelWishFragment;
     private Button editWishFragment;
-    private Button favouriteWish_btn;
+
 
     WishList wishSelected;
 
@@ -70,7 +71,7 @@ public class WishFragment extends Fragment {
         cancelWishFragment = view. findViewById(R.id.cancel_wish_fragment);
         editWishFragment = view. findViewById(R.id.edit_wish);
 
-        favouriteWish_btn=view.findViewById(R.id.favourite_wish_btn);
+        favouriteWish_btn=view.findViewById(R.id.floatingActionButton_favourite_wish_btn);
 
 
         setTitle();
