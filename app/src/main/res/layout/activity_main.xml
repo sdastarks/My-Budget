@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".Home.MainActivity"
-    android:background="@drawable/gradient">
-    <!--tools:openDrawer="start">-->
+    android:background="@drawable/gradient"
+    tools:openDrawer="start">
 
 
     <android.support.constraint.ConstraintLayout
@@ -125,20 +125,6 @@
             app:maxImageSize="@android:dimen/app_icon_size"
             app:srcCompat="@drawable/icon_add" />
 
-        <Button
-            android:id="@+id/register_demobutton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/ic_outline_account_circle_24px"
-            android:text=""
-            app:layout_constraintEnd_toEndOf="@+id/toolbar"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toolbar" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
@@ -227,12 +213,11 @@
             android:id="@+id/fragment_placeholder"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_minus">
+            app:layout_constraintTop_toTopOf="@+id/toolbar">
 
         </FrameLayout>
 

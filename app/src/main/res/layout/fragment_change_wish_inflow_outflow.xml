@@ -8,6 +8,7 @@
     android:background="@drawable/gradient"
     tools:context=".WishList.ChangeWishInflowOutflowFragment">
 
+
     <TextView
         android:id="@+id/title_change_money_fragment"
         android:layout_width="match_parent"
@@ -16,8 +17,10 @@
         android:background="?attr/colorPrimary"
         android:gravity="center_vertical"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@android:color/background_light"
-        android:textSize="25dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,8 +29,8 @@
         android:id="@+id/btn_cancelTransaction"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/icon_cancel_white"
         android:clickable="true"
@@ -50,72 +53,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_available_balance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/available_balance"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/balance"
-        app:layout_constraintStart_toStartOf="@+id/title_change_money_fragment"
-        app:layout_constraintTop_toBottomOf="@+id/title_change_money_fragment" />
-
-    <TextView
-        android:id="@+id/balance"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="top"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/thinking_frame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_available_balance"
-        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageViewHero_wishlist"
         android:layout_width="0dp"
         android:layout_height="220dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="212dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_change_money_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/thinking_frame_small"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/cookie" />
 
     <ImageView
-        android:id="@+id/thinking_frame"
-        android:layout_width="362dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="122dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/thinking_frame_small"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:scaleType="fitEnd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_change_money_fragment"
-        app:srcCompat="@drawable/icon_thinking_bubble" />
+        app:srcCompat="@drawable/speech_bubble_big" />
 
     <EditText
         android:id="@+id/amount"
         android:layout_width="55dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginRight="90dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="24dp"
         android:hint="0.00"
         android:inputType="number"
         android:textAlignment="center"
@@ -123,19 +94,64 @@
         android:textColorHint="?attr/colorPrimaryDark"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
-        app:layout_constraintEnd_toEndOf="@+id/thinking_frame"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame" />
+        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
+        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_small" />
 
     <TextView
         android:id="@+id/SEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="SEK"
         android:textColor="?attr/colorPrimaryDark"
         android:textSize="20dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/amount"
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/amount" />
 
 
+    <TextView
+        android:id="@+id/balance_wish_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="top"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/money_image_fragment_wish"
+        app:layout_constraintEnd_toEndOf="@+id/money_image_fragment_wish"
+        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
+        app:layout_constraintTop_toTopOf="@+id/money_image_fragment_wish" />
+
+
+    <ImageView
+        android:id="@+id/money_image_fragment_wish"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_money"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewHero_wishlist"
+        app:layout_constraintTop_toTopOf="@+id/imageViewHero_wishlist"
+        app:layout_constraintVertical_bias="0.0" />
+
+
 </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+
+

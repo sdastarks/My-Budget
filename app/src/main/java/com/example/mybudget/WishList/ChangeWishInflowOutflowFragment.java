@@ -61,7 +61,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         mAmount = view.findViewById(R.id.amount);
         btn_cancelTransaction=view.findViewById(R.id.btn_cancelTransaction);
         btn_saveTransfer=view.findViewById(R.id.btn_saveTransfer);
-        mbalance=view.findViewById(R.id.balance);
+        mbalance=view.findViewById(R.id.balance_wish_fragment);
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
@@ -71,9 +71,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         index = getArguments().getInt("index");
 
         if (addingMoney2Wish) {
-            mfragmentTitle.setText("Add Money to Wish");
+            mfragmentTitle.setText("Save for your wish");
         } else {
-            mfragmentTitle.setText("Remove Money from Wish");
+            mfragmentTitle.setText("Deduct from from your wish");
         }
 
         setAvatar();

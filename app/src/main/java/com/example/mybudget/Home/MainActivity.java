@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -47,6 +48,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private TextView tvBalance;
     private int progress;
     private ImageView imageViewHero;
+    private FloatingActionButton addIncome;
+    private FloatingActionButton outOutcome;
+    private Toolbar toolbar;
 
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -58,6 +62,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         setContentView(R.layout.activity_main);
         Log.v("SettingsActivityLog","imageResId2: "+imageResId);
 
+        addIncome = findViewById(R.id.floatingActionButton_add);
+        outOutcome = findViewById(R.id.floatingActionButton_minus);
+
         imageViewHero=findViewById(R.id.imageViewHero);
         if(imageResId != -1){
             Drawable d=getDrawable(imageResId);
@@ -65,27 +72,27 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         }
 
         //Sets the state of the drawer navigation bar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         drawer = findViewById(R.id.drawer_layout);
-       ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        Button register_button = findViewById(R.id.register_demobutton);
-        register_button.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
-                startActivity(intent_register);
-
-            }
-        });
+//        Button register_button = findViewById(R.id.register_demobutton);
+//        register_button.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
+//                startActivity(intent_register);
+//
+//            }
+//        });
 
 
         /*
@@ -179,6 +186,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
      * user to enter an inflow
      */
     public void onAddSelected(View view) {
+        addIncome.hide();
+        outOutcome.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow = true;
@@ -190,6 +200,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
      * user to enter an outflow
      */
     public void onMinusSelected(View view) {
+        addIncome.hide();
+        outOutcome.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow = false;
