@@ -132,8 +132,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         calcProgress(favWish_dbID);
         setProgressBar(favWish_dbID);
         setTitle(favWish_dbID);
-        setCost(favWish_dbID);
-        setSaved(favWish_dbID);
         updateBalance();
     }
     /*
@@ -161,25 +159,10 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         if (favWish_dbID !=0){
             TextView favWishTitle = findViewById(R.id.favWishTitle);
             WishList favWish = db.returnWish(favWish_dbID);
-            favWishTitle.setText(favWish.getTitle());
+            favWishTitle.setText("Your savings for " + favWish.getTitle());
         }
     }
 
-    public void setCost(int favWish_dbID){
-        if (favWish_dbID !=0){
-            TextView favWishCost = findViewById(R.id.favWishCost);
-            WishList favWish = db.returnWish(favWish_dbID);
-            favWishCost.setText(favWish.getCost() + " SEK");
-        }
-    }
-
-    public void setSaved(int favWish_dbID){
-        if (favWish_dbID !=0){
-            TextView favWishSaved = findViewById(R.id.favWishSavedProgress);
-            WishList favWish = db.returnWish(favWish_dbID);
-            favWishSaved.setText(favWish.getSaved() + " SEK");
-        }
-    }
     /*
      * Method sets the state of the progress bar
      */
