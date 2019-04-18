@@ -44,7 +44,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class MainActivity extends SettingsActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    private TextView tvBalance, textView2, textView3;
+    private TextView tvBalance;
     private int progress;
     private ImageView imageViewHero;
 
@@ -63,14 +63,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
             Drawable d=getDrawable(imageResId);
             imageViewHero.setImageDrawable(d);
         }
-
-        textView2 = findViewById(R.id.textView2);
-        int moneySpent = db.calcExpenses();
-        textView2.setText("Money Spent: "+String.valueOf(moneySpent));
-        textView3 = findViewById(R.id.textView3);
-        int moneyReceived = db.calcIncome();
-        textView3.setText("Money Received: " + String.valueOf(moneyReceived));
-
 
         //Sets the state of the drawer navigation bar
         Toolbar toolbar = findViewById(R.id.toolbar);
