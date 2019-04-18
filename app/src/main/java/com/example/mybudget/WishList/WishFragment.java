@@ -57,7 +57,7 @@ public class WishFragment extends Fragment {
         Log.d(TAG, "onCreateView: view infaled. Index passed " + index);
 
         view = inflater.inflate(R.layout.fragment_wish, container, false);
-        wishTitle = view.findViewById(R.id.wish_title);
+        //wishTitle = view.findViewById(R.id.wish_title);
         mwishPrice = view.findViewById(R.id.wish_price);
         balance = view.findViewById(R.id.balance);
         msavingProgress = view.findViewById(R.id.saving_progress);
@@ -81,7 +81,7 @@ public class WishFragment extends Fragment {
         favouriteWish_btn=view.findViewById(R.id.favourite_wish_btn);
 
 
-        setTitle();
+        //setTitle();
         calcProgress();
         setProgressBar();
         activateOnAddSelected();
