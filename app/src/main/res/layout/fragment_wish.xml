@@ -235,8 +235,10 @@
         android:background="@drawable/icon_wishlist"
         android:clickable="true"
         android:text=" "
+
         app:layout_constraintBottom_toBottomOf="@+id/fragment_title"
         app:layout_constraintStart_toEndOf="@+id/cancel_wish_fragment"
+
         app:layout_constraintTop_toTopOf="parent" />
 
 
