@@ -1,7 +1,8 @@
-package com.example.mybudget;
+package com.example.mybudget.WishList;
 
 
-import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,13 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.R;
 
 import java.time.LocalDate;
 
@@ -30,14 +34,17 @@ import java.time.LocalDate;
 public class ChangeWishInflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
-    EditText mAmount;
-    TextView wishTitle;
-    Boolean addingMoney2Wish;
-    WishList wish2Update;
-    int dbid;
-    int index;
-    int balance;
-
+    private EditText mAmount;
+    private TextView mfragmentTitle;
+    private ImageView mimageViewHero;
+    private Boolean addingMoney2Wish;
+    private WishList wish2Update;
+    private Button btn_cancelTransaction;
+    private Button btn_saveTransfer;
+    private View view;
+    private int dbid;
+    private int index;
+    private int balance;
     /*
      * Method creates the initial state of the
      * fragment
@@ -46,32 +53,48 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
+        view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
+
+        mfragmentTitle=view.findViewById(R.id.title_change_money_fragment);
+        mimageViewHero=view.findViewById(R.id.imageViewHero_wishlist);
+        mAmount = view.findViewById(R.id.amount);
+        btn_cancelTransaction=view.findViewById(R.id.btn_cancelTransaction);
+        btn_saveTransfer=view.findViewById(R.id.btn_saveTransfer);
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-
-        wishTitle= view.findViewById(R.id.wish_title2);
-        wishTitle.setText(wish2Update.getTitle());
-
         balance = ((WishlistActivity) getActivity()).db.balance();
         addingMoney2Wish = getArguments().getBoolean("inflow");
         index = getArguments().getInt("index");
-        ImageView image = view.findViewById(R.id.image_inflow_outflow);
+
         if (addingMoney2Wish) {
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
+            mfragmentTitle.setText("Add Money to Wish");
         } else {
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_outflow));
+            mfragmentTitle.setText("Remove Money from Wish");
         }
-        mAmount = view.findViewById(R.id.amount);
+
+        setAvatar();
+
+
         return view;
+    }
+    /*
+     * Method sets the avatar image from system
+     * preferences
+     */
+    public void setAvatar(){
+        SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
+        int imageResId = settings.getInt("imageResId", -1);
+        if(imageResId != -1){
+            Drawable d=getActivity().getDrawable(imageResId);
+            mimageViewHero.setImageDrawable(d);
+        }
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + addingMoney2Wish);
 
-        FloatingActionButton saveButton = view.findViewById(R.id.floatingActionButton_saveTransfer);
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        btn_saveTransfer.setOnClickListener(new View.OnClickListener() {
             /*
              * Method either adds or takes away money from the wish
              * if the user has enough money from their balance
@@ -108,8 +131,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             }
         });
 
-        FloatingActionButton cancelTransactionButton = view.findViewById(R.id.floatingActionButton_cancelTransaction);
-        cancelTransactionButton.setOnClickListener(new View.OnClickListener() {
+
+        btn_cancelTransaction.setOnClickListener(new View.OnClickListener() {
             /*
              * Method sends the user back to the previous fragment
              * when the cancel button is initialised

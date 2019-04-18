@@ -1,7 +1,6 @@
-package com.example.mybudget;
+package com.example.mybudget.Account;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.R;
+import com.example.mybudget.WishList.WishlistActivity;
+import com.example.mybudget.myDbHelper;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AccountActivity extends AppCompatActivity {
@@ -61,19 +62,9 @@ public class AccountActivity extends AppCompatActivity {
                 Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
 
                 data =fill_with_data(position);
-                if (data.isEmpty()){
-                    System.out.println("empty");
-                }else{
-                    System.out.println("not empty");
-                }
-                for(AccountsRow e : data)
-                {
-                    System.out.println(e.title);
-                }
                 adapter = new AccountsRecyclerViewAdapter(data, getApplication());
                 mRecyclerView.setAdapter(adapter);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
             }
 
             @Override
@@ -178,49 +169,30 @@ public class AccountActivity extends AppCompatActivity {
         if (typeOfEntry == 1) {
             entries = db.expensesEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Expense"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 2) {
             entries = db.incomeEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Income"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 3) {
             entries = db.wishEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Spent on wish"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 4) {
             entries = db.earningsEntries();
             for (Entry e : entries) {
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), "Earned from chore"));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         } else if (typeOfEntry == 0){
             entries = db.allEntries();
-            String entry = "";
             for (Entry e : entries) {
-                if (e.getTypeOfEntry() == 0)
-                    entry = "Expense";
-                else if (e.getTypeOfEntry() == 1)
-                    entry = "Income";
-                else if (e.getTypeOfEntry() == 2)
-                    entry = "Transferred to Wish";
-                else if (e.getTypeOfEntry() == 3)
-                    entry = "Earned from Chore";
-
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), entry));
+                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getDesc()));
             }
         }
         return row;
     }
-
-
-
-
-    //ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AccountActivity.this,
-    //        android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filter));
-    //myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown);
-    //mySpinner.setAdapter(myAdapter);
-
 }
 

@@ -1,22 +1,21 @@
 package com.example.mybudget;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.awt.font.TextAttribute;
+import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.MainActivity;
+import com.example.mybudget.WishList.WishlistActivity;
 
 
 public class SettingsActivity extends AppCompatActivity {

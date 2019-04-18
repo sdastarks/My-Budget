@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Home;
 /**
  * Main class
  * <p>
@@ -10,7 +10,6 @@ package com.example.mybudget;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -18,7 +17,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,7 +29,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.Profile.ProfileActivity;
+import com.example.mybudget.R;
+import com.example.mybudget.Profile.RegisterActivity;
+import com.example.mybudget.SettingsActivity;
+import com.example.mybudget.WishList.WishlistActivity;
+import com.example.mybudget.myDbHelper;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 
