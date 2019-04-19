@@ -64,6 +64,7 @@ public class addChoresMoneyFragment extends Fragment {
         mChoresDescription= (EditText) view.findViewById(R.id.choresDescription);
         mChoresAmount = view.findViewById(R.id.choresAmount);
         mChoresAmount.setText((getArguments().getInt("amount"))+"");
+        mChoresDescription.setText(getArguments().getString("title"));
         mFragmentTitle = view.findViewById(R.id.title_money_from_chore_fragment);
         mFragmentTitle.setText("Money for completed chores");
         setAvatar();
