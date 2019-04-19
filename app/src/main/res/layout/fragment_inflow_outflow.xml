@@ -4,86 +4,169 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.InflowOutflowFragment"
-    android:background="#FFFFFF"
-    >
+    tools:context=".WishList.ChangeWishInflowOutflowFragment"
+    android:background="@drawable/gradient">
 
-    <EditText
-        android:id="@+id/choresDescription"
+
+    <TextView
+        android:id="@+id/title_money_in_out_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_cancelIncome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/icon_cancel_white"
+        android:clickable="true"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="@+id/title_money_in_out_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_saveIncome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/icon_done_white"
+        android:clickable="true"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="@+id/title_money_in_out_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/balance_inflow_outflow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="top"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/money_image_fragment_home"
+        app:layout_constraintEnd_toEndOf="@+id/money_image_fragment_home"
+        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_home"
+        app:layout_constraintTop_toTopOf="@+id/money_image_fragment_home" />
+
+    <ImageView
+        android:id="@+id/imageViewHero_home"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
         android:layout_marginStart="16dp"
-        android:hint="Enter a Description"
-        android:inputType="text"
-        android:maxLines="1"
-        android:textColor="?attr/colorPrimary"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thinking_frame"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/cookie" />
+
+    <ImageView
+        android:id="@+id/thinking_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="fitEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_money_in_out_fragment"
+        app:srcCompat="@drawable/speech_bubble_big" />
+
+    <EditText
+        android:id="@+id/amount_home"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageViewHero"
+        android:layout_marginBottom="32dp"
+        android:hint="0.00"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textColorHint="?attr/colorPrimaryDark"
         android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/image_inflow_outflow"
-        app:layout_constraintTop_toTopOf="@+id/image_inflow_outflow" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
+        app:layout_constraintStart_toStartOf="@+id/description_home"
+        app:layout_constraintTop_toBottomOf="@+id/description_home"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/SEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="SEK"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_inflow_outflow"
-        app:layout_constraintStart_toEndOf="@+id/image_inflow_outflow" />
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/amount_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/amount_home" />
 
     <EditText
-        android:id="@+id/amount"
+        android:id="@+id/description_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:hint="0.00"
-        android:inputType="number"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="30dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/SEK"
-        app:layout_constraintEnd_toEndOf="@+id/choresDescription" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:hint="Enter a Description"
+        android:inputType="text"
+        android:textColorHint="?attr/colorPrimaryDark"
+        android:maxLines="1"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/thinking_frame"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/image_inflow_outflow"
-        android:layout_width="70dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/money_image_fragment_home"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="70dp"
         android:layout_marginBottom="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_money"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_cancelIncome"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:clickable="true"
-        android:src="@drawable/icon_cancel_white"
-        app:fabCustomSize="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_saveIncome"
-        app:layout_constraintTop_toTopOf="@+id/choresDescription" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_saveIncome"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:src="@drawable/icon_done_white"
-        app:fabCustomSize="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/amount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/amount"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_cancelIncome" />
-
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewHero_home"
+        app:layout_constraintTop_toTopOf="@+id/imageViewHero_home"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+
+

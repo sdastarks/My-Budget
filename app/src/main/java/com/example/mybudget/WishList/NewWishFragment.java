@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -24,10 +25,11 @@ import com.example.mybudget.WishList.WishlistActivity;
  */
 public class NewWishFragment extends Fragment {
     private static final String TAG = "NewWishFragment";
-    private EditText title;
-    private EditText cost;
-    private ImageView wishPicture;
-    private FloatingActionButton floatingActionButton_save_wish;
+    private EditText mNewWishTitle;
+    private EditText mNewWishCost;
+    private ImageView wishCathegory;
+    private Button saveNewWish;
+    private Button cancelNewWish;
 
 
     public NewWishFragment() {
@@ -40,17 +42,33 @@ public class NewWishFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_new_wish, container, false);
-        title = view.findViewById(R.id.editText_title);
-        cost = view.findViewById(R.id.editText_cost);
-        wishPicture = view.findViewById(R.id.wish_picture);
-        floatingActionButton_save_wish = view.findViewById(R.id.floatingActionButton_save_wish);
+        mNewWishTitle = view.findViewById(R.id.new_wish_title);
+        mNewWishCost = view.findViewById(R.id.new_wish_cost);
+        wishCathegory = view.findViewById(R.id.new_wish_cathegory);
+        saveNewWish = view.findViewById(R.id.btn_save__new_wish);
+        cancelNewWish = view.findViewById(R.id.btn_cancel_new_wish);
+        activateOnCancelNewWish();
+        activateOnSaveNewWish();
+        return view;
+    }
 
-        floatingActionButton_save_wish.setOnClickListener(new View.OnClickListener() {
+    private void activateOnCancelNewWish() {
+        cancelNewWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WishlistActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void activateOnSaveNewWish() {
+        saveNewWish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 WishList wish = new WishList();
-                wish.setTitle(title.getText().toString());
-                wish.setCost(Integer.parseInt(cost.getText().toString()));
+                wish.setTitle(mNewWishTitle.getText().toString());
+                wish.setCost(Integer.parseInt(mNewWishCost.getText().toString()));
                 wish.setSaved(0);
                 //wish.setImage(wishPicture);
                 ((WishlistActivity) getActivity()).db.addWish(wish);
@@ -58,24 +76,10 @@ public class NewWishFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
-        //Method to exit fragment
-
-        FloatingActionButton exitNewWish = view.findViewById(R.id.floatingActionButton_exit_new_wish);
-        exitNewWish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WishlistActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        return view;
     }
 
-    public void bike(View view){
+
+        public void bike(View view){
           //wishPicture.setImageResource();
           
 

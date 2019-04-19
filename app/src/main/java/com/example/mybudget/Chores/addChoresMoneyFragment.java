@@ -2,6 +2,8 @@ package com.example.mybudget.Chores;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,14 +11,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.R;
+import com.example.mybudget.WishList.WishlistActivity;
 
 import java.time.LocalDate;
 
@@ -27,12 +32,18 @@ import java.time.LocalDate;
  * @author Daniel Beadleson
  */
 
-public class addChoresMoney extends Fragment {
+public class addChoresMoneyFragment extends Fragment {
 
-    private static final String TAG = "addChoresMoney";
-    EditText choresDescription;
-    EditText choresAmount;
-    Boolean inflow;
+    private static final String TAG = "addChoresMoneyFragment";
+    private EditText mChoresDescription;
+    private EditText mChoresAmount;
+    private Boolean inflow;
+    private ImageView mImageViewHero;
+    private TextView mBalance;
+    private int balance;
+    private TextView mFragmentTitle;
+
+
     private Bundle bundle;
 
     /*
@@ -45,16 +56,19 @@ public class addChoresMoney extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_add_chores_money, container, false);
 
-        // the boolean expression inflow will show if the input by the user
-        //  is an income or spending
-        inflow = ((ChoresActivity) getActivity()).inflow;
+        balance =  ((ChoresActivity) getActivity()).db.balance();
+        Log.d(TAG, "onCreateView: balance is" + balance);
+        mBalance = view.findViewById(R.id.balance_choreFragment);
+        mBalance.setText(balance + " SEK");
+        mImageViewHero=view.findViewById(R.id.imageViewHero_chores);
+        mChoresDescription= (EditText) view.findViewById(R.id.choresDescription);
+        mChoresAmount = view.findViewById(R.id.choresAmount);
+        mChoresAmount.setText((getArguments().getInt("amount"))+"");
+        mChoresDescription.setText(getArguments().getString("title"));
+        mFragmentTitle = view.findViewById(R.id.title_money_from_chore_fragment);
+        mFragmentTitle.setText("Money for completed chores");
+        setAvatar();
 
-        ImageView image = view.findViewById(R.id.choresImage_inflow_outflow);
-        image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
-        choresDescription = (EditText) view.findViewById(R.id.choresDescription);
-        choresAmount = view.findViewById(R.id.choresAmount);
-        choresDescription.setText(getArguments().getString("title"));
-        choresAmount.setText((getArguments().getInt("amount"))+"");
 
         return view;
 
@@ -62,18 +76,17 @@ public class addChoresMoney extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
-        Log.v(TAG, "inflow" + inflow);
 
-        FloatingActionButton saveButton = view.findViewById(R.id.choresFloatingActionButton_saveIncome);
+        Button saveButton = view.findViewById(R.id.btn_saveChoreTransfer);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*
                  * Method gets the description and amount of the income
                  */
-                String description = choresDescription.getText().toString();
+                String description = mChoresDescription.getText().toString();
                 Log.v(TAG, "description: " + description);
-                String sAmount = choresAmount.getText().toString();
+                String sAmount = mChoresAmount.getText().toString();
 
                 if (description.isEmpty() | sAmount.isEmpty()) {
                     Toast.makeText(getActivity(), "Both fields must be filled", Toast.LENGTH_SHORT).show();
@@ -94,7 +107,7 @@ public class addChoresMoney extends Fragment {
             }
         });
 
-        FloatingActionButton cancelButton = view.findViewById(R.id.choresFloatingActionButton_cancelIncome);
+        Button cancelButton = view.findViewById(R.id.btn_cancelChoreFragment);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             /*
              * Method sends the user back to the main menu
@@ -108,5 +121,14 @@ public class addChoresMoney extends Fragment {
             }
         });
 
+    }
+
+    public void setAvatar() {
+        SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
+        int imageResId = settings.getInt("imageResId", -1);
+        if(imageResId != -1){
+            Drawable d=getActivity().getDrawable(imageResId);
+            mImageViewHero.setImageDrawable(d);
+        }
     }
 }

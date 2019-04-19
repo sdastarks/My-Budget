@@ -1,7 +1,10 @@
 package com.example.mybudget.Home;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,12 +12,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.R;
+import com.example.mybudget.WishList.WishlistActivity;
 
 import java.time.LocalDate;
 
@@ -29,9 +35,14 @@ import java.time.LocalDate;
 public class InflowOutflowFragment extends Fragment {
 
     private static  final String TAG= "InflowOutflowFragment";
-    EditText mDescription;
-    EditText mAmount;
-    Boolean inflow;
+    private EditText mDescription;
+    private EditText mAmount;
+    private Boolean inflow;
+    private ImageView mImageViewHero;
+    private TextView mBalance;
+    private int balance;
+    private TextView mFragmentTitle;
+
     //myDbHelper db = new myDbHelper(InflowOutflowFragment.this, "myDb.db", null, 1);
     /*
      * Method creates the initial state of the
@@ -47,16 +58,21 @@ public class InflowOutflowFragment extends Fragment {
         //  is an income or spending
 
         inflow =((MainActivity) getActivity()).inflow;
+        balance = ((MainActivity) getActivity()).updateBalance();
+        Log.d(TAG, "onCreateView: balance is" + balance);
+        mBalance = view.findViewById(R.id.balance_inflow_outflow);
+        mBalance.setText(balance + " SEK");
+        mImageViewHero=view.findViewById(R.id.imageViewHero_home);
+        mDescription= (EditText) view.findViewById(R.id.description_home);
+        mAmount = view.findViewById(R.id.amount_home);
+        mFragmentTitle = view.findViewById(R.id.title_money_in_out_fragment);
+        setAvatar();
 
-        ImageView image =view.findViewById(R.id.image_inflow_outflow);
-        if(inflow){
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_inflow));
+        if (inflow) {
+            mFragmentTitle.setText("Money received");
+        } else {
+            mFragmentTitle.setText("Money Spent");
         }
-        else {
-            image.setImageDrawable(getResources().getDrawable(R.drawable.image_outflow));
-        }
-        mDescription= (EditText) view.findViewById(R.id.choresDescription);
-        mAmount = view.findViewById(R.id.amount);
 
         return view;
 
@@ -66,7 +82,7 @@ public class InflowOutflowFragment extends Fragment {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow"+inflow);
 
-        FloatingActionButton saveButton= view.findViewById(R.id.floatingActionButton_saveIncome);
+        Button saveButton= view.findViewById(R.id.btn_saveIncome);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
              * Method gets the description and amount of the income
@@ -101,13 +117,13 @@ public class InflowOutflowFragment extends Fragment {
 
                     //inflow ? entry.setTypeOfEntry(1) : entry.setTypeOfEntry(0);
 
-                    if(inflow)
-                    {   entry.setTypeOfEntry(1);
+                    if(inflow) {
+                        entry.setTypeOfEntry(1);
                         addEntry(amount, description, entry);
                         ((MainActivity) getActivity()).db.addEntry(entry);
                     }
 
-                    else if(!inflow){
+                    else if(!inflow) {
                         entry.setTypeOfEntry(0);
                         addEntry(amount, description, entry);
                         ((MainActivity) getActivity()).db.addEntry(entry);
@@ -120,7 +136,7 @@ public class InflowOutflowFragment extends Fragment {
             }
         });
 
-        FloatingActionButton cancelButton = view.findViewById(R.id.floatingActionButton_cancelIncome);
+        Button cancelButton = view.findViewById(R.id.btn_cancelIncome);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             /*
              * Method sends the user back to the main menu
@@ -134,6 +150,19 @@ public class InflowOutflowFragment extends Fragment {
             }
         });
 
+    }
+
+    /*
+     * Method sets the avatar image from system
+     * preferences
+     */
+    public void setAvatar(){
+        SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
+        int imageResId = settings.getInt("imageResId", -1);
+        if(imageResId != -1){
+            Drawable d=getActivity().getDrawable(imageResId);
+            mImageViewHero.setImageDrawable(d);
+        }
     }
 
     public Entry addEntry(int amount, String desc, Entry entry){
