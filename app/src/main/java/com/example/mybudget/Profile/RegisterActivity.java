@@ -1,6 +1,8 @@
 package com.example.mybudget.Profile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentTransaction;
@@ -57,13 +59,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String userEmail;
     private int userAge;
 
+    public static final String PREFS_NAME = "userPreferenceFile";
+    public static final String USER_ID = "userId";
+    public static final String USER_NAME = "userName";
+    SharedPreferences sharedPreferences;
+    int userGlobalId;
+    String userGlobalName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        sharedPreferences = getApplicationContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        userGlobalId = getUserId();
+        userGlobalName = getUserName();
 
-            Intent intent = getIntent();
+        Intent intent = getIntent();
             switchValue = intent.getStringExtra("editProfile");
             if(intent != null) { // to avoid the NullPointerException
 
@@ -72,15 +85,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (switchValue.equals("add")) {
                     initializeViews();
                     initializeObjects();
-                    System.out.println("ee");
                    // initializeListeners();
                     appCompatButtonUpdateUser.setVisibility(View.GONE);
+
 
                 }else if (switchValue.equals("update")) {
                     setContentView(R.layout.activity_register);
                     initializeViews();
                     initializeObjects();
-                    System.out.println("wwwww");
                     //initializeListeners();
                     setValues();
                     appCompatButtonRegister.setVisibility(View.GONE);
@@ -157,9 +169,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         try {
             switch (view.getId()) {
                 case R.id.appCompatButtonRegister: {
+                    //databaseHelper.deleteUser();
                     if (inputValidation()) {
-                        addUser(user);
-                        Log.v(TAG, "whatup");
+                       addUser(user);
+                        Log.v(TAG, "user added");
                     }
                 }
                 break;
@@ -167,7 +180,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.appCompatButtonUpdateUser: {
                     if (inputValidation()) {
                         updateUser(user);
-                        Log.v(TAG, "on no");
+                        Log.v(TAG, "user updated");
                     }
                 }
                 break;
@@ -284,19 +297,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String valueEmail = textInputEditTextEmail.getText().toString();
         User userObj = new User(valueFirstName, valueLastName, valueEmail, valueAge1);
 
-        databaseHelper.addUser(userObj);
+        int userId = databaseHelper.addUser(userObj);
+        saveUser(valueFirstName, userId);
     }
 
 
     public void updateUser(User user) {
         initializeViews();
+        //String keyValue = getUserName();
+        //int keyValue = getUserId();
         String valueFirstName = textInputEditTextFirstName.getText().toString();
         String valueLastName = textInputEditTextLastName.getText().toString();
         String valueAge = textInputEditTextAge.getText().toString();
         int valueAge1 = Integer.parseInt(valueAge);
         String valueEmail = textInputEditTextEmail.getText().toString();
         User userObj = new User(valueFirstName, valueLastName, valueEmail, valueAge1);
-        databaseHelper.updateUser(userObj);
+        databaseHelper.updateUser(userObj,   userGlobalId );
 
     }
     private void setValues() {
@@ -314,6 +330,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    //save user name and id in shared preference
+    private void saveUser(String userName, int userId) {
+        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString(USER_NAME, userName);
+        editor.putInt(USER_ID, userId);
+        editor.apply();
+    }
+
+    //get user name and id from shared preference
+    private String getUserName(){
+        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
+        return sharedPrefs.getString(USER_NAME,null);
+    }
+
+    private int getUserId(){
+        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
+        return sharedPrefs.getInt(USER_ID, 0);
+    }
 
     /**
      * This method is to delete user record

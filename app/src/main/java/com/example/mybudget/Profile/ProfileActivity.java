@@ -37,8 +37,6 @@ import java.util.ArrayList;
  */
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "ProfileActivityLog";
-
-    public static final String PREFS_NAME = "user_name";
     User user = new User();
     private myDbHelper databaseHelper;
 
@@ -75,10 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = databaseHelper.getUser();
         if(user!= null) {
-            String userName = user.getUserFirstName();
-            SharedPreferences prefs = getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
-            saveUser(userName);
-            getUser(userName);
             setValues();
         }else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
 
@@ -91,17 +85,6 @@ public class ProfileActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         permissionsToRequest = findUnAskedPermissions(permissions);*/
 
-    }
-    private void saveUser(String userName) {
-        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString(PREFS_NAME, userName);
-        editor.apply();
-    }
-
-    private String getUser(String userName){
-        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
-        return sharedPrefs.getString(PREFS_NAME,userName);
     }
 
     private void initializeViews() {
