@@ -30,4 +30,8 @@
     <color name="girlMonsterColorSecondary">#E49292</color>
     <color name="girlMonsterMonsterPrimaryText">#FFFFFF</color>
 
+    <!--AccountActivtity text colors-->
+    <color name="green">#248f24</color>
+    <color name="red">#b32d00</color>
+
 </resources>
