@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".WishList.NewWishFragment">
+    tools:context=".WishList.NewWishFragment"
+    android:clickable="true">
 
     <TextView
         android:id="@+id/fragment_new_wish_title"
