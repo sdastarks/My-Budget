@@ -65,8 +65,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-        balance = ((WishlistActivity) getActivity()).db.balance();
-        mbalance.setText(String.valueOf(balance));
+
         addingMoney2Wish = getArguments().getBoolean("inflow");
         index = getArguments().getInt("index");
 
@@ -76,9 +75,25 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             mfragmentTitle.setText("Deduct from from your wish");
         }
 
+        setBalance();
         setAvatar();
 
         return view;
+    }
+    /*
+     * Method sets the balance
+     */
+    public void setBalance(){
+        balance = ((WishlistActivity) getActivity()).db.balance();
+        if(balance>999999){
+            mbalance.setText(balance/1000000+"M SEK");
+        }
+        else if (balance>999){
+            mbalance.setText(balance/1000+"k SEK");
+        }
+        else{
+            mbalance.setText(balance+" SEK");
+        }
     }
     /*
      * Method sets the avatar image from system
