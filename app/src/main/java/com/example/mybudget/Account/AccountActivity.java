@@ -70,7 +70,7 @@ public class AccountActivity extends SettingsActivity {
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
 
                 if(position == 0){
                     currentlog = db.balance();
