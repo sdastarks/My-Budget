@@ -58,14 +58,14 @@ public class InflowOutflowFragment extends Fragment {
         //  is an income or spending
 
         inflow =((MainActivity) getActivity()).inflow;
-        balance = ((MainActivity) getActivity()).updateBalance();
-        Log.d(TAG, "onCreateView: balance is" + balance);
+
         mBalance = view.findViewById(R.id.balance_inflow_outflow);
-        mBalance.setText(balance + " SEK");
         mImageViewHero=view.findViewById(R.id.imageViewHero_home);
         mDescription= (EditText) view.findViewById(R.id.description_home);
         mAmount = view.findViewById(R.id.amount_home);
         mFragmentTitle = view.findViewById(R.id.title_money_in_out_fragment);
+
+        setBalance();
         setAvatar();
 
         if (inflow) {
@@ -77,7 +77,21 @@ public class InflowOutflowFragment extends Fragment {
         return view;
 
     }
-
+    /*
+     * Method sets the balance
+     */
+    public void setBalance(){
+        balance = ((MainActivity) getActivity()).updateBalance();
+        if(balance>999999){
+            mBalance.setText(balance/1000000+"M SEK");
+        }
+        else if (balance>999){
+            mBalance.setText(balance/1000+"k SEK");
+        }
+        else{
+            mBalance.setText(balance+" SEK");
+        }
+    }
     public void onViewCreated(View view, Bundle savedInstanceState){
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow"+inflow);
@@ -151,7 +165,6 @@ public class InflowOutflowFragment extends Fragment {
         });
 
     }
-
     /*
      * Method sets the avatar image from system
      * preferences
