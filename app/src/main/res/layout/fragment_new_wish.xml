@@ -9,12 +9,14 @@
     android:clickable="true"
     tools:context=".WishList.NewWishFragment">
 
+
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/new_wish_toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="?attr/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -104,7 +106,6 @@
             android:textSize="22sp" />
 
     </android.support.design.widget.TextInputLayout>
-
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView3"

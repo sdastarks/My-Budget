@@ -33,6 +33,7 @@ import java.time.LocalDate;
  */
 public class InflowOutflowFragment extends Fragment {
 
+
     private static final String TAG = "InflowOutflowFragment";
     private EditText mDescription;
     private EditText mAmount;
@@ -56,8 +57,8 @@ public class InflowOutflowFragment extends Fragment {
         // the boolean expression inflow will show if the input by the user
         //  is an income or spending
 
-        inflow = ((MainActivity) getActivity()).inflow;
 
+        inflow = ((MainActivity) getActivity()).inflow;
         mBalance = view.findViewById(R.id.balance_inflow_outflow);
         mImageViewHero = view.findViewById(R.id.imageViewHero_home);
         mDescription = (EditText) view.findViewById(R.id.description_home);
@@ -95,7 +96,9 @@ public class InflowOutflowFragment extends Fragment {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + inflow);
 
+
         Button saveButton = view.findViewById(R.id.btn_saveIncome);
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
              * Method gets the description and amount of the income
@@ -158,16 +161,18 @@ public class InflowOutflowFragment extends Fragment {
      * Method sets the avatar image from system
      * preferences
      */
-    public void setAvatar() {
+    public void setAvatar(){
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);
-        if (imageResId != -1) {
-            Drawable d = getActivity().getDrawable(imageResId);
+        if(imageResId != -1){
+            Drawable d=getActivity().getDrawable(imageResId);
             mImageViewHero.setImageDrawable(d);
         }
     }
 
+
     public Entry addEntry(int amount, String desc, Entry entry) {
+
         entry.setAmount(amount);
         entry.setDesc(desc);
         entry.setDate(LocalDate.now());
