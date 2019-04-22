@@ -41,7 +41,7 @@ public class NewWishFragment extends Fragment {
     private ImageView otherPic;
     private TextInputEditText mNewWishTitle;
     private TextInputEditText mNewWishCost;
-    private ImageView wishCathegory;
+    private ImageView wishPicture;
     private Button saveNewWish;
     private Button cancelNewWish;
 
@@ -54,7 +54,7 @@ public class NewWishFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_new_wish, container, false);
         mNewWishTitle = view.findViewById(R.id.wish_title);
         mNewWishCost = view.findViewById(R.id.wish_cost);
-        wishCathegory = view.findViewById(R.id.image_wish_cathegory);
+        wishPicture = view.findViewById(R.id.image_wish_cathegory);
         saveNewWish = view.findViewById(R.id.btn_save_new_wish);
         cancelNewWish = view.findViewById(R.id.btn_cancel_new_wish);
         activateOnCancelNewWish();
