@@ -103,11 +103,11 @@ public class InflowOutflowFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String description = mDescription.getText().toString();
-                Log.v(TAG, "description: " + description);
-                String sAmount = mAmount.getText().toString();
-
                 try {
+                    String description = mDescription.getText().toString();
+                    Log.v(TAG, "description: " + description);
+                    String sAmount = mAmount.getText().toString();
+
                     if (description.isEmpty()) {
                         mDescription.setError("Field must be filled");
                     } else if (sAmount.isEmpty()) {

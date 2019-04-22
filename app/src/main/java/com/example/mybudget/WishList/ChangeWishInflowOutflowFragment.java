@@ -121,27 +121,32 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
              */
             @Override
             public void onClick(View v) {
+                try {
+                    String sAmount = mAmount.getText().toString();
+                    if (sAmount.isEmpty()) {
+                        mAmount.setError("You have transferred 0 sek");
+                    } else if (Integer.parseInt(sAmount) > balance) {
+                        mAmount.setError("You don't have enough money in your account");
+                    } else {
+                        //Adding an entry to log
+                        int amount = Integer.parseInt(sAmount);
+                        String wishName;
+                        Entry entry = new Entry();
+                        entry.setDate(LocalDate.now());
+                        entry.setAmount(Integer.parseInt(sAmount));
 
-                String sAmount = mAmount.getText().toString();
-                if (sAmount.isEmpty()) {
-                    mAmount.setError("You have transferred 0 sek");
-                } else if (Integer.parseInt(sAmount) > balance) {
-                    mAmount.setError("You don't have enough money in your account");
-                } else {
-                    //Adding an entry to log
-                    int amount = Integer.parseInt(sAmount);
-                    String wishName;
-                    Entry entry = new Entry();
-                    entry.setDate(LocalDate.now());
-                    entry.setAmount(Integer.parseInt(sAmount));
+                        if (addingMoney2Wish) {
+                            addMoney2Wish(entry, amount, wish2Update, dbid);
 
-                    if (addingMoney2Wish) {
-                        addMoney2Wish(entry, amount, wish2Update, dbid);
-
-                    } else if (!addingMoney2Wish) {
-                        takeMoneyFromWish(entry, amount, wish2Update, dbid);
+                        } else if (!addingMoney2Wish) {
+                            takeMoneyFromWish(entry, amount, wish2Update, dbid);
+                        }
                     }
                 }
+                catch (Exception e){
+                    mAmount.setError("Try Again");
+                }
+
 
             }
         });
