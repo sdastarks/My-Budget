@@ -27,7 +27,6 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/icon_done_white" />
 
-
         <Button
             android:id="@+id/btn_cancelTransaction"
             android:layout_width="30dp"

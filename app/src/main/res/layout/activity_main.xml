@@ -231,7 +231,8 @@
             android:background="@drawable/ic_outline_account_circle_24px"
             android:clickable="true"
             app:layout_constraintBaseline_toBaselineOf="@+id/toolbar"
-            tools:layout_editor_absoluteX="376dp" />
+            tools:layout_editor_absoluteX="376dp"
+            android:visibility="invisible"/>
 
 
         <android.support.design.widget.BottomNavigationView

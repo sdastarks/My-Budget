@@ -110,6 +110,7 @@ public class InflowOutflowFragment extends Fragment {
 
 
                 if (description.isEmpty() | sAmount.isEmpty()){
+
                     Toast.makeText(getActivity(),"Both fields must be filled",Toast.LENGTH_SHORT).show();
                 }
                 else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() &&!inflow){
