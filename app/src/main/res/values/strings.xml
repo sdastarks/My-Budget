@@ -34,6 +34,10 @@
     <string name="money_received">Money Received</string>
     <string name="text_for_fav_wish">Your savings for</string>
     <string name="cost">Cost:</string>
+    <string name="reached_goal_text">You reached your goal! Fantastic!</string>
+    <string name="congrads">Cool!</string>
+    <string name="half_way_goal_txt">You are half way to reach your savings goal! Keep it up!</string>
+    <string name="half_way_encouragement">Well done!</string>
 
     <string-array name="filter">
         <item>Everything</item>
@@ -42,7 +46,6 @@
         <item>Spend on wish</item>
         <item>Earned from chore</item>
     </string-array>
-
 
 
 </resources>
