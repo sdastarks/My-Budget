@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -47,6 +48,11 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private TextView tvBalance;
     private int progress;
     private ImageView imageViewHero;
+    private FloatingActionButton addIncome;
+    private FloatingActionButton outOutcome;
+    private Toolbar toolbar;
+    private Button register_button;
+
 
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -58,6 +64,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         setContentView(R.layout.activity_main);
         Log.v("SettingsActivityLog","imageResId2: "+imageResId);
 
+        addIncome = findViewById(R.id.floatingActionButton_add);
+        outOutcome = findViewById(R.id.floatingActionButton_minus);
+
         imageViewHero=findViewById(R.id.imageViewHero);
         if(imageResId != -1){
             Drawable d=getDrawable(imageResId);
@@ -65,27 +74,30 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         }
 
         //Sets the state of the drawer navigation bar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         drawer = findViewById(R.id.drawer_layout);
-       ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        Button register_button = findViewById(R.id.register_demobutton);
+        register_button = findViewById(R.id.registerbutton);
         register_button.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
+                Log.v(TAG, "clickable");
                 Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
+                intent_register.putExtra("editProfile", "add");
                 startActivity(intent_register);
 
             }
         });
+
 
 
         /*
@@ -127,9 +139,11 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 return false;
             }
         });
+
         int favWish_dbID= getFavouriteWishID();
         calcProgress(favWish_dbID);
         setProgressBar(favWish_dbID);
+        setTitle(favWish_dbID);
         updateBalance();
     }
     /*
@@ -152,6 +166,15 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
             progress =wishSaved*100/wishPrice;
         }
     }
+
+    public void setTitle(int favWish_dbID){
+        if (favWish_dbID !=0){
+            TextView favWishTitle = findViewById(R.id.favWishTitle);
+            WishList favWish = db.returnWish(favWish_dbID);
+            favWishTitle.setText("Your savings for " + favWish.getTitle());
+        }
+    }
+
     /*
      * Method sets the state of the progress bar
      */
@@ -168,6 +191,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
      * user to enter an inflow
      */
     public void onAddSelected(View view) {
+        addIncome.hide();
+        outOutcome.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow = true;
@@ -179,6 +205,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
      * user to enter an outflow
      */
     public void onMinusSelected(View view) {
+        addIncome.hide();
+        outOutcome.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow = false;
@@ -192,13 +221,16 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Log.v(TAG, "navagation item selected");
+
         switch (menuItem.getItemId()) {
             case R.id.side_nav_my_profile:
                 Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.side_nav_edit_profile:
-                Toast.makeText(this, "Edit Profile", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(MainActivity.this, RegisterActivity.class);
+                intent2.putExtra("editProfile", "update");
+                startActivity(intent2);
                 break;
             case R.id.side_nav_settings:
                 Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
@@ -232,7 +264,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         int wishes = db.calcWish();
         int earning = db.calcEarning();
         int balance = (income + earning) - (expense + wishes);
-        tvBalance.setText(String.valueOf(balance));
+        tvBalance.setText(String.valueOf(balance) + " SEK");
         return balance;
     }
 }

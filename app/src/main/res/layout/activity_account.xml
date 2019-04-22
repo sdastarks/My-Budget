@@ -11,36 +11,47 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvBalance"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="8"
-            android:orientation="horizontal">
+            android:layout_height="198dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            android:fontFamily="@font/autour_one"
+            android:gravity="center"
+            android:hint="Balance"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvBalance"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="36sp"
-                android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-20dp"
+            android:layout_marginRight="0dp"
+            android:background="?attr/colorSecondary"
+            android:textColor="#fff"
+            android:spinnerMode="dropdown"
+            android:visibility="visible"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
 
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:clickable="true"
+            android:contextClickable="false"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground" />
+
     </LinearLayout>
 
 
@@ -52,7 +63,9 @@
         android:background="@drawable/border_button"
         app:itemIconTint="@drawable/bottom_nav_colours"
         app:itemTextColor="?attr/colorAccent"
-        app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/bottom_menu">
+
+    </android.support.design.widget.BottomNavigationView>
 
 
 </RelativeLayout>
