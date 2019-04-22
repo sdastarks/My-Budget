@@ -46,7 +46,7 @@ public class EditWishFragment extends Fragment {
         meditTitle = view.findViewById(R.id.edit_title);
         meditCost = view.findViewById(R.id.edit_cost);
         btn_exitEditWish= view.findViewById(R.id.btn_cancel_edit_wish);
-        btn_saveEditWish=view.findViewById(R.id.btn_save__edit_wish);
+        btn_saveEditWish=view.findViewById(R.id.btn_save_edit_wish);
         btn_deletwish=view.findViewById(R.id.floatingActionButton_delete_wish);
 
         dbid = ((WishlistActivity) getActivity()).id;
