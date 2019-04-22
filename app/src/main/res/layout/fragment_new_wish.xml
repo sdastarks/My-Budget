@@ -134,6 +134,9 @@
                     android:onClick="bike"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_bike"
+                    android:clickable="true"
+                    android:onClick="bikeonclick"
+
 
 
                     />

@@ -57,7 +57,6 @@ public class InflowOutflowFragment extends Fragment {
         //  is an income or spending
 
         inflow = ((MainActivity) getActivity()).inflow;
-
         mBalance = view.findViewById(R.id.balance_inflow_outflow);
         mImageViewHero = view.findViewById(R.id.imageViewHero_home);
         mDescription = (EditText) view.findViewById(R.id.description_home);
@@ -94,7 +93,7 @@ public class InflowOutflowFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + inflow);
-
+      
         Button saveButton = view.findViewById(R.id.btn_saveIncome);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
@@ -102,6 +101,7 @@ public class InflowOutflowFragment extends Fragment {
              */
             @Override
             public void onClick(View v) {
+
 
                 try {
                     String description = mDescription.getText().toString();

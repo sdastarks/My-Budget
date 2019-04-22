@@ -85,7 +85,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         register_button = findViewById(R.id.registerbutton);
         register_button.setOnClickListener(new View.OnClickListener(){
 
