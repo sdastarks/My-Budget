@@ -17,9 +17,9 @@ import com.example.mybudget.R;
 
 import java.util.ArrayList;
 
-/*
-This class is used to adapt Wish List view to display wish image and progress bar
-Author: Anastasija Gurejeva
+/**
+ * This class is used to adapt Wish List view to display wish image and progress bar
+ * Author: Anastasija Gurejeva
  */
 
 

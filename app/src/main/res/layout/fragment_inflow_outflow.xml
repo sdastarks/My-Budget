@@ -4,53 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WishList.ChangeWishInflowOutflowFragment"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    tools:context=".WishList.ChangeWishInflowOutflowFragment">
 
 
-    <TextView
-        android:id="@+id/title_money_in_out_fragment"
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/money_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_cancelIncome"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_cancel_white"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/title_money_in_out_fragment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_saveIncome"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_done_white"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/title_money_in_out_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_saveIncome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/icon_done_white" />
+
+
+        <Button
+            android:id="@+id/btn_cancelIncome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:background="@drawable/icon_cancel_white" />
+
+        <TextView
+            android:id="@+id/title_money_in_out_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="25dp" />
+
+    </android.support.v7.widget.Toolbar>
+
 
     <TextView
         android:id="@+id/balance_inflow_outflow"
@@ -86,31 +79,74 @@
         android:id="@+id/thinking_frame"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:scaleType="fitEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_money_in_out_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/money_toolbar"
         app:srcCompat="@drawable/speech_bubble_big" />
 
-    <EditText
-        android:id="@+id/amount_home"
-        android:layout_width="55dp"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/amount_home_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginBottom="32dp"
-        android:hint="0.00"
-        android:inputType="number"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="24dp"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
-        android:textSize="20dp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
-        app:layout_constraintStart_toStartOf="@+id/description_home"
-        app:layout_constraintTop_toBottomOf="@+id/description_home"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_home"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame"
+        app:layout_constraintVertical_bias="0.776">
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/amount_home"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:hint="0.00"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textColorHint="?attr/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/description_home_layout"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textColorHint="?attr/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame"
+        app:layout_constraintVertical_bias="0.197">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/description_home"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter a Description"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textColorHint="?attr/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/SEK"
@@ -118,32 +154,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="52dp"
         android:text="SEK"
         android:textColor="?attr/colorPrimaryDark"
         android:textSize="20dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/amount_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/amount_home" />
-
-    <EditText
-        android:id="@+id/description_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:hint="Enter a Description"
-        android:inputType="text"
-        android:textColorHint="?attr/colorPrimaryDark"
-        android:maxLines="1"
-        android:textColor="?attr/colorPrimaryDark"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewHero_home"
         app:layout_constraintEnd_toEndOf="@+id/thinking_frame"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/thinking_frame"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/amount_home_layout" />
+
 
     <ImageView
         android:id="@+id/money_image_fragment_home"
@@ -162,11 +181,3 @@
         app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
-
-
-
-
-
-
-
-

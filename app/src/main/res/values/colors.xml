@@ -6,6 +6,7 @@
     <color name="colorSecondary">#EEAD4D</color>
     <color name="white">#FFFFFF</color>
 
+
     <color name="cookieMonsterColorPrimary">#DF7835</color>
     <color name="cookieMonsterColorPrimaryDark">#C75F2C</color>
     <color name="cookieMonsterColorAccent">#FCB338</color>
@@ -29,5 +30,9 @@
     <color name="girlMonsterColorAccent">#FFA2A2</color>
     <color name="girlMonsterColorSecondary">#E49292</color>
     <color name="girlMonsterMonsterPrimaryText">#FFFFFF</color>
+
+    <!--AccountActivtity text colors-->
+    <color name="green">#248f24</color>
+    <color name="red">#b32d00</color>
 
 </resources>

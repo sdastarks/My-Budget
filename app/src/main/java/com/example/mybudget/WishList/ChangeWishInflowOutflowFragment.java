@@ -1,6 +1,8 @@
 package com.example.mybudget.WishList;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,17 +37,18 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
     private EditText mAmount;
-    private TextView mfragmentTitle;
-    private TextView mbalance;
+    private TextView mfragmentTitle, mbalance;
     private ImageView mimageViewHero;
     private Boolean addingMoney2Wish;
     private WishList wish2Update;
-    private Button btn_cancelTransaction;
-    private Button btn_saveTransfer;
+    private Button btn_cancelTransaction, btn_saveTransfer;
     private View view;
     private int dbid;
     private int index;
     private int balance;
+    private GoalReachedDialog goalReached;
+    private GoalHalfReachedDialog goalHalfReached;
+
     /*
      * Method creates the initial state of the
      * fragment
@@ -56,17 +59,16 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
 
-        mfragmentTitle=view.findViewById(R.id.title_change_money_fragment);
-        mimageViewHero=view.findViewById(R.id.imageViewHero_wishlist);
+        mfragmentTitle = view.findViewById(R.id.title_change_money_fragment);
+        mimageViewHero = view.findViewById(R.id.imageViewHero_wishlist);
         mAmount = view.findViewById(R.id.amount);
-        btn_cancelTransaction=view.findViewById(R.id.btn_cancelTransaction);
-        btn_saveTransfer=view.findViewById(R.id.btn_saveTransfer);
-        mbalance=view.findViewById(R.id.balance_wish_fragment);
+        btn_cancelTransaction = view.findViewById(R.id.btn_cancelTransaction);
+        btn_saveTransfer = view.findViewById(R.id.btn_saveTransfer);
+        mbalance = view.findViewById(R.id.balance_wish_fragment);
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Update = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-        balance = ((WishlistActivity) getActivity()).db.balance();
-        mbalance.setText(String.valueOf(balance));
+
         addingMoney2Wish = getArguments().getBoolean("inflow");
         index = getArguments().getInt("index");
 
@@ -76,19 +78,34 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             mfragmentTitle.setText("Deduct from from your wish");
         }
 
+        setBalance();
         setAvatar();
-
         return view;
     }
+
+    /*
+     * Method sets the balance
+     */
+    public void setBalance() {
+        balance = ((WishlistActivity) getActivity()).db.balance();
+        if (balance > 999999) {
+            mbalance.setText(balance / 1000000 + "M SEK");
+        } else if (balance > 999) {
+            mbalance.setText(balance / 1000 + "k SEK");
+        } else {
+            mbalance.setText(balance + " SEK");
+        }
+    }
+
     /*
      * Method sets the avatar image from system
      * preferences
      */
-    public void setAvatar(){
+    public void setAvatar() {
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);
-        if(imageResId != -1){
-            Drawable d=getActivity().getDrawable(imageResId);
+        if (imageResId != -1) {
+            Drawable d = getActivity().getDrawable(imageResId);
             mimageViewHero.setImageDrawable(d);
         }
     }
@@ -108,9 +125,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
                 String sAmount = mAmount.getText().toString();
                 if (sAmount.isEmpty()) {
-                    Toast.makeText(getActivity(), "You have transferred 0 sek", Toast.LENGTH_SHORT).show();
+                    mAmount.setError("You have transferred 0 sek");
                 } else if (Integer.parseInt(sAmount) > balance) {
-                    Toast.makeText(getActivity(), "You don't have enough money in your account", Toast.LENGTH_SHORT).show();
+                    mAmount.setError("You don't have enough money in your account");
                 } else {
                     //Adding an entry to log
                     int amount = Integer.parseInt(sAmount);
@@ -127,10 +144,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     }
                 }
 
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_wish_fragment, new WishFragment())
-                        .commit();
             }
         });
 
@@ -141,15 +154,12 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
              */
             @Override
             public void onClick(View v) {
-                Log.v(TAG, "cancel button initialised");
 
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_wish_fragment, new WishFragment())
-                        .commit();
+                exitFragment();
             }
         });
     }
+
     /*
      * Method adds money to the wish
      * if the amount doesnt exceed the total price
@@ -160,19 +170,45 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
                 + " wishlist transfer";
         if (amount > (wish2Update.getCost() - wish2Update.getSaved())) {
-            Toast.makeText(getActivity(), "Your goal doesn' t need that much money, try " +
-                    (wish2Update.getCost() - wish2Update.getSaved()) + " SEK", Toast.LENGTH_LONG).show();
-        } else if ((wish2Update.getCost() - wish2Update.getSaved()) == 0) {
-            //TODO show some avatar when reach the goal
-            Toast.makeText(getActivity(), "You have reached your goal", Toast.LENGTH_SHORT).show();
+            mAmount.setError("Your goal doesn't need that much money, try " +
+                    (wish2Update.getCost() - wish2Update.getSaved()) + " SEK");
+
+        } else if ( wish2Update.getCost()/2 > wish2Update.getSaved() && (wish2Update.getCost()/2 <= wish2Update.getSaved() + amount)) {
+            Log.d(TAG, "addMoney2Wish: cost/2=saved");
+            goalHalfReached = new GoalHalfReachedDialog();
+            //Bundle args = new Bundle();
+            //args.putInt("dbIdHalfGoal", dbid);
+            //goalHalfReached.setArguments(args);
+            goalHalfReached.show(getFragmentManager(), "GoalHalfReachedDialog");
+            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
+                    , wish2Update.getCost(), amount + wish2Update.getSaved(),
+                    wish2Update.getImage());
+            entry.setDesc(entryDescription);
+            ((WishlistActivity) getActivity()).db.addEntry(entry);
+
+        } else if ((wish2Update.getCost() == wish2Update.getSaved() + amount)) {
+            Log.d(TAG, "addMoney2Wish: cost==saved");
+            goalReached = new GoalReachedDialog();
+            //Bundle args = new Bundle();
+            //args.putInt("dbIdGoal", dbid);
+            //goalReached.setArguments(args);
+            goalReached.show(getFragmentManager(), "GoalReachedDialog");
+            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
+                    , wish2Update.getCost(), amount + wish2Update.getSaved(),
+                    wish2Update.getImage());
+            entry.setDesc(entryDescription);
+            ((WishlistActivity) getActivity()).db.addEntry(entry);    
+        
         } else {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
+            exitFragment();
         }
     }
+
     /*
      * Method takes away money from the list
      * if the amount doesnt exceed the total
@@ -182,17 +218,25 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         entry.setTypeOfEntry(1);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
                 + " wishlist return to balance";
-        if (amount < wish2Update.getSaved()) {
+       if (amount < wish2Update.getSaved()) {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), wish2Update.getSaved() - amount,
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
+
+            exitFragment();
         } else {
-            Toast.makeText(getActivity(), "Gotta be less than " +
-                            (wish2Update.getSaved()) +
-                            " SEK"
-                    , Toast.LENGTH_SHORT).show();
+            mAmount.setError("Can't be more than " +
+                    (wish2Update.getSaved()) +
+                    " SEK");
         }
+    }
+
+    public void exitFragment() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_wish_fragment, new WishFragment())
+                .commit();
     }
 }
