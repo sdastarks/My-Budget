@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
+    android:clickable="true"
     tools:context=".Chores.addChoresMoneyFragment">
 
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -105,7 +106,6 @@
             android:id="@+id/choresAmount"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:hint="0.00"
             android:inputType="number"
             android:textAlignment="center"
             android:textColor="?attr/colorPrimaryDark"
@@ -135,7 +135,6 @@
             android:id="@+id/choresDescription"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:hint="Enter a Description"
             android:inputType="text"
             android:textAlignment="center"
             android:textColor="?attr/colorPrimaryDark"
