@@ -6,52 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
+    android:clickable="true"
     tools:context=".WishList.ChangeWishInflowOutflowFragment">
 
-
-    <TextView
-        android:id="@+id/title_change_money_fragment"
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/wish_money_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_cancelTransaction"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_cancel_white"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/title_change_money_fragment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_saveTransfer"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/icon_done_white" />
 
-    <Button
-        android:id="@+id/btn_saveTransfer"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_done_white"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/title_change_money_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_cancelTransaction"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:background="@drawable/icon_cancel_white" />
+
+        <TextView
+            android:id="@+id/title_change_money_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="25dp" />
+
+    </android.support.v7.widget.Toolbar>
 
 
     <ImageView
@@ -72,44 +62,57 @@
         android:id="@+id/thinking_frame_small"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:scaleType="fitEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_change_money_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/wish_money_toolbar"
         app:srcCompat="@drawable/speech_bubble_big" />
 
-    <EditText
-        android:id="@+id/amount"
-        android:layout_width="55dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/wish_cost_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="56dp"
         android:layout_marginBottom="24dp"
-        android:hint="0.00"
-        android:inputType="number"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
-        android:textSize="20dp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
         app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame_small" />
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_small"
+        app:layout_constraintVertical_bias="0.507">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/amount"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:hint="0.00"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textColorHint="?attr/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/SEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="68dp"
         android:text="SEK"
         android:textColor="?attr/colorPrimaryDark"
         android:textSize="20dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/amount"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewHero_wishlist"
         app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/amount" />
+        app:layout_constraintStart_toEndOf="@+id/wish_cost_layout" />
 
 
     <TextView
@@ -147,11 +150,5 @@
 
 
 </android.support.constraint.ConstraintLayout>
-
-
-
-
-
-
 
 

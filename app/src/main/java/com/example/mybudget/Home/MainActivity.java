@@ -51,6 +51,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private FloatingActionButton addIncome;
     private FloatingActionButton outOutcome;
     private Toolbar toolbar;
+    private Button register_button;
+
 
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -83,16 +85,19 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        Button register_button = findViewById(R.id.register_demobutton);
-//        register_button.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
-//                startActivity(intent_register);
-//
-//            }
-//        });
+        register_button = findViewById(R.id.registerbutton);
+        register_button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "clickable");
+                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
+                intent_register.putExtra("editProfile", "add");
+                startActivity(intent_register);
+
+            }
+        });
+
 
 
         /*
@@ -224,7 +229,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 break;
             case R.id.side_nav_edit_profile:
                 Intent intent2 = new Intent(MainActivity.this, RegisterActivity.class);
-                intent2.putExtra("editProfile", true);
+                intent2.putExtra("editProfile", "update");
                 startActivity(intent2);
                 break;
             case R.id.side_nav_settings:

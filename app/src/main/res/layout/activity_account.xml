@@ -14,13 +14,16 @@
         <TextView
             android:id="@+id/tvBalance"
             android:layout_width="match_parent"
-            android:layout_height="330dp"
+            android:layout_height="198dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
+            android:background="?attr/colorPrimary"
+            android:fontFamily="@font/autour_one"
+            android:gravity="center"
+            android:hint="Balance"
             android:textColor="#fff"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -28,12 +31,15 @@
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="38dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="-20dp"
             android:layout_marginRight="0dp"
-            android:background="@color/colorPrimary"
-            android:textColor="#fff"/>
+            android:background="?attr/colorSecondary"
+            android:textColor="#fff"
+            android:spinnerMode="dropdown"
+            android:visibility="visible"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"

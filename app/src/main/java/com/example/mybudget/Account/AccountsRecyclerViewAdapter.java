@@ -1,6 +1,8 @@
 package com.example.mybudget.Account;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.nfc.Tag;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ public class AccountsRecyclerViewAdapter extends RecyclerView.Adapter<AccountsVi
 
     List<AccountsRow> list = Collections.emptyList();
     Context context;
+
 
     public AccountsRecyclerViewAdapter(List<AccountsRow> list, Context context) {
         this.list = list;
@@ -34,12 +37,28 @@ public class AccountsRecyclerViewAdapter extends RecyclerView.Adapter<AccountsVi
     public void onBindViewHolder(AccountsViewHolder holder, int position) {
 
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
-        holder.title.setText(list.get(position).title);
-        holder.date.setText(""+list.get(position).date);
-        holder.amount.setText(""+list.get(position).amount);
-        holder.status.setText(list.get(position).status);
+        int type = list.get(position).status;
 
-
+        if(type == 0 || type == 2){
+            holder.title.setText(list.get(position).title);
+            holder.title.setTextColor(context.getColor(R.color.red));
+            holder.date.setText(""+list.get(position).date);
+            holder.date.setTextColor(context.getColor(R.color.red));
+            holder.amount.setText(""+list.get(position).amount + " SEK");
+            holder.amount.setTextColor(context.getColor(R.color.red));
+//            holder.status.setText(""+list.get(position).status);
+//            holder.status.setTextColor(Color.RED);
+        }
+        else if(type == 1 || type == 3){
+            holder.title.setText(list.get(position).title);
+            holder.title.setTextColor(context.getColor(R.color.green));
+            holder.date.setText(""+list.get(position).date);
+            holder.date.setTextColor(context.getColor(R.color.green));
+            holder.amount.setText(""+list.get(position).amount + " SEK");
+            holder.amount.setTextColor(context.getColor(R.color.green));
+//            holder.status.setText(""+list.get(position).status);
+//            holder.status.setTextColor(Color.GREEN);
+        }
     }
 
     @Override
