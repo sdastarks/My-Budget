@@ -40,11 +40,10 @@ public class NewWishFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_new_wish, container, false);
-
-        mNewWishTitle = view.findViewById(R.id.new_wish_title);
-        mNewWishCost = view.findViewById(R.id.new_wish_cost);
-        wishCathegory = view.findViewById(R.id.new_wish_cathegory);
-        saveNewWish = view.findViewById(R.id.btn_save__new_wish);
+        mNewWishTitle = view.findViewById(R.id.wish_title);
+        mNewWishCost = view.findViewById(R.id.wish_cost);
+        wishCathegory = view.findViewById(R.id.image_wish_cathegory);
+        saveNewWish = view.findViewById(R.id.btn_save_new_wish);
         cancelNewWish = view.findViewById(R.id.btn_cancel_new_wish);
         activateOnCancelNewWish();
         activateOnSaveNewWish();
@@ -64,6 +63,7 @@ public class NewWishFragment extends Fragment {
     /*
      * Method attempts to save a wish
      */
+
     private void activateOnSaveNewWish() {
         saveNewWish.setOnClickListener(new View.OnClickListener() {
             @Override

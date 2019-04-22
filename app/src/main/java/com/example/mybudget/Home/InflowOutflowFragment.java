@@ -98,7 +98,6 @@ public class InflowOutflowFragment extends Fragment {
 
 
         Button saveButton = view.findViewById(R.id.btn_saveIncome);
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
              * Method gets the description and amount of the income
@@ -172,7 +171,6 @@ public class InflowOutflowFragment extends Fragment {
 
 
     public Entry addEntry(int amount, String desc, Entry entry) {
-
         entry.setAmount(amount);
         entry.setDesc(desc);
         entry.setDate(LocalDate.now());
