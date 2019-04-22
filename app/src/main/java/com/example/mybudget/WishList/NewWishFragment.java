@@ -28,6 +28,19 @@ public class NewWishFragment extends Fragment {
     private EditText cost;
     private ImageView wishPicture;
     private FloatingActionButton floatingActionButton_save_wish;
+    private ImageView theBikePic;
+    private ImageView clothesPic;
+    private ImageView gadgetsPic;
+    private ImageView gamesPic;
+    private ImageView giftPic;
+    private ImageView holidayPic;
+    private ImageView iceSkatePic;
+    private ImageView petsPic;
+    private ImageView scooterPic;
+    private ImageView shoesPic;
+    private ImageView otherPic;
+
+
 
 
     public NewWishFragment() {
@@ -54,11 +67,11 @@ public class NewWishFragment extends Fragment {
                 wish.setSaved(0);
                 //wish.setImage(wishPicture);
                 ((WishlistActivity) getActivity()).db.addWish(wish);
-                Intent intent = new Intent (getActivity(), WishlistActivity.class);
+                Intent intent = new Intent(getActivity(), WishlistActivity.class);
                 startActivity(intent);
+
             }
         });
-
 
 
         //Method to exit fragment
@@ -72,13 +85,100 @@ public class NewWishFragment extends Fragment {
             }
         });
 
+
+        theBikePic = view.findViewById(R.id.bike);
+        theBikePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_bike);
+            }
+        });
+
+        clothesPic = view.findViewById(R.id.clothes);
+        clothesPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_clothes);
+            }
+        });
+
+        gadgetsPic = view.findViewById(R.id.gadgets);
+        gadgetsPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_gadgets);
+            }
+        });
+
+        gamesPic = view.findViewById(R.id.games);
+        gamesPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_games);
+            }
+        });
+
+        giftPic = view.findViewById(R.id.gift);
+        giftPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_gift);
+            }
+        });
+
+        holidayPic = view.findViewById(R.id.holiday);
+        holidayPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_holiday);
+            }
+        });
+
+        iceSkatePic = view.findViewById(R.id.iceskate);
+        iceSkatePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_iceskate);
+            }
+        });
+
+        petsPic = view.findViewById(R.id.pets);
+        petsPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_pets);
+            }
+        });
+
+        scooterPic = view.findViewById(R.id.scooter);
+        scooterPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_scooter);
+            }
+        });
+
+        shoesPic = view.findViewById(R.id.shoes);
+        shoesPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_shoes);
+            }
+        });
+
+        otherPic = view.findViewById(R.id.dream);
+        otherPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_dream);
+            }
+        });
+
+
+
+
+
         return view;
-    }
-
-    public void bike(View view){
-          //wishPicture.setImageResource();
-          
-
     }
 
 }
