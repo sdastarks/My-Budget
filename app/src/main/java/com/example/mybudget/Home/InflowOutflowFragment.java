@@ -30,11 +30,10 @@ import java.time.LocalDate;
  * an income, that will affect the balance
  *
  * @author Daniel Beadleson
- *
  */
 public class InflowOutflowFragment extends Fragment {
 
-    private static  final String TAG= "InflowOutflowFragment";
+    private static final String TAG = "InflowOutflowFragment";
     private EditText mDescription;
     private EditText mAmount;
     private Boolean inflow;
@@ -52,16 +51,16 @@ public class InflowOutflowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =inflater.inflate(R.layout.fragment_inflow_outflow, container, false);
+        View view = inflater.inflate(R.layout.fragment_inflow_outflow, container, false);
 
         // the boolean expression inflow will show if the input by the user
         //  is an income or spending
 
-        inflow =((MainActivity) getActivity()).inflow;
+        inflow = ((MainActivity) getActivity()).inflow;
 
         mBalance = view.findViewById(R.id.balance_inflow_outflow);
-        mImageViewHero=view.findViewById(R.id.imageViewHero_home);
-        mDescription= (EditText) view.findViewById(R.id.description_home);
+        mImageViewHero = view.findViewById(R.id.imageViewHero_home);
+        mDescription = (EditText) view.findViewById(R.id.description_home);
         mAmount = view.findViewById(R.id.amount_home);
         mFragmentTitle = view.findViewById(R.id.title_money_in_out_fragment);
 
@@ -77,26 +76,26 @@ public class InflowOutflowFragment extends Fragment {
         return view;
 
     }
+
     /*
      * Method sets the balance
      */
-    public void setBalance(){
+    public void setBalance() {
         balance = ((MainActivity) getActivity()).updateBalance();
-        if(balance>999999){
-            mBalance.setText(balance/1000000+"M SEK");
-        }
-        else if (balance>999){
-            mBalance.setText(balance/1000+"k SEK");
-        }
-        else{
-            mBalance.setText(balance+" SEK");
+        if (balance > 999999) {
+            mBalance.setText(balance / 1000000 + "M SEK");
+        } else if (balance > 999) {
+            mBalance.setText(balance / 1000 + "k SEK");
+        } else {
+            mBalance.setText(balance + " SEK");
         }
     }
-    public void onViewCreated(View view, Bundle savedInstanceState){
-        Log.v(TAG, "onViewCreated inititialsed");
-        Log.v(TAG, "inflow"+inflow);
 
-        Button saveButton= view.findViewById(R.id.btn_saveIncome);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        Log.v(TAG, "onViewCreated inititialsed");
+        Log.v(TAG, "inflow" + inflow);
+
+        Button saveButton = view.findViewById(R.id.btn_saveIncome);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
              * Method gets the description and amount of the income
@@ -105,48 +104,38 @@ public class InflowOutflowFragment extends Fragment {
             public void onClick(View v) {
 
                 String description = mDescription.getText().toString();
-                Log.v(TAG,"description: " +description);
-                String sAmount= mAmount.getText().toString();
+                Log.v(TAG, "description: " + description);
+                String sAmount = mAmount.getText().toString();
 
+                try {
+                    if (description.isEmpty()) {
+                        mDescription.setError("Field must be filled");
+                    } else if (sAmount.isEmpty()) {
+                        mAmount.setError("Field must be filled");
+                    } else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() && !inflow) {
+                        mAmount.setError("You don't have enough money in your account");
+                    } else if (Integer.parseInt(sAmount) > 10000 && inflow) {
+                        mAmount.setError("Are you a high roller");
+                    } else {
+                        int amount = Integer.parseInt(sAmount);
+                        Entry entry = new Entry();
 
-                if (description.isEmpty() | sAmount.isEmpty()){
-                    Toast.makeText(getActivity(),"Both fields must be filled",Toast.LENGTH_SHORT).show();
-                }
-                else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() &&!inflow){
-                    Toast.makeText(getActivity(), "You don't have enough money on your account", Toast.LENGTH_SHORT).show();
-                }
-                else if( Integer.parseInt(sAmount) > 5000 && inflow){
-                    Toast.makeText(getActivity(), "Are you a high roller", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    int amount= Integer.parseInt(sAmount);
-                    Log.v(TAG, "amount: "+ amount);
+                        if (inflow) {
+                            entry.setTypeOfEntry(1);
+                            addEntry(amount, description, entry);
+                            ((MainActivity) getActivity()).db.addEntry(entry);
+                        } else if (!inflow) {
+                            entry.setTypeOfEntry(0);
+                            addEntry(amount, description, entry);
+                            ((MainActivity) getActivity()).db.addEntry(entry);
+                        }
 
-                    Log.v(TAG, "inflow: "+inflow);
-
-                    Log.v(TAG, "balance: "+((MainActivity) getActivity()).updateBalance());
-
-                    //DAWNIE...
-                    Entry entry = new Entry();
-
-                    //inflow ? entry.setTypeOfEntry(1) : entry.setTypeOfEntry(0);
-
-                    if(inflow) {
-                        entry.setTypeOfEntry(1);
-                        addEntry(amount, description, entry);
-                        ((MainActivity) getActivity()).db.addEntry(entry);
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
                     }
-
-                    else if(!inflow) {
-                        entry.setTypeOfEntry(0);
-                        addEntry(amount, description, entry);
-                        ((MainActivity) getActivity()).db.addEntry(entry);
-                    }
-
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+                } catch (Exception e) {
+                    mAmount.setError("Try Again");
                 }
-
             }
         });
 
@@ -163,22 +152,22 @@ public class InflowOutflowFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
+
     /*
      * Method sets the avatar image from system
      * preferences
      */
-    public void setAvatar(){
+    public void setAvatar() {
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);
-        if(imageResId != -1){
-            Drawable d=getActivity().getDrawable(imageResId);
+        if (imageResId != -1) {
+            Drawable d = getActivity().getDrawable(imageResId);
             mImageViewHero.setImageDrawable(d);
         }
     }
 
-    public Entry addEntry(int amount, String desc, Entry entry){
+    public Entry addEntry(int amount, String desc, Entry entry) {
         entry.setAmount(amount);
         entry.setDesc(desc);
         entry.setDate(LocalDate.now());

@@ -27,7 +27,6 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/icon_done_white" />
 
-
         <Button
             android:id="@+id/btn_cancelTransaction"
             android:layout_width="30dp"
@@ -71,36 +70,49 @@
         app:layout_constraintTop_toBottomOf="@+id/wish_money_toolbar"
         app:srcCompat="@drawable/speech_bubble_big" />
 
-    <EditText
-        android:id="@+id/amount"
-        android:layout_width="55dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/wish_cost_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="56dp"
         android:layout_marginBottom="24dp"
-        android:hint="0.00"
-        android:inputType="number"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
-        android:textSize="20dp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
         app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame_small" />
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_small"
+        app:layout_constraintVertical_bias="0.507">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/amount"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:hint="0.00"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textColorHint="?attr/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/SEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="68dp"
         android:text="SEK"
         android:textColor="?attr/colorPrimaryDark"
         android:textSize="20dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/amount"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewHero_wishlist"
         app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/amount" />
+        app:layout_constraintStart_toEndOf="@+id/wish_cost_layout" />
 
 
     <TextView
