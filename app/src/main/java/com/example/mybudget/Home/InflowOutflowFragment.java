@@ -33,7 +33,6 @@ import java.time.LocalDate;
  */
 public class InflowOutflowFragment extends Fragment {
 
-
     private static final String TAG = "InflowOutflowFragment";
     private EditText mDescription;
     private EditText mAmount;
@@ -56,7 +55,6 @@ public class InflowOutflowFragment extends Fragment {
 
         // the boolean expression inflow will show if the input by the user
         //  is an income or spending
-
 
         inflow = ((MainActivity) getActivity()).inflow;
         mBalance = view.findViewById(R.id.balance_inflow_outflow);
@@ -95,8 +93,7 @@ public class InflowOutflowFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + inflow);
-
-
+      
         Button saveButton = view.findViewById(R.id.btn_saveIncome);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
@@ -105,11 +102,12 @@ public class InflowOutflowFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String description = mDescription.getText().toString();
-                Log.v(TAG, "description: " + description);
-                String sAmount = mAmount.getText().toString();
 
                 try {
+                    String description = mDescription.getText().toString();
+                    Log.v(TAG, "description: " + description);
+                    String sAmount = mAmount.getText().toString();
+
                     if (description.isEmpty()) {
                         mDescription.setError("Field must be filled");
                     } else if (sAmount.isEmpty()) {
@@ -160,15 +158,14 @@ public class InflowOutflowFragment extends Fragment {
      * Method sets the avatar image from system
      * preferences
      */
-    public void setAvatar(){
+    public void setAvatar() {
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);
-        if(imageResId != -1){
-            Drawable d=getActivity().getDrawable(imageResId);
+        if (imageResId != -1) {
+            Drawable d = getActivity().getDrawable(imageResId);
             mImageViewHero.setImageDrawable(d);
         }
     }
-
 
     public Entry addEntry(int amount, String desc, Entry entry) {
         entry.setAmount(amount);
