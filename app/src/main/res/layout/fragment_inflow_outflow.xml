@@ -8,49 +8,43 @@
     android:background="@drawable/gradient">
 
 
-    <TextView
-        android:id="@+id/title_money_in_out_fragment"
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/money_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_cancelIncome"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_cancel_white"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/title_money_in_out_fragment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_saveIncome"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_done_white"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/title_money_in_out_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_saveIncome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/icon_done_white" />
+
+
+        <Button
+            android:id="@+id/btn_cancelIncome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:background="@drawable/icon_cancel_white" />
+
+        <TextView
+            android:id="@+id/title_money_in_out_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="25dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+
 
     <TextView
         android:id="@+id/balance_inflow_outflow"
@@ -86,12 +80,12 @@
         android:id="@+id/thinking_frame"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:scaleType="fitEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_money_in_out_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/money_toolbar"
         app:srcCompat="@drawable/speech_bubble_big" />
 
     <EditText

@@ -42,7 +42,7 @@ public class NewWishFragment extends Fragment {
         mNewWishTitle = view.findViewById(R.id.wish_title);
         mNewWishCost = view.findViewById(R.id.wish_cost);
         wishCathegory = view.findViewById(R.id.image_wish_cathegory);
-        saveNewWish = view.findViewById(R.id.btn_save__new_wish);
+        saveNewWish = view.findViewById(R.id.btn_save_new_wish);
         cancelNewWish = view.findViewById(R.id.btn_cancel_new_wish);
         activateOnCancelNewWish();
         activateOnSaveNewWish();
