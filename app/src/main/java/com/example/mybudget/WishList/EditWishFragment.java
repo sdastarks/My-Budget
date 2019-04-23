@@ -111,8 +111,8 @@ public class EditWishFragment extends Fragment {
                     } else if (title.isEmpty()) {
                         Log.v(TAG, "title: " + title + "cost: " + cost);
                         updateWish(wish2Edit.getTitle(), cost);
-                    } else if (title.length() > 25) {
-                        meditTitle.setError("Choose a smaller wish name");
+                    } else if (title.length() > 18) {
+                        meditTitle.setError("Wish must be less than 18 characters");
                     } else {
                         updateWish(title, cost);
                     }
