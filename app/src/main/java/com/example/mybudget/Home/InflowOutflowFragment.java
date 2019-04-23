@@ -112,7 +112,9 @@ public class InflowOutflowFragment extends Fragment {
                         mDescription.setError("Field must be filled");
                     } else if (sAmount.isEmpty()) {
                         mAmount.setError("Field must be filled");
-                    } else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() && !inflow) {
+                    } else if (Integer.parseInt(sAmount) <= 0) {
+                        mAmount.setError("Must be larger than 0");
+                    }else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() && !inflow) {
                         mAmount.setError("You don't have enough money in your account");
                     } else if (Integer.parseInt(sAmount) > 10000 && inflow) {
                         mAmount.setError("Are you a high roller");

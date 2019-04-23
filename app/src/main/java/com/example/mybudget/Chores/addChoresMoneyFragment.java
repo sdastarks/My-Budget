@@ -100,6 +100,8 @@ public class addChoresMoneyFragment extends Fragment {
                         mChoresDescription.setError("Field must be filled");
                     } else if (sAmount.isEmpty()) {
                         mChoresAmount.setError("Field must be filled");
+                    } else if (Integer.parseInt(sAmount) <= 0) {
+                        mChoresAmount.setError("Must be larger than 0");
                     } else if (description.contains("Specify here!")) {
                         mChoresDescription.setError("Enter a name");
                     } else if (description.length() > 21) {
