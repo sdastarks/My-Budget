@@ -1,6 +1,8 @@
 package com.example.mybudget.WishList;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -28,9 +30,10 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     private static final String TAG = "WishlistActivity";
     protected ArrayList<Integer> mWishId = new ArrayList<>();
     protected ArrayList <String> mWishNames = new ArrayList<>();
-    private ArrayList <String> mImageUrls = new ArrayList<>();
+    private ArrayList <Integer> mImageUrls = new ArrayList<>();
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
+    private ArrayList<Drawable> mDrawable = new ArrayList<>();
     private FloatingActionButton addWish;
     protected int id;
     protected int wishPrice;
@@ -88,14 +91,14 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         //initImageBitmaps();
     }
 
- 
+
     //Method initializes List view with values for Wish List
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: recycler view init");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishId ,mWishNames, mWishPrices, mImageUrls,
-                mSavingProgress,this, this );
+                mSavingProgress,this, this ,mDrawable);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -134,7 +137,8 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         for(WishList wl : loadwishes){
             mWishId.add(wl.getWishListId());
             mWishNames.add(wl.getTitle());
-            mImageUrls.add(wl.getImage());
+            mDrawable.add(getDrawable(wl.getImage()));
+            //mImageUrls.add(wl.getImage());
             mWishPrices.add(wl.getCost());
             mSavingProgress.add(wl.getSaved());
         }

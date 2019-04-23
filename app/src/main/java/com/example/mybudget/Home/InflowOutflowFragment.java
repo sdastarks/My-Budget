@@ -93,7 +93,7 @@ public class InflowOutflowFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + inflow);
-      
+
         Button saveButton = view.findViewById(R.id.btn_saveIncome);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
@@ -104,18 +104,22 @@ public class InflowOutflowFragment extends Fragment {
 
 
                 try {
-                    String description = mDescription.getText().toString();
+                    String description = mDescription.getText().toString().trim();
                     Log.v(TAG, "description: " + description);
-                    String sAmount = mAmount.getText().toString();
+                    String sAmount = mAmount.getText().toString().trim();
 
                     if (description.isEmpty()) {
                         mDescription.setError("Field must be filled");
                     } else if (sAmount.isEmpty()) {
                         mAmount.setError("Field must be filled");
-                    } else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() && !inflow) {
+                    } else if (Integer.parseInt(sAmount) <= 0) {
+                        mAmount.setError("Must be larger than 0");
+                    }else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() && !inflow) {
                         mAmount.setError("You don't have enough money in your account");
                     } else if (Integer.parseInt(sAmount) > 10000 && inflow) {
                         mAmount.setError("Are you a high roller");
+                    } else if (description.length() > 21) {
+                        mDescription.setError("Must be less than 22 characters");
                     } else {
                         int amount = Integer.parseInt(sAmount);
                         Entry entry = new Entry();
