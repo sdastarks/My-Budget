@@ -1,59 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".Account.AccountActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvBalance"
+        style="@style/HeadlineTextStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:background="?attr/colorPrimary"
+        android:hint="Balance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvBalance"
-            android:layout_width="match_parent"
-            android:layout_height="198dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            android:fontFamily="@font/autour_one"
-            android:gravity="center"
-            android:hint="Balance"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+    <Spinner
+        android:id="@+id/spinner1"
+        style="@style/mySpinnerItemStyle"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/colorAccent"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_months" />
 
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="-20dp"
-            android:layout_marginRight="0dp"
-            android:background="?attr/colorSecondary"
-            android:textColor="#fff"
-            android:spinnerMode="dropdown"
-            android:visibility="visible"
-            style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+    <Spinner
+        android:id="@+id/spinner_months"
+        style="@style/mySpinnerItemStyle"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:spinnerMode="dropdown"
+        android:background="?attr/colorAccent"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBalance" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="55dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:contextClickable="false"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground" />
-
-    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:contextClickable="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
 
 
     <android.support.design.widget.BottomNavigationView
@@ -64,9 +67,36 @@
         android:background="@drawable/border_button"
         app:itemIconTint="@drawable/bottom_nav_colours"
         app:itemTextColor="?attr/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu">
 
     </android.support.design.widget.BottomNavigationView>
 
+    <ImageView
+        android:id="@+id/drop_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner1"
+        app:layout_constraintEnd_toEndOf="@+id/spinner1"
+        app:layout_constraintTop_toTopOf="@+id/spinner1"
+        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24px" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/drop_down2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_months"
+        app:layout_constraintEnd_toEndOf="@+id/spinner1"
+        app:layout_constraintTop_toTopOf="@+id/spinner_months"
+        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24px" />
+
+
+</android.support.constraint.ConstraintLayout>

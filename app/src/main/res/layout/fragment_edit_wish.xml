@@ -37,9 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Edit Wish"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="25dp" />
+            style="@style/HeadlineTextStyle" />
 
     </android.support.v7.widget.Toolbar>
 
