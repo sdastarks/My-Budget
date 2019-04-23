@@ -177,7 +177,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             mAmount.setError("Your goal doesn't need that much money, try " +
                     (wish2Update.getCost() - wish2Update.getSaved()) + " SEK");
 
-        } else if ( wish2Update.getCost()/2 > wish2Update.getSaved() && (wish2Update.getCost()/2 <= wish2Update.getSaved() + amount)) {
+        } else if ( wish2Update.getCost()/2 > wish2Update.getSaved() && (wish2Update.getCost()/2 <= wish2Update.getSaved() + amount) &&
+                (wish2Update.getCost() != wish2Update.getSaved() + amount)) {
             Log.d(TAG, "addMoney2Wish: cost/2=saved");
             goalHalfReached = new GoalHalfReachedDialog();
             //Bundle args = new Bundle();

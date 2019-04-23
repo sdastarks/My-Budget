@@ -38,9 +38,8 @@
             android:id="@+id/title_change_money_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="22dp" />
+            style="@style/HeadlineTextStyle"
+             />
 
     </android.support.v7.widget.Toolbar>
 
