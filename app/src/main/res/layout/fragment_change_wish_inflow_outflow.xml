@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
-            android:textSize="25dp" />
+            android:textSize="22dp" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -75,8 +75,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="32dp"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="72dp"
         android:text="SEK"
         android:textColor="?attr/colorPrimaryDark"
         android:textSize="20dp"

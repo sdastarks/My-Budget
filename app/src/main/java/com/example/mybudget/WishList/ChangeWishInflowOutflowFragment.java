@@ -189,6 +189,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
+          
+            exitFragment();
+
 
         } else if ((wish2Update.getCost() == wish2Update.getSaved() + amount)) {
             Log.d(TAG, "addMoney2Wish: cost==saved");
@@ -201,8 +204,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
-            ((WishlistActivity) getActivity()).db.addEntry(entry);    
-        
+
+            ((WishlistActivity) getActivity()).db.addEntry(entry);
+            exitFragment();        
 
         } else {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
@@ -224,7 +228,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         entry.setTypeOfEntry(1);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
                 + " wishlist return to balance";
-       if (amount < wish2Update.getSaved()) {
+
+       if (amount <= wish2Update.getSaved()) {
+
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), wish2Update.getSaved() - amount,
                     wish2Update.getImage());
