@@ -118,8 +118,8 @@ public class InflowOutflowFragment extends Fragment {
                         mAmount.setError("You don't have enough money in your account");
                     } else if (Integer.parseInt(sAmount) > 10000 && inflow) {
                         mAmount.setError("Are you a high roller");
-                    } else if (description.length() > 21) {
-                        mDescription.setError("Must be less than 22 characters");
+                    } else if (description.length() > 24) {
+                        mDescription.setError("Must be less than 24 characters");
                     } else {
                         int amount = Integer.parseInt(sAmount);
                         Entry entry = new Entry();
