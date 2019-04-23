@@ -224,7 +224,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         entry.setTypeOfEntry(1);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
                 + " wishlist return to balance";
-       if (amount < wish2Update.getSaved()) {
+       if (amount <= wish2Update.getSaved()) {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), wish2Update.getSaved() - amount,
                     wish2Update.getImage());
