@@ -92,9 +92,9 @@ public class addChoresMoneyFragment extends Fragment {
                  */
 
                 try {
-                    String description = mChoresDescription.getText().toString();
+                    String description = mChoresDescription.getText().toString().trim();
                     Log.v(TAG, "description: " + description);
-                    String sAmount = mChoresAmount.getText().toString();
+                    String sAmount = mChoresAmount.getText().toString().trim();
                     int amount = Integer.parseInt(sAmount);
                     if (description.isEmpty()) {
                         mChoresDescription.setError("Field must be filled");

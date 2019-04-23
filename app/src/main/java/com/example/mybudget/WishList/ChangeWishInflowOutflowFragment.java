@@ -124,7 +124,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             public void onClick(View v) {
 
                 try {
-                    String sAmount = mAmount.getText().toString();
+                    String sAmount = mAmount.getText().toString().trim();
                     if (sAmount.isEmpty()) {
                         mAmount.setError("You have transferred 0 sek");
                     } else if (Integer.parseInt(sAmount) > balance) {
