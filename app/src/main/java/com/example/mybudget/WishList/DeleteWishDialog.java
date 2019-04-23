@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 
@@ -32,7 +34,12 @@ public class DeleteWishDialog extends AppCompatDialogFragment {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                        int favWish_dbID= sharedPref.getInt("favouriteWish",0);
                         int dbid =((WishlistActivity) getActivity()).id;
+                        if (dbid==favWish_dbID){
+                            sharedPref.edit().putInt("favouriteWish", 0).apply();
+                        }
                         ((WishlistActivity) getActivity()).db.deleteWish(dbid);
                         Intent intent = new Intent(getActivity(), WishlistActivity.class);
                         startActivity(intent);

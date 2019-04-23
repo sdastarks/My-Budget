@@ -54,8 +54,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private Button register_button;
     private Drawable d;
 
-
-
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
