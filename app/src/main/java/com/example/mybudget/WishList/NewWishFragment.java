@@ -80,8 +80,6 @@ public class NewWishFragment extends Fragment {
             public void onClick(View v) {
                 wishPicture.setImageResource(R.drawable.button_wish_bike);
                 drawable = R.drawable.button_wish_bike;
-                //d = getActivity().getDrawable(R.drawable.button_wish_bike);
-
             }
         });
 
@@ -176,63 +174,6 @@ public class NewWishFragment extends Fragment {
             }
         });
 
-        giftPic = view.findViewById(R.id.gift);
-        giftPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wishPicture.setImageResource(R.drawable.button_wish_gift);
-            }
-        });
-
-        holidayPic = view.findViewById(R.id.holiday);
-        holidayPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wishPicture.setImageResource(R.drawable.button_wish_holiday);
-            }
-        });
-
-        iceSkatePic = view.findViewById(R.id.iceskate);
-        iceSkatePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wishPicture.setImageResource(R.drawable.button_wish_iceskate);
-            }
-        });
-
-
-        petsPic = view.findViewById(R.id.pets);
-        petsPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wishPicture.setImageResource(R.drawable.button_wish_pets);
-            }
-        });
-
-        scooterPic = view.findViewById(R.id.scooter);
-        scooterPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wishPicture.setImageResource(R.drawable.button_wish_scooter);
-            }
-        });
-
-        shoesPic = view.findViewById(R.id.shoes);
-        shoesPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wishPicture.setImageResource(R.drawable.button_wish_shoes);
-            }
-        });
-
-        otherPic = view.findViewById(R.id.dream);
-        otherPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wishPicture.setImageResource(R.drawable.button_wish_dream);
-            }
-        });
-
         return view;
     }
 
@@ -282,9 +223,5 @@ public class NewWishFragment extends Fragment {
             }
 
             });
-        }
-
-        public void categoryIntoImage (String imagePath){
-
         }
     }

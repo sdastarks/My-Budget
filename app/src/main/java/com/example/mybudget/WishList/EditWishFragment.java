@@ -2,6 +2,7 @@ package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -48,13 +49,13 @@ public class EditWishFragment extends Fragment {
         btn_exitEditWish = view.findViewById(R.id.btn_cancel_edit_wish);
         btn_saveEditWish = view.findViewById(R.id.btn_save_edit_wish);
         btn_deletwish = view.findViewById(R.id.floatingActionButton_delete_wish);
+        editWishPicture = view.findViewById(R.id.edit_wish_picture);
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Edit = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-
+        editWishPicture.setImageResource(wish2Edit.getImage());
         meditTitle.setHint(wish2Edit.getTitle());
         meditCost.setHint(wish2Edit.getCost()+" SEK");
-        editWishPicture = view.findViewById(R.id.edit_wish_picture);
 
 
         activateOnExitEditWish();
