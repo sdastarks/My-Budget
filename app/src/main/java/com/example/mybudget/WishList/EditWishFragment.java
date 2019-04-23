@@ -2,6 +2,7 @@ package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -48,13 +49,13 @@ public class EditWishFragment extends Fragment {
         btn_exitEditWish = view.findViewById(R.id.btn_cancel_edit_wish);
         btn_saveEditWish = view.findViewById(R.id.btn_save_edit_wish);
         btn_deletwish = view.findViewById(R.id.floatingActionButton_delete_wish);
+        editWishPicture = view.findViewById(R.id.edit_wish_picture);
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Edit = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-
+        editWishPicture.setImageResource(wish2Edit.getImage());
         meditTitle.setHint(wish2Edit.getTitle());
-        meditCost.setHint(wish2Edit.getCost()+" SEK");
-        editWishPicture = view.findViewById(R.id.edit_wish_picture);
+        meditCost.setHint(wish2Edit.getCost() + " SEK");
 
 
         activateOnExitEditWish();
@@ -98,28 +99,42 @@ public class EditWishFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     int dbid = ((WishlistActivity) getActivity()).id;
-                    WishList wish = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-                    String title = meditTitle.getText().toString();
+                    String title = meditTitle.getText().toString().trim();
                     int cost = Integer.parseInt(meditCost.getText().toString());
 
                     if (cost > 10000000) {
                         meditCost.setError("Wish must be less than 10M SEK");
+                    } else if (cost <= 0) {
+                        meditCost.setError("Must be greater than 0 SEK");
+                    } else if (wish2Edit.getSaved() > cost) {
+                        meditCost.setError("You've already saved " + wish2Edit.getSaved() + " SEK");
                     } else if (title.isEmpty()) {
-                        meditTitle.setError("Field cannot be empty");
+                        Log.v(TAG, "title: " + title + "cost: " + cost);
+                        updateWish(wish2Edit.getTitle(), cost);
                     } else if (title.length() > 25) {
                         meditTitle.setError("Choose a smaller wish name");
                     } else {
-                        ((WishlistActivity) getActivity()).db.updateWish(dbid, title, cost, wish.getSaved(), wish.getImage());
-                        Intent intent = new Intent(getActivity(), WishlistActivity.class);
-                        startActivity(intent);
+                        updateWish(title, cost);
                     }
 
-
                 } catch (Exception e) {
-                    meditCost.setError("Try Again");
+                    if (meditCost.getText().toString().trim().isEmpty()) {
+                        Log.v(TAG, "if statment initialsed");
+                        Log.v(TAG, "title: " + meditTitle.getText().toString() + " cost: " + wish2Edit.getCost());
+                        updateWish(meditTitle.getText().toString(), wish2Edit.getCost());
+                    } else {
+                        meditCost.setError("Try Again");
+                    }
+
                 }
 
             }
         });
+    }
+
+    public void updateWish(String title, int cost) {
+        ((WishlistActivity) getActivity()).db.updateWish(dbid, title, cost, wish2Edit.getSaved(), wish2Edit.getImage());
+        Intent intent = new Intent(getActivity(), WishlistActivity.class);
+        startActivity(intent);
     }
 }
