@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,9 +58,7 @@ public class NewWishFragment extends Fragment {
     private ImageView wishPicture;
     private Button saveNewWish;
     private Button cancelNewWish;
-
-
-    int drawable = R.drawable.button_wish_clothes;
+    private int drawable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -196,7 +195,7 @@ public class NewWishFragment extends Fragment {
         saveNewWish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.v(TAG, "Drawable: "+drawable);
                 try {
                     int cost = Integer.parseInt(mNewWishCost.getText().toString());
                     String wishTitle = mNewWishTitle.getText().toString();
@@ -206,7 +205,11 @@ public class NewWishFragment extends Fragment {
                         mNewWishTitle.setError("Field cannot be empty");
                     } else if (wishTitle.length() > 13) {
                         mNewWishTitle.setError("Wish must be less than 13 characters");
-                    } else {
+                    }
+                     else if (drawable==0){
+                        mNewWishTitle.setError("Select a category");
+                    }
+                    else {
                         WishList wish = new WishList();
                         wish.setTitle(wishTitle);
                         wish.setCost(cost);
