@@ -131,6 +131,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                         mAmount.setError("You don't have enough money in your account");
                     } else if (Integer.parseInt(sAmount) <= 0) {
                         mAmount.setError("Must be larger than 0");
+                    } else if (Integer.parseInt(sAmount) > 6000) {
+                        mAmount.setError("Single transaction can't be more than 6000");
                     } else {
                         //Adding an entry to log
                         int amount = Integer.parseInt(sAmount);

@@ -104,7 +104,7 @@ public class addChoresMoneyFragment extends Fragment {
                         mChoresAmount.setError("Must be larger than 0");
                     } else if (description.contains("Specify here!")) {
                         mChoresDescription.setError("Enter a name");
-                    } else if (description.length() > 21) {
+                    } else if (description.length() > 24) {
                         mChoresDescription.setError("Must be less than 22 characters");
                     } else if (amount > 10000) {
                         mChoresAmount.setError("You kidding?");
