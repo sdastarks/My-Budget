@@ -83,7 +83,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_CookieMonster, R.drawable.cookie);
-                //heroImage.setImageDrawable(getDrawable(R.drawable.cookie));
 
             }
         });
@@ -93,7 +92,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_Science, R.drawable.science);
-               // heroImage.setImageDrawable(getDrawable(R.drawable.science));
             }
         });
 
@@ -102,7 +100,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_GirlMonster, R.drawable.girl);
-                //heroImage.setImageDrawable(getDrawable(R.drawable.girl));
             }
         });
         Button themeSwitchCrazy = findViewById(R.id.btn_crazy);
@@ -110,7 +107,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_CrazyMonster, R.drawable.crazy);
-                //heroImage.setImageDrawable(getDrawable(R.drawable.crazy));
             }
         });
 
@@ -127,106 +123,3 @@ public class SettingsActivity extends AppCompatActivity {
     }
 }
 
-
-
-
-
-
-//    protected SharedPreferences mPrefs;
-//    private String currentTheme;
-////    private static final String COOKIEMONSTER = "cookie";
-////    private static final String ROBOT = "robot";
-////    private static final ArrayMap<String, ThemeSpec> VALUES = new ArrayMap<>();
-////    static {
-////        BUTTONS.put(R.id.btn_cookieMonster, COOKIEMONSTER);
-////        BUTTONS.put(R.id.btn_robot, ROBOT);
-////
-////        VALUES.put(COOKIEMONSTER, new DayNightSpec(R.string.btn_coo));
-////        VALUES.put(ROBOT, new DarkSpec(R.string.theme_dark));
-//
-//    }
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//
-//            mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-//            SharedPreferences.Editor prefEditor = mPrefs.edit();
-//
-//        mPrefs
-//                .edit()
-//                .putString("current_theme",
-//                        "cookie")
-//                .apply();
-//            recreate();
-//
-//
-//
-////        mPrefs= PreferenceManager.getDefaultSharedPreferences(this);
-////        currentTheme = mPrefs.getString("current_theme", "default");
-////        if (currentTheme == "cookie") {
-////            setTheme(R.style.Theme_App_Lilac);
-////        } else {
-////        setTheme(R.style.Theme_App_Mint);
-////        setContentView(...)
-////    }
-////
-////
-//
-//
-//
-//
-//        private fun setAppTheme(String currentTheme) {
-//            if (currentTheme == MINT_THEME) {
-//                setTheme(R.style.Theme_App_Mint);
-//            }
-//            else {
-//                setTheme(R.style.Theme_App_Lilac);
-//            }
-//
-//
-//            override fun onCreate(savedInstanceState: Bundle?) {
-//                super.onCreate(savedInstanceState)
-//
-//                mPrefs = PreferenceManager
-//                        .getDefaultSharedPreferences(this)
-//                currentTheme = mPrefs.getString("current_theme",
-//                        "lilac");
-//                setAppTheme(currentTheme);
-//            }
-//
-//            override fun onResume() {
-//                super.onResume()
-//                theme = mPrefs.getString("current_theme", "lilac");
-//                if(currentTheme != theme) {
-//                    recreate();
-//                }
-//            }
-//
-//            private fun setAppTheme(currentTheme: String) {
-//                if (currentTheme == MINT_THEME) {
-//                    setTheme(R.style.Theme_App_Mint);
-//                }
-//            else {
-//                setTheme(R.style.Theme_App_Lilac)
-//                    }
-//                }
-//            }
-//        }
-//
-//
-//
-//
-////            prefEditor.putBoolean("USE_DARK_THEME", !mPrefs.getBoolean("USE_DARK_THEME",false));
-////            prefEditor.commit();
-////            setTheme(mPrefs.getBoolean("USE_DARK_THEME",false) ? R.style.AppTheme_CookieMonster : R.style.AppTheme);
-////            setContentView(R.layout.activity_main);
-////
-////    }
-////    public static ThemeSpec getTheme(String value, boolean isTranslucent) {
-////        ThemeSpec themeSpec = VALUES.get(VALUES.containsKey(value) ? value : LIGHT);
-////        return isTranslucent ? themeSpec.getTranslucent() : themeSpec;
-////    }
-//
-//
-//}

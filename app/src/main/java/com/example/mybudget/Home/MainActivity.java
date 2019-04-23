@@ -52,6 +52,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private FloatingActionButton outOutcome;
     private Toolbar toolbar;
     private Button register_button;
+    private Drawable d;
 
 
     private static final String TAG = "MainActivityLog";
@@ -67,9 +68,10 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         addIncome = findViewById(R.id.floatingActionButton_add);
         outOutcome = findViewById(R.id.floatingActionButton_minus);
 
+
         imageViewHero=findViewById(R.id.imageViewHero);
         if(imageResId != -1){
-            Drawable d=getDrawable(imageResId);
+            d = getDrawable(imageResId);
             imageViewHero.setImageDrawable(d);
         }
 
@@ -80,6 +82,14 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         drawer = findViewById(R.id.drawer_layout);
+        View headView = navigationView.getHeaderView(0);
+        ImageView heroImageNav = headView.findViewById(R.id.hero_image_side_nav);
+        if(imageResId != -1){
+            d = getDrawable(imageResId);
+            heroImageNav.setImageDrawable(d);
+        }
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
