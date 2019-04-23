@@ -63,8 +63,8 @@ public class AccountActivity extends SettingsActivity {
         String [] labels={"Everything","Expenses","Income","On wish","Chore Money"};
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, labels);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item, labels);
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mySpinner.setAdapter(spinnerAdapter);
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
