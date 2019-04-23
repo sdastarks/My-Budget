@@ -6,25 +6,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
+    android:clickable="true"
     tools:context=".Home.InflowOutflowFragment">
 
-
-    <TextView
-        android:id="@+id/fragment_title"
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/wish_Details_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:gravity="center_vertical"
-        android:text="Details"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/btn_edit_wish"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_baseline_create_24px" />
+
+
+        <Button
+            android:id="@+id/btn_cancel_wish_fragment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:background="@drawable/icon_cancel_white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="25dp" />
+
+    </android.support.v7.widget.Toolbar>
+
 
     <TextView
         android:id="@+id/wish_title_wish_frag"
@@ -36,9 +56,9 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_title"
+        app:layout_constraintEnd_toEndOf="@+id/wish_Details_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_title" />
+        app:layout_constraintTop_toBottomOf="@+id/wish_Details_toolbar" />
 
 
     <ImageView
@@ -134,46 +154,17 @@
         app:layout_constraintTop_toBottomOf="@+id/wish_price" />
 
 
-    <Button
-        android:id="@+id/cancel_wish_fragment"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/icon_cancel_white"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/edit_wish"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/ic_baseline_create_24px"
-        android:clickable="true"
-        android:text=" "
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_favourite_wish_btn"
-        android:background="?attr/colorPrimaryDark"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="?attr/colorPrimaryDark"
         android:clickable="true"
         android:src="@drawable/icon_wishlist"
         app:fabCustomSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_title" />
+        app:layout_constraintTop_toBottomOf="@+id/wish_Details_toolbar" />
 
 </android.support.constraint.ConstraintLayout>

@@ -19,7 +19,7 @@
         <item name="colorSecondary">@color/scienceMonsterColorSecondary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/scienceMonsterColorPrimary</item>
     </style>
 
     <style name="AppTheme.CookieMonster" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -29,7 +29,7 @@
         <item name="colorSecondary">@color/cookieMonsterColorSecondary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/cookieMonsterColorPrimary</item>
     </style>
 
     <style name="AppTheme.GirlMonster" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -39,7 +39,7 @@
         <item name="colorSecondary">@color/girlMonsterColorSecondary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/girlMonsterColorPrimary</item>
     </style>
 
     <style name="AppTheme.CrazyMonster" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -49,7 +49,7 @@
         <item name="colorSecondary">@color/CrazyMonsterColorSecondary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/CrazyMonsterColorPrimary</item>
     </style>
 
 

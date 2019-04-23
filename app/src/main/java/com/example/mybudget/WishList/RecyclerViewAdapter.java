@@ -1,6 +1,7 @@
 package com.example.mybudget.WishList;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -17,9 +18,9 @@ import com.example.mybudget.R;
 
 import java.util.ArrayList;
 
-/*
-This class is used to adapt Wish List view to display wish image and progress bar
-Author: Anastasija Gurejeva
+/**
+ * This class is used to adapt Wish List view to display wish image and progress bar
+ * Author: Anastasija Gurejeva
  */
 
 
@@ -30,17 +31,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Integer> mWishId = new ArrayList<>();
     private ArrayList<String> mWishNames = new ArrayList<>();
     private ArrayList<Integer> mWishPrices = new ArrayList<>();
-    private ArrayList<String> mWishImages = new ArrayList<>();
+    private ArrayList<Integer> mWishImages = new ArrayList<>();
     private ArrayList<Integer> mSavingProgress = new ArrayList<>();
-
+    private ArrayList<Drawable> mDrawable = new ArrayList<>();
 
     private Context mContext;
     private OnWishListener mOnWishListener;
 
 
     public RecyclerViewAdapter(ArrayList<Integer> mWishId ,ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
-                               ArrayList<String> mWishImages, ArrayList<Integer> mSavingProgress,
-                               Context mContext, OnWishListener onWishListener) {
+                               ArrayList<Integer> mWishImages, ArrayList<Integer> mSavingProgress,
+                               Context mContext, OnWishListener onWishListener,ArrayList<Drawable> mDrawable) {
 
         //added the database instance to retreive all added wished to display
              this.mWishId = mWishId;
@@ -50,6 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
              this.mSavingProgress = mSavingProgress;
              this.mContext = mContext;
              this.mOnWishListener = onWishListener;
+             this.mDrawable = mDrawable;
          }
 
 
@@ -70,11 +72,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Log.d(TAG, "onBindViewHolder: called item added");
 
-        Glide.with(mContext)
-                .asBitmap()
-                .load(mWishImages.get(i))
-                .into(viewHolder.wishImage);
+//        Glide.with(mContext)
+//                .asBitmap()
+//                .load(mWishImages.get(i))
+//                .into(viewHolder.wishImage);
 
+        viewHolder.wishImage.setImageDrawable(mDrawable.get(i));
         viewHolder.wishName.setText(mWishNames.get(i));
         viewHolder.wishPrice.setText("Price: " + mWishPrices.get(i) + " sek");
         viewHolder.progressBarHorizontal.setMax(mWishPrices.get(i));
@@ -89,7 +92,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return mWishNames.size();
     }
-
 
      //View Holder class initiates elements inside the Wish section
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

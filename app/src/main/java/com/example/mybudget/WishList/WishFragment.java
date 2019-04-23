@@ -68,8 +68,8 @@ public class WishFragment extends Fragment {
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
 
-        cancelWishFragment = view. findViewById(R.id.cancel_wish_fragment);
-        editWishFragment = view. findViewById(R.id.edit_wish);
+        cancelWishFragment = view. findViewById(R.id.btn_cancel_wish_fragment);
+        editWishFragment = view. findViewById(R.id.btn_edit_wish);
 
         favouriteWish_btn=view.findViewById(R.id.floatingActionButton_favourite_wish_btn);
 

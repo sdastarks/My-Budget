@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -185,7 +184,7 @@ public class ChoresActivity extends SettingsActivity {
 
     public void addMoney(String title, int amount) {
 
-        addChoresMoney add = new addChoresMoney();
+        addChoresMoneyFragment add = new addChoresMoneyFragment();
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putInt("amount", amount);

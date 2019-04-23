@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".Home.MainActivity"
-    android:background="@drawable/gradient">
-    <!--tools:openDrawer="start">-->
+    android:background="@drawable/gradient"
+    tools:openDrawer="start">
 
 
     <android.support.constraint.ConstraintLayout
@@ -127,9 +127,6 @@
             app:maxImageSize="@android:dimen/app_icon_size"
             app:srcCompat="@drawable/icon_add" />
 
-
-
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
@@ -218,12 +215,11 @@
             android:id="@+id/fragment_placeholder"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_minus">
+            app:layout_constraintTop_toTopOf="@+id/toolbar">
 
         </FrameLayout>
 
@@ -234,7 +230,8 @@
             android:background="@drawable/ic_outline_account_circle_24px"
             android:clickable="true"
             app:layout_constraintBaseline_toBaselineOf="@+id/toolbar"
-            tools:layout_editor_absoluteX="376dp" />
+            tools:layout_editor_absoluteX="376dp"
+            android:visibility="invisible"/>
 
 
         <android.support.design.widget.BottomNavigationView

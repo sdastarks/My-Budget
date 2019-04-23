@@ -1,77 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Chores.addChoresMoney"
-    android:background="#FFFFFF"
-    >
+    android:background="@drawable/gradient"
+    android:clickable="true"
+    tools:context=".Chores.addChoresMoneyFragment">
 
-    <EditText
-        android:id="@+id/choresDescription"
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/money_from_chore_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/btn_saveChoreTransfer"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/icon_done_white" />
+
+
+        <Button
+            android:id="@+id/btn_cancelChoreFragment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:background="@drawable/icon_cancel_white" />
+
+        <TextView
+            android:id="@+id/title_money_from_chore_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="25dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/balance_choreFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:layout_marginLeft="140dp"
-        android:textSize="20dp"
-        android:hint="Enter a Description"
-        android:maxLines="1"
-        android:inputType="text"
-        />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="top"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/money_image_fragment_chores"
+        app:layout_constraintEnd_toEndOf="@+id/money_image_fragment_chores"
+        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_chores"
+        app:layout_constraintTop_toTopOf="@+id/money_image_fragment_chores" />
+
+    <ImageView
+        android:id="@+id/imageViewHero_chores"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thinking_frame_chores"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/cookie" />
+
+    <ImageView
+        android:id="@+id/thinking_frame_chores"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="fitEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/money_from_chore_toolbar"
+        app:srcCompat="@drawable/speech_bubble_big" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/choresAmount_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageViewHero"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="24dp"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textColorHint="?attr/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_chores"
+        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_chores"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_chores"
+        app:layout_constraintVertical_bias="0.776">
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/choresAmount"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textColorHint="?attr/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/choresDescription_layout"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textColorHint="?attr/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_chores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_chores"
+        app:layout_constraintVertical_bias="0.197">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/choresDescription"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimaryDark"
+            android:textColorHint="?attr/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
     <TextView
         android:id="@+id/choresSEK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/choresDescription"
-        android:layout_alignLeft="@+id/choresDescription"
-        android:textSize="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="52dp"
         android:text="SEK"
-        android:textColor="@android:color/black"        />
-
-    <EditText
-        android:id="@+id/choresAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/choresDescription"
-        android:layout_alignBottom="@+id/choresSEK"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/choresSEK"
-        android:hint="0.00"
-        android:inputType="numberDecimal"
-        android:textSize="30dp" />
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewHero_chores"
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame_chores"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/choresAmount_layout" />
 
     <ImageView
-        android:id="@+id/choresImage_inflow_outflow"
-        android:layout_width="70dp"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@+id/choresSEK"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/choresSEK" />
+        android:id="@+id/money_image_fragment_chores"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_money"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewHero_chores"
+        app:layout_constraintTop_toTopOf="@+id/imageViewHero_chores"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/choresFloatingActionButton_cancelIncome"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="50dp"
-        android:clickable="true"
-        android:src="@drawable/icon_cancel_white"
-        app:fabCustomSize="40dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/choresFloatingActionButton_saveIncome"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="287dp"
-        android:layout_marginEnd="50dp"
-        android:clickable="true"
-        android:src="@drawable/icon_done_white"
-        app:fabCustomSize="40dp" />
+</android.support.constraint.ConstraintLayout>
 
 
-</RelativeLayout>
+
+
+
+
+
+
