@@ -197,8 +197,8 @@ public class NewWishFragment extends Fragment {
             public void onClick(View v) {
                 Log.v(TAG, "Drawable: "+drawable);
                 try {
-                    int cost = Integer.parseInt(mNewWishCost.getText().toString());
-                    String wishTitle = mNewWishTitle.getText().toString();
+                    int cost = Integer.parseInt(mNewWishCost.getText().toString().trim());
+                    String wishTitle = mNewWishTitle.getText().toString().trim();
                     if (cost > 10000000) {
                         mNewWishCost.setError("Wish must be less than 10M SEK");
                     } else if (wishTitle.isEmpty()) {

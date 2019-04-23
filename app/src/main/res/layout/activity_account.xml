@@ -32,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_months" />
 
-
     <Spinner
         android:id="@+id/spinner_months"
         style="@style/mySpinnerItemStyle"

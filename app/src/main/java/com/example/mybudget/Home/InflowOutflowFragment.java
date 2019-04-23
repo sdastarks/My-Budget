@@ -104,9 +104,9 @@ public class InflowOutflowFragment extends Fragment {
 
 
                 try {
-                    String description = mDescription.getText().toString();
+                    String description = mDescription.getText().toString().trim();
                     Log.v(TAG, "description: " + description);
-                    String sAmount = mAmount.getText().toString();
+                    String sAmount = mAmount.getText().toString().trim();
 
                     if (description.isEmpty()) {
                         mDescription.setError("Field must be filled");
