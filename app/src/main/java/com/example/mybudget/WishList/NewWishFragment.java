@@ -263,8 +263,8 @@ public class NewWishFragment extends Fragment {
                         mNewWishCost.setError("Wish must be less than 10M SEK");
                     } else if (wishTitle.isEmpty()) {
                         mNewWishTitle.setError("Field cannot be empty");
-                    } else if (wishTitle.length() > 25) {
-                        mNewWishTitle.setError("Choose a smaller wish name");
+                    } else if (wishTitle.length() > 13) {
+                        mNewWishTitle.setError("Wish must be less than 13 characters");
                     } else {
                         WishList wish = new WishList();
                         wish.setTitle(wishTitle);

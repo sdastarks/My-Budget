@@ -93,7 +93,7 @@ public class InflowOutflowFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + inflow);
-      
+
         Button saveButton = view.findViewById(R.id.btn_saveIncome);
         saveButton.setOnClickListener(new View.OnClickListener() {
             /*
@@ -116,6 +116,8 @@ public class InflowOutflowFragment extends Fragment {
                         mAmount.setError("You don't have enough money in your account");
                     } else if (Integer.parseInt(sAmount) > 10000 && inflow) {
                         mAmount.setError("Are you a high roller");
+                    } else if (description.length() > 21) {
+                        mDescription.setError("Must be less than 22 characters");
                     } else {
                         int amount = Integer.parseInt(sAmount);
                         Entry entry = new Entry();

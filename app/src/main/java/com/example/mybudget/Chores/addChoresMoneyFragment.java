@@ -64,14 +64,13 @@ public class addChoresMoneyFragment extends Fragment {
         mChoresDescription = (EditText) view.findViewById(R.id.choresDescription);
         mChoresAmount = view.findViewById(R.id.choresAmount);
         mChoresAmount.setText((getArguments().getInt("amount")) + "");
-        
-        if(getArguments().getString("title").equals("Specify here!")){
+
+        if (getArguments().getString("title").equals("Specify here!")) {
             mChoresDescription.setHint(getArguments().getString("title"));
-        }
-        else {
+        } else {
             mChoresDescription.setText(getArguments().getString("title"));
         }
-      
+
         mFragmentTitle = view.findViewById(R.id.title_money_from_chore_fragment);
         mFragmentTitle.setText("Money for completed chores");
         setAvatar();
@@ -103,6 +102,8 @@ public class addChoresMoneyFragment extends Fragment {
                         mChoresAmount.setError("Field must be filled");
                     } else if (description.contains("Specify here!")) {
                         mChoresDescription.setError("Enter a name");
+                    } else if (description.length() > 21) {
+                        mChoresDescription.setError("Must be less than 22 characters");
                     } else if (amount > 10000) {
                         mChoresAmount.setError("You kidding?");
                     } else {

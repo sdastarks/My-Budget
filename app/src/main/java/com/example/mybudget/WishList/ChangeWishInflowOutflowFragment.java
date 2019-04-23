@@ -172,7 +172,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     public void addMoney2Wish(Entry entry, Integer amount, WishList wish2Update, int dbid) {
         entry.setTypeOfEntry(2);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
-                + " wishlist transfer";
+                + " transfer";
         if (amount > (wish2Update.getCost() - wish2Update.getSaved())) {
             mAmount.setError("Your goal doesn't need that much money, try " +
                     (wish2Update.getCost() - wish2Update.getSaved()) + " SEK");
@@ -227,7 +227,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     public void takeMoneyFromWish(Entry entry, Integer amount, WishList wish2Update, int dbid) {
         entry.setTypeOfEntry(1);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
-                + " wishlist return to balance";
+                + " return";
 
        if (amount <= wish2Update.getSaved()) {
 
