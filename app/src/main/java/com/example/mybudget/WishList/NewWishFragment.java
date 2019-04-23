@@ -2,6 +2,11 @@ package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
@@ -14,9 +19,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.Resource;
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 import com.example.mybudget.WishList.WishlistActivity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Base64;
 
 
 /**
@@ -46,6 +59,7 @@ public class NewWishFragment extends Fragment {
     private Button cancelNewWish;
 
 
+    int drawable = R.drawable.button_wish_clothes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +79,9 @@ public class NewWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 wishPicture.setImageResource(R.drawable.button_wish_bike);
+                drawable = R.drawable.button_wish_bike;
+                //d = getActivity().getDrawable(R.drawable.button_wish_bike);
+
             }
         });
 
@@ -73,6 +90,7 @@ public class NewWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 wishPicture.setImageResource(R.drawable.button_wish_clothes);
+                drawable = R.drawable.button_wish_clothes;
             }
         });
 
@@ -81,6 +99,7 @@ public class NewWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 wishPicture.setImageResource(R.drawable.button_wish_gadgets);
+                drawable = R.drawable.button_wish_gadgets;
             }
         });
 
@@ -89,6 +108,71 @@ public class NewWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 wishPicture.setImageResource(R.drawable.button_wish_games);
+                drawable = R.drawable.button_wish_games;
+            }
+        });
+
+        giftPic = view.findViewById(R.id.gift);
+        giftPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_gift);
+                drawable = R.drawable.button_wish_gift;
+            }
+        });
+
+        holidayPic = view.findViewById(R.id.holiday);
+        holidayPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_holiday);
+                drawable = R.drawable.button_wish_holiday;
+            }
+        });
+
+        iceSkatePic = view.findViewById(R.id.iceskate);
+        iceSkatePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_iceskate);
+                drawable = R.drawable.button_wish_iceskate;
+            }
+        });
+
+
+        petsPic = view.findViewById(R.id.pets);
+        petsPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_pets);
+                drawable = R.drawable.button_wish_pets;
+            }
+        });
+
+        scooterPic = view.findViewById(R.id.scooter);
+        scooterPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_scooter);
+                drawable = R.drawable.button_wish_scooter;
+            }
+        });
+
+        shoesPic = view.findViewById(R.id.shoes);
+        shoesPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_shoes);
+                drawable = R.drawable.button_wish_shoes;
+            }
+        });
+
+        otherPic = view.findViewById(R.id.dream);
+        otherPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishPicture.setImageResource(R.drawable.button_wish_dream);
+                drawable = R.drawable.button_wish_dream;
             }
         });
 
@@ -149,7 +233,6 @@ public class NewWishFragment extends Fragment {
             }
         });
 
-
         return view;
     }
     
@@ -163,15 +246,26 @@ public class NewWishFragment extends Fragment {
         });
     }
 
+    private void activateOnCancelNewWish() {
+        cancelNewWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WishlistActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     /*
      * Method attempts to save a wish
      */
-
 
     private void activateOnSaveNewWish() {
         saveNewWish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                }
+
                 try {
                     int cost =Integer.parseInt(mNewWishCost.getText().toString());
                     String wishTitle=mNewWishTitle.getText().toString();
@@ -190,7 +284,7 @@ public class NewWishFragment extends Fragment {
                         wish.setTitle(wishTitle);
                         wish.setCost(cost);
                         wish.setSaved(0);
-                        //wish.setImage(wishPicture);
+                        wish.setImage(drawable);                        
                         mNewWishCost.setError(null);
                         ((WishlistActivity) getActivity()).db.addWish(wish);
                         Intent intent = new Intent (getActivity(), WishlistActivity.class);
@@ -204,4 +298,7 @@ public class NewWishFragment extends Fragment {
         });
     }
 
+    public void categoryIntoImage(String imagePath) {
+
+    }
 }
