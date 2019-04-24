@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/framelayout_newavatar"
-    >
+    android:id="@+id/grid_item">
 
-    <GridView
-        android:id="@+id/gridview1"
+    <ImageView
+        android:id="@+id/picture_avatar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:layout_marginTop="40dp"
-        android:numColumns="2"/>
+        android:scaleType="fitCenter"
+        android:layout_marginTop="50dp"/>
 
 
 </FrameLayout>

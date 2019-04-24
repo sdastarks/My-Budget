@@ -436,8 +436,9 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
     //Methods to add, update and delete user account
-    public void addUser(User user) {
+    public int addUser(User user) {
         open_db();
+        int userId = autoIdGenerator(user);
         ContentValues values = new ContentValues();
         values.put(USERID, autoIdGenerator(user));
         values.put(USER_FISRT_NAME, user.getUserFirstName());
@@ -448,17 +449,28 @@ public class myDbHelper extends SQLiteOpenHelper {
         Log.e("data inserted", "in database");
         db.insert(USER_PROFILE, null, values);
         close_db();
+        return userId;
     }
 
-    public boolean updateUser(User user) {
+    public boolean updateUser(User user, int id) {
         ContentValues values = new ContentValues();
         open_db();
-        values.put(USERID, autoIdGenerator(user));
+        values.put(USERID,id);
         values.put(USER_FISRT_NAME, user.getUserFirstName());
         values.put(USER_LAST_NAME, user.getUserLastName());
         values.put(USER_EMAIL, user.getUserMail());
         values.put(USER_AGE, user.getUserAge());
-        return db.update(USER_PROFILE, values, USERID + "=" + user.getUserId(), null) > 0;
+    try {
+   // return db.update(USER_PROFILE, values, USER_FISRT_NAME,new String[]{keyValue}) > 0;
+
+    return db.update(USER_PROFILE, values,USERID + " =" + id,null) > 0;
+
+    }
+    catch(Exception ex)
+    {
+    ex.printStackTrace();
+    }
+    return false;
     }
 
 

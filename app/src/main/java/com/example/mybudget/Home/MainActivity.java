@@ -106,8 +106,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
             }
         });
 
-
-
         /*
          * Method creates a pathway to the other
          * activities via a navigation bar
@@ -153,6 +151,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         setProgressBar(favWish_dbID);
         setTitle(favWish_dbID);
         updateBalance();
+
+
     }
     /*
      * Method gets the database id of the favourite wish
