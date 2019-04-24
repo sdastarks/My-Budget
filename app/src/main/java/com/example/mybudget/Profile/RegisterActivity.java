@@ -56,6 +56,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
     private TextView appCompatTextViewLoginLink;
     private TextView chooseAvatarTextView;
+    private TextView register_headline;
 
     private ImageView avatar_image;
     private FrameLayout  frameLayoutNewAvatar;
@@ -112,7 +113,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
                 selectAvatar();
                 appCompatButtonUpdateUser.setVisibility(View.GONE);
-
+                register_headline.setText("REGISTER");
 
             } else if (switchValue.equals("update")) {
                 setContentView(R.layout.activity_register);
@@ -120,6 +121,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 appCompatButtonRegister.setVisibility(View.GONE);
                 appCompatTextViewLoginLink.setVisibility(View.GONE);
                 appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
+                register_headline.setText("Edit Profile");
             }
         }
         activateOnExitRegisterActiviy();
@@ -167,6 +169,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
         appCompatButtonUpdateUser = (AppCompatButton) findViewById(R.id.appCompatButtonUpdateUser);
         appCompatTextViewLoginLink = (TextView) findViewById(R.id.appCompatTextViewLoginLink);
         chooseAvatarTextView = (TextView) findViewById(R.id.textView4);
+        register_headline = (TextView)findViewById(R.id.register_activity_title);
         btn_exitRegisterActivity = (Button) findViewById(R.id.btn_cancel_register_user);
 
         appCompatButtonRegister.setOnClickListener(this);
