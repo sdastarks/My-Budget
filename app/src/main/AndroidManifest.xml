@@ -20,7 +20,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Chores.ChoresActivity" />
         <activity android:name=".Account.AccountActivity" />
-        <activity android:name=".WishList.WishlistActivity" />
+        <activity android:name=".WishList.WishlistActivity"
+            android:parentActivityName=".Home.MainActivity"/>
         <activity
             android:name=".Home.MainActivity"
             android:theme="@style/AppTheme.CookieMonster">
