@@ -1,25 +1,26 @@
 package com.example.mybudget.Profile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.mybudget.AvatarFragment;
 import com.example.mybudget.Models.User;
 import com.example.mybudget.R;
+import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.myDbHelper;
 
 
@@ -29,7 +30,7 @@ import com.example.mybudget.myDbHelper;
  * @author Benish
  */
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends SettingsActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivityLog";
     private final AppCompatActivity activity = RegisterActivity.this;
@@ -44,11 +45,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextInputEditText textInputEditTextLastName;
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextAge;
+
     private AppCompatButton appCompatButtonRegister;
     private AppCompatButton appCompatButtonUpdateUser;
 
     private TextView appCompatTextViewLoginLink;
+    private TextView chooseAvatarTextView;
+
     private ImageView avatar_image;
+    private FrameLayout  frameLayoutNewAvatar;
+
     private myDbHelper databaseHelper;
     User user;
     private String switchValue;
@@ -66,10 +72,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     int userGlobalId;
     String userGlobalName;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         sharedPreferences = getApplicationContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -77,45 +85,59 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         userGlobalName = getUserName();
 
         Intent intent = getIntent();
-            switchValue = intent.getStringExtra("editProfile");
-            if(intent != null) { // to avoid the NullPointerException
+        switchValue = intent.getStringExtra("editProfile");
+        if (intent != null) { // to avoid the NullPointerException
 
-                Log.v(TAG, "switch activity use" + switchValue);
+            initializeViews();
+            initializeObjects();
+            // initializeListeners();
 
-                if (switchValue.equals("add")) {
-                    initializeViews();
-                    initializeObjects();
-                   // initializeListeners();
-                    appCompatButtonUpdateUser.setVisibility(View.GONE);
+            if(frameLayoutNewAvatar != null)
+                frameLayoutNewAvatar.setVisibility(View.GONE);
 
-
-                }else if (switchValue.equals("update")) {
-                    setContentView(R.layout.activity_register);
-                    initializeViews();
-                    initializeObjects();
-                    //initializeListeners();
-                    setValues();
-                    appCompatButtonRegister.setVisibility(View.GONE);
-                    appCompatTextViewLoginLink.setVisibility(View.GONE);
-                    appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
-                }
+            if(imageResId != -1)
+            {
+                Drawable drawable = getDrawable(imageResId);
+                avatar_image.setImageDrawable(drawable);
             }
+
+            Log.v(TAG, "switch activity use" + switchValue);
+
+            if (switchValue.equals("add")) {
+
+                selectAvatar();
+                appCompatButtonUpdateUser.setVisibility(View.GONE);
+
+
+            } else if (switchValue.equals("update")) {
+                setContentView(R.layout.activity_register);
+                setValues();
+                appCompatButtonRegister.setVisibility(View.GONE);
+                appCompatTextViewLoginLink.setVisibility(View.GONE);
+                appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     /**
      * This method is to initialize Image onClick
      */
-    public void selectAvatar(){
+    public void selectAvatar() {
         avatar_image = (ImageView) findViewById(R.id.avatarImage);
         avatar_image.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Log.d(TAG, "Select Avatar: activated");
-              FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-              ft.replace(R.id.fragment_avatar_layout, new AvatarFragment());
-              ft.commit();
-          }
-      });
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Select Avatar: activated");
+                AllItemsVisibilitySwitch();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_avatar, new AvatarFragment());
+                ft.commit();
+                //gridView.setAdapter(new AvatarGridView(this));
+
+                //gridView.setVisibility(View.VISIBLE);
+
+            }
+        });
     }
 
     /**
@@ -137,10 +159,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
         appCompatButtonUpdateUser = (AppCompatButton) findViewById(R.id.appCompatButtonUpdateUser);
-        appCompatTextViewLoginLink = (TextView)findViewById(R.id.appCompatTextViewLoginLink);
+        appCompatTextViewLoginLink = (TextView) findViewById(R.id.appCompatTextViewLoginLink);
+        chooseAvatarTextView = (TextView) findViewById(R.id.textView4);
 
         appCompatButtonRegister.setOnClickListener(this);
         appCompatButtonUpdateUser.setOnClickListener(this);
+
+        frameLayoutNewAvatar = (FrameLayout)findViewById(R.id.framelayout_newavatar);
     }
 
     /**
@@ -154,14 +179,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     /**
      * This method is to initialize listeners
 
-    private void initializeListeners() {
-        initializeViews();
-        appCompatButtonRegister.setOnClickListener(this);
-        appCompatButtonUpdateUser.setOnClickListener(this);
-    }*/
+     private void initializeListeners() {
+     initializeViews();
+     appCompatButtonRegister.setOnClickListener(this);
+     appCompatButtonUpdateUser.setOnClickListener(this);
+     }*/
 
     /**
-     *
      * @param view This method will execute onClick method depending on which button has been clicked
      */
     public void onClick(View view) {
@@ -171,7 +195,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.appCompatButtonRegister: {
                     //databaseHelper.deleteUser();
                     if (inputValidation()) {
-                       addUser(user);
+                        addUser(user);
                         Log.v(TAG, "user added");
                     }
                 }
@@ -185,98 +209,113 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             }
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Validate the input entered by user
      */
     private boolean inputValidation() {
-           try{
-                String valueEmail=textInputEditTextEmail.getText().toString();
-                if (valueEmail.isEmpty()){
-                    throw new NullPointerException();
-                }
-               if (validateEmail() && validateFirstname() && validateLastname() && validateAge()) {
-                   System.out.println("gerer");
-                   return true;
-               }
-
-            }catch (NullPointerException e){
-
-               if (validateFirstname() && validateLastname() && validateAge()) {
-                   return true;
-               }
+        try {
+            String valueEmail = textInputEditTextEmail.getText().toString();
+            if (valueEmail.isEmpty()) {
+                throw new NullPointerException();
             }
-            return false;
+            if (validateEmail() && validateFirstname() && validateLastname() && validateAge()) {
+                System.out.println("all fields validation");
+                return true;
+            }
+
+        } catch (NullPointerException e) {
+            System.out.println("Email field not validated");
+            if (validateFirstname() && validateLastname() && validateAge()) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private boolean validateFirstname(){
+    private boolean validateFirstname() {
         initializeViews();
         String valueFirstName = textInputEditTextFirstName.getText().toString().trim();
-        if (valueFirstName.isEmpty()){ textInputEditTextFirstName.setError("Field cannot be empty");  valid = false;}
-        else if(valueFirstName.length() < 3 ) { textInputEditTextFirstName.setError("Name cannot be less then 3 characters"); valid = false; }
-        else if(valueFirstName.length() > 15 ) { textInputEditTextFirstName.setError("Name cannot be more then 15 characters");  valid = false;}
-        else {
+        if (valueFirstName.isEmpty()) {
+            textInputEditTextFirstName.setError("Field cannot be empty");
+            valid = false;
+        } else if (valueFirstName.length() < 3) {
+            textInputEditTextFirstName.setError("Name cannot be less then 3 characters");
+            valid = false;
+        } else if (valueFirstName.length() > 15) {
+            textInputEditTextFirstName.setError("Name cannot be more then 15 characters");
+            valid = false;
+        } else {
             textInputEditTextFirstName.setError(null);
             valid = true;
         }
         return valid;
     }
 
-    private boolean validateLastname(){
+    private boolean validateLastname() {
         initializeViews();
         String valueLastName = textInputEditTextLastName.getText().toString().trim();
-        if (valueLastName.isEmpty()){ textInputEditTextLastName.setError("Field cannot be empty");  valid = false;}
-        else if(valueLastName.length() < 3 ) { textInputEditTextLastName.setError("Name cannot be less then 3 characters"); valid = false; }
-        else if(valueLastName.length() > 15 ) { textInputEditTextLastName.setError("Name cannot be more then 15 characters");  valid = false;}
-        else {
+        if (valueLastName.isEmpty()) {
+            textInputEditTextLastName.setError("Field cannot be empty");
+            valid = false;
+        } else if (valueLastName.length() < 3) {
+            textInputEditTextLastName.setError("Name cannot be less then 3 characters");
+            valid = false;
+        } else if (valueLastName.length() > 15) {
+            textInputEditTextLastName.setError("Name cannot be more then 15 characters");
+            valid = false;
+        } else {
             textInputEditTextLastName.setError(null);
             valid = true;
         }
         return valid;
     }
 
-    private boolean validateEmail(){
+    private boolean validateEmail() {
         initializeViews();
         String valueEmail = textInputEditTextEmail.getText().toString();
-        if (valueEmail.isEmpty()){ textInputEditTextEmail.setError("Field cannot be empty");  valid = false;}
-        else if(!Patterns.EMAIL_ADDRESS.matcher(valueEmail).matches() ) { textInputEditTextEmail.setError("Invalid email address"); valid = false; }
-        else {
+        if (valueEmail.isEmpty()) {
+            textInputEditTextEmail.setError("Field cannot be empty");
+            valid = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(valueEmail).matches()) {
+            textInputEditTextEmail.setError("Invalid email address");
+            valid = false;
+        } else {
             textInputEditTextLastName.setError(null);
             valid = true;
         }
         return valid;
     }
 
-    private boolean validateAge(){
+    private boolean validateAge() {
         initializeViews();
         String valueAge = textInputEditTextAge.getText().toString();
         int valueAge1 = Integer.parseInt(valueAge);
         try {
             if (valueAge.isEmpty()) {
-                textInputEditTextLastName.setError("Field cannot be empty");
-                valid = false;}
-
-             else if(valueAge.length() > 2){
-                textInputEditTextLastName.setError("Invalid value");
+                textInputEditTextAge.setError("Field cannot be empty");
                 valid = false;
-            }
-            else if(valueAge1 == 0){
-                textInputEditTextLastName.setError("Invalid value");
+            } else if (valueAge.length() > 2) {
+                textInputEditTextAge.setError("Invalid value");
                 valid = false;
-            }
-            else{
-                 valid = true;
+            } else if (valueAge1 == 0) {
+                textInputEditTextAge.setError("Invalid value");
+                valid = false;
+            } else {
+                valid = true;
             }
 
             return valid;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return valid = false;
         }
     }
+
     /**
      * This method is to empty all input edit text
      */
@@ -312,9 +351,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         int valueAge1 = Integer.parseInt(valueAge);
         String valueEmail = textInputEditTextEmail.getText().toString();
         User userObj = new User(valueFirstName, valueLastName, valueEmail, valueAge1);
-        databaseHelper.updateUser(userObj,   userGlobalId );
+        databaseHelper.updateUser(userObj, userGlobalId);
 
     }
+
     private void setValues() {
         initializeViews();
         user = databaseHelper.getUser();
@@ -340,12 +380,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //get user name and id from shared preference
-    private String getUserName(){
+    private String getUserName() {
         SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
-        return sharedPrefs.getString(USER_NAME,null);
+        return sharedPrefs.getString(USER_NAME, null);
     }
 
-    private int getUserId(){
+    private int getUserId() {
         SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
         return sharedPrefs.getInt(USER_ID, 0);
     }
@@ -353,15 +393,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     /**
      * This method is to delete user record
      *
-     * @param user
+     * @param user public void deleteUser(){
+     *             initializeViews();
+     *             databaseHelper.open_db();
+     *             <p>
+     *             db.delete(USER_PROFILE, values, USERID  + " = ?",
+     *             new String[]{String.valueOf(user.getId())});
+     *             databaseHelper.close();
+     *             }
+     */
 
-    public void deleteUser(){
-    initializeViews();
-    databaseHelper.open_db();
+    private void AllItemsVisibilitySwitch() {
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
+        textInputLayoutFirstName.setVisibility(View.GONE);
+        textInputLayoutLastName.setVisibility(View.GONE);
+        textInputLayoutEmail.setVisibility(View.GONE);
+        textInputLayoutAge.setVisibility(View.GONE);
 
-    db.delete(USER_PROFILE, values, USERID  + " = ?",
-    new String[]{String.valueOf(user.getId())});
-    databaseHelper.close();
-    }*/
+        textInputEditTextFirstName.setVisibility(View.GONE);
+        textInputEditTextLastName.setVisibility(View.GONE);
+        textInputEditTextEmail.setVisibility(View.GONE);
+        textInputEditTextAge.setVisibility(View.GONE);
+        chooseAvatarTextView.setVisibility(View.GONE);
+
+        avatar_image.setVisibility(View.GONE);
+
+        appCompatButtonRegister.setVisibility(View.GONE);
+        appCompatButtonUpdateUser.setVisibility(View.GONE);
+        appCompatTextViewLoginLink.setVisibility(View.GONE);
+
+    }
 
 }

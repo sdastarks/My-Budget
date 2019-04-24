@@ -2,7 +2,9 @@
 
 
     <style name="AppTheme.CookieMonster.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
+    <style name="AppTheme.NoActionBar">
+        <item name = "windowActionBar">false</item>
+    <item name = "windowNoTitle">true</item> </style>
     <style name="AppTheme.CookieMonster.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="TextInputLayoutWhiteBox" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
     <item name="boxStrokeColor">@color/white</item>

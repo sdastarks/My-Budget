@@ -59,6 +59,7 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         setContentView(R.layout.activity_main);
         Log.v("SettingsActivityLog","imageResId2: "+imageResId);
 
+
         imageViewHero=findViewById(R.id.imageViewHero);
         if(imageResId != -1){
             Drawable d=getDrawable(imageResId);
@@ -136,6 +137,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         setProgressBar(favWish_dbID);
         setTitle(favWish_dbID);
         updateBalance();
+
+
     }
     /*
      * Method gets the database id of the favourite wish

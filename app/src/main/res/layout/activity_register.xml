@@ -5,25 +5,26 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingTop="20dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="20dp"
     tools:context=".Profile.RegisterActivity">
-
-
-
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
 
+        <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="735dp">
+
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/register_activity_title"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="67dp"
             android:layout_alignParentTop="true"
             android:background="?attr/colorPrimary"
             android:gravity="center_vertical"
@@ -56,11 +57,14 @@
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
             android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_activity_title"
-            app:srcCompat="@drawable/cookie"
-            tools:layout_editor_absoluteX="0dp" />
+            app:srcCompat="@drawable/cookie" />
 
         <TextView
             android:id="@+id/textView4"
@@ -177,6 +181,31 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatButtonRegister"
             tools:layout_editor_absoluteX="0dp" />
+
+        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/grid_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:columnWidth="90dp"
+            android:gravity="center"
+            android:horizontalSpacing="10dp"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </GridView>
+
     </android.support.constraint.ConstraintLayout>
+
+
 
 </ScrollView>

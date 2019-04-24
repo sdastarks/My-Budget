@@ -30,6 +30,7 @@ import com.example.mybudget.myDbHelper;
 
 import java.io.File;
 import java.util.ArrayList;
+
 /**
  * The activity is used to create user Profile
  *
@@ -72,9 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
         initializeObjects();
 
         user = databaseHelper.getUser();
-        if(user!= null) {
+        if (user != null) {
             setValues();
-        }else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
 
 
 
@@ -98,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
     }
 
-    private void setValues(){
+    private void setValues() {
         initializeViews();
         user = databaseHelper.getUser();
         userFirstName = user.getUserFirstName();
@@ -109,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
         textFirstName.setText(userFirstName);
         textLastName.setText(userLastName);
         textEmail.setText(userEmail);
-        textAge.setText(""+userAge);
+        textAge.setText("" + userAge);
     }
 
 
