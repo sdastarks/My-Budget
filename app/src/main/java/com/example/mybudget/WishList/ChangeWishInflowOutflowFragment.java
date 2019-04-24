@@ -3,9 +3,11 @@ package com.example.mybudget.WishList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -24,6 +26,8 @@ import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 
 import java.time.LocalDate;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -172,7 +176,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
      * if the amount doesnt exceed the total price
      * of the wish
      */
-    public void addMoney2Wish(Entry entry, Integer amount, WishList wish2Update, int dbid) {
+    public void addMoney2Wish(Entry entry, Integer amount, WishList wish2Update, final int dbid) {
         entry.setTypeOfEntry(2);
         String entryDescription = ((WishlistActivity) getActivity()).mWishNames.get(((WishlistActivity) getActivity()).index)
                 + " transfer";
@@ -210,10 +214,17 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
-
             ((WishlistActivity) getActivity()).db.addEntry(entry);
-            exitFragment();
-
+            ((WishlistActivity) getActivity()).db.deleteWish(dbid);
+            Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+//                    exitFragment();
+                    Intent intent = new Intent(getActivity(), WishlistActivity.class);
+                    startActivity(intent);
+                }
+            }, 2000);
         } else {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),

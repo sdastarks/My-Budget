@@ -59,7 +59,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Wishlist");
+        setTitle("Wishlist");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
