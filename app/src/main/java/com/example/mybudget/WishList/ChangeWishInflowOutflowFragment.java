@@ -210,10 +210,10 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             //args.putInt("dbIdGoal", dbid);
             //goalReached.setArguments(args);
             goalReached.show(getFragmentManager(), "GoalReachedDialog");
-//            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
-//                    , wish2Update.getCost(), amount + wish2Update.getSaved(),
-//                    wish2Update.getImage());
-//            entry.setDesc(entryDescription);
+            ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
+                    , wish2Update.getCost(), amount + wish2Update.getSaved(),
+                    wish2Update.getImage());
+            entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
             ((WishlistActivity) getActivity()).db.deleteWish(dbid);
             Timer timer = new Timer();
