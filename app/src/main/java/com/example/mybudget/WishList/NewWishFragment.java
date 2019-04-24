@@ -201,6 +201,8 @@ public class NewWishFragment extends Fragment {
                     String wishTitle = mNewWishTitle.getText().toString().trim();
                     if (cost > 10000000) {
                         mNewWishCost.setError("Wish must be less than 10M SEK");
+                    } else if (cost == 0) {
+                        mNewWishCost.setError("Wish price can't be 0 SEK");
                     } else if (wishTitle.isEmpty()) {
                         mNewWishTitle.setError("Field cannot be empty");
                     } else if (wishTitle.length() > 18) {
