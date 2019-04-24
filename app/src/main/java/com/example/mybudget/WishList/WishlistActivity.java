@@ -1,17 +1,21 @@
 package com.example.mybudget.WishList;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.WindowDecorActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.mybudget.Account.AccountActivity;
@@ -28,14 +32,16 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     private static final String TAG = "WishlistActivity";
     protected ArrayList<Integer> mWishId = new ArrayList<>();
     protected ArrayList <String> mWishNames = new ArrayList<>();
-    private ArrayList <String> mImageUrls = new ArrayList<>();
+    private ArrayList <Integer> mImageUrls = new ArrayList<>();
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
+    private ArrayList<Drawable> mDrawable = new ArrayList<>();
     private FloatingActionButton addWish;
     protected int id;
     protected int wishPrice;
     protected Integer progress;
     int index;
+    private Toolbar toolbar;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
     @Override
@@ -43,11 +49,19 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
         Log.d(TAG, "onCreate: startec");
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         /*
          * Method creates a pathway to the other
          * activities via a navigation bar
          */
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Wishlist");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         Menu menu = navigation.getMenu();
@@ -81,6 +95,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
             }
         });
 
+
         addWish = findViewById(R.id.add_wish);
         addWish.show();
         loadDataToRecycle();
@@ -88,14 +103,14 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         //initImageBitmaps();
     }
 
- 
+
     //Method initializes List view with values for Wish List
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: recycler view init");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mWishId ,mWishNames, mWishPrices, mImageUrls,
-                mSavingProgress,this, this );
+                mSavingProgress,this, this ,mDrawable);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -105,6 +120,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     public void onWishClick(int position) {
         Log.d(TAG, "onWishClick: clicked : " + position);
         addWish.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         id =mWishId.get(position);
         wishPrice=mWishPrices.get(position);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -118,6 +134,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     public void onAddWish(View view) {
         Log.d(TAG, "onAddWish: clicked : " );
         addWish.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
         ft.commit();
@@ -134,7 +151,8 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
         for(WishList wl : loadwishes){
             mWishId.add(wl.getWishListId());
             mWishNames.add(wl.getTitle());
-            mImageUrls.add(wl.getImage());
+            mDrawable.add(getDrawable(wl.getImage()));
+            //mImageUrls.add(wl.getImage());
             mWishPrices.add(wl.getCost());
             mSavingProgress.add(wl.getSaved());
         }

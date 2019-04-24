@@ -12,7 +12,7 @@ public class AccountsViewHolder extends RecyclerView.ViewHolder {
     TextView date;
     TextView title;
     TextView amount;
-    TextView status;
+    //TextView status;
 
     AccountsViewHolder(View itemView) {
         super(itemView);
@@ -20,6 +20,6 @@ public class AccountsViewHolder extends RecyclerView.ViewHolder {
         title = (TextView) itemView.findViewById(R.id.title);
         date = (TextView) itemView.findViewById(R.id.date);
         amount = (TextView) itemView.findViewById(R.id.amount);
-        status = (TextView) itemView.findViewById(R.id.status);
+        //status = (TextView) itemView.findViewById(R.id.status);
     }
 }

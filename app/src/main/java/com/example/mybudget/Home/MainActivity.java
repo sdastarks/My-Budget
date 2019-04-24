@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -47,7 +48,11 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
     private TextView tvBalance;
     private int progress;
     private ImageView imageViewHero;
+    private FloatingActionButton addIncome;
+    private FloatingActionButton outOutcome;
+    private Toolbar toolbar;
     private Button register_button;
+    private Drawable d;
 
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -59,21 +64,31 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         setContentView(R.layout.activity_main);
         Log.v("SettingsActivityLog","imageResId2: "+imageResId);
 
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        addIncome = findViewById(R.id.floatingActionButton_add);
+        outOutcome = findViewById(R.id.floatingActionButton_minus);
         imageViewHero=findViewById(R.id.imageViewHero);
         if(imageResId != -1){
-            Drawable d=getDrawable(imageResId);
+            d = getDrawable(imageResId);
             imageViewHero.setImageDrawable(d);
         }
 
         //Sets the state of the drawer navigation bar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         drawer = findViewById(R.id.drawer_layout);
-       ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+
+        View headView = navigationView.getHeaderView(0);
+        ImageView heroImageNav = headView.findViewById(R.id.hero_image_side_nav);
+        if(imageResId != -1){
+            d = getDrawable(imageResId);
+            heroImageNav.setImageDrawable(d);
+        }
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -90,7 +105,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
 
             }
         });
-
 
         /*
          * Method creates a pathway to the other
@@ -185,6 +199,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
      * user to enter an inflow
      */
     public void onAddSelected(View view) {
+        addIncome.hide();
+        outOutcome.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow = true;
@@ -196,6 +213,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
      * user to enter an outflow
      */
     public void onMinusSelected(View view) {
+        addIncome.hide();
+        outOutcome.hide();
+        toolbar.setVisibility(View.INVISIBLE);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_placeholder, new InflowOutflowFragment());
         inflow = false;

@@ -6,85 +6,113 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:clickable="true"
     tools:context=".WishList.NewWishFragment">
 
-    <TextView
-        android:id="@+id/SEK2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="@string/currency"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText_cost"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editText_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:hint="@string/wish_name_hint"
-        android:inputType="textPersonName"
-        android:textSize="22sp"
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/new_wish_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wish_picture" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editText_cost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="50dp"
-        android:ems="10"
-        android:hint="@string/costHint"
-        android:inputType="number"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SEK2"
-        app:layout_constraintTop_toBottomOf="@+id/editText_title"
-        app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/btn_save_new_wish"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/icon_done_white" />
+
+
+        <Button
+            android:id="@+id/btn_cancel_new_wish"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:background="@drawable/icon_cancel_white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your New Wish"
+            style="@style/HeadlineTextStyle"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
 
     <ImageView
-        android:id="@+id/wish_picture"
-        android:layout_width="255dp"
-        android:layout_height="175dp"
+        android:id="@+id/image_wish_cathegory"
+        android:layout_width="352dp"
+        android:layout_height="150dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="24dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/dream"
+        android:src="@drawable/button_wish_iceskate"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/new_wish_toolbar" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_exit_new_wish"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/wish_title_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_wish_cathegory">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/wish_title"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter the name of the  wish"
+            android:inputType="text"
+            android:textSize="22sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/wish_cost_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:clickable="true"
-        android:src="@drawable/icon_cancel_white"
-        app:fabSize="mini"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wish_title_layout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/wish_cost"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter the price of the wish"
+            android:inputType="number"
+            android:textSize="22sp" />
+
+    </android.support.design.widget.TextInputLayout>
 
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView3"
         android:layout_width="395dp"
         android:layout_height="105dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/editText_cost"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -102,12 +130,9 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:clickable="true"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/button_wish_bike"
-                    android:onClick="bike"
-
-
-                    />
+                    app:srcCompat="@drawable/button_wish_bike"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -153,7 +178,7 @@
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/button_wish_gadgets"/>
+                    app:srcCompat="@drawable/button_wish_gadgets" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -344,18 +369,5 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_save_wish"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="true"
-        android:src="@drawable/icon_done_white"
-        app:fabCustomSize="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView3" />
 
 </android.support.constraint.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.mybudget.WishList;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class WishFragment extends Fragment {
     private TextView mwishTitle;
     private TextView mwishPrice;
     private TextView msavingProgress;
+    private ImageView wish_picture_fragment;
     private int index;
     private int progress;
     private int dbid;
@@ -59,17 +62,18 @@ public class WishFragment extends Fragment {
         mwishTitle = view.findViewById(R.id.wish_title_wish_frag);
         mwishPrice = view.findViewById(R.id.wish_price);
         msavingProgress = view.findViewById(R.id.saving_progress);
-
+        wish_picture_fragment = view.findViewById(R.id.wish_picture_fragment);
 
         //selected wish database id and Wish
         dbid = ((WishlistActivity) getActivity()).id;
         wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
+        wish_picture_fragment.setImageResource(wishSelected.getImage());
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
 
-        cancelWishFragment = view. findViewById(R.id.cancel_wish_fragment);
-        editWishFragment = view. findViewById(R.id.edit_wish);
+        cancelWishFragment = view. findViewById(R.id.btn_cancel_wish_fragment);
+        editWishFragment = view. findViewById(R.id.btn_edit_wish);
 
         favouriteWish_btn=view.findViewById(R.id.floatingActionButton_favourite_wish_btn);
 

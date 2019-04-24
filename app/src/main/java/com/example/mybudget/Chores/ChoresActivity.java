@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,7 +103,7 @@ public class ChoresActivity extends SettingsActivity {
         vacuum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "Doing the vacuum";
+                 title = "Doing the vacuuming";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -113,7 +112,7 @@ public class ChoresActivity extends SettingsActivity {
         beingNice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "Being nice ";
+                 title = "Being nice";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -122,7 +121,7 @@ public class ChoresActivity extends SettingsActivity {
         petting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "taking care of our pet";
+                 title = "Walking the dog";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -131,7 +130,7 @@ public class ChoresActivity extends SettingsActivity {
         grass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "Do the grading";
+                 title = "Mowing the lawn";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -140,7 +139,7 @@ public class ChoresActivity extends SettingsActivity {
         mopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "Do the mopping";
+                 title = "Mopping the floor";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -149,7 +148,7 @@ public class ChoresActivity extends SettingsActivity {
         goodGrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "Get a high grade at class";
+                 title = "A high grade in class";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -158,7 +157,7 @@ public class ChoresActivity extends SettingsActivity {
         cooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "Cook a small dish";
+                 title = "Cooking a small dish";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -167,7 +166,7 @@ public class ChoresActivity extends SettingsActivity {
         baby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 title = "take care of your little sibling";
+                 title = "Babysitting";
                  amount = 50;
                 addMoney(title,amount);
             }
@@ -185,7 +184,7 @@ public class ChoresActivity extends SettingsActivity {
 
     public void addMoney(String title, int amount) {
 
-        addChoresMoney add = new addChoresMoney();
+        addChoresMoneyFragment add = new addChoresMoneyFragment();
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putInt("amount", amount);

@@ -16,11 +16,10 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="false"
         android:background="?attr/colorSecondary"
-        android:gravity="center"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:text="Earn more money with chores!"
-        android:textSize="18dp"
-        android:textColor="#fff"></TextView>
+        android:text="Earn money with chores!"
+        style="@style/HeadlineTextStyle">
+        </TextView>
 
     <TableLayout
         android:layout_width="413dp"
