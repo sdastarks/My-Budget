@@ -41,6 +41,7 @@
         </LinearLayout>
 
 
+
         <ImageView
             android:id="@+id/imageViewHero"
             android:layout_width="0dp"
@@ -234,7 +235,6 @@
             app:layout_constraintTop_toTopOf="@+id/toolbar">
 
         </FrameLayout>
-
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation"
