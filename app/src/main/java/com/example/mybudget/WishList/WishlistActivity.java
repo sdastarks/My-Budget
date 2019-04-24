@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.Chores.ChoresActivity;
@@ -40,6 +41,7 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     protected int id;
     protected int wishPrice;
     protected Integer progress;
+    private Button register_button;
     int index;
     private Toolbar toolbar;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);

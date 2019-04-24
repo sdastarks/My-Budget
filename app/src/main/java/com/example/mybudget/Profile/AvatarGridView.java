@@ -24,10 +24,10 @@ public class AvatarGridView extends BaseAdapter {
     public AvatarGridView(Context context) {
         mInflater = LayoutInflater.from(context);
 
-        mItems.add(new Item(R.drawable.cookie));
-        mItems.add(new Item(R.drawable.crazy));
-        mItems.add(new Item(R.drawable.girl));
-        mItems.add(new Item(R.drawable.science));
+        mItems.add(new Item(R.drawable.cookie_bg));
+        mItems.add(new Item(R.drawable.crazy_bgpng));
+        mItems.add(new Item(R.drawable.girl_bg));
+        mItems.add(new Item(R.drawable.science_bg));
     }
 
     @Override
