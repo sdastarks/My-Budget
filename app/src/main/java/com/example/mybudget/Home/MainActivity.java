@@ -64,6 +64,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         setContentView(R.layout.activity_main);
         Log.v("SettingsActivityLog","imageResId2: "+imageResId);
 
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         addIncome = findViewById(R.id.floatingActionButton_add);
         outOutcome = findViewById(R.id.floatingActionButton_minus);
         imageViewHero=findViewById(R.id.imageViewHero);
@@ -73,8 +76,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         }
 
         //Sets the state of the drawer navigation bar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
