@@ -16,12 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+      <include
             android:id="@+id/toolbar"
             layout="@layout/tool_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
 
         <LinearLayout
@@ -39,7 +40,6 @@
                 android:clickable="true"
                 />
         </LinearLayout>
-
 
 
         <ImageView
