@@ -37,6 +37,9 @@ public class AccountActivity extends SettingsActivity {
     private AccountsRecyclerViewAdapter adapter;
     private TextView tvBalance;
     private int currentlog = 0;
+    private Spinner mySpinner;
+    private Spinner mySpinnerMonths;
+    private BottomNavigationView navigation;
 
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
@@ -58,7 +61,7 @@ public class AccountActivity extends SettingsActivity {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Spinner mySpinner = (findViewById(R.id.spinner1));
+        mySpinner = (findViewById(R.id.spinner1));
 
         String [] labels={"Everything","Expenses","Income","On wish","Chore Money"};
 
@@ -66,6 +69,35 @@ public class AccountActivity extends SettingsActivity {
                 R.layout.spinner_item, labels);
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mySpinner.setAdapter(spinnerAdapter);
+        mySpinnerOnClick();
+
+
+        mySpinnerMonths = (findViewById(R.id.spinner_months));
+
+        String [] labelsMonths = {"Everything","January","February","March","April", "May", "April", "June", "July",
+        "August", "September", "October", "November", "December"};
+
+        ArrayAdapter<String> spinnerAdapterMonths = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, labelsMonths);
+        spinnerAdapterMonths.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        mySpinnerMonths.setAdapter(spinnerAdapterMonths);
+        mySpinnerMonthsOnClick();
+
+        /*
+         * Method creates a pathway to the other
+         * activities via a navigation bar
+         */
+
+        navigation = findViewById(R.id.bottom_navigation);
+        Menu menu = navigation.getMenu();
+        MenuItem menuItem =menu.getItem(2);
+        menuItem.setChecked(true);
+        bottomNavigationOnClick();
+
+    }
+
+
+    public void mySpinnerOnClick() {
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -100,22 +132,57 @@ public class AccountActivity extends SettingsActivity {
                 mRecyclerView.setAdapter(adapter);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+    }
 
+    public void mySpinnerMonthsOnClick() {
+        mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
+                // TODO: 2019-04-24 Dawnie
 
-        /*
-         * Method creates a pathway to the other
-         * activities via a navigation bar
-         */
+//                if(position == 0){
+//                    currentlog = db.balance();
+//                    tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
+//                }
+//                else if(position == 1)
+//                {
+//                    currentlog = db.calcExpenses();
+//                    tvBalance.setText("Spent: " + String.valueOf(currentlog) + " SEK");
+//                }
+//                else if (position == 2){
+//                    currentlog = db.calcIncome();
+//                    tvBalance.setText("Income: " + String.valueOf(currentlog) + " SEK");
+//                }
+//                else if(position == 3){
+//                    currentlog = db.calcWish();
+//                    tvBalance.setText("On wish: " + String.valueOf(currentlog) + " SEK");
+//                }
+//                else if(position == 4){
+//                    currentlog = db.calcEarning();
+//                    tvBalance.setText("Chore Money: " + String.valueOf(currentlog) + " SEK");
+//                }
+//
+//                data = fill_with_data(position);
+//                adapter = new AccountsRecyclerViewAdapter(data, getApplication());
+//
+//                mRecyclerView.setAdapter(adapter);
+//                mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+           }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
-        Menu menu = navigation.getMenu();
-        MenuItem menuItem =menu.getItem(2);
-        menuItem.setChecked(true);
+            }
+        });
+    }
+
+    public void bottomNavigationOnClick () {
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -138,11 +205,11 @@ public class AccountActivity extends SettingsActivity {
                         Intent intent3 = new Intent(AccountActivity.this, ChoresActivity.class);
                         startActivity(intent3);
                         break;
-
                 }
                 return false;
             }
         });
+
     }
 
     /*
