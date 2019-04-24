@@ -40,15 +40,13 @@
 
 
         <Button
-            android:id="@+id/cancel_registration_activity"
+            android:id="@+id/btn_cancel_register_user"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_gravity="left"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/icon_cancel_white"
-            android:clickable="true"
-            android:text=" "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
