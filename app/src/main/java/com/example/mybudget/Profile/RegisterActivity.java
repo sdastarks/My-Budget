@@ -9,18 +9,22 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
 import com.example.mybudget.R;
 import com.example.mybudget.SettingsActivity;
+import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
 
@@ -48,6 +52,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
     private AppCompatButton appCompatButtonRegister;
     private AppCompatButton appCompatButtonUpdateUser;
+    private Button btn_exitRegisterActivity;
 
     private TextView appCompatTextViewLoginLink;
     private TextView chooseAvatarTextView;
@@ -117,6 +122,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
             }
         }
+        activateOnExitRegisterActiviy();
     }
 
     /**
@@ -161,6 +167,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
         appCompatButtonUpdateUser = (AppCompatButton) findViewById(R.id.appCompatButtonUpdateUser);
         appCompatTextViewLoginLink = (TextView) findViewById(R.id.appCompatTextViewLoginLink);
         chooseAvatarTextView = (TextView) findViewById(R.id.textView4);
+        btn_exitRegisterActivity = (Button) findViewById(R.id.btn_cancel_register_user);
 
         appCompatButtonRegister.setOnClickListener(this);
         appCompatButtonUpdateUser.setOnClickListener(this);
@@ -197,6 +204,8 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                     if (inputValidation()) {
                         addUser(user);
                         Log.v(TAG, "user added");
+                        Intent intentLoadMainPage = new Intent (RegisterActivity.this, MainActivity.class);
+                        startActivity(intentLoadMainPage);
                     }
                 }
                 break;
@@ -204,7 +213,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 case R.id.appCompatButtonUpdateUser: {
                     if (inputValidation()) {
                         updateUser(user);
-                        Log.v(TAG, "user updated");
+                        //Log.v(TAG, "user updated");
                     }
                 }
                 break;
@@ -421,6 +430,19 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
         appCompatButtonRegister.setVisibility(View.GONE);
         appCompatButtonUpdateUser.setVisibility(View.GONE);
         appCompatTextViewLoginLink.setVisibility(View.GONE);
+
+    }
+
+
+    private void activateOnExitRegisterActiviy() {
+
+        btn_exitRegisterActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentExitActivity = new Intent (RegisterActivity.this, MainActivity.class);
+                startActivity(intentExitActivity);
+            }
+        });
 
     }
 
