@@ -53,13 +53,6 @@ public class AccountActivity extends SettingsActivity {
         //create recycler view
         mRecyclerView = findViewById(R.id.recyclerview);
 
-        //data = fill_with_data(0);
-        data = filterEntriesByDate(fill_with_data(0),0);
-
-        adapter = new AccountsRecyclerViewAdapter(data, getApplication());
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mySpinner = (findViewById(R.id.spinner1));
 
         String [] labels={"Everything","Expenses","Income","On wish","Chore Money"};
@@ -69,7 +62,6 @@ public class AccountActivity extends SettingsActivity {
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mySpinner.setAdapter(spinnerAdapter);
         mySpinnerOnClick();
-
 
         mySpinnerMonths = (findViewById(R.id.spinner_months));
 
@@ -93,8 +85,8 @@ public class AccountActivity extends SettingsActivity {
         menuItem.setChecked(true);
         bottomNavigationOnClick();
 
+        settingAdapter();
     }
-
 
     public void mySpinnerOnClick() {
 
@@ -102,47 +94,30 @@ public class AccountActivity extends SettingsActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
-
                 if(position == 0){
                     currentlog = db.balance();
                     tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
-                    entries = fill_with_data(0);
-//                    data = filterEntriesByDate(entries, 0);
                 }
                 else if(position == 1)
                 {
                     currentlog = db.calcExpenses();
                     tvBalance.setText("Spent: " + String.valueOf(currentlog) + " SEK");
-                    entries = fill_with_data(1);
-                   // data = filterEntriesByDate(fill_with_data(1),0);
                 }
                 else if (position == 2){
                     currentlog = db.calcIncome();
                     tvBalance.setText("Income: " + String.valueOf(currentlog) + " SEK");
-                    entries = fill_with_data(2);
-//                    data = filterEntriesByDate(fill_with_data(2),0);
                 }
                 else if(position == 3){
                     currentlog = db.calcWish();
                     tvBalance.setText("On wish: " + String.valueOf(currentlog) + " SEK");
-                    entries = fill_with_data(3);
-//                    data = filterEntriesByDate(fill_with_data(3),0);
                 }
                 else if(position == 4){
                     currentlog = db.calcEarning();
                     tvBalance.setText("Chore Money: " + String.valueOf(currentlog) + " SEK");
-                    entries = fill_with_data(4);
-//                    data = filterEntriesByDate(fill_with_data(4),0);
                 }
                 //TODO Dawnie
-                /*will be placed in the date filter spinner
-                data = filterEntriesByDate(entries, spinnerPosition);
-                adapter = new AccountsRecyclerViewAdapter(data, getApplication());
-                mRecyclerView.setAdapter(adapter);
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                */
+                settingAdapter();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -156,34 +131,7 @@ public class AccountActivity extends SettingsActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
                 // TODO: 2019-04-24 Dawnie
-
-//                if(position == 0){
-//                    currentlog = db.balance();
-//                    tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
-//                }
-//                else if(position == 1)
-//                {
-//                    currentlog = db.calcExpenses();
-//                    tvBalance.setText("Spent: " + String.valueOf(currentlog) + " SEK");
-//                }
-//                else if (position == 2){
-//                    currentlog = db.calcIncome();
-//                    tvBalance.setText("Income: " + String.valueOf(currentlog) + " SEK");
-//                }
-//                else if(position == 3){
-//                    currentlog = db.calcWish();
-//                    tvBalance.setText("On wish: " + String.valueOf(currentlog) + " SEK");
-//                }
-//                else if(position == 4){
-//                    currentlog = db.calcEarning();
-//                    tvBalance.setText("Chore Money: " + String.valueOf(currentlog) + " SEK");
-//                }
-//
-//                data = fill_with_data(position);
-//                adapter = new AccountsRecyclerViewAdapter(data, getApplication());
-//
-//                mRecyclerView.setAdapter(adapter);
-//                mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                settingAdapter();
            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -219,10 +167,6 @@ public class AccountActivity extends SettingsActivity {
                 return false;
             }
         });
-
-
-        int num = getMonthesOfEntries();
-
     }
 
     /**
@@ -293,8 +237,6 @@ public class AccountActivity extends SettingsActivity {
 
         if(spinnerPosition == 0) {
             allEntries = dataFilteredByTypeOfEntry;
-            for(Entry e : allEntries)
-                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
         }
         else if(spinnerPosition == 1) {
             for (Entry entry : dataFilteredByTypeOfEntry) {
@@ -310,7 +252,6 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         else if(spinnerPosition == 3){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "MARCH"){
@@ -325,7 +266,6 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         else if(spinnerPosition == 5){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "MAY"){
@@ -333,7 +273,6 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         else if(spinnerPosition == 6){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "JUNE"){
@@ -341,7 +280,6 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         else if(spinnerPosition == 7){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "JULY"){
@@ -349,7 +287,6 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         else if(spinnerPosition == 8){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "AUGUST"){
@@ -357,7 +294,6 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         else if(spinnerPosition == 9){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "SEPTEMBER"){
@@ -365,7 +301,6 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         else if(spinnerPosition == 10){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "OCTOBER"){
@@ -373,15 +308,13 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
-        else if(spinnerPosition ==11){
+        else if(spinnerPosition == 11){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "NOVEMBER"){
                     allEntries.add(entry);
                 }
             }
         }
-
         else if(spinnerPosition == 12){
             for(Entry entry : dataFilteredByTypeOfEntry){
                 if(entry.getDate().getMonth().toString() == "DECEMBER"){
@@ -389,11 +322,22 @@ public class AccountActivity extends SettingsActivity {
                 }
             }
         }
-
         for(Entry e : allEntries){
             row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
         }
         return row;
+    }
+
+    /**
+     * setting the spinners adapter with the selected filters
+     * @auth Dawnie Safar
+     */
+    public void settingAdapter(){
+        entries = fill_with_data(mySpinner.getSelectedItemPosition());
+        data = filterEntriesByDate(entries, mySpinnerMonths.getSelectedItemPosition());
+        adapter = new AccountsRecyclerViewAdapter(data, getApplication());
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 }
 
