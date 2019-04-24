@@ -30,6 +30,7 @@ import com.example.mybudget.myDbHelper;
 
 import java.io.File;
 import java.util.ArrayList;
+
 /**
  * The activity is used to create user Profile
  *
@@ -37,8 +38,6 @@ import java.util.ArrayList;
  */
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "ProfileActivityLog";
-
-    public static final String PREFS_NAME = "user_name";
     User user = new User();
     private myDbHelper databaseHelper;
 
@@ -74,13 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
         initializeObjects();
 
         user = databaseHelper.getUser();
-        if(user!= null) {
-            String userName = user.getUserFirstName();
-            SharedPreferences prefs = getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
-            saveUser(userName);
-            getUser(userName);
+        if (user != null) {
             setValues();
-        }else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
 
 
 
@@ -91,17 +86,6 @@ public class ProfileActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         permissionsToRequest = findUnAskedPermissions(permissions);*/
 
-    }
-    private void saveUser(String userName) {
-        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString(PREFS_NAME, userName);
-        editor.apply();
-    }
-
-    private String getUser(String userName){
-        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
-        return sharedPrefs.getString(PREFS_NAME,userName);
     }
 
     private void initializeViews() {
@@ -115,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
     }
 
-    private void setValues(){
+    private void setValues() {
         initializeViews();
         user = databaseHelper.getUser();
         userFirstName = user.getUserFirstName();
@@ -126,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
         textFirstName.setText(userFirstName);
         textLastName.setText(userLastName);
         textEmail.setText(userEmail);
-        textAge.setText(""+userAge);
+        textAge.setText("" + userAge);
     }
 
 
