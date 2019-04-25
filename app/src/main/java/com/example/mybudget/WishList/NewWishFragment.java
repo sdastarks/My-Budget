@@ -208,8 +208,8 @@ public class NewWishFragment extends Fragment {
                     } else if (wishTitle.length() > 18) {
                         mNewWishTitle.setError("Wish must be less than 18 characters");
                     }
-                     else if (drawable==0){
-                        mNewWishTitle.setError("Select a category");
+                     else if (drawable == 0){
+                        drawable = R.drawable.button_wish_dream;
                     }
                     else {
                         WishList wish = new WishList();

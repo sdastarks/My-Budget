@@ -45,9 +45,9 @@
     <ImageView
         android:id="@+id/edit_wish_picture"
         android:layout_width="352dp"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,13 +56,12 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_wish_toolbar" />
 
 
-
     <android.support.design.widget.TextInputLayout
         android:id="@+id/edit_wish_title_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,13 +84,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.413"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_wish_title_layout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/edit_wish_title_layout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_wish_cost"
@@ -114,6 +110,296 @@
         app:fabCustomSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView3"
+        android:layout_width="395dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_wish_cost_layout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/bike_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_bike" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="bike" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/clothes_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_clothes" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="clothes" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/gadgets_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_gadgets" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="gadgets" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/games_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_games" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="games" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/gift_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_gift" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="gift" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/holiday_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_holiday" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="holiday" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/iceskate_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_iceskate" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="ice skate" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/pets_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_pets" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="pets" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/scooter_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_scooter" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="scooter" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/shoes_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_shoes" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="shoes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/dream_edit"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/button_wish_dream" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:gravity="center"
+                    android:text="other" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
 
 
 </android.support.constraint.ConstraintLayout>
