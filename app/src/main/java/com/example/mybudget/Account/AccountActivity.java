@@ -368,6 +368,7 @@ public class AccountActivity extends SettingsActivity {
     }
     private void removeItem(int id){
             Log.v(TAG, "id: "+id);
+            db.deleteEntry(id);
     }
 }
 
