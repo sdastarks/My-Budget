@@ -45,7 +45,7 @@ import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
 
 /**
  * The activity is used to create user Profile
- *
+ *And pick an avatar
  * @author Benish
  */
 public class ProfileActivity extends SettingsActivity {
