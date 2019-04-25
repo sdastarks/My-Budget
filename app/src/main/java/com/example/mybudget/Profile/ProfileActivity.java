@@ -97,9 +97,12 @@ public class ProfileActivity extends SettingsActivity {
             setUserPersonalData(userGlobalId);
             setUserBalanceValues();
             updateBalance();
+            savingsOfUser();
+            spendingsOfUser();
+
             } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation_profile);
         Menu menu = navigation.getMenu();
         MenuItem menuItem =menu.getItem(1);
         menuItem.setChecked(true);
@@ -176,6 +179,23 @@ public class ProfileActivity extends SettingsActivity {
         int balance = (income + earning) - (expense + wishes);
         user_profile_balance.setText(String.valueOf(balance) + " SEK");
         return balance;
+    }
+
+    public int savingsOfUser(){
+        user_profile_savings = (TextView)findViewById(R.id.profile_savings);
+        int wishes = databaseHelper.calcWish();
+        int savings = wishes;
+        user_profile_savings.setText(String.valueOf(savings) + " SEK");
+        return savings;
+    }
+
+    public int spendingsOfUser(){
+        user_profile_spendings = (TextView)findViewById(R.id.profile_spending);
+        int expense = databaseHelper.calcExpenses();
+        int wishes = databaseHelper.calcWish();
+        int spendings = (expense + wishes);
+        user_profile_spendings.setText(String.valueOf(spendings) + " SEK");
+        return spendings;
     }
 
 
