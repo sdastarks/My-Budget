@@ -55,8 +55,9 @@ public class EditWishFragment extends Fragment {
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Edit = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         editWishPicture.setImageResource(wish2Edit.getImage());
-        meditTitle.setHint(wish2Edit.getTitle());
-        meditCost.setHint(wish2Edit.getCost() + " SEK");
+        meditTitle.setText(wish2Edit.getTitle());
+        meditCost.setText(String.valueOf(wish2Edit.getCost()));
+        drawable = wish2Edit.getImage();
 
         ImageView theBikePic = view.findViewById(R.id.bike_edit);
         theBikePic.setOnClickListener(new View.OnClickListener() {
@@ -212,18 +213,18 @@ public class EditWishFragment extends Fragment {
                         meditCost.setError("You've already saved " + wish2Edit.getSaved() + " SEK");
                     } else if (title.isEmpty()) {
                         Log.v(TAG, "title: " + title + "cost: " + cost);
-                        updateWish(wish2Edit.getTitle(), cost, drawable);
+                        updateWish();
                     } else if (title.length() > 18) {
                         meditTitle.setError("Wish must be less than 18 characters");
                     } else {
-                        updateWish(title, cost, drawable);
+                        updateWish();
                     }
 
                 } catch (Exception e) {
                     if (meditCost.getText().toString().trim().isEmpty()) {
                         Log.v(TAG, "if statment initialsed");
                         Log.v(TAG, "title: " + meditTitle.getText().toString() + " cost: " + wish2Edit.getCost());
-                        updateWish(meditTitle.getText().toString(), wish2Edit.getCost(), wish2Edit.getImage());
+                        updateWish();
                     } else {
                         meditCost.setError("Try Again");
                     }
@@ -234,8 +235,24 @@ public class EditWishFragment extends Fragment {
         });
     }
 
-    public void updateWish(String title, int cost, int drawable) {
-        ((WishlistActivity) getActivity()).db.updateWish(dbid, title, cost, wish2Edit.getSaved(), drawable);
+    public void updateWish() {
+        String newTitle = meditTitle.getText().toString();
+        int newCost = Integer.parseInt(meditCost.getText().toString());
+        int newDrawable = drawable;
+
+        if(meditTitle.getText().toString()== wish2Edit.getTitle())
+            newTitle = wish2Edit.getTitle();
+        else newTitle = meditTitle.getText().toString();
+
+        if(meditCost.getText().toString() == String.valueOf(wish2Edit.getCost()))
+            newCost = wish2Edit.getCost();
+        else newCost =Integer.parseInt(meditCost.getText().toString());
+
+        if(drawable == wish2Edit.getImage())
+            newDrawable = wish2Edit.getImage();
+        else newDrawable = drawable;
+
+        ((WishlistActivity) getActivity()).db.updateWish(dbid, newTitle, newCost, wish2Edit.getSaved(), newDrawable);
         Intent intent = new Intent(getActivity(), WishlistActivity.class);
         startActivity(intent);
     }
