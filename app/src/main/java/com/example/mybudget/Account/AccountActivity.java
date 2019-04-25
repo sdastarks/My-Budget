@@ -2,6 +2,7 @@ package com.example.mybudget.Account;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.R;
+import com.example.mybudget.WishList.RegisterRequestDialog;
 import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
@@ -39,6 +41,8 @@ public class AccountActivity extends AvatarChangeActivity {
     private Spinner mySpinner;
     private Spinner mySpinnerMonths;
     private BottomNavigationView navigation;
+    public static final String USER_PREFS_NAME = "userPreferenceFile";
+    public static final String USER_ID = "userId";
 
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
@@ -57,22 +61,33 @@ public class AccountActivity extends AvatarChangeActivity {
 
         String [] labels={"Everything","Expenses","Income","On wish","Chore Money"};
 
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, labels);
-        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        mySpinner.setAdapter(spinnerAdapter);
-        mySpinnerOnClick();
-
         mySpinnerMonths = (findViewById(R.id.spinner_months));
 
         String [] labelsMonths = {"Everything","January","February","March","April", "May", "June", "July",
         "August", "September", "October", "November", "December"};
 
-        ArrayAdapter<String> spinnerAdapterMonths = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, labelsMonths);
-        spinnerAdapterMonths.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        mySpinnerMonths.setAdapter(spinnerAdapterMonths);
-        mySpinnerMonthsOnClick();
+
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
+        if (sharedPrefs.getInt(USER_ID, 0) == 0) {
+            Log.d(TAG, "onAddWish: locking user if not registered");
+            RegisterRequestDialog dialog = new RegisterRequestDialog();
+            dialog.show(getSupportFragmentManager(), "register request dialog");
+
+        } else {
+            ArrayAdapter<String> spinnerAdapterMonths = new ArrayAdapter<String>(this,
+                    R.layout.spinner_item, labelsMonths);
+            spinnerAdapterMonths.setDropDownViewResource(R.layout.spinner_dropdown_item);
+            mySpinnerMonths.setAdapter(spinnerAdapterMonths);
+            mySpinnerMonthsOnClick();
+
+            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+                    R.layout.spinner_item, labels);
+            spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+            mySpinner.setAdapter(spinnerAdapter);
+
+            mySpinnerOnClick();
+
+        }
 
         /*
          * Method creates a pathway to the other
@@ -89,30 +104,31 @@ public class AccountActivity extends AvatarChangeActivity {
     }
 
     public void mySpinnerOnClick() {
+            mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    settingAdapter();
+                }
 
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                settingAdapter();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                }
+            });
     }
 
     public void mySpinnerMonthsOnClick() {
-        mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                settingAdapter();
-           }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    settingAdapter();
+                }
 
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
     }
 
     public void bottomNavigationOnClick () {
