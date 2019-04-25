@@ -2,9 +2,11 @@ package com.example.mybudget;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,9 @@ public class ProfileActivity extends SettingsActivity {
     private boolean switchValue;
     SharedPreferences sharedPreferences;
     int userGlobalId;
+    private Drawable d;
+    private ImageView hero_profile;
+
 
     /*
     private static final int CAMERA_TAKE_REQUEST = 200;
@@ -61,6 +66,12 @@ public class ProfileActivity extends SettingsActivity {
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
         userData = databaseHelper.getUser(userGlobalId);
 
+        hero_profile = (ImageView)findViewById(R.id.hero_image_profile);
+        if(imageResId != -1){
+            d = getDrawable(imageResId);
+            hero_profile.setImageDrawable(d);
+        }
+
         sharedPreferences = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         userGlobalId = sharedPreferences.getInt(USER_ID, 0);;
@@ -74,7 +85,7 @@ public class ProfileActivity extends SettingsActivity {
 
             } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
 
-
+        activateOnExitProfileActiviy();
         /*imageviewCamera = (ImageView)findViewById(R.id.imageviewCamera);
         context = this;
         activity = ProfileActivity.this;
