@@ -282,7 +282,7 @@ public class AccountActivity extends SettingsActivity {
             }
         }
         for(Entry e : allEntries){
-            row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
+            row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry(), e.getEnteryId()));
         }
         return row;
     }
@@ -361,12 +361,14 @@ public class AccountActivity extends SettingsActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+                removeItem((int) viewHolder.itemView.getTag());
             }
         }).attachToRecyclerView(mRecyclerView);
 
     }
-
+    private void removeItem(int id){
+            Log.v(TAG, "id: "+id);
+    }
 }
 
 
