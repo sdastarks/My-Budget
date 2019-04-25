@@ -65,7 +65,7 @@ public class AccountActivity extends AvatarChangeActivity {
 
         mySpinnerMonths = (findViewById(R.id.spinner_months));
 
-        String [] labelsMonths = {"Everything","January","February","March","April", "May", "April", "June", "July",
+        String [] labelsMonths = {"Everything","January","February","March","April", "May", "June", "July",
         "August", "September", "October", "November", "December"};
 
         ArrayAdapter<String> spinnerAdapterMonths = new ArrayAdapter<String>(this,
@@ -156,7 +156,6 @@ public class AccountActivity extends AvatarChangeActivity {
      * @return an arrayList contains filtered data
      */
     public ArrayList<Entry> fill_with_data(int typeOfEntry) {
-        Log.v(TAG, "typeOfEntry: "+typeOfEntry);
         ArrayList<Entry> entries = new ArrayList<>();
 
         if (typeOfEntry == 1) {
@@ -306,7 +305,7 @@ public class AccountActivity extends AvatarChangeActivity {
        if (data.size() > 0){
             tvBalance.setText("Current Filter: " + String.valueOf(calcBalanceAfterFilter(data)));
         }
-        else {
+        else if(data.size() <= 0){
             tvBalance.setText("No data in the specified filter");
         }
         //sending filtered data to recycleView adapter
@@ -328,18 +327,32 @@ public class AccountActivity extends AvatarChangeActivity {
         int onWish = 0;
         int fromChore = 0;
         for (AccountsRow ar : filteredLog){
-            balance += ar.amount;
-//            if(ar.status == 0)
-//            expenses += ar.amount;
-//            else if(ar.status == 1)
-//                income += ar.amount;
-//            else if(ar.status == 2)
-//                onWish += ar.amount;
-//            else if(ar.status == 3)
-//                fromChore += ar.amount;
+            Log.v(TAG, "AccountsRow: " + ar.amount + " " + ar.status);
+            if(ar.status == 0)
+                expenses += ar.amount;
+            else if(ar.status == 1)
+                income += ar.amount;
+            else if(ar.status == 2)
+                onWish += ar.amount;
+            else if(ar.status == 3)
+                fromChore += ar.amount;
         }
-//        balance = income + fromChore - onWish - expenses;
-        return balance;
+        if(mySpinner.getSelectedItemPosition() == 0) {
+            balance = income + fromChore - onWish - expenses;
+            return balance;
+        }
+        else if(mySpinner.getSelectedItemPosition() == 1) {
+            Log.v(TAG, "EXPENSES: " + expenses);
+            return expenses;
+        }
+        else if(mySpinner.getSelectedItemPosition() == 2)
+            return income;
+        else if(mySpinner.getSelectedItemPosition() == 3)
+            return onWish;
+        else if(mySpinner.getSelectedItemPosition() == 4)
+            return fromChore;
+        else return 0;
+
     }
 }
 

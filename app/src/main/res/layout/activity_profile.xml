@@ -5,17 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile.ProfileActivity"
+    tools:context=".ProfileActivity"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="377dp">
+        <Button
+            android:id="@+id/btn_cancel_profile_user"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="?attr/colorPrimary"
+            android:background="@drawable/icon_cancel_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:gravity="center_vertical"
+            android:layout_height="301dp"
+            android:background="@drawable/gradient"
+            android:gravity="bottom"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
@@ -58,8 +70,8 @@
         </LinearLayout>
 
         <android.support.v7.widget.CardView
-            android:layout_width="268dp"
-            android:layout_height="238dp"
+            android:layout_width="273dp"
+            android:layout_height="86dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="300dp"
@@ -82,6 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Balance"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="15sp" />
 
                     <TextView
@@ -90,6 +103,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="Value"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -105,6 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Savings"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="15sp" />
 
                     <TextView
@@ -113,6 +128,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="Value"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -129,6 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Spendings"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="15sp" />
 
                     <TextView
@@ -137,6 +154,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="Value"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -164,6 +182,7 @@
                 android:layout_width="309dp"
                 android:layout_height="52dp"
                 android:layout_gravity="center_vertical"
+                android:textColor="?attr/colorPrimary"
                 android:drawableLeft="@drawable/ic_baseline_person_24px"
                 android:paddingLeft="20dp"
                 android:textStyle="bold" />
@@ -172,7 +191,9 @@
                 android:id="@+id/age_user"
                 android:layout_width="309dp"
                 android:layout_height="43dp"
+                android:textColor="?attr/colorPrimary"
                 android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_baseline_mail_24px"
                 android:paddingLeft="20dp"
                 android:textStyle="bold" />
 
@@ -181,26 +202,14 @@
                 android:layout_width="311dp"
                 android:layout_height="39dp"
                 android:layout_gravity="center_vertical"
+                android:textColor="?attr/colorPrimary"
+                android:drawableLeft="@drawable/ic_baseline_accessibility_new_24px"
                 android:paddingLeft="20dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation_profile"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:background="@drawable/border_button"
-        app:itemIconTint="@drawable/bottom_nav_colours"
-        app:itemTextColor="?attr/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
 
 

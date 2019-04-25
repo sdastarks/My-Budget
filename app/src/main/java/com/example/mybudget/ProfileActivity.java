@@ -1,23 +1,15 @@
-package com.example.mybudget.Profile;
+package com.example.mybudget;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mybudget.Account.AccountActivity;
-import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
-import com.example.mybudget.R;
-import com.example.mybudget.AvatarChangeActivity;
-import com.example.mybudget.WishList.WishlistActivity;
-import com.example.mybudget.myDbHelper;
 
 import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
@@ -44,6 +36,7 @@ public class ProfileActivity extends AvatarChangeActivity {
     private String userLastName;
     private String userEmail;
     private int userAge;
+    private Button btn_exitProfileActivity;
     private boolean switchValue;
     SharedPreferences sharedPreferences;
     int userGlobalId;
@@ -80,40 +73,6 @@ public class ProfileActivity extends AvatarChangeActivity {
             spendingsOfUser();
 
             } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation_profile);
-        Menu menu = navigation.getMenu();
-        MenuItem menuItem =menu.getItem(1);
-        menuItem.setChecked(true);
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                switch (id) {
-                    case R.id.nav_home:
-                        Intent intent0= new Intent(ProfileActivity.this, MainActivity.class);
-                        startActivity(intent0);
-                        break;
-
-                    case R.id.nav_wishlist:
-                        Intent intent1 = new Intent(ProfileActivity.this, WishlistActivity.class);
-                        startActivity(intent1);
-                        break;
-
-                    case R.id.nav_account:
-                        Intent intent2 = new Intent(ProfileActivity.this, AccountActivity.class);
-                        startActivity(intent2);
-                        break;
-                    case R.id.nav_chores:
-                        Intent intent3 = new Intent(ProfileActivity.this, ChoresActivity.class);
-                        startActivity(intent3);
-                        break;
-
-                }
-                return false;
-            }
-        });
 
 
         /*imageviewCamera = (ImageView)findViewById(R.id.imageviewCamera);
@@ -177,6 +136,17 @@ public class ProfileActivity extends AvatarChangeActivity {
         return spendings;
     }
 
+    private void activateOnExitProfileActiviy() {
+        btn_exitProfileActivity = (Button)findViewById(R.id.btn_cancel_profile_user);
+        btn_exitProfileActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentExitActivity = new Intent (ProfileActivity.this, MainActivity.class);
+                startActivity(intentExitActivity);
+            }
+        });
+
+    }
 
 
 
