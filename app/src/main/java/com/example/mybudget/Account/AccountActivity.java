@@ -397,13 +397,21 @@ public class AccountActivity extends SettingsActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                removeItem((int) viewHolder.itemView.getTag());
+                removeItem((int) viewHolder.itemView.getTag(0xfffffff), (int) viewHolder.itemView.getTag(0xffffffff));
+                //removeItem((int) viewHolder.itemView.getTag());
+
+                //Log.v(TAG, "id:"+(int) viewHolder.itemView.getTag());
+                Log.v(TAG, "id: "+(int) viewHolder.itemView.getTag(0xfffffff));
+                Log.v(TAG, "tag: "+(int) viewHolder.itemView.getTag(0xffffffff));
+
             }
         }).attachToRecyclerView(mRecyclerView);
 
     }
-    private void removeItem(int id){
-            Log.v(TAG, "id: "+id);
+    private void removeItem(int id, int label){
+            Log.v(TAG, "id: "+id+" label: "+label);
+        // expenditures = 0; income = 1; spendOnWish = 2; earnedFromChore = 3;
+            //check balance before deleting
             db.deleteEntry(id);
     }
 }
