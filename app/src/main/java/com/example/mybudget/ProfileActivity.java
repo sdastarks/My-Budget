@@ -1,30 +1,14 @@
-package com.example.mybudget.Profile;
+package com.example.mybudget;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ScrollView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,13 +16,7 @@ import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
-import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.WishList.WishlistActivity;
-import com.example.mybudget.myDbHelper;
-
-import java.io.File;
-import java.util.ArrayList;
 
 import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
@@ -65,6 +43,7 @@ public class ProfileActivity extends SettingsActivity {
     private String userLastName;
     private String userEmail;
     private int userAge;
+    private Button btn_exitProfileActivity;
     private boolean switchValue;
     SharedPreferences sharedPreferences;
     int userGlobalId;
@@ -198,6 +177,17 @@ public class ProfileActivity extends SettingsActivity {
         return spendings;
     }
 
+    private void activateOnExitProfileActiviy() {
+        btn_exitProfileActivity = (Button)findViewById(R.id.btn_cancel_profile_user);
+        btn_exitProfileActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentExitActivity = new Intent (ProfileActivity.this, MainActivity.class);
+                startActivity(intentExitActivity);
+            }
+        });
+
+    }
 
 
 
