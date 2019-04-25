@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -305,6 +306,8 @@ public class AccountActivity extends SettingsActivity {
         adapter = new AccountsRecyclerViewAdapter(data, getApplication());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        setUpItemTouchHelper();
     }
 
     /**
@@ -347,6 +350,23 @@ public class AccountActivity extends SettingsActivity {
         else return 0;
 
     }
+
+    private void setUpItemTouchHelper(){
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+            }
+        }).attachToRecyclerView(mRecyclerView);
+
+    }
+
 }
 
 
