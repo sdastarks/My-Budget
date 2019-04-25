@@ -71,7 +71,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
     private String userEmail;
     private int userAge;
 
-    public static final String PREFS_NAME = "userPreferenceFile";
+    public static final String USER_PREFS_NAME = "userPreferenceFile";
     public static final String USER_ID = "userId";
     public static final String USER_NAME = "userName";
     SharedPreferences sharedPreferences;
@@ -84,9 +84,8 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        sharedPreferences = getApplicationContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        sharedPreferences = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(USER_PREFS_NAME, 0);
         userGlobalId = getUserId();
         userGlobalName = getUserName();
 
@@ -121,6 +120,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 appCompatButtonRegister.setVisibility(View.GONE);
                 appCompatTextViewLoginLink.setVisibility(View.GONE);
                 appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
+                chooseAvatarTextView.setVisibility(View.GONE);
                 register_headline.setText("Edit Profile");
             }
         }
@@ -369,7 +369,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
     private void setValues() {
         initializeViews();
-        user = databaseHelper.getUser();
+        user = databaseHelper.getUser(userGlobalId);
         userFirstName = user.getUserFirstName();
         userLastName = user.getUserLastName();
         userEmail = user.getUserMail();
@@ -384,7 +384,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
     //save user name and id in shared preference
     private void saveUser(String userName, int userId) {
-        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString(USER_NAME, userName);
         editor.putInt(USER_ID, userId);
@@ -393,12 +393,12 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
     //get user name and id from shared preference
     private String getUserName() {
-        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         return sharedPrefs.getString(USER_NAME, null);
     }
 
     private int getUserId() {
-        SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         return sharedPrefs.getInt(USER_ID, 0);
     }
 

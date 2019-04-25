@@ -242,6 +242,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 startActivity(intent2);
                 break;
             case R.id.side_nav_settings:
+                Intent intent3 = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent3);
                 Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
                 break;
         }
