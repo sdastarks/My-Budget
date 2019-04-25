@@ -40,13 +40,6 @@ public class GoalHalfReachedDialog extends  AppCompatDialogFragment {
         mPoints = view.findViewById(R.id.txt_points_half_goal_reached);
         mImageHeroGoalHalfReached = view.findViewById(R.id.imageHero_goal_half_reached);
 
-        //Points for reaching half way
-//        int dbid = getArguments().getInt("dbIdHalfGoal");
-//        WishList wish = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-//        int halfCost = wish.getCost()/2;
-//        mPoints.setText("+ "+ halfCost + " points");
-        //Todo: Update points in DB
-
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mCancelHalfWayDialog.setOnClickListener(new View.OnClickListener() {
             @Override

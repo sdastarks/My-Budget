@@ -21,7 +21,7 @@ import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
  *And pick an avatar
  * @author Benish
  */
-public class ProfileActivity extends SettingsActivity {
+public class ProfileActivity extends AvatarChangeActivity {
     private static final String TAG = "ProfileActivityLog";
     User userData = new User();
     private myDbHelper databaseHelper;

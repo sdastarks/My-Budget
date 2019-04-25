@@ -36,7 +36,7 @@
     <string name="cost">Cost:</string>
     <string name="reached_goal_text">You reached your goal! Fantastic!</string>
     <string name="congrads">Cool!</string>
-    <string name="half_way_goal_txt">You are half way to reach your savings goal! Keep it up!</string>
+    <string name="half_way_goal_txt">You are close to reach your savings goal! Keep it up!</string>
     <string name="half_way_encouragement">Well done!</string>
 
     <string-array name="filter">
