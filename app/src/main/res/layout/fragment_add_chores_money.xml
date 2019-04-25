@@ -80,10 +80,11 @@
         android:id="@+id/thinking_frame_chores"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:scaleType="fitEnd"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/money_from_chore_toolbar"
         app:srcCompat="@drawable/speech_bubble_big" />
@@ -106,24 +107,23 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/choresAmount"
-            android:layout_width="55dp"
+            android:layout_width="74dp"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:textAlignment="center"
             android:textColor="?attr/colorPrimaryDark"
             android:textColorHint="?attr/colorPrimaryDark"
+            android:textCursorDrawable="?attr/colorPrimaryDark"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textCursorDrawable="?attr/colorPrimaryDark"/>
+            android:textStyle="bold" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/choresDescription_layout"
-        android:layout_width="170dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="66dp"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
@@ -136,15 +136,15 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/choresDescription"
-            android:layout_width="170dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:textAlignment="center"
             android:textColor="?attr/colorPrimaryDark"
             android:textColorHint="?attr/colorPrimaryDark"
+            android:textCursorDrawable="?attr/colorPrimaryDark"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textCursorDrawable="?attr/colorPrimaryDark"/>
+            android:textStyle="bold" />
 
     </android.support.design.widget.TextInputLayout>
 

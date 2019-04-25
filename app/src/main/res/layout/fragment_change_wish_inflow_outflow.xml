@@ -87,7 +87,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/amount"
-            android:layout_width="55dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:hint="0.00"
             android:inputType="number"

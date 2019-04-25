@@ -64,7 +64,7 @@ public class AccountActivity extends SettingsActivity {
 
         mySpinnerMonths = (findViewById(R.id.spinner_months));
 
-        String [] labelsMonths = {"Everything","January","February","March","April", "May", "April", "June", "July",
+        String [] labelsMonths = {"Everything","January","February","March","April", "May", "June", "July",
         "August", "September", "October", "November", "December"};
 
         ArrayAdapter<String> spinnerAdapterMonths = new ArrayAdapter<String>(this,
