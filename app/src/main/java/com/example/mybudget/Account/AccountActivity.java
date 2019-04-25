@@ -47,8 +47,7 @@ public class AccountActivity extends SettingsActivity {
         setContentView(R.layout.activity_account);
         tvBalance = findViewById(R.id.tvBalance);
         currentlog = db.balance();
-        tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
-
+        //tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
 
         //create recycler view
         mRecyclerView = findViewById(R.id.recyclerview);
@@ -93,29 +92,6 @@ public class AccountActivity extends SettingsActivity {
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
-                if(position == 0){
-                    currentlog = db.balance();
-                    tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
-                }
-                else if(position == 1)
-                {
-                    currentlog = db.calcExpenses();
-                    tvBalance.setText("Spent: " + String.valueOf(currentlog) + " SEK");
-                }
-                else if (position == 2){
-                    currentlog = db.calcIncome();
-                    tvBalance.setText("Income: " + String.valueOf(currentlog) + " SEK");
-                }
-                else if(position == 3){
-                    currentlog = db.calcWish();
-                    tvBalance.setText("On wish: " + String.valueOf(currentlog) + " SEK");
-                }
-                else if(position == 4){
-                    currentlog = db.calcEarning();
-                    tvBalance.setText("Chore Money: " + String.valueOf(currentlog) + " SEK");
-                }
-                //TODO Dawnie
                 settingAdapter();
             }
             @Override
@@ -129,8 +105,6 @@ public class AccountActivity extends SettingsActivity {
         mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(AccountActivity.this, "position: "+position, Toast.LENGTH_SHORT).show();
-                // TODO: 2019-04-24 Dawnie
                 settingAdapter();
            }
             @Override
@@ -170,39 +144,24 @@ public class AccountActivity extends SettingsActivity {
     }
 
     /**
+     * First stage filter function
      * @param typeOfEntry a filter taken from spinner position to specify the type of entry
      * @return an arrayList contains filtered data
      */
     public ArrayList<Entry> fill_with_data(int typeOfEntry) {
         Log.v(TAG, "typeOfEntry: "+typeOfEntry);
-//        List<AccountsRow> row = new ArrayList<>();
         ArrayList<Entry> entries = new ArrayList<>();
 
         if (typeOfEntry == 1) {
             entries = db.expensesEntries();
-//            for (Entry e : entries) {
-//                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
-//            }
         } else if (typeOfEntry == 2) {
             entries = db.incomeEntries();
-//            for (Entry e : entries) {
-//                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
-//            }
         } else if (typeOfEntry == 3) {
             entries = db.wishEntries();
-//            for (Entry e : entries) {
-//                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
-//            }
         } else if (typeOfEntry == 4) {
             entries = db.earningsEntries();
-//            for (Entry e : entries) {
-//                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
-//            }
         } else if (typeOfEntry == 0){
             entries = db.allEntries();
-//            for (Entry e : entries) {
-//                row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry()));
-//            }
         }
         return entries;
     }
@@ -333,11 +292,47 @@ public class AccountActivity extends SettingsActivity {
      * @auth Dawnie Safar
      */
     public void settingAdapter(){
+        //Filtering data
         entries = fill_with_data(mySpinner.getSelectedItemPosition());
         data = filterEntriesByDate(entries, mySpinnerMonths.getSelectedItemPosition());
+        //setting Balance textView
+       if (data.size() > 0){
+            tvBalance.setText("Current Filter: " + String.valueOf(calcBalanceAfterFilter(data)));
+        }
+        else {
+            tvBalance.setText("No data in the specified filter");
+        }
+        //sending filtered data to recycleView adapter
         adapter = new AccountsRecyclerViewAdapter(data, getApplication());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    }
+
+    /**
+     * @param filteredLog specifies the double filtered data(date and typeOfEntry)
+     *                   to calculate the current balance state
+     * @return filtered balance
+     * @auth Dawnie
+     */
+    public int calcBalanceAfterFilter(List<AccountsRow> filteredLog){
+        int balance = 0;
+        int expenses = 0;
+        int income = 0;
+        int onWish = 0;
+        int fromChore = 0;
+        for (AccountsRow ar : filteredLog){
+            balance += ar.amount;
+//            if(ar.status == 0)
+//            expenses += ar.amount;
+//            else if(ar.status == 1)
+//                income += ar.amount;
+//            else if(ar.status == 2)
+//                onWish += ar.amount;
+//            else if(ar.status == 3)
+//                fromChore += ar.amount;
+        }
+//        balance = income + fromChore - onWish - expenses;
+        return balance;
     }
 }
 
