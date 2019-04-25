@@ -1,5 +1,6 @@
 package com.example.mybudget.Chores;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,13 +12,13 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
-public class ChoresActivity extends SettingsActivity {
+public class ChoresActivity extends AvatarChangeActivity {
     protected Boolean inflow;
     private static  final String TAG= "ChoresActivity";
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -63,6 +64,11 @@ public class ChoresActivity extends SettingsActivity {
                         startActivity(intent3);
                         break;
                     case R.id.nav_chores:
+                        break;
+
+                    case R.id.nav_avatar_change:
+                        Intent intent4 = new Intent(ChoresActivity.this, AvatarChangeActivity.class);
+                        startActivity(intent4);
                         break;
 
                 }

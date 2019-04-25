@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.mybudget.Account.AccountActivity;
@@ -18,7 +18,7 @@ import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.WishList.WishlistActivity;
 
 
-public class SettingsActivity extends AppCompatActivity {
+public class AvatarChangeActivity extends AppCompatActivity {
     private static final String TAG = "SettingsActivityLog";
     public static final String PREFS_NAME = "themePreferenceFile";
     public static final String KEY_THEME_RES_ID = "themeResId";
@@ -31,17 +31,20 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         themeResId = settings.getInt(KEY_THEME_RES_ID, -1);
         imageResId = settings.getInt(KEY_DRAWABLE_RES_ID, -1);
+
         if (themeResId != -1) {
             setTheme(themeResId);
         }
         setContentView(R.layout.activity_settings);
 
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         Menu menu = navigation.getMenu();
-        MenuItem menuItem = menu.getItem(0);
+        MenuItem menuItem = menu.getItem(4);
         menuItem.setChecked(true);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -50,26 +53,26 @@ public class SettingsActivity extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.nav_home:
-                        Intent intent0 = new Intent(SettingsActivity.this, MainActivity.class);
+                        Intent intent0 = new Intent(AvatarChangeActivity.this, MainActivity.class);
                         startActivity(intent0);
                         break;
 
                     case R.id.nav_wishlist:
-                        Intent intent1 = new Intent(SettingsActivity.this, WishlistActivity.class);
+                        Intent intent1 = new Intent(AvatarChangeActivity.this, WishlistActivity.class);
                         startActivity(intent1);
                         break;
 
                     case R.id.nav_account:
-                        Intent intent2 = new Intent(SettingsActivity.this, AccountActivity.class);
+                        Intent intent2 = new Intent(AvatarChangeActivity.this, AccountActivity.class);
                         startActivity(intent2);
                         break;
+
                     case R.id.nav_chores:
-                        Intent intent3 = new Intent(SettingsActivity.this, ChoresActivity.class);
+                        Intent intent3 = new Intent(AvatarChangeActivity.this, ChoresActivity.class);
                         startActivity(intent3);
                         break;
-                    case R.id.nav_settings:
-                        Intent intent4 = new Intent(SettingsActivity.this, SettingsActivity.class);
-                        startActivity(intent4);
+
+                    case R.id.nav_avatar_change:
                         break;
 
                 }
@@ -78,39 +81,46 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        Button themeSwitchCookie = findViewById(R.id.btn_cookie);
+        ImageButton themeSwitchCookie = findViewById(R.id.btn_cookie);
         themeSwitchCookie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_CookieMonster, R.drawable.cookie);
+                Intent intent = new Intent(AvatarChangeActivity.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
 
-        Button themeSwitchRobot = findViewById(R.id.btn_science);
+        ImageButton themeSwitchRobot = findViewById(R.id.btn_science);
         themeSwitchRobot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_Science, R.drawable.science);
+                Intent intent = new Intent(AvatarChangeActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
-        Button themeSwitchGirl = findViewById(R.id.btn_girl);
+        ImageButton themeSwitchGirl = findViewById(R.id.btn_girl);
         themeSwitchGirl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_GirlMonster, R.drawable.girl);
+                Intent intent = new Intent(AvatarChangeActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
-        Button themeSwitchCrazy = findViewById(R.id.btn_crazy);
+
+        ImageButton themeSwitchCrazy = findViewById(R.id.btn_crazy);
         themeSwitchCrazy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveAndSwitchTheme(R.style.AppTheme_CrazyMonster, R.drawable.crazy);
+                Intent intent = new Intent(AvatarChangeActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
-
-
     }
 
     private void saveAndSwitchTheme(@StyleRes int themeRes, int imageRes) {
@@ -121,5 +131,7 @@ public class SettingsActivity extends AppCompatActivity {
         editor.apply();
         recreate();
     }
+
 }
+
 
