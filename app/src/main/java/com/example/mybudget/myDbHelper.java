@@ -481,18 +481,19 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
     //Get user record from DB
-    public User getUser(){
+    public User getUser(int user_id){
         open_db();
-        String query = "SELECT * FROM " + USER_PROFILE;
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = this.db.rawQuery("SELECT * FROM " + USER_PROFILE + " where " + USERID + " = " + user_id, null);
         User user = new User();
 
-        if(cursor != null && cursor.moveToFirst()){
-            user.setUserFirstName(cursor.getString(1));
-            user.setUserLastName(cursor.getString(2));
-            user.setUserMail(cursor.getString(3));
-            user.setUserAge(cursor.getInt(4));
-            //userRecord.add(user);
+        if(cursor != null) {
+            if (cursor.moveToFirst()) {
+                user.setUserFirstName(cursor.getString(1));
+                user.setUserLastName(cursor.getString(2));
+                user.setUserMail(cursor.getString(3));
+                user.setUserAge(cursor.getInt(4));
+                //userRecord.add(user);
+            }
         }
         //cursor.close();
         close_db();

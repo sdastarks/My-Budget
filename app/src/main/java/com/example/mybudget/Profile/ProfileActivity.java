@@ -12,46 +12,62 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
 import com.example.mybudget.R;
+import com.example.mybudget.SettingsActivity;
+import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
+import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
 
 /**
  * The activity is used to create user Profile
  *
  * @author Benish
  */
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends SettingsActivity {
     private static final String TAG = "ProfileActivityLog";
-    User user = new User();
+    User userData = new User();
     private myDbHelper databaseHelper;
 
-
-    private TextView textFirstName;
-    private TextView textLastName;
+    private TextView textFullName;
     private TextView textEmail;
     private TextView textAge;
+
+    private TextView user_profile_balance;
+    private TextView user_profile_savings;
+    private TextView user_profile_spendings;
 
     private String userFirstName;
     private String userLastName;
     private String userEmail;
     private int userAge;
     private boolean switchValue;
+    SharedPreferences sharedPreferences;
+    int userGlobalId;
 
     /*
     private static final int CAMERA_TAKE_REQUEST = 200;
@@ -69,14 +85,56 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        initializeViews();
-        initializeObjects();
 
-        user = databaseHelper.getUser();
-        if (user != null) {
-            setValues();
-        } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
+        databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
+        userData = databaseHelper.getUser(userGlobalId);
 
+        sharedPreferences = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        userGlobalId = sharedPreferences.getInt(USER_ID, 0);;
+        if (userGlobalId != 0)
+            {
+            setUserPersonalData(userGlobalId);
+            setUserBalanceValues();
+            updateBalance();
+            savingsOfUser();
+            spendingsOfUser();
+
+            } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation_profile);
+        Menu menu = navigation.getMenu();
+        MenuItem menuItem =menu.getItem(1);
+        menuItem.setChecked(true);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+
+                switch (id) {
+                    case R.id.nav_home:
+                        Intent intent0= new Intent(ProfileActivity.this, MainActivity.class);
+                        startActivity(intent0);
+                        break;
+
+                    case R.id.nav_wishlist:
+                        Intent intent1 = new Intent(ProfileActivity.this, WishlistActivity.class);
+                        startActivity(intent1);
+                        break;
+
+                    case R.id.nav_account:
+                        Intent intent2 = new Intent(ProfileActivity.this, AccountActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.nav_chores:
+                        Intent intent3 = new Intent(ProfileActivity.this, ChoresActivity.class);
+                        startActivity(intent3);
+                        break;
+
+                }
+                return false;
+            }
+        });
 
 
         /*imageviewCamera = (ImageView)findViewById(R.id.imageviewCamera);
@@ -88,30 +146,58 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void initializeViews() {
-        textFirstName = (TextView) findViewById(R.id.textFirstName);
-        textLastName = (TextView) findViewById(R.id.textLastName);
-        textEmail = (TextView) findViewById(R.id.textEmail);
-        textAge = (TextView) findViewById(R.id.textAge);
-    }
+    private void setUserPersonalData(int user_id) {
 
-    private void initializeObjects() {
-        databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
-    }
+        textFullName = (TextView)findViewById(R.id.full_name_user);
+        textAge = (TextView)findViewById(R.id.age_user);
+        textEmail = (TextView)findViewById(R.id.email_user);
 
-    private void setValues() {
-        initializeViews();
-        user = databaseHelper.getUser();
-        userFirstName = user.getUserFirstName();
-        userLastName = user.getUserLastName();
-        userEmail = user.getUserMail();
-        userAge = user.getUserAge();
+        userData = databaseHelper.getUser(user_id);
+        userFirstName = userData.getUserFirstName();
+        userLastName = userData.getUserLastName();
+        userEmail = userData.getUserMail();
+        userAge = userData.getUserAge();
 
-        textFirstName.setText(userFirstName);
-        textLastName.setText(userLastName);
+        textFullName.setText(userFirstName + " "+ userLastName);
         textEmail.setText(userEmail);
         textAge.setText("" + userAge);
     }
+
+    private void setUserBalanceValues(){
+        user_profile_balance = (TextView)findViewById(R.id.profile_balance);
+        user_profile_savings = (TextView)findViewById(R.id.profile_savings);
+        user_profile_spendings = (TextView)findViewById(R.id.profile_spending);
+
+    }
+
+    public int updateBalance(){
+        user_profile_balance = findViewById(R.id.profile_balance);
+        int income = databaseHelper.calcIncome();
+        int expense = databaseHelper.calcExpenses();
+        int wishes = databaseHelper.calcWish();
+        int earning = databaseHelper.calcEarning();
+        int balance = (income + earning) - (expense + wishes);
+        user_profile_balance.setText(String.valueOf(balance) + " SEK");
+        return balance;
+    }
+
+    public int savingsOfUser(){
+        user_profile_savings = (TextView)findViewById(R.id.profile_savings);
+        int wishes = databaseHelper.calcWish();
+        int savings = wishes;
+        user_profile_savings.setText(String.valueOf(savings) + " SEK");
+        return savings;
+    }
+
+    public int spendingsOfUser(){
+        user_profile_spendings = (TextView)findViewById(R.id.profile_spending);
+        int expense = databaseHelper.calcExpenses();
+        int wishes = databaseHelper.calcWish();
+        int spendings = (expense + wishes);
+        user_profile_spendings.setText(String.valueOf(spendings) + " SEK");
+        return spendings;
+    }
+
 
 
 
