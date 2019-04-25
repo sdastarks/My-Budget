@@ -48,12 +48,12 @@
     <ImageView
         android:id="@+id/image_wish_cathegory"
         android:layout_width="352dp"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/button_wish_iceskate"
+        android:src="@drawable/button_wish_dream"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,12 +106,13 @@
         android:id="@+id/horizontalScrollView3"
         android:layout_width="395dp"
         android:layout_height="105dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wish_cost_layout">
+        app:layout_constraintTop_toBottomOf="@+id/wish_cost_layout"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -129,7 +130,9 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
                     android:clickable="true"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_bike" />
 
@@ -153,6 +156,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_clothes" />
 
@@ -176,6 +181,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_gadgets" />
 
@@ -198,6 +205,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_games" />
 
@@ -220,6 +229,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_gift" />
 
@@ -243,6 +254,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_holiday" />
 
@@ -266,6 +279,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_iceskate" />
 
@@ -288,6 +303,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_pets" />
 
@@ -310,6 +327,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_scooter" />
 
@@ -332,6 +351,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_shoes" />
 
@@ -354,6 +375,8 @@
                     android:layout_height="75dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/button_wish_dream" />
 

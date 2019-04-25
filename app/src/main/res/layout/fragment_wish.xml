@@ -82,7 +82,6 @@
         android:layout_marginBottom="8dp"
         android:backgroundTint="?attr/colorAccent"
         android:clickable="true"
-        app:borderWidth="@dimen/default_background_stroke_width"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/progressBar"
@@ -152,17 +151,23 @@
         app:layout_constraintTop_toBottomOf="@+id/wish_price" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_favourite_wish_btn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+    <Button
+        android:id="@+id/btn_favourite_wish"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="?attr/colorPrimaryDark"
-        android:clickable="true"
-        android:src="@drawable/icon_wishlist"
-        app:fabCustomSize="40dp"
+        android:background="@drawable/button_rounded_corners"
+        android:drawableRight="@drawable/icon_wishlist"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Set as Favourite"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wish_Details_toolbar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saving_progress" />
 
 </android.support.constraint.ConstraintLayout>

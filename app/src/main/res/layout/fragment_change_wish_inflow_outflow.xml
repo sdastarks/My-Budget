@@ -82,7 +82,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
         app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
         app:layout_constraintTop_toTopOf="@+id/thinking_frame_small"
-        app:layout_constraintVertical_bias="0.507">
+        app:layout_constraintVertical_bias="0.507"
+        app:hintEnabled="false">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/amount"
@@ -94,7 +95,8 @@
             android:textColor="?attr/colorPrimaryDark"
             android:textColorHint="?attr/colorPrimaryDark"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textCursorDrawable="?attr/colorPrimaryDark"/>
 
     </android.support.design.widget.TextInputLayout>
 
