@@ -28,7 +28,6 @@
             android:layout_alignParentTop="true"
             android:background="?attr/colorPrimary"
             android:gravity="center_vertical"
-            android:text="Registration"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="25dp"

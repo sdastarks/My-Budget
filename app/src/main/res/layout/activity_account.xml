@@ -22,26 +22,27 @@
     <Spinner
         android:id="@+id/spinner1"
         style="@style/mySpinnerItemStyle"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
         android:background="?attr/colorAccent"
         android:spinnerMode="dropdown"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_months"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_months" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBalance" />
 
     <Spinner
         android:id="@+id/spinner_months"
         style="@style/mySpinnerItemStyle"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:spinnerMode="dropdown"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
         android:background="?attr/colorAccent"
+        android:spinnerMode="dropdown"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinner1"
         app:layout_constraintTop_toBottomOf="@+id/tvBalance" />
 
     <android.support.v7.widget.RecyclerView
@@ -94,7 +95,7 @@
         android:layout_marginBottom="8dp"
         android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="@+id/spinner_months"
-        app:layout_constraintEnd_toEndOf="@+id/spinner1"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_months"
         app:layout_constraintTop_toTopOf="@+id/spinner_months"
         app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24px" />
 

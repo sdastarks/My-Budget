@@ -34,6 +34,7 @@ public class EditWishFragment extends Fragment {
     private int dbid;
     private WishList wish2Edit;
     View view;
+    private int drawable;
 
 
     @Override
@@ -56,6 +57,106 @@ public class EditWishFragment extends Fragment {
         editWishPicture.setImageResource(wish2Edit.getImage());
         meditTitle.setHint(wish2Edit.getTitle());
         meditCost.setHint(wish2Edit.getCost() + " SEK");
+
+        ImageView theBikePic = view.findViewById(R.id.bike_edit);
+        theBikePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_bike);
+                drawable = R.drawable.button_wish_bike;
+            }
+        });
+
+        ImageView clothesPic = view.findViewById(R.id.clothes_edit);
+        clothesPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_clothes);
+                drawable = R.drawable.button_wish_clothes;
+            }
+        });
+
+        ImageView gadgetsPic = view.findViewById(R.id.gadgets_edit);
+        gadgetsPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_gadgets);
+                drawable = R.drawable.button_wish_gadgets;
+            }
+        });
+
+        ImageView gamesPic = view.findViewById(R.id.games_edit);
+        gamesPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_games);
+                drawable = R.drawable.button_wish_games;
+            }
+        });
+
+        ImageView giftPic = view.findViewById(R.id.gift_edit);
+        giftPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_gift);
+                drawable = R.drawable.button_wish_gift;
+            }
+        });
+
+        ImageView holidayPic = view.findViewById(R.id.holiday_edit);
+        holidayPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_holiday);
+                drawable = R.drawable.button_wish_holiday;
+            }
+        });
+
+        ImageView iceSkatePic = view.findViewById(R.id.iceskate_edit);
+        iceSkatePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_iceskate);
+                drawable = R.drawable.button_wish_iceskate;
+            }
+        });
+
+
+        ImageView petsPic = view.findViewById(R.id.pets_edit);
+        petsPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_pets);
+                drawable = R.drawable.button_wish_pets;
+            }
+        });
+
+        ImageView scooterPic = view.findViewById(R.id.scooter_edit);
+        scooterPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_scooter);
+                drawable = R.drawable.button_wish_scooter;
+            }
+        });
+
+        ImageView shoesPic = view.findViewById(R.id.shoes_edit);
+        shoesPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_shoes);
+                drawable = R.drawable.button_wish_shoes;
+            }
+        });
+
+        ImageView otherPic = view.findViewById(R.id.dream_edit);
+        otherPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editWishPicture.setImageResource(R.drawable.button_wish_dream);
+                drawable = R.drawable.button_wish_dream;
+            }
+        });
 
 
         activateOnExitEditWish();
@@ -102,6 +203,7 @@ public class EditWishFragment extends Fragment {
                     String title = meditTitle.getText().toString().trim();
                     int cost = Integer.parseInt(meditCost.getText().toString());
 
+
                     if (cost > 10000000) {
                         meditCost.setError("Wish must be less than 10M SEK");
                     } else if (cost <= 0) {
@@ -110,18 +212,18 @@ public class EditWishFragment extends Fragment {
                         meditCost.setError("You've already saved " + wish2Edit.getSaved() + " SEK");
                     } else if (title.isEmpty()) {
                         Log.v(TAG, "title: " + title + "cost: " + cost);
-                        updateWish(wish2Edit.getTitle(), cost);
+                        updateWish(wish2Edit.getTitle(), cost, drawable);
                     } else if (title.length() > 18) {
                         meditTitle.setError("Wish must be less than 18 characters");
                     } else {
-                        updateWish(title, cost);
+                        updateWish(title, cost, drawable);
                     }
 
                 } catch (Exception e) {
                     if (meditCost.getText().toString().trim().isEmpty()) {
                         Log.v(TAG, "if statment initialsed");
                         Log.v(TAG, "title: " + meditTitle.getText().toString() + " cost: " + wish2Edit.getCost());
-                        updateWish(meditTitle.getText().toString(), wish2Edit.getCost());
+                        updateWish(meditTitle.getText().toString(), wish2Edit.getCost(), wish2Edit.getImage());
                     } else {
                         meditCost.setError("Try Again");
                     }
@@ -132,8 +234,8 @@ public class EditWishFragment extends Fragment {
         });
     }
 
-    public void updateWish(String title, int cost) {
-        ((WishlistActivity) getActivity()).db.updateWish(dbid, title, cost, wish2Edit.getSaved(), wish2Edit.getImage());
+    public void updateWish(String title, int cost, int drawable) {
+        ((WishlistActivity) getActivity()).db.updateWish(dbid, title, cost, wish2Edit.getSaved(), drawable);
         Intent intent = new Intent(getActivity(), WishlistActivity.class);
         startActivity(intent);
     }
