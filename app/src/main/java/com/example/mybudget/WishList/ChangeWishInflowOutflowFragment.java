@@ -190,9 +190,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
             Log.d(TAG, "addMoney2Wish: cost/2=saved");
             goalHalfReached = new GoalHalfReachedDialog();
-            //Bundle args = new Bundle();
-            //args.putInt("dbIdHalfGoal", dbid);
-            //goalHalfReached.setArguments(args);
             goalHalfReached.show(getFragmentManager(), "GoalHalfReachedDialog");
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),
@@ -206,9 +203,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         } else if ((wish2Update.getCost() == wish2Update.getSaved() + amount)) {
             Log.d(TAG, "addMoney2Wish: cost==saved");
             goalReached = new GoalReachedDialog();
-            //Bundle args = new Bundle();
-            //args.putInt("dbIdGoal", dbid);
-            //goalReached.setArguments(args);
             goalReached.show(getFragmentManager(), "GoalReachedDialog");
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),

@@ -9,22 +9,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
-import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
 
@@ -34,7 +31,7 @@ import com.example.mybudget.myDbHelper;
  * @author Benish
  */
 
-public class RegisterActivity extends SettingsActivity implements View.OnClickListener {
+public class RegisterActivity extends AvatarChangeActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivityLog";
     private final AppCompatActivity activity = RegisterActivity.this;

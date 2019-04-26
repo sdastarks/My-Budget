@@ -38,15 +38,7 @@ public class GoalReachedDialog extends  AppCompatDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_goal_reached, container, false);
         mCancelDialog = view.findViewById(R.id.btn_cancel_goal_reached_dialog);
-
-      //  Points for reaching the goal
-//        points = view.findViewById(R.id.txt_points_goal_reached);
-          mImageHeroGoalReached = view.findViewById(R.id.imageHero_goal_reached);
-//        int dbid = getArguments().getInt("dbIdGoal");
-//        WishList wish = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-//        points.setText("+ " + wish.getCost() + " points");
-        //Todo: Update points in DB
-
+        mImageHeroGoalReached = view.findViewById(R.id.imageHero_goal_reached);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mCancelDialog.setOnClickListener(new View.OnClickListener() {
             @Override
