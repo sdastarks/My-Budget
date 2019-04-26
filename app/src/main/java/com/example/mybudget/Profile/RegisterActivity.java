@@ -74,6 +74,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     SharedPreferences sharedPreferences;
     int userGlobalId;
     String userGlobalName;
+    private Drawable d;
 
 
     @Override
@@ -119,6 +120,11 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
                 chooseAvatarTextView.setVisibility(View.GONE);
                 register_headline.setText("Edit Profile");
+                avatar_image = (ImageView)findViewById(R.id.avatarImage);
+                if(imageResId != -1){
+                    d = getDrawable(imageResId);
+                    avatar_image.setImageDrawable(d);
+                }
             }
         }
         activateOnExitRegisterActiviy();
