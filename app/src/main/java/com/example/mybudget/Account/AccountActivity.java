@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
+import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.WishList.WishlistActivity;
@@ -330,7 +331,7 @@ public class AccountActivity extends SettingsActivity {
         int onWish = 0;
         int fromChore = 0;
         for (AccountsRow ar : filteredLog){
-            Log.v(TAG, "AccountsRow: " + ar.amount + " " + ar.status);
+            //Log.v(TAG, "AccountsRow: " + ar.amount + " " + ar.status);
             if(ar.status == 0)
                 expenses += ar.amount;
             else if(ar.status == 1)
@@ -397,22 +398,39 @@ public class AccountActivity extends SettingsActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                removeItem((int) viewHolder.itemView.getTag(0xfffffff), (int) viewHolder.itemView.getTag(0xffffffff));
+                int id= (int) viewHolder.itemView.getTag(0xfffffff);
+                int tag =(int) viewHolder.itemView.getTag(0xffffffff);
+                String title= (String) viewHolder.itemView.getTag();
+                Log.v(TAG, "int: "+ i);
+                removeItem(id, tag , title);
                 //removeItem((int) viewHolder.itemView.getTag());
 
                 //Log.v(TAG, "id:"+(int) viewHolder.itemView.getTag());
-                Log.v(TAG, "id: "+(int) viewHolder.itemView.getTag(0xfffffff));
-                Log.v(TAG, "tag: "+(int) viewHolder.itemView.getTag(0xffffffff));
+               // Log.v(TAG, "id: "+(int) viewHolder.itemView.getTag(0xfffffff));
+                //Log.v(TAG, "tag: "+(int) viewHolder.itemView.getTag(0xffffffff));
+                Log.v(TAG, "something"+viewHolder.itemView.findViewById(R.id.amount));
 
             }
         }).attachToRecyclerView(mRecyclerView);
 
     }
-    private void removeItem(int id, int label){
-            Log.v(TAG, "id: "+id+" label: "+label);
+    private void removeItem(int id, int label, String title){
+            Log.v(TAG, "id: "+id+" label: "+label+" title: "+title);
         // expenditures = 0; income = 1; spendOnWish = 2; earnedFromChore = 3;
             //check balance before deleting
-            db.deleteEntry(id);
+
+        Entry e= db.returnEntry(id);
+
+        Log.v(TAG, "entry: "+ e.getDesc());
+
+        if (label==2){
+            title=title.substring(0,title.length()-9);
+            Log.v(TAG, "new title "+title);
+            WishList wish2update= db.findWishList(title);
+            Log.v(TAG, "right wish?: "+wish2update.getTitle());
+        }
+
+            //db.deleteEntry(id);
     }
 }
 

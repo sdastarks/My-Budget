@@ -183,7 +183,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             wishList.setTitle(cursor.getString(1));
             wishList.setCost(Integer.parseInt(cursor.getString(2)));
             wishList.setSaved(Integer.parseInt(cursor.getString(3)));
-            wishList.setImage(Integer.parseInt(cursor.getColumnName(4)));
+            wishList.setImage(cursor.getInt(4));
         } else {
             wishList = null;
         }
@@ -280,6 +280,30 @@ public class myDbHelper extends SQLiteOpenHelper {
         close_db();
         return allRecords;
 
+    }
+
+    public Entry returnEntry(int id){
+        open_db();
+        Log.v(TAG,"id: "+id);
+
+        String query = "select * from " + ENTRY + " where " + ENTRYID + "="
+                + id;
+
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        Entry entry = new Entry();
+        entry.setEnteryId(cursor.getInt(0));
+        entry.setAmount(cursor.getInt(2));
+        entry.setTypeOfEntry(cursor.getInt(3));
+        String date1 = cursor.getString(1);
+        DateTimeFormatter formate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(date1, formate);
+        entry.setDate(date);
+        entry.setDesc(cursor.getString(4));
+        cursor.close();
+        close_db();
+        return entry;
     }
 
     public myDbHelper open_db() {

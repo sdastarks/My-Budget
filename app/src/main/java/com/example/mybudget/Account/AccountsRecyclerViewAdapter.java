@@ -60,10 +60,14 @@ public class AccountsRecyclerViewAdapter extends RecyclerView.Adapter<AccountsVi
 //            holder.status.setTextColor(Color.GREEN);
         }
         int id= list.get(position).id;
+        String title= list.get(position).title;
         //holder.itemView.setTag(id);
 
+        // set tags inorder to delete a transaction within
         holder.itemView.setTag(0xffffffff, type);
         holder.itemView.setTag(0xfffffff, id);
+        //holder.itemView.setTag(10101010, id);
+        holder.itemView.setTag(title);
         //holder.itemView.setTag(1, type);
     }
 
