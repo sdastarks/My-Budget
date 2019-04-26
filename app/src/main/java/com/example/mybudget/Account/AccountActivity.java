@@ -372,7 +372,7 @@ public class AccountActivity extends AvatarChangeActivity {
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 View itemView = viewHolder.itemView;
 
-                Drawable background = new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null)); //?attr/colorPrimaryDark
+                Drawable background = new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.deleteRed, null)); //?attr/colorPrimaryDark
                 Drawable icon = ContextCompat.getDrawable(AccountActivity.this, R.drawable.ic_baseline_delete_24px);
                 icon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
                 int xMarkMargin = 68;
