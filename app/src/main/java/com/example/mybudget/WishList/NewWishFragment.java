@@ -195,7 +195,7 @@ public class NewWishFragment extends Fragment {
         saveNewWish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v(TAG, "Drawable: "+drawable);
+                Log.v(TAG, "Drawable: " + drawable);
                 try {
                     int cost = Integer.parseInt(mNewWishCost.getText().toString().trim());
                     String wishTitle = mNewWishTitle.getText().toString().trim();
@@ -207,11 +207,11 @@ public class NewWishFragment extends Fragment {
                         mNewWishTitle.setError("Field cannot be empty");
                     } else if (wishTitle.length() > 18) {
                         mNewWishTitle.setError("Wish must be less than 18 characters");
-                    }
-                     else if (drawable == 0){
+                    } else if (((WishlistActivity) getActivity()).db.findWishList(wishTitle) != null) {
+                        mNewWishTitle.setError("Wish already exists");
+                    } else if (drawable == 0) {
                         drawable = R.drawable.button_wish_dream;
-                    }
-                    else {
+                    } else {
                         WishList wish = new WishList();
                         wish.setTitle(wishTitle);
                         wish.setCost(cost);
@@ -227,6 +227,6 @@ public class NewWishFragment extends Fragment {
                 }
             }
 
-            });
-        }
+        });
     }
+}
