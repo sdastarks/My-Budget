@@ -421,17 +421,17 @@ public class AccountActivity extends SettingsActivity {
         try {
             Entry e = db.returnEntry(id);
             int label = e.getTypeOfEntry();
-
+            int balance = (db.calcIncome() + db.calcEarning()) - (db.calcExpenses() + db.calcWish());
             if (label == 2) {
                 String title = e.getDesc();
                 title = title.substring(0, title.length() - 9);
                 WishList wish2update = db.findWishList(title);
-                e.getAmount();
-                db.updateWish(wish2update.getWishListId(), title, wish2update.getCost(),
-                        wish2update.getSaved() - e.getAmount(), wish2update.getImage());
+                if (wish2update.getSaved()-e.getAmount()>0){
+                    db.updateWish(wish2update.getWishListId(), title, wish2update.getCost(),
+                            wish2update.getSaved() - e.getAmount(), wish2update.getImage());
+                }
                 db.deleteEntry(id);
             } else if (label == 1 | label == 3) {
-                int balance = (db.calcIncome() + db.calcEarning()) - (db.calcExpenses() + db.calcWish());
                 if (e.getAmount() > balance) {
                     Toast.makeText(this, "Unable to delete entry", Toast.LENGTH_SHORT).show();
                 } else {
