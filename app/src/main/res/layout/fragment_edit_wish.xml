@@ -24,7 +24,10 @@
             android:layout_height="30dp"
             android:layout_gravity="right"
             android:layout_marginRight="16dp"
-            android:background="@drawable/icon_done_white" />
+            android:text="OK"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/btn_cancel_edit_wish"
