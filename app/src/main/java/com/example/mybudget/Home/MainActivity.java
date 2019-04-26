@@ -33,7 +33,7 @@ import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Models.WishList;
-import com.example.mybudget.ProfileActivity;
+import com.example.mybudget.Profile.ProfileActivity;
 import com.example.mybudget.R;
 import com.example.mybudget.Profile.RegisterActivity;
 import com.example.mybudget.WishList.WishlistActivity;
