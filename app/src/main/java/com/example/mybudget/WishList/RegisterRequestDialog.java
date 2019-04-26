@@ -1,5 +1,6 @@
 package com.example.mybudget.WishList;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 
+import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.Profile.RegisterActivity;
@@ -45,7 +47,8 @@ import java.time.LocalDate;
                     .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dismiss();
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
                         }
                     });
             return builder.create();

@@ -44,8 +44,6 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
     private Button register_button;
     int index;
     private Toolbar toolbar;
-    public static final String USER_PREFS_NAME = "userPreferenceFile";
-    public static final String USER_ID = "userId";
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
     @Override
@@ -129,14 +127,6 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
     @Override
     public void onWishClick(int position) {
         Log.d(TAG, "onWishClick: clicked : " + position);
-
-        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
-        if (sharedPrefs.getInt(USER_ID, 0) == 0) {
-            Log.d(TAG, "onAddWish: locking user if not registered");
-            RegisterRequestDialog dialog = new RegisterRequestDialog();
-            dialog.show(getSupportFragmentManager(), "register request dialog");
-
-        } else {
             addWish.hide();
             toolbar.setVisibility(View.INVISIBLE);
             id = mWishId.get(position);
@@ -145,8 +135,6 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
             ft.replace(R.id.frame_wish_fragment, new WishFragment());
             index = position;
             ft.commit();
-        }
-
     }
 
 
