@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
@@ -417,12 +418,14 @@ public class AccountActivity extends SettingsActivity {
                 db.deleteEntry(id);
             }
 
-            if (label==1 | label==3){
-                e.getAmount();
-                db.deleteEntry(id);
-
-            }
-            else{
+            if (label == 1 | label == 3) {
+                int balance = (db.calcIncome() + db.calcEarning()) - (db.calcExpenses() + db.calcWish());
+                if (e.getAmount() > balance) {
+                    Toast.makeText(this, "Unable to delete entry", Toast.LENGTH_SHORT).show();
+                } else {
+                    db.deleteEntry(id);
+                }
+            } else {
                 db.deleteEntry(id);
             }
         } catch (NullPointerException e) {
