@@ -351,6 +351,12 @@ public class AccountActivity extends SettingsActivity {
 
     }
 
+    /**
+     * Method allows the user to swipe a
+     * transaction to the left
+     * 
+     * @author Daniel Beadleson
+     */
     private void setUpItemTouchHelper() {
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -364,11 +370,11 @@ public class AccountActivity extends SettingsActivity {
                 xMark.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
                 int xMarkMargin = 68;
 
-                // draw red background
+                // Set background when item dragged left
                 background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
                 background.draw(c);
 
-                // draw x mark
+                // set delete icon position
                 int itemHeight = itemView.getBottom() - itemView.getTop();
                 int intrinsicWidth = xMark.getIntrinsicWidth();
                 int intrinsicHeight = xMark.getIntrinsicWidth();
@@ -398,15 +404,22 @@ public class AccountActivity extends SettingsActivity {
 
     }
 
+    /**
+     * Method removes an entry from the db
+     * - if the entry is of type 2, the wish saved
+     * is updated, if the wish still exists
+     * - if the entry is of type 1 or 3, the
+     * entry can only be removed if a negatice balance
+     * ISNT'T the outcome
+     *
+     * @param id database id
+     * @author Daniel Beadleson
+     */
     private void removeItem(int id) {
-
         // expenditures = 0; income = 1; spendOnWish = 2; earnedFromChore = 3;
-        //check balance before deleting
         try {
             Entry e = db.returnEntry(id);
             int label = e.getTypeOfEntry();
-
-            //take away money from saved
 
             if (label == 2) {
                 String title = e.getDesc();
@@ -416,9 +429,7 @@ public class AccountActivity extends SettingsActivity {
                 db.updateWish(wish2update.getWishListId(), title, wish2update.getCost(),
                         wish2update.getSaved() - e.getAmount(), wish2update.getImage());
                 db.deleteEntry(id);
-            }
-
-            if (label == 1 | label == 3) {
+            } else if (label == 1 | label == 3) {
                 int balance = (db.calcIncome() + db.calcEarning()) - (db.calcExpenses() + db.calcWish());
                 if (e.getAmount() > balance) {
                     Toast.makeText(this, "Unable to delete entry", Toast.LENGTH_SHORT).show();
