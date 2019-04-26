@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <activity android:name=".AvatarChangeActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ProfileActivity"
-            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Profile.ProfileActivity"
+                  android:screenOrientation="portrait"/>
+
 
         <activity android:name=".Profile.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"

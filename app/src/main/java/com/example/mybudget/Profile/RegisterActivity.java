@@ -74,6 +74,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     SharedPreferences sharedPreferences;
     int userGlobalId;
     String userGlobalName;
+    private Drawable d;
 
 
     @Override
@@ -119,6 +120,11 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
                 chooseAvatarTextView.setVisibility(View.GONE);
                 register_headline.setText("Edit Profile");
+                avatar_image = (ImageView)findViewById(R.id.avatarImage);
+                if(imageResId != -1){
+                    d = getDrawable(imageResId);
+                    avatar_image.setImageDrawable(d);
+                }
             }
         }
         activateOnExitRegisterActiviy();
@@ -213,7 +219,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 case R.id.appCompatButtonUpdateUser: {
                     if (inputValidation()) {
                         updateUser(user);
-                        //Log.v(TAG, "user updated");
+                        Log.v(TAG, "user updated");
                     }
                 }
                 break;
@@ -303,7 +309,16 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     private boolean validateAge() {
         initializeViews();
         String valueAge = textInputEditTextAge.getText().toString();
-        int valueAge1 = Integer.parseInt(valueAge);
+
+        String valueAgeNotNull = valueAge.trim();
+        int value1 = 0;
+        try {
+            value1 = valueAgeNotNull != null && !valueAgeNotNull.isEmpty() && !valueAgeNotNull.equals("") ? Integer.parseInt(valueAgeNotNull) : 0;
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            textInputEditTextAge.setError("Invalid value");
+            valid = false;
+        }
         try {
             if (valueAge.isEmpty()) {
                 textInputEditTextAge.setError("Field cannot be empty");
@@ -311,7 +326,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
             } else if (valueAge.length() > 2) {
                 textInputEditTextAge.setError("Invalid value");
                 valid = false;
-            } else if (valueAge1 == 0) {
+            } else if (value1 == 0) {
                 textInputEditTextAge.setError("Invalid value");
                 valid = false;
             } else {

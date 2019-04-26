@@ -1,11 +1,10 @@
 package com.example.mybudget.Account;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -59,11 +58,11 @@ public class AccountActivity extends AvatarChangeActivity {
 
         mySpinner = (findViewById(R.id.spinner1));
 
-        String [] labels={"Everything","Expenses","Income","On wish","Chore Money"};
+        String [] labels={"Categories","Expenses","Income","On wish","Chore Money"};
 
         mySpinnerMonths = (findViewById(R.id.spinner_months));
 
-        String [] labelsMonths = {"Everything","January","February","March","April", "May", "June", "July",
+        String [] labelsMonths = {"Months","January","February","March","April", "May", "June", "July",
         "August", "September", "October", "November", "December"};
 
 
