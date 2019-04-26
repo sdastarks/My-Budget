@@ -110,7 +110,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
 
                 selectAvatar();
                 appCompatButtonUpdateUser.setVisibility(View.GONE);
-                register_headline.setText("REGISTER");
+                register_headline.setText("Register");
 
             } else if (switchValue.equals("update")) {
                 setContentView(R.layout.activity_register);

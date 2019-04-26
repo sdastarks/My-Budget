@@ -222,6 +222,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            app:labelVisibilityMode="labeled"
             android:background="@drawable/border_button"
             app:itemIconTint="@drawable/bottom_nav_colours"
             app:itemTextColor="?attr/colorAccent"

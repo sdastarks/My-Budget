@@ -15,18 +15,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".AvatarChangeActivity" />
-        <activity android:name=".Profile.ProfileActivity" />
+
+        <activity android:name=".AvatarChangeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Profile.ProfileActivity"
+                  android:screenOrientation="portrait"/>
+
 
         <activity android:name=".Profile.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Chores.ChoresActivity" />
-        <activity android:name=".Account.AccountActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Chores.ChoresActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Account.AccountActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".WishList.WishlistActivity"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Home.MainActivity"/>
         <activity
             android:name=".Home.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CookieMonster">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
