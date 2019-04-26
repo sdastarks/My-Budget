@@ -1,4 +1,4 @@
-package com.example.mybudget;
+package com.example.mybudget.Profile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
+import com.example.mybudget.R;
+import com.example.mybudget.myDbHelper;
 
 import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
