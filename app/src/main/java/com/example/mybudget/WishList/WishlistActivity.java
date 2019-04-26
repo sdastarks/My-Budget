@@ -2,6 +2,7 @@ package com.example.mybudget.WishList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.AvatarChangeActivity;
@@ -125,25 +127,25 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
     @Override
     public void onWishClick(int position) {
         Log.d(TAG, "onWishClick: clicked : " + position);
-        addWish.hide();
-        toolbar.setVisibility(View.INVISIBLE);
-        id =mWishId.get(position);
-        wishPrice=mWishPrices.get(position);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frame_wish_fragment, new WishFragment());
-        index = position ;
-        ft.commit();
-
+            addWish.hide();
+            toolbar.setVisibility(View.INVISIBLE);
+            id = mWishId.get(position);
+            wishPrice = mWishPrices.get(position);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frame_wish_fragment, new WishFragment());
+            index = position;
+            ft.commit();
     }
 
 
     public void onAddWish(View view) {
         Log.d(TAG, "onAddWish: clicked : " );
-        addWish.hide();
-        toolbar.setVisibility(View.INVISIBLE);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
-        ft.commit();
+            addWish.hide();
+            toolbar.setVisibility(View.INVISIBLE);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
+            ft.commit();
+
     }
 
     /**
