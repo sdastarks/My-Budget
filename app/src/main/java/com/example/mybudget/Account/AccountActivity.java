@@ -433,7 +433,7 @@ public class AccountActivity extends AvatarChangeActivity {
                 String title = e.getDesc();
                 title = title.substring(0, title.length() - 9);
                 WishList wish2update = db.findWishList(title);
-                if (wish2update.getSaved()-e.getAmount()>0){
+                if (wish2update.getSaved()-e.getAmount()>=0){
                     db.updateWish(wish2update.getWishListId(), title, wish2update.getCost(),
                             wish2update.getSaved() - e.getAmount(), wish2update.getImage());
                 }
