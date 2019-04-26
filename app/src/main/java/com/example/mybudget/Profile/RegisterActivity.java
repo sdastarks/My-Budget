@@ -220,6 +220,8 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                     if (inputValidation()) {
                         updateUser(user);
                         Log.v(TAG, "user updated");
+                        Intent intentLoadMainPage = new Intent (RegisterActivity.this, MainActivity.class);
+                        startActivity(intentLoadMainPage);
                     }
                 }
                 break;
