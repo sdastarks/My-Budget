@@ -354,7 +354,7 @@ public class AccountActivity extends SettingsActivity {
     /**
      * Method allows the user to swipe a
      * transaction to the left
-     * 
+     *
      * @author Daniel Beadleson
      */
     private void setUpItemTouchHelper() {
@@ -366,25 +366,26 @@ public class AccountActivity extends SettingsActivity {
                 View itemView = viewHolder.itemView;
 
                 Drawable background = new ColorDrawable(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null)); //?attr/colorPrimaryDark
-                Drawable xMark = ContextCompat.getDrawable(AccountActivity.this, R.drawable.ic_baseline_delete_24px);
-                xMark.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                Drawable icon = ContextCompat.getDrawable(AccountActivity.this, R.drawable.ic_baseline_delete_24px);
+                icon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
                 int xMarkMargin = 68;
 
                 // Set background when item dragged left
                 background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
                 background.draw(c);
 
+
                 // set delete icon position
                 int itemHeight = itemView.getBottom() - itemView.getTop();
-                int intrinsicWidth = xMark.getIntrinsicWidth();
-                int intrinsicHeight = xMark.getIntrinsicWidth();
+                int intrinsicWidth = icon.getIntrinsicWidth();
+                int intrinsicHeight = icon.getIntrinsicWidth();
                 int xMarkLeft = itemView.getRight() - xMarkMargin - intrinsicWidth;
                 int xMarkRight = itemView.getRight() - xMarkMargin;
                 int xMarkTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
                 int xMarkBottom = xMarkTop + intrinsicHeight;
-                xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
+                icon.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
 
-                xMark.draw(c);
+                icon.draw(c);
 
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
@@ -409,7 +410,7 @@ public class AccountActivity extends SettingsActivity {
      * - if the entry is of type 2, the wish saved
      * is updated, if the wish still exists
      * - if the entry is of type 1 or 3, the
-     * entry can only be removed if a negatice balance
+     * entry can only be removed if a negative balance
      * ISNT'T the outcome
      *
      * @param id database id
