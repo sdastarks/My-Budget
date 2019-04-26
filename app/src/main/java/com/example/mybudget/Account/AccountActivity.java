@@ -63,7 +63,7 @@ public class AccountActivity extends SettingsActivity {
 
         mySpinner = (findViewById(R.id.spinner1));
 
-        String [] labels={"Everything","Expenses","Income","On wish","Chore Money"};
+        String[] labels = {"Everything", "Expenses", "Income", "On wish", "Chore Money"};
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
                 R.layout.spinner_item, labels);
@@ -73,8 +73,8 @@ public class AccountActivity extends SettingsActivity {
 
         mySpinnerMonths = (findViewById(R.id.spinner_months));
 
-        String [] labelsMonths = {"Everything","January","February","March","April", "May", "April", "June", "July",
-        "August", "September", "October", "November", "December"};
+        String[] labelsMonths = {"Everything", "January", "February", "March", "April", "May", "April", "June", "July",
+                "August", "September", "October", "November", "December"};
 
         ArrayAdapter<String> spinnerAdapterMonths = new ArrayAdapter<String>(this,
                 R.layout.spinner_item, labelsMonths);
@@ -89,7 +89,7 @@ public class AccountActivity extends SettingsActivity {
 
         navigation = findViewById(R.id.bottom_navigation);
         Menu menu = navigation.getMenu();
-        MenuItem menuItem =menu.getItem(2);
+        MenuItem menuItem = menu.getItem(2);
         menuItem.setChecked(true);
         bottomNavigationOnClick();
 
@@ -103,6 +103,7 @@ public class AccountActivity extends SettingsActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 settingAdapter();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -115,7 +116,8 @@ public class AccountActivity extends SettingsActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 settingAdapter();
-           }
+            }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -123,7 +125,7 @@ public class AccountActivity extends SettingsActivity {
         });
     }
 
-    public void bottomNavigationOnClick () {
+    public void bottomNavigationOnClick() {
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -131,7 +133,7 @@ public class AccountActivity extends SettingsActivity {
 
                 switch (id) {
                     case R.id.nav_home:
-                        Intent intent1= new Intent(AccountActivity.this, MainActivity.class);
+                        Intent intent1 = new Intent(AccountActivity.this, MainActivity.class);
                         startActivity(intent1);
                         break;
 
@@ -154,6 +156,7 @@ public class AccountActivity extends SettingsActivity {
 
     /**
      * First stage filter function
+     *
      * @param typeOfEntry a filter taken from spinner position to specify the type of entry
      * @return an arrayList contains filtered data
      */
@@ -168,13 +171,15 @@ public class AccountActivity extends SettingsActivity {
             entries = db.wishEntries();
         } else if (typeOfEntry == 4) {
             entries = db.earningsEntries();
-        } else if (typeOfEntry == 0){
+        } else if (typeOfEntry == 0) {
             entries = db.allEntries();
         }
         return entries;
     }
 
-    /** Sets the number of months to the spinner
+    /**
+     * Sets the number of months to the spinner
+     *
      * @return number of monthes since the user logged an Entry
      * @auth DAWNIE SAFAR
      */
@@ -194,102 +199,90 @@ public class AccountActivity extends SettingsActivity {
 
     /**
      * @param dataFilteredByTypeOfEntry specifies entries filter by type of entry (income, expenses...)
-     * @param spinnerPosition a date filter as per the spinner position
+     * @param spinnerPosition           a date filter as per the spinner position
      * @return data filtered by data and type of entry
      * @auth Dawnie Safar
      */
-    public List<AccountsRow> filterEntriesByDate(ArrayList<Entry> dataFilteredByTypeOfEntry, int spinnerPosition){
+    public List<AccountsRow> filterEntriesByDate(ArrayList<Entry> dataFilteredByTypeOfEntry, int spinnerPosition) {
         ArrayList<Entry> allEntries = new ArrayList<>();
         List<AccountsRow> row = new ArrayList<>();
 
-        if(spinnerPosition == 0) {
+        if (spinnerPosition == 0) {
             allEntries = dataFilteredByTypeOfEntry;
-        }
-        else if(spinnerPosition == 1) {
+        } else if (spinnerPosition == 1) {
             for (Entry entry : dataFilteredByTypeOfEntry) {
                 if (entry.getDate().getMonth().toString() == "JANUARY") {
                     allEntries.add(entry);
                 }
             }
-        }
-        else if (spinnerPosition == 2){
+        } else if (spinnerPosition == 2) {
             for (Entry entry : dataFilteredByTypeOfEntry) {
                 if (entry.getDate().getMonth().toString() == "FEBRUARY") {
                     allEntries.add(entry);
                 }
             }
-        }
-        else if(spinnerPosition == 3){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "MARCH"){
+        } else if (spinnerPosition == 3) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "MARCH") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 4) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "APRIL") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 5) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "MAY") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 6) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "JUNE") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 7) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "JULY") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 8) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "AUGUST") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 9) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "SEPTEMBER") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 10) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "OCTOBER") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 11) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "NOVEMBER") {
+                    allEntries.add(entry);
+                }
+            }
+        } else if (spinnerPosition == 12) {
+            for (Entry entry : dataFilteredByTypeOfEntry) {
+                if (entry.getDate().getMonth().toString() == "DECEMBER") {
                     allEntries.add(entry);
                 }
             }
         }
-        else if(spinnerPosition == 4){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "APRIL"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 5){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "MAY"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 6){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "JUNE"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 7){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "JULY"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 8){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "AUGUST"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 9){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "SEPTEMBER"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 10){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "OCTOBER"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 11){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "NOVEMBER"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        else if(spinnerPosition == 12){
-            for(Entry entry : dataFilteredByTypeOfEntry){
-                if(entry.getDate().getMonth().toString() == "DECEMBER"){
-                    allEntries.add(entry);
-                }
-            }
-        }
-        for(Entry e : allEntries){
+        for (Entry e : allEntries) {
             row.add(new AccountsRow(e.getDate(), e.getDesc(), e.getAmount(), e.getTypeOfEntry(), e.getEnteryId()));
         }
         return row;
@@ -297,17 +290,17 @@ public class AccountActivity extends SettingsActivity {
 
     /**
      * setting the spinners adapter with the selected filters
+     *
      * @auth Dawnie Safar
      */
-    public void settingAdapter(){
+    public void settingAdapter() {
         //Filtering data
         entries = fill_with_data(mySpinner.getSelectedItemPosition());
         data = filterEntriesByDate(entries, mySpinnerMonths.getSelectedItemPosition());
         //setting Balance textView
-       if (data.size() > 0){
+        if (data.size() > 0) {
             tvBalance.setText("Current Filter: " + String.valueOf(calcBalanceAfterFilter(data)));
-        }
-        else if(data.size() <= 0){
+        } else if (data.size() <= 0) {
             tvBalance.setText("No data in the specified filter");
         }
         //sending filtered data to recycleView adapter
@@ -320,46 +313,44 @@ public class AccountActivity extends SettingsActivity {
 
     /**
      * @param filteredLog specifies the double filtered data(date and typeOfEntry)
-     *                   to calculate the current balance state
+     *                    to calculate the current balance state
      * @return filtered balance
      * @auth Dawnie
      */
-    public int calcBalanceAfterFilter(List<AccountsRow> filteredLog){
+    public int calcBalanceAfterFilter(List<AccountsRow> filteredLog) {
         int balance = 0;
         int expenses = 0;
         int income = 0;
         int onWish = 0;
         int fromChore = 0;
-        for (AccountsRow ar : filteredLog){
+        for (AccountsRow ar : filteredLog) {
             //Log.v(TAG, "AccountsRow: " + ar.amount + " " + ar.status);
-            if(ar.status == 0)
+            if (ar.status == 0)
                 expenses += ar.amount;
-            else if(ar.status == 1)
+            else if (ar.status == 1)
                 income += ar.amount;
-            else if(ar.status == 2)
+            else if (ar.status == 2)
                 onWish += ar.amount;
-            else if(ar.status == 3)
+            else if (ar.status == 3)
                 fromChore += ar.amount;
         }
-        if(mySpinner.getSelectedItemPosition() == 0) {
+        if (mySpinner.getSelectedItemPosition() == 0) {
             balance = income + fromChore - onWish - expenses;
             return balance;
-        }
-        else if(mySpinner.getSelectedItemPosition() == 1) {
+        } else if (mySpinner.getSelectedItemPosition() == 1) {
             Log.v(TAG, "EXPENSES: " + expenses);
             return expenses;
-        }
-        else if(mySpinner.getSelectedItemPosition() == 2)
+        } else if (mySpinner.getSelectedItemPosition() == 2)
             return income;
-        else if(mySpinner.getSelectedItemPosition() == 3)
+        else if (mySpinner.getSelectedItemPosition() == 3)
             return onWish;
-        else if(mySpinner.getSelectedItemPosition() == 4)
+        else if (mySpinner.getSelectedItemPosition() == 4)
             return fromChore;
         else return 0;
 
     }
 
-    private void setUpItemTouchHelper(){
+    private void setUpItemTouchHelper() {
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
@@ -382,7 +373,7 @@ public class AccountActivity extends SettingsActivity {
                 int intrinsicHeight = xMark.getIntrinsicWidth();
                 int xMarkLeft = itemView.getRight() - xMarkMargin - intrinsicWidth;
                 int xMarkRight = itemView.getRight() - xMarkMargin;
-                int xMarkTop = itemView.getTop() + (itemHeight - intrinsicHeight)/2;
+                int xMarkTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
                 int xMarkBottom = xMarkTop + intrinsicHeight;
                 xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
 
@@ -398,39 +389,46 @@ public class AccountActivity extends SettingsActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                int id= (int) viewHolder.itemView.getTag(0xfffffff);
-                int tag =(int) viewHolder.itemView.getTag(0xffffffff);
-                String title= (String) viewHolder.itemView.getTag();
-                Log.v(TAG, "int: "+ i);
-                removeItem(id, tag , title);
-                //removeItem((int) viewHolder.itemView.getTag());
-
-                //Log.v(TAG, "id:"+(int) viewHolder.itemView.getTag());
-               // Log.v(TAG, "id: "+(int) viewHolder.itemView.getTag(0xfffffff));
-                //Log.v(TAG, "tag: "+(int) viewHolder.itemView.getTag(0xffffffff));
-                Log.v(TAG, "something"+viewHolder.itemView.findViewById(R.id.amount));
+                int id = (int) viewHolder.itemView.getTag();
+                removeItem(id);
 
             }
         }).attachToRecyclerView(mRecyclerView);
 
     }
-    private void removeItem(int id, int label, String title){
-            Log.v(TAG, "id: "+id+" label: "+label+" title: "+title);
+
+    private void removeItem(int id) {
+
         // expenditures = 0; income = 1; spendOnWish = 2; earnedFromChore = 3;
-            //check balance before deleting
+        //check balance before deleting
+        try {
+            Entry e = db.returnEntry(id);
+            int label = e.getTypeOfEntry();
 
-        Entry e= db.returnEntry(id);
+            //take away money from saved
 
-        Log.v(TAG, "entry: "+ e.getDesc());
+            if (label == 2) {
+                String title = e.getDesc();
+                title = title.substring(0, title.length() - 9);
+                WishList wish2update = db.findWishList(title);
+                e.getAmount();
+                db.updateWish(wish2update.getWishListId(), title, wish2update.getCost(),
+                        wish2update.getSaved() - e.getAmount(), wish2update.getImage());
+                db.deleteEntry(id);
+            }
 
-        if (label==2){
-            title=title.substring(0,title.length()-9);
-            Log.v(TAG, "new title "+title);
-            WishList wish2update= db.findWishList(title);
-            Log.v(TAG, "right wish?: "+wish2update.getTitle());
+            if (label==1 | label==3){
+                e.getAmount();
+                db.deleteEntry(id);
+
+            }
+            else{
+                db.deleteEntry(id);
+            }
+        } catch (NullPointerException e) {
+            db.deleteEntry(id);
         }
-
-            //db.deleteEntry(id);
+        settingAdapter();
     }
 }
 
