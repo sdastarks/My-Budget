@@ -1,5 +1,6 @@
 package com.example.mybudget.Account;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -24,12 +25,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
@@ -37,7 +38,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountActivity extends SettingsActivity {
+public class AccountActivity extends AvatarChangeActivity {
     private static final String TAG = "AccountActivityLog";
     RecyclerView mRecyclerView;
     private List<AccountsRow> data;
@@ -73,7 +74,7 @@ public class AccountActivity extends SettingsActivity {
         mySpinnerOnClick();
 
         mySpinnerMonths = (findViewById(R.id.spinner_months));
-
+        
         String[] labelsMonths = {"Everything", "January", "February", "March", "April", "May", "April", "June", "July",
                 "August", "September", "October", "November", "December"};
 
@@ -145,9 +146,15 @@ public class AccountActivity extends SettingsActivity {
 
                     case R.id.nav_account:
                         break;
+
                     case R.id.nav_chores:
                         Intent intent3 = new Intent(AccountActivity.this, ChoresActivity.class);
                         startActivity(intent3);
+                        break;
+
+                    case R.id.nav_avatar_change:
+                        Intent intent4 = new Intent(AccountActivity.this, AvatarChangeActivity.class);
+                        startActivity(intent4);
                         break;
                 }
                 return false;

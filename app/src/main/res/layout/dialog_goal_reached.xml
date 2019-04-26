@@ -51,11 +51,12 @@
             android:background="@drawable/icon_cancel_white"
             android:clickable="true"
             android:text=" "
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_new_wish_title"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.997"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.058" />
 
 
 

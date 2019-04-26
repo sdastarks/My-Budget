@@ -9,22 +9,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
-import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
 
@@ -34,7 +31,7 @@ import com.example.mybudget.myDbHelper;
  * @author Benish
  */
 
-public class RegisterActivity extends SettingsActivity implements View.OnClickListener {
+public class RegisterActivity extends AvatarChangeActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivityLog";
     private final AppCompatActivity activity = RegisterActivity.this;
@@ -216,7 +213,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 case R.id.appCompatButtonUpdateUser: {
                     if (inputValidation()) {
                         updateUser(user);
-                        //Log.v(TAG, "user updated");
+                        Log.v(TAG, "user updated");
                     }
                 }
                 break;
@@ -306,7 +303,16 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
     private boolean validateAge() {
         initializeViews();
         String valueAge = textInputEditTextAge.getText().toString();
-        int valueAge1 = Integer.parseInt(valueAge);
+
+        String valueAgeNotNull = valueAge.trim();
+        int value1 = 0;
+        try {
+            value1 = valueAgeNotNull != null && !valueAgeNotNull.isEmpty() && !valueAgeNotNull.equals("") ? Integer.parseInt(valueAgeNotNull) : 0;
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            textInputEditTextAge.setError("Invalid value");
+            valid = false;
+        }
         try {
             if (valueAge.isEmpty()) {
                 textInputEditTextAge.setError("Field cannot be empty");
@@ -314,7 +320,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
             } else if (valueAge.length() > 2) {
                 textInputEditTextAge.setError("Invalid value");
                 valid = false;
-            } else if (valueAge1 == 0) {
+            } else if (value1 == 0) {
                 textInputEditTextAge.setError("Invalid value");
                 valid = false;
             } else {
