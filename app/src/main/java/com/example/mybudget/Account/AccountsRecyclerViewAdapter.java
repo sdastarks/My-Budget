@@ -59,6 +59,8 @@ public class AccountsRecyclerViewAdapter extends RecyclerView.Adapter<AccountsVi
 //            holder.status.setText(""+list.get(position).status);
 //            holder.status.setTextColor(Color.GREEN);
         }
+        int id= list.get(position).id;
+        holder.itemView.setTag(id);
     }
 
     @Override
