@@ -69,12 +69,12 @@ public class AccountActivity extends AvatarChangeActivity {
         mySpinner = (findViewById(R.id.spinner1));
 
 
-        String [] labels={"Categories","Expenses","Income","On wish","Chore Money"};
+        String[] labels = {"Categories", "Expenses", "Income", "On wish", "Chore Money"};
 
         mySpinnerMonths = (findViewById(R.id.spinner_months));
 
-        String [] labelsMonths = {"Months","January","February","March","April", "May", "June", "July",
-        "August", "September", "October", "November", "December"};
+        String[] labelsMonths = {"Months", "January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"};
 
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         if (sharedPrefs.getInt(USER_ID, 0) == 0) {
@@ -113,32 +113,32 @@ public class AccountActivity extends AvatarChangeActivity {
     }
 
     public void mySpinnerOnClick() {
-            mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    settingAdapter();
-                }
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                settingAdapter();
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
+            }
+        });
     }
 
     public void mySpinnerMonthsOnClick() {
 
-            mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    settingAdapter();
-                }
+        mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                settingAdapter();
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
+            }
+        });
     }
 
     public void bottomNavigationOnClick() {
@@ -447,9 +447,12 @@ public class AccountActivity extends AvatarChangeActivity {
                 String title = e.getDesc();
                 title = title.substring(0, title.length() - 9);
                 WishList wish2update = db.findWishList(title);
-                if (wish2update.getSaved()-e.getAmount()>=0){
+                if (wish2update.getSaved() - e.getAmount() >= 0) {
                     db.updateWish(wish2update.getWishListId(), title, wish2update.getCost(),
                             wish2update.getSaved() - e.getAmount(), wish2update.getImage());
+                } else {
+                    db.updateWish(wish2update.getWishListId(), title, wish2update.getCost(),
+                            0, wish2update.getImage());
                 }
                 db.deleteEntry(id);
             } else if (label == 1 | label == 3) {
