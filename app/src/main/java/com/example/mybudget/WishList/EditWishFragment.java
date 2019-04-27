@@ -2,7 +2,6 @@ package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
-import com.example.mybudget.WishList.WishlistActivity;
 
 /**
  * A simple {@link Fragment} subclass.
