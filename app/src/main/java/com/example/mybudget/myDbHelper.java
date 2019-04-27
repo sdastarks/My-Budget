@@ -183,7 +183,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             wishList.setTitle(cursor.getString(1));
             wishList.setCost(Integer.parseInt(cursor.getString(2)));
             wishList.setSaved(Integer.parseInt(cursor.getString(3)));
-            wishList.setImage(Integer.parseInt(cursor.getColumnName(4)));
+            wishList.setImage(cursor.getInt(4));
         } else {
             wishList = null;
         }

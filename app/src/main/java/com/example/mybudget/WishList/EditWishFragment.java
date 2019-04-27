@@ -2,7 +2,6 @@ package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
-import com.example.mybudget.WishList.WishlistActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -205,12 +203,12 @@ public class EditWishFragment extends Fragment {
                     int cost = Integer.parseInt(meditCost.getText().toString());
 
 
-                    if (cost > 10000000) {
+                    if (wish2Edit.getSaved() >= cost) {
+                        meditCost.setError("You've already saved " + wish2Edit.getSaved() + " SEK");
+                    } else if (cost > 10000000) {
                         meditCost.setError("Wish must be less than 10M SEK");
                     } else if (cost <= 0) {
                         meditCost.setError("Must be greater than 0 SEK");
-                    } else if (wish2Edit.getSaved() > cost) {
-                        meditCost.setError("You've already saved " + wish2Edit.getSaved() + " SEK");
                     } else if (title.isEmpty()) {
                         Log.v(TAG, "title: " + title + "cost: " + cost);
                         updateWish();
@@ -240,15 +238,15 @@ public class EditWishFragment extends Fragment {
         int newCost = Integer.parseInt(meditCost.getText().toString());
         int newDrawable = drawable;
 
-        if(meditTitle.getText().toString()== wish2Edit.getTitle())
+        if (meditTitle.getText().toString() == wish2Edit.getTitle())
             newTitle = wish2Edit.getTitle();
         else newTitle = meditTitle.getText().toString();
 
-        if(meditCost.getText().toString() == String.valueOf(wish2Edit.getCost()))
+        if (meditCost.getText().toString() == String.valueOf(wish2Edit.getCost()))
             newCost = wish2Edit.getCost();
-        else newCost =Integer.parseInt(meditCost.getText().toString());
+        else newCost = Integer.parseInt(meditCost.getText().toString());
 
-        if(drawable == wish2Edit.getImage())
+        if (drawable == wish2Edit.getImage())
             newDrawable = wish2Edit.getImage();
         else newDrawable = drawable;
 

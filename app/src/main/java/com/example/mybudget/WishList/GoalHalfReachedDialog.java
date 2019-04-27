@@ -38,7 +38,7 @@ public class GoalHalfReachedDialog extends  AppCompatDialogFragment {
         mImageHeroGoalHalfReached = view.findViewById(R.id.imageHero_goal_half_reached);
 
 
-        
+
         mCancelHalfWayDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
