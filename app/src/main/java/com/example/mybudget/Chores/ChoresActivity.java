@@ -209,7 +209,7 @@ public class ChoresActivity extends AvatarChangeActivity {
         bundle.putInt("amount", amount);
         add.setArguments(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.check, add);
+        ft.replace(R.id.chres_frame_fragment, add);
         inflow = true;
         ft.commit();
     }

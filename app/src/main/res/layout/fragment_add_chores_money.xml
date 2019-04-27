@@ -20,14 +20,15 @@
 
         <Button
             android:id="@+id/btn_saveChoreTransfer"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
             android:layout_gravity="right"
-            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            style="@style/NormalTextStyleWhite"
             android:text="OK"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:background="@android:color/transparent"/>
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="371dp"
+            tools:layout_editor_absoluteY="15dp"  />
 
 
         <Button
@@ -51,15 +52,14 @@
 
     <TextView
         android:id="@+id/balance_choreFragment"
+        style="@style/HeadlineTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="4dp"
         android:gravity="top"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/money_image_fragment_chores"
         app:layout_constraintEnd_toEndOf="@+id/money_image_fragment_chores"
         app:layout_constraintStart_toStartOf="@+id/money_image_fragment_chores"
@@ -68,119 +68,124 @@
     <ImageView
         android:id="@+id/imageViewHero_chores"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="fitStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/money_image_fragment_chores"
+        app:layout_constraintEnd_toStartOf="@+id/money_image_fragment_chores"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thinking_frame_chores"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_chores"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/cookie" />
 
     <ImageView
         android:id="@+id/thinking_frame_chores"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="16dp"
-        android:scaleType="fitEnd"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/money_image_fragment_chores"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/money_from_chore_toolbar"
+        app:layout_constraintVertical_weight="1"
         app:srcCompat="@drawable/speech_bubble_big" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/choresAmount_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="55dp"
         android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_chores"
-        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_chores"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame_chores"
-        app:layout_constraintVertical_bias="0.776">
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame_chores"
+        app:layout_constraintStart_toStartOf="@+id/thinking_frame_chores"
+        app:layout_constraintTop_toTopOf="@+id/choresDescription_layout">
 
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/choresAmount"
-            android:layout_width="76dp"
+            style="@style/InputTextStyleNoColor"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:textAlignment="center"
             android:textColor="?attr/colorPrimaryDark"
             android:textColorHint="?attr/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textCursorDrawable="?attr/colorPrimaryDark"/>
+            android:textCursorDrawable="?attr/colorPrimaryDark"
+            android:textSize="22sp" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/choresDescription_layout"
-        android:layout_width="235dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="28dp"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_chores"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.782"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame_chores"
-        app:layout_constraintVertical_bias="0.197">
+        app:layout_constraintBottom_toTopOf="@+id/choresAmount_layout"
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame_chores"
+        app:layout_constraintStart_toStartOf="@+id/thinking_frame_chores"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_chores">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/choresDescription"
-            android:layout_width="250dp"
+            style="@style/NormalTextStyleWhite"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:textAlignment="center"
             android:textColor="?attr/colorPrimaryDark"
             android:textColorHint="?attr/colorPrimaryDark"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textCursorDrawable="?attr/colorPrimaryDark"/>
+            android:textCursorDrawable="?attr/colorPrimaryDark"
+            android:textSize="19sp" />
 
     </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/choresSEK"
+        style="@style/TextStyleBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="4dp"
         android:text="SEK"
         android:textColor="?attr/colorPrimaryDark"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewHero_chores"
+        app:layout_constraintBottom_toBottomOf="@+id/choresAmount_layout"
         app:layout_constraintEnd_toEndOf="@+id/thinking_frame_chores"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/choresAmount_layout" />
 
     <ImageView
         android:id="@+id/money_image_fragment_chores"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_money"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageViewHero_chores"
-        app:layout_constraintTop_toTopOf="@+id/imageViewHero_chores"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/imageViewHero_chores"
+        app:layout_constraintTop_toBottomOf="@id/thinking_frame_chores"
+        app:layout_constraintVertical_weight="2" />
 
 </android.support.constraint.ConstraintLayout>
 

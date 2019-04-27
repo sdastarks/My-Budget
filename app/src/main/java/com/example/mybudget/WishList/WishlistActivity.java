@@ -60,6 +60,8 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Wishlist");
+        toolbar.setTitleTextAppearance(this, R.style.ToolbarTextAppearance);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
