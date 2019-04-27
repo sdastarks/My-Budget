@@ -39,7 +39,7 @@ public class AvatarChangeActivity extends AppCompatActivity {
         if (themeResId != -1) {
             setTheme(themeResId);
         }
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_avatar_change);
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);

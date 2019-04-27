@@ -74,6 +74,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     SharedPreferences sharedPreferences;
     int userGlobalId;
     String userGlobalName;
+    private Drawable d;
 
 
     @Override
@@ -109,7 +110,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
 
                 selectAvatar();
                 appCompatButtonUpdateUser.setVisibility(View.GONE);
-                register_headline.setText("REGISTER");
+                register_headline.setText("Register");
 
             } else if (switchValue.equals("update")) {
                 setContentView(R.layout.activity_register);
@@ -119,6 +120,11 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
                 chooseAvatarTextView.setVisibility(View.GONE);
                 register_headline.setText("Edit Profile");
+                avatar_image = (ImageView)findViewById(R.id.avatarImage);
+                if(imageResId != -1){
+                    d = getDrawable(imageResId);
+                    avatar_image.setImageDrawable(d);
+                }
             }
         }
         activateOnExitRegisterActiviy();
@@ -214,6 +220,8 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                     if (inputValidation()) {
                         updateUser(user);
                         Log.v(TAG, "user updated");
+                        Intent intentLoadMainPage = new Intent (RegisterActivity.this, MainActivity.class);
+                        startActivity(intentLoadMainPage);
                     }
                 }
                 break;
