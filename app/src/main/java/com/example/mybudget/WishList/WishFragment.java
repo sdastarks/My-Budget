@@ -88,7 +88,7 @@ public class WishFragment extends Fragment {
         activateCancelWishFragment();
         activateFavouriteWish();
 
-        completed_wishes = view.findViewById(R.id.completed_wishes);
+        completed_wishes = getActivity().findViewById(R.id.completed_wishes);
         completed_wishes.hide();
 
         return view;

@@ -42,7 +42,7 @@ public class EditWishFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        completed_wishes = view.findViewById(R.id.completed_wishes);
+        completed_wishes = getActivity().findViewById(R.id.completed_wishes);
         completed_wishes.hide();
 
         view = inflater.inflate(R.layout.fragment_edit_wish, container, false);

@@ -52,7 +52,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private int balance;
     private GoalReachedDialog goalReached;
     private GoalHalfReachedDialog goalHalfReached;
-    FloatingActionButton completed_wishes;
+    private FloatingActionButton completed_wishes;
 
     /*
      * Method creates the initial state of the
@@ -62,7 +62,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        completed_wishes = view.findViewById(R.id.completed_wishes);
+        completed_wishes = getActivity().findViewById(R.id.completed_wishes);
         completed_wishes.hide();
 
         view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);

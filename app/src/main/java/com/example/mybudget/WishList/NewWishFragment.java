@@ -65,8 +65,6 @@ public class NewWishFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
         View view = inflater.inflate(R.layout.fragment_new_wish, container, false);
         mNewWishTitle = view.findViewById(R.id.wish_title);
         mNewWishCost = view.findViewById(R.id.wish_cost);
@@ -175,7 +173,7 @@ public class NewWishFragment extends Fragment {
                 drawable = R.drawable.button_wish_dream;
             }
         });
-        completed_wishes = view.findViewById(R.id.completed_wishes);
+        completed_wishes = getActivity().findViewById(R.id.completed_wishes);
         completed_wishes.hide();
 
         return view;
