@@ -19,6 +19,9 @@ import com.example.mybudget.myDbHelper;
 
 import java.util.ArrayList;
 
+/**
+ * Class to show all completed wishes in Activity
+ */
 public class CompletedWishesActivity extends SettingsActivity implements RecyclerViewAdapter.OnWishListener{
 
     private FloatingActionButton exitCompletedWishes;
@@ -53,7 +56,6 @@ public class CompletedWishesActivity extends SettingsActivity implements Recycle
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
     /**
      * Loading all wishes in the list from the database
      * @auth DAWNIE Safar
