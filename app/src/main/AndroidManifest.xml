@@ -3,9 +3,13 @@
     package="com.example.mybudget">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -14,15 +18,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".WishList.CompletedWishesActivity"></activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".Profile.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Profile.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Chores.ChoresActivity" />
         <activity android:name=".Account.AccountActivity" />
-        <activity android:name=".WishList.WishlistActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".Home.MainActivity"/>
+        <activity
+            android:name=".WishList.WishlistActivity"
+            android:parentActivityName=".Home.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Home.MainActivity"
             android:theme="@style/AppTheme.CookieMonster">

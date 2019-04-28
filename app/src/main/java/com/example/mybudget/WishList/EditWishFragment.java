@@ -35,11 +35,15 @@ public class EditWishFragment extends Fragment {
     private WishList wish2Edit;
     View view;
     private int drawable;
+    private FloatingActionButton completed_wishes;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        completed_wishes = view.findViewById(R.id.completed_wishes);
+        completed_wishes.hide();
 
         view = inflater.inflate(R.layout.fragment_edit_wish, container, false);
 

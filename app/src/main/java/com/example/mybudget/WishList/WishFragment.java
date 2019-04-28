@@ -45,6 +45,7 @@ public class WishFragment extends Fragment {
 
     private Button cancelWishFragment;
     private Button editWishFragment;
+    private FloatingActionButton completed_wishes;
 
 
     WishList wishSelected;
@@ -86,6 +87,9 @@ public class WishFragment extends Fragment {
         activateEditWishFragment();
         activateCancelWishFragment();
         activateFavouriteWish();
+
+        completed_wishes = view.findViewById(R.id.completed_wishes);
+        completed_wishes.hide();
 
         return view;
     }

@@ -126,7 +126,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      }
 
     public interface OnWishListener {
-        void onWishClick(int position);
+         void onWishClick(int position);
     }
 }
 

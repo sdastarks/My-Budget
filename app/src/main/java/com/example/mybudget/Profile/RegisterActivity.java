@@ -405,7 +405,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
     /**
      * This method is to delete user record
      *
-     * @param user public void deleteUser(){
+     * @param //user public void deleteUser(){
      *             initializeViews();
      *             databaseHelper.open_db();
      *             <p>

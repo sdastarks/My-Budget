@@ -59,10 +59,13 @@ public class NewWishFragment extends Fragment {
     private Button saveNewWish;
     private Button cancelNewWish;
     private int drawable;
+    private FloatingActionButton completed_wishes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
 
         View view = inflater.inflate(R.layout.fragment_new_wish, container, false);
         mNewWishTitle = view.findViewById(R.id.wish_title);
@@ -172,6 +175,8 @@ public class NewWishFragment extends Fragment {
                 drawable = R.drawable.button_wish_dream;
             }
         });
+        completed_wishes = view.findViewById(R.id.completed_wishes);
+        completed_wishes.hide();
 
         return view;
     }
