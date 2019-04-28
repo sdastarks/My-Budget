@@ -2,11 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_wishList"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
+    android:id="@+id/content_completed_wishList"
     android:background="@drawable/gradient"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WishList.CompletedWishesActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -17,9 +17,9 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/recycler_completedWishes"
+        android:layout_width="400dp"
+        android:layout_height="601dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
@@ -32,37 +32,19 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_wish"
+        android:id="@+id/exitCompletedWishes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="?attr/colorPrimary"
-        android:onClick="onAddWish"
-        android:src="@drawable/ic_add_black_24dp"
-        app:borderWidth="@dimen/default_background_stroke_width"
-        app:elevation="@dimen/default_stroke_width"
-        app:fabSize="auto"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:useCompatPadding="false" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/completed_wishes"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="324dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:onClick="onAddWish"
-        android:src="@drawable/ic_goal_reached"
+        android:src="@drawable/icon_cancel_white"
         app:borderWidth="@dimen/default_background_stroke_width"
         app:elevation="@dimen/default_stroke_width"
         app:fabSize="auto"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:useCompatPadding="false" />
 
 
@@ -86,10 +68,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
+
 
 
 </android.support.constraint.ConstraintLayout>

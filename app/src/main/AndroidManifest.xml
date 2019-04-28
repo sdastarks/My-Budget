@@ -3,9 +3,13 @@
     package="com.example.mybudget">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -34,6 +38,7 @@
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:parentActivityName=".Home.MainActivity"/>
+
         <activity
             android:name=".Home.MainActivity"
             android:screenOrientation="portrait"

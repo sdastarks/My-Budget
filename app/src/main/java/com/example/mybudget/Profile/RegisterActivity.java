@@ -402,6 +402,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         return sharedPrefs.getInt(USER_ID, 0);
     }
 
+
     private void AllItemsVisibilitySwitch() {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         textInputLayoutFirstName.setVisibility(View.GONE);

@@ -47,6 +47,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private int balance;
     private GoalReachedDialog goalReached;
     private GoalHalfReachedDialog goalHalfReached;
+    private FloatingActionButton completed_wishes;
 
     /*
      * Method creates the initial state of the
@@ -55,6 +56,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        completed_wishes = getActivity().findViewById(R.id.completed_wishes);
+        completed_wishes.hide();
 
         view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
 
@@ -204,6 +208,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
+             //((WishlistActivity) getActivity()).db.deleteWish(dbid);
             deleteCompletedWish();
             Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
