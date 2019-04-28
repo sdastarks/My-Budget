@@ -12,9 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.myDbHelper;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Class to show all completed wishes in Activity
  */
-public class CompletedWishesActivity extends SettingsActivity implements RecyclerViewAdapter.OnWishListener{
+public class CompletedWishesActivity extends AvatarChangeActivity implements RecyclerViewAdapter.OnWishListener{
 
     private FloatingActionButton exitCompletedWishes;
 

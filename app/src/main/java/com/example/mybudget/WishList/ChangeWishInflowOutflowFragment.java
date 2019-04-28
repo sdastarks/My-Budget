@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,7 +48,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private int balance;
     private GoalReachedDialog goalReached;
     private GoalHalfReachedDialog goalHalfReached;
-    private FloatingActionButton completed_wishes;
+    protected FloatingActionButton completed_wishes;
 
     /*
      * Method creates the initial state of the
