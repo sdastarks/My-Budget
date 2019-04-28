@@ -59,6 +59,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_CookieMonster);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.v("SettingsActivityLog","imageResId2: "+imageResId);
