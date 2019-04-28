@@ -128,6 +128,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 }
             }
         }
+        exitRegisterUpdateActivity();
     }
 
     /**
@@ -428,6 +429,21 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         welcomeFragment = new WelcomeFragmentDialog();
         welcomeFragment.show(fragmentManager, "welcomeFragment");
 
+    }
+
+    private void exitRegisterUpdateActivity() {
+        btn_exitRegisterActivity.setOnClickListener(new View.OnClickListener() {
+            /*
+             * Method sends the user back to the main menu
+             * when the cancel button is initialised
+             */
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "cancel button initialised");
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

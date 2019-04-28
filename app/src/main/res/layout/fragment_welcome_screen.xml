@@ -17,14 +17,18 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        app:cardBackgroundColor="@color/colorAccent"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="50dp"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="20dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="239dp"
+            android:layout_height="260dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp">
+
             <Button
                 android:id="@+id/btn_cancel_welcome_fragment"
                 android:layout_width="30dp"
@@ -72,6 +76,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_welcome_hero" />
 
+            <ImageView
+                android:layout_width="94dp"
+                android:layout_height="108dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="184dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/cookie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </android.support.constraint.ConstraintLayout>
