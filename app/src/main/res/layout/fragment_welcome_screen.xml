@@ -12,8 +12,8 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/welcome_screen"
-        android:layout_width="384dp"
-        android:layout_height="311dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -52,22 +52,43 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />
+
+            <TextView
+                android:id="@+id/txt_welcome"
+                style="@style/HeadlineTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="Welcome!"
+                android:textColor="?attr/colorPrimaryDark"
+                android:textSize="50sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
+
+                android:id="@+id/goal_reached_txt"
+                style="@style/NormalTextStyleWhite"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/welcome_msg_txt"
                 android:layout_width="284dp"
                 android:layout_height="77dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="You are now registerd! Let pocket monster be incharge of your pocket money."
+                android:layout_marginBottom="8dp"
+                android:lineSpacingMultiplier="0.85"
+                android:text="@string/welcome_message"
                 android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_welcome_hero" />

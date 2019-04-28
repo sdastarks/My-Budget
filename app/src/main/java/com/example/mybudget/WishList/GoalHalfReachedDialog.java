@@ -24,7 +24,6 @@ import com.example.mybudget.R;
 public class GoalHalfReachedDialog extends  AppCompatDialogFragment {
     private static final String TAG = "GoalReachedDialog";
     private Button mCancelHalfWayDialog;
-    private TextView mPoints;
     private ImageView mImageHeroGoalHalfReached;
 
 
@@ -34,7 +33,6 @@ public class GoalHalfReachedDialog extends  AppCompatDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.dialog_goal_half_reached,container,false);
         mCancelHalfWayDialog = view.findViewById(R.id.btn_cancel_half_goal_reached_dialog);
-        mPoints = view.findViewById(R.id.txt_points_half_goal_reached);
         mImageHeroGoalHalfReached = view.findViewById(R.id.imageHero_goal_half_reached);
 
 

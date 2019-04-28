@@ -1,157 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/wish_fragment"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/wish_fragment"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/gradient"
+android:clickable="true"
+tools:context=".WishList.ChangeWishInflowOutflowFragment">
+
+<android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/wish_money_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradient"
-    android:clickable="true"
-    tools:context=".WishList.ChangeWishInflowOutflowFragment">
+    android:layout_height="60dp"
+    android:background="?attr/colorAccent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/wish_money_toolbar"
+
+    <Button
+        android:id="@+id/btn_saveTransfer"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        style="@style/NormalTextStyleWhite"
+        android:text="OK"
+        android:textSize="22sp"
+        tools:layout_editor_absoluteX="371dp"
+        tools:layout_editor_absoluteY="15dp"  />
+
+
+    <Button
+        android:id="@+id/btn_cancelTransaction"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left"
+        android:background="@drawable/icon_cancel_white" />
+
+    <TextView
+        android:id="@+id/title_change_money_fragment"
+        style="@style/HeadlineTextStyle"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="?attr/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="13dp" />
 
+</android.support.v7.widget.Toolbar>
 
-        <Button
-            android:id="@+id/btn_saveTransfer"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="16dp"
-            android:text="OK"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:background="@android:color/transparent" />
-
-        <Button
-            android:id="@+id/btn_cancelTransaction"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="left"
-            android:background="@drawable/icon_cancel_white" />
-
-        <TextView
-            android:id="@+id/title_change_money_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/HeadlineTextStyle"
-             />
-
-    </android.support.v7.widget.Toolbar>
+<TextView
+    android:id="@+id/balance_wish_fragment"
+    style="@style/HeadlineTextStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="4dp"
+    android:gravity="top"
+    android:textAlignment="center"
+    android:textColor="?attr/colorPrimaryDark"
+    android:textSize="20sp"
+    app:layout_constraintBottom_toBottomOf="@+id/money_image_fragment_wish"
+    app:layout_constraintEnd_toEndOf="@+id/money_image_fragment_wish"
+    app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
+    app:layout_constraintTop_toTopOf="@+id/money_image_fragment_wish" />
 
     <ImageView
         android:id="@+id/imageViewHero_wishlist"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="fitStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/money_image_fragment_wish"
+        app:layout_constraintEnd_toStartOf="@+id/money_image_fragment_wish"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thinking_frame_small"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/thinking_frame_small"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/cookie" />
 
     <ImageView
         android:id="@+id/thinking_frame_small"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="16dp"
-        android:scaleType="fitEnd"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/money_image_fragment_wish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wish_money_toolbar"
+        app:layout_constraintVertical_weight="1"
         app:srcCompat="@drawable/speech_bubble_big" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/wish_cost_layout"
-        android:layout_width="wrap_content"
+<android.support.design.widget.TextInputLayout
+    android:id="@+id/wish_cost_layout"
+    android:layout_width="80dp"
+    android:layout_height="55dp"
+    android:layout_alignTop="@id/imageViewHero"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="35dp"
+    android:textAlignment="center"
+    android:textColor="?attr/colorPrimaryDark"
+    android:textColorHint="?attr/colorPrimaryDark"
+    app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
+    app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
+    app:layout_constraintStart_toStartOf="@+id/thinking_frame_small"
+    app:layout_constraintTop_toTopOf="@+id/thinking_frame_small">
+
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/amount"
+        style="@style/InputTextStyleNoColor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/imageViewHero"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="32dp"
+        android:inputType="number"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
-        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
-        app:layout_constraintTop_toTopOf="@+id/thinking_frame_small"
-        app:layout_constraintVertical_bias="0.507"
-        app:hintEnabled="false">
+        android:textCursorDrawable="?attr/colorPrimaryDark"
+        android:textSize="22sp" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/amount"
-            android:layout_width="55dp"
-            android:layout_height="wrap_content"
-            android:hint="0.00"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimaryDark"
-            android:textColorHint="?attr/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textCursorDrawable="?attr/colorPrimaryDark"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:id="@+id/SEK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="72dp"
-        android:text="SEK"
-        android:textColor="?attr/colorPrimaryDark"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewHero_wishlist"
-        app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/wish_cost_layout" />
+</android.support.design.widget.TextInputLayout>
 
 
-    <TextView
-        android:id="@+id/balance_wish_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="top"
-        android:textAlignment="center"
-        android:textColor="?attr/colorPrimaryDark"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/money_image_fragment_wish"
-        app:layout_constraintEnd_toEndOf="@+id/money_image_fragment_wish"
-        app:layout_constraintStart_toStartOf="@+id/money_image_fragment_wish"
-        app:layout_constraintTop_toTopOf="@+id/money_image_fragment_wish" />
+<TextView
+    android:id="@+id/SEK"
+    style="@style/TextStyleBody"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    android:text="SEK"
+    android:textColor="?attr/colorPrimaryDark"
+    android:textSize="20dp"
+    app:layout_constraintBottom_toBottomOf="@+id/wish_cost_layout"
+    app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toEndOf="@+id/wish_cost_layout" />
 
-
-    <ImageView
-        android:id="@+id/money_image_fragment_wish"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_money"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageViewHero_wishlist"
-        app:layout_constraintTop_toTopOf="@+id/imageViewHero_wishlist"
-        app:layout_constraintVertical_bias="0.0" />
-
+<ImageView
+    android:id="@+id/money_image_fragment_wish"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="32dp"
+    android:scaleType="fitCenter"
+    android:src="@drawable/ic_money"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintStart_toEndOf="@+id/imageViewHero_wishlist"
+    app:layout_constraintTop_toBottomOf="@id/thinking_frame_small"
+    app:layout_constraintVertical_weight="2" />
 
 </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+
+
+
 
