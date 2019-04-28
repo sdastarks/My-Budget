@@ -1,14 +1,11 @@
 package com.example.mybudget.WishList;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,9 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
@@ -194,9 +189,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
             Log.d(TAG, "addMoney2Wish: cost/2=saved");
             goalHalfReached = new GoalHalfReachedDialog();
-            //Bundle args = new Bundle();
-            //args.putInt("dbIdHalfGoal", dbid);
-            //goalHalfReached.setArguments(args);
             goalHalfReached.show(getFragmentManager(), "GoalHalfReachedDialog");
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),
@@ -210,16 +202,14 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         } else if ((wish2Update.getCost() == wish2Update.getSaved() + amount)) {
             Log.d(TAG, "addMoney2Wish: cost==saved");
             goalReached = new GoalReachedDialog();
-            //Bundle args = new Bundle();
-            //args.putInt("dbIdGoal", dbid);
-            //goalReached.setArguments(args);
             goalReached.show(getFragmentManager(), "GoalReachedDialog");
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
-            //((WishlistActivity) getActivity()).db.deleteWish(dbid);
+             //((WishlistActivity) getActivity()).db.deleteWish(dbid);
+            deleteCompletedWish();
             Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
                 @Override
@@ -238,6 +228,15 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
             exitFragment();
         }
+    }
+
+    public void deleteCompletedWish(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        int favWish_dbID= sharedPref.getInt("favouriteWish",0);
+        if (dbid==favWish_dbID){
+            sharedPref.edit().putInt("favouriteWish", 0).apply();
+        }
+        ((WishlistActivity) getActivity()).db.deleteWish(dbid);
     }
 
     /*

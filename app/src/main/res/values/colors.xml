@@ -5,6 +5,7 @@
     <color name="colorAccent">#FCB338</color>
     <color name="colorSecondary">#EEAD4D</color>
     <color name="white">#FFFFFF</color>
+    <color name="deleteRed">#b71c1c</color>
 
 
     <color name="cookieMonsterColorPrimary">#DF7835</color>

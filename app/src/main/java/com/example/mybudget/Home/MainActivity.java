@@ -28,21 +28,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Models.WishList;
-import com.example.mybudget.ProfileActivity;
+import com.example.mybudget.Profile.ProfileActivity;
 import com.example.mybudget.R;
 import com.example.mybudget.Profile.RegisterActivity;
-import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 
-public class MainActivity extends SettingsActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AvatarChangeActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private TextView tvBalance;
@@ -93,6 +92,9 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        ImageView logo =findViewById(R.id.logo);
+        logo.setVisibility(View.VISIBLE);
+
         register_button = findViewById(R.id.user_register_button);
         register_button.setVisibility(View.VISIBLE);
         register_button.setOnClickListener(new View.OnClickListener(){
@@ -137,8 +139,8 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                         Intent intent3 = new Intent(MainActivity.this, ChoresActivity.class);
                         startActivity(intent3);
                         break;
-                    case R.id.nav_settings:
-                        Intent intent4 = new Intent(MainActivity.this, SettingsActivity.class);
+                    case R.id.nav_avatar_change:
+                        Intent intent4 = new Intent(MainActivity.this, AvatarChangeActivity.class);
                         startActivity(intent4);
                         break;
 
@@ -240,11 +242,6 @@ public class MainActivity extends SettingsActivity implements NavigationView.OnN
                 Intent intent2 = new Intent(MainActivity.this, RegisterActivity.class);
                 intent2.putExtra("editProfile", "update");
                 startActivity(intent2);
-                break;
-            case R.id.side_nav_settings:
-                Intent intent3 = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent3);
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

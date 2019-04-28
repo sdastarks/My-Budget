@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,13 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.R;
-import com.example.mybudget.WishList.WishlistActivity;
 
 import java.time.LocalDate;
 
@@ -72,7 +68,7 @@ public class addChoresMoneyFragment extends Fragment {
         }
 
         mFragmentTitle = view.findViewById(R.id.title_money_from_chore_fragment);
-        mFragmentTitle.setText("Money for completed chores");
+        mFragmentTitle.setText("Chores Money");
         setAvatar();
 
 

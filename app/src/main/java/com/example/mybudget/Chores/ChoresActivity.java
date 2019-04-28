@@ -1,25 +1,31 @@
 package com.example.mybudget.Chores;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
+import com.example.mybudget.WishList.RegisterRequestDialog;
 import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
-public class ChoresActivity extends SettingsActivity {
+public class ChoresActivity extends AvatarChangeActivity {
     protected Boolean inflow;
     private static  final String TAG= "ChoresActivity";
+    public static final String USER_PREFS_NAME = "userPreferenceFile";
+    public static final String USER_ID = "userId";
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
     //Initilaizing ImagesButtons
@@ -65,121 +71,134 @@ public class ChoresActivity extends SettingsActivity {
                     case R.id.nav_chores:
                         break;
 
+                    case R.id.nav_avatar_change:
+                        Intent intent4 = new Intent(ChoresActivity.this, AvatarChangeActivity.class);
+                        startActivity(intent4);
+                        break;
+
                 }
                 return false;
             }
         });
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
+        if (sharedPrefs.getInt(USER_ID, 0) == 0) {
+            Log.d(TAG, "onAddWish: locking user if not registered");
+            RegisterRequestDialog dialog = new RegisterRequestDialog();
+            dialog.show(getSupportFragmentManager(), "register request dialog");
 
-        laundry = findViewById(R.id.laudry);
-        laundry.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                 title = "Laundry";
-                 amount = 50;
-                 addMoney(title,amount);
-            }
-        });
+        } else {
 
-        dishwashing = findViewById(R.id.dishwashing);
-        dishwashing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Dish washing";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
+            laundry = findViewById(R.id.laudry);
+            laundry.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Laundry";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
 
-        readingBook = findViewById(R.id.readingBook);
-        readingBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Reading a book";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        vacuum = findViewById(R.id.vacuum);
-        vacuum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Doing the vacuuming";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        beingNice = findViewById(R.id.beingNice);
-        beingNice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Being nice";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        petting = findViewById(R.id.petting);
-        petting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Walking the dog";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        grass = findViewById(R.id.grass);
-        grass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Mowing the lawn";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        mopping = findViewById(R.id.mopping);
-        mopping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Mopping the floor";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        goodGrade = findViewById(R.id.goodGrade);
-        goodGrade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "A high grade in class";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        cooking = findViewById(R.id.cooking);
-        cooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Cooking a small dish";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        baby = findViewById(R.id.baby);
-        baby.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Babysitting";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
-        other = findViewById(R.id.other);
-        other.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 title = "Specify here!";
-                 amount = 50;
-                addMoney(title,amount);
-            }
-        });
+            dishwashing = findViewById(R.id.dishwashing);
+            dishwashing.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Dish washing";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+
+            readingBook = findViewById(R.id.readingBook);
+            readingBook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Reading a book";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            vacuum = findViewById(R.id.vacuum);
+            vacuum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Doing the vacuuming";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            beingNice = findViewById(R.id.beingNice);
+            beingNice.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Being nice";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            petting = findViewById(R.id.petting);
+            petting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Walking the dog";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            grass = findViewById(R.id.grass);
+            grass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Mowing the lawn";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            mopping = findViewById(R.id.mopping);
+            mopping.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Mopping the floor";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            goodGrade = findViewById(R.id.goodGrade);
+            goodGrade.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "A high grade in class";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            cooking = findViewById(R.id.cooking);
+            cooking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Cooking a small dish";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            baby = findViewById(R.id.baby);
+            baby.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Babysitting";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+            other = findViewById(R.id.other);
+            other.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    title = "Specify here!";
+                    amount = 50;
+                    addMoney(title, amount);
+                }
+            });
+        }
     }
 
     public void addMoney(String title, int amount) {

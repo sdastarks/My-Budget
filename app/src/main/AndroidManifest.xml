@@ -18,20 +18,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WishList.CompletedWishesActivity"></activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity
-            android:name=".Profile.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Chores.ChoresActivity" />
-        <activity android:name=".Account.AccountActivity" />
-        <activity
-            android:name=".WishList.WishlistActivity"
-            android:parentActivityName=".Home.MainActivity"
-            android:windowSoftInputMode="adjustPan" />
+
+
+        <activity android:name=".AvatarChangeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Profile.ProfileActivity"
+                  android:screenOrientation="portrait"/>
+
+
+        <activity android:name=".Profile.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Chores.ChoresActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Account.AccountActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WishList.WishlistActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Home.MainActivity"/>
+
         <activity
             android:name=".Home.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CookieMonster">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,13 +1,14 @@
 package com.example.mybudget.WishList;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.WindowDecorActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,21 +16,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mybudget.Account.AccountActivity;
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
 import com.example.mybudget.myDbHelper;
 
 import java.util.ArrayList;
 
-public class WishlistActivity extends SettingsActivity implements RecyclerViewAdapter.OnWishListener {
+public class WishlistActivity extends AvatarChangeActivity implements RecyclerViewAdapter.OnWishListener {
     private static final String TAG = "WishlistActivity";
     protected ArrayList<Integer> mWishId = new ArrayList<>();
     protected ArrayList <String> mWishNames = new ArrayList<>();
@@ -87,9 +87,15 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
                         Intent intent2 = new Intent(WishlistActivity.this, AccountActivity.class);
                         startActivity(intent2);
                         break;
+
                     case R.id.nav_chores:
                         Intent intent3 = new Intent(WishlistActivity.this, ChoresActivity.class);
                         startActivity(intent3);
+                        break;
+
+                    case R.id.nav_avatar_change:
+                        Intent intent4 = new Intent(WishlistActivity.this, AvatarChangeActivity.class);
+                        startActivity(intent4);
                         break;
 
                 }
@@ -129,25 +135,25 @@ public class WishlistActivity extends SettingsActivity implements RecyclerViewAd
     @Override
     public void onWishClick(int position) {
         Log.d(TAG, "onWishClick: clicked : " + position);
-        addWish.hide();
-        toolbar.setVisibility(View.INVISIBLE);
-        id =mWishId.get(position);
-        wishPrice=mWishPrices.get(position);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frame_wish_fragment, new WishFragment());
-        index = position ;
-        ft.commit();
-
+            addWish.hide();
+            toolbar.setVisibility(View.INVISIBLE);
+            id = mWishId.get(position);
+            wishPrice = mWishPrices.get(position);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frame_wish_fragment, new WishFragment());
+            index = position;
+            ft.commit();
     }
 
 
     public void onAddWish(View view) {
         Log.d(TAG, "onAddWish: clicked : " );
-        addWish.hide();
-        toolbar.setVisibility(View.INVISIBLE);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
-        ft.commit();
+            addWish.hide();
+            toolbar.setVisibility(View.INVISIBLE);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
+            ft.commit();
+
     }
 
     /**

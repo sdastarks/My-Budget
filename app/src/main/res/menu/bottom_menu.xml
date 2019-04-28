@@ -19,9 +19,9 @@
         android:icon="@drawable/icon_chores"
         android:title="Chores"/>
     <item
-        android:id="@+id/nav_settings"
-        android:icon="@drawable/icon_settings_white"
-        android:title="Settings" />
+        android:id="@+id/nav_avatar_change"
+        android:icon="@drawable/ic_avatar"
+        android:title="Avatar" />
 
 
 </menu>

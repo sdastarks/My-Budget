@@ -19,4 +19,14 @@
         android:background="@drawable/ic_baseline_person_add_24px"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="208dp"
+        android:layout_height="33dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ic_logo"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:visibility="invisible" />
+
 </android.support.v7.widget.Toolbar>

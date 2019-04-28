@@ -3,28 +3,26 @@ package com.example.mybudget.Profile;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
 import com.example.mybudget.R;
-import com.example.mybudget.SettingsActivity;
-import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
 
@@ -34,7 +32,7 @@ import com.example.mybudget.myDbHelper;
  * @author Benish
  */
 
-public class RegisterActivity extends SettingsActivity implements View.OnClickListener {
+public class RegisterActivity extends AvatarChangeActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivityLog";
     private final AppCompatActivity activity = RegisterActivity.this;
@@ -77,7 +75,8 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
     SharedPreferences sharedPreferences;
     int userGlobalId;
     String userGlobalName;
-
+    private Drawable d;
+    private WelcomeFragmentDialog welcomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +111,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
                 selectAvatar();
                 appCompatButtonUpdateUser.setVisibility(View.GONE);
-                register_headline.setText("REGISTER");
+                register_headline.setText("Register");
 
             } else if (switchValue.equals("update")) {
                 setContentView(R.layout.activity_register);
@@ -122,9 +121,13 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 appCompatButtonUpdateUser.setVisibility(View.VISIBLE);
                 chooseAvatarTextView.setVisibility(View.GONE);
                 register_headline.setText("Edit Profile");
+                avatar_image = (ImageView)findViewById(R.id.avatarImage);
+                if(imageResId != -1){
+                    d = getDrawable(imageResId);
+                    avatar_image.setImageDrawable(d);
+                }
             }
         }
-        activateOnExitRegisterActiviy();
     }
 
     /**
@@ -140,10 +143,6 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_avatar, new AvatarFragment());
                 ft.commit();
-                //gridView.setAdapter(new AvatarGridView(this));
-
-                //gridView.setVisibility(View.VISIBLE);
-
             }
         });
     }
@@ -184,16 +183,8 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
     private void initializeObjects() {
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
         User user = new User();
+        welcomeFragment = new WelcomeFragmentDialog();
     }
-
-    /**
-     * This method is to initialize listeners
-
-     private void initializeListeners() {
-     initializeViews();
-     appCompatButtonRegister.setOnClickListener(this);
-     appCompatButtonUpdateUser.setOnClickListener(this);
-     }*/
 
     /**
      * @param view This method will execute onClick method depending on which button has been clicked
@@ -207,8 +198,7 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                     if (inputValidation()) {
                         addUser(user);
                         Log.v(TAG, "user added");
-                        Intent intentLoadMainPage = new Intent (RegisterActivity.this, MainActivity.class);
-                        startActivity(intentLoadMainPage);
+                        showWelcomeDialog();
                     }
                 }
                 break;
@@ -216,7 +206,9 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 case R.id.appCompatButtonUpdateUser: {
                     if (inputValidation()) {
                         updateUser(user);
-                        //Log.v(TAG, "user updated");
+                        Log.v(TAG, "user updated");
+                        Intent intentLoadMainPage = new Intent (RegisterActivity.this, MainActivity.class);
+                        startActivity(intentLoadMainPage);
                     }
                 }
                 break;
@@ -239,7 +231,6 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
                 System.out.println("all fields validation");
                 return true;
             }
-
         } catch (NullPointerException e) {
             System.out.println("Email field not validated");
             if (validateFirstname() && validateLastname() && validateAge()) {
@@ -306,7 +297,16 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
     private boolean validateAge() {
         initializeViews();
         String valueAge = textInputEditTextAge.getText().toString();
-        int valueAge1 = Integer.parseInt(valueAge);
+
+        String valueAgeNotNull = valueAge.trim();
+        int value1 = 0;
+        try {
+            value1 = valueAgeNotNull != null && !valueAgeNotNull.isEmpty() && !valueAgeNotNull.equals("") ? Integer.parseInt(valueAgeNotNull) : 0;
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            textInputEditTextAge.setError("Enter a valid number");
+            valid = false;
+        }
         try {
             if (valueAge.isEmpty()) {
                 textInputEditTextAge.setError("Field cannot be empty");
@@ -314,8 +314,8 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
             } else if (valueAge.length() > 2) {
                 textInputEditTextAge.setError("Invalid value");
                 valid = false;
-            } else if (valueAge1 == 0) {
-                textInputEditTextAge.setError("Invalid value");
+            } else if (value1 == 0) {
+                textInputEditTextAge.setError("Age cannot be 0");
                 valid = false;
             } else {
                 valid = true;
@@ -402,18 +402,6 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
         return sharedPrefs.getInt(USER_ID, 0);
     }
 
-    /**
-     * This method is to delete user record
-     *
-     * @param //user public void deleteUser(){
-     *             initializeViews();
-     *             databaseHelper.open_db();
-     *             <p>
-     *             db.delete(USER_PROFILE, values, USERID  + " = ?",
-     *             new String[]{String.valueOf(user.getId())});
-     *             databaseHelper.close();
-     *             }
-     */
 
     private void AllItemsVisibilitySwitch() {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
@@ -436,16 +424,10 @@ public class RegisterActivity extends SettingsActivity implements View.OnClickLi
 
     }
 
-
-    private void activateOnExitRegisterActiviy() {
-
-        btn_exitRegisterActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentExitActivity = new Intent (RegisterActivity.this, MainActivity.class);
-                startActivity(intentExitActivity);
-            }
-        });
+    private void showWelcomeDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        welcomeFragment = new WelcomeFragmentDialog();
+        welcomeFragment.show(fragmentManager, "welcomeFragment");
 
     }
 
