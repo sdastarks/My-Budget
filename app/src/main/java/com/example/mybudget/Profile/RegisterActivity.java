@@ -402,7 +402,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         return sharedPrefs.getInt(USER_ID, 0);
     }
-
     private void AllItemsVisibilitySwitch() {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         textInputLayoutFirstName.setVisibility(View.GONE);
@@ -428,7 +427,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         FragmentManager fragmentManager = getSupportFragmentManager();
         welcomeFragment = new WelcomeFragmentDialog();
         welcomeFragment.show(fragmentManager, "welcomeFragment");
-
     }
 
     private void exitRegisterUpdateActivity() {

@@ -8,5 +8,4 @@
         android:state_checked="false"
         android:color="?attr/colorPrimary" />
 
-
 </selector>
