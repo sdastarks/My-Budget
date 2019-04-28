@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.R;
+import com.example.mybudget.SendMailTask;
 
 import java.time.LocalDate;
 
@@ -38,6 +39,7 @@ public class addChoresMoneyFragment extends Fragment {
     private TextView mBalance;
     private int balance;
     private TextView mFragmentTitle;
+    private String userEmail;
 
 
     private Bundle bundle;
@@ -105,6 +107,12 @@ public class addChoresMoneyFragment extends Fragment {
                     } else if (amount > 10000) {
                         mChoresAmount.setError("You kidding?");
                     } else {
+                       userEmail = "nastasyja@gmail.com";
+                        String emailBody = "Your child completed chore: " + mChoresDescription.getText() + " \n Payment for chore: " + mChoresAmount.getText() +
+                                "\n please approve: ";
+
+                        new SendMailTask().execute( userEmail, emailBody);
+
                         Log.v(TAG, "amount: " + amount);
                         //DATABASE
                         Entry entry = new Entry();
