@@ -1,8 +1,6 @@
 package com.example.mybudget.WishList;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 
 /**
@@ -38,7 +35,8 @@ public class GoalHalfReachedDialog extends  AppCompatDialogFragment {
         mCancelHalfWayDialog = view.findViewById(R.id.btn_cancel_half_goal_reached_dialog);
         mImageHeroGoalHalfReached = view.findViewById(R.id.imageHero_goal_half_reached);
 
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
         mCancelHalfWayDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

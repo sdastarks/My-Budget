@@ -37,7 +37,7 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
     private ArrayList<Drawable> mDrawable = new ArrayList<>();
-    private FloatingActionButton addWish;
+    private FloatingActionButton addWish, completedWish;
     protected int id;
     protected int wishPrice;
     protected Integer progress;
@@ -110,9 +110,17 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
         addWish.show();
         loadDataToRecycle();
         initRecyclerView();
+
+        completedWish = findViewById(R.id.completed_wishes);
+        completedWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WishlistActivity.this, CompletedWishesActivity.class);
+                startActivity(intent);
+            }
+        });
         //initImageBitmaps();
     }
-
 
     //Method initializes List view with values for Wish List
     private void initRecyclerView() {
@@ -159,12 +167,14 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
         ArrayList<WishList> loadwishes = db.loadWishes();
 
         for(WishList wl : loadwishes){
-            mWishId.add(wl.getWishListId());
-            mWishNames.add(wl.getTitle());
-            mDrawable.add(getDrawable(wl.getImage()));
-            //mImageUrls.add(wl.getImage());
-            mWishPrices.add(wl.getCost());
-            mSavingProgress.add(wl.getSaved());
+            if(wl.getSaved() != wl.getCost()) {
+                mWishId.add(wl.getWishListId());
+                mWishNames.add(wl.getTitle());
+                mDrawable.add(getDrawable(wl.getImage()));
+                //mImageUrls.add(wl.getImage());
+                mWishPrices.add(wl.getCost());
+                mSavingProgress.add(wl.getSaved());
+            }
         }
     }
 }

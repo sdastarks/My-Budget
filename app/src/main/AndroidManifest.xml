@@ -3,9 +3,11 @@
     package="com.example.mybudget">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -16,20 +18,25 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".AvatarChangeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AvatarChangeActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".Profile.ProfileActivity"
-                  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Profile.ProfileActivity"
+            android:screenOrientation="portrait" />
 
 
         <activity android:name=".Profile.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".Chores.ChoresActivity"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".Account.AccountActivity"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".WishList.WishlistActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
@@ -37,7 +44,7 @@
         <activity
             android:name=".Home.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.CookieMonster">
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
