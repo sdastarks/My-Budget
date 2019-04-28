@@ -17,14 +17,18 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        app:cardBackgroundColor="@color/colorAccent"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="50dp"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="20dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="239dp"
+            android:layout_height="260dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp">
+
             <Button
                 android:id="@+id/btn_cancel_welcome_fragment"
                 android:layout_width="30dp"
@@ -51,25 +55,7 @@
                 android:src="@drawable/ic_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />
-
-            <TextView
-                android:id="@+id/txt_welcome"
-                style="@style/HeadlineTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="Welcome!"
-                android:textColor="?attr/colorPrimaryDark"
-                android:textSize="50sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/welcome_msg_txt"
@@ -80,13 +66,26 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:lineSpacingMultiplier="0.85"
-                android:text="@string/welcome_message"
+                android:text="You are now registerd! Let pocket monster be incharge of your pocket money."
                 android:textAlignment="center"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_welcome_hero" />
+
+
+            <ImageView
+                android:layout_width="94dp"
+                android:layout_height="108dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="184dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/cookie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
 
