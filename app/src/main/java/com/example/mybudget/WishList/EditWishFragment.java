@@ -319,7 +319,7 @@ public class EditWishFragment extends Fragment {
     {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            // Create the File where the photo should go
+            // Create the File where the photo should go ther
             File photoFile = null;
             try {
                 photoFile = createImageFile();
