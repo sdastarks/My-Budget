@@ -6,9 +6,19 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+  
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +26,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".AvatarChangeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Profile.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Profile.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chores.ChoresActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Account.AccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WishList.WishlistActivity"
+            android:parentActivityName=".Home.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <activity
