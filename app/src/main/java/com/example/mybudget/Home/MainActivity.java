@@ -66,6 +66,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("");
 
         addIncome = findViewById(R.id.floatingActionButton_add);
         outOutcome = findViewById(R.id.floatingActionButton_minus);
