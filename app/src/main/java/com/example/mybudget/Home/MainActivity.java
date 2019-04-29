@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.AvatarChangeActivity;
@@ -244,6 +245,10 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
                 Intent intent2 = new Intent(MainActivity.this, RegisterActivity.class);
                 intent2.putExtra("editProfile", "update");
                 startActivity(intent2);
+                break;
+            case R.id.side_nav_settings:
+                Intent intent3 = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent3);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
