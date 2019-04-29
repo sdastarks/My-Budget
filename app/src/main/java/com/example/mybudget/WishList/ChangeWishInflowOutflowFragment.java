@@ -210,7 +210,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
              //((WishlistActivity) getActivity()).db.deleteWish(dbid);
-            deleteCompletedWish();
+            //deleteCompletedWish();
             Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
                 @Override

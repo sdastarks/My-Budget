@@ -41,13 +41,18 @@
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:parentActivityName=".Home.MainActivity"/>
+
+        <activity android:name=".WishList.CompletedWishesActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Home.MainActivity"/>
+
         <activity
             android:name=".Home.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
