@@ -117,10 +117,10 @@ public class SettingsActivity extends AvatarChangeActivity {
         if (notificationsSet){
             dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
-        else if(emailsSet){
+        if(emailsSet){
             dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
-        else if (messagesSet){
+        if (messagesSet){
             dMessages[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
 /*
