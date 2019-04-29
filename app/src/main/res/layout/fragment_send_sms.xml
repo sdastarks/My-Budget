@@ -87,12 +87,14 @@
         android:layout_marginEnd="37dp"
         android:background="?attr/colorAccent"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textMultiLine|textCapSentences"
         android:textColor="?attr/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        android:gravity="top|left"
+        />
 
 
 

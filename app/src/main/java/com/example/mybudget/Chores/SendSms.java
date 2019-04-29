@@ -47,6 +47,10 @@ public class SendSms extends Fragment {
         e1 = view.findViewById(R.id.editText);
 
         e2 = view.findViewById(R.id.editText2);
+
+        e2.setText(getArguments().getString("desc") + "chore is completed and "
+         + getArguments().getString("amount") + "SEK has been added to the balance.");
+        //e2.setText(((ChoresActivity) getActivity()).title + " chore is completed and " + ((ChoresActivity) getActivity()).amount + "  SEK has been added to the balance.");
         b1 = view.findViewById(R.id.sendButton);
         b1.setEnabled(false);
 
