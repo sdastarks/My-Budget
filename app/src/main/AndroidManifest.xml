@@ -3,27 +3,26 @@
     package="com.example.mybudget">
 
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
+
     <uses-feature android:name="android.hardware.camera"
         android:required="false" />
-=======
 
     <!--For email approval to work-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
->>>>>>> e97fe8d1074ac73cccf96cea917fa4536c4c86bc
+
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-<<<<<<< HEAD
+
     <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
 
-=======
+
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -33,8 +32,7 @@
         android:required="false" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-  
->>>>>>> e97fe8d1074ac73cccf96cea917fa4536c4c86bc
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
