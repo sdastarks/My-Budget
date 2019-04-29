@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyBudget</string>
+    <string name="app_name"> </string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -38,6 +38,7 @@
     <string name="congrads">Cool!</string>
     <string name="half_way_goal_txt">You are close to reach your savings goal! Keep it up!</string>
     <string name="half_way_encouragement">Well done!</string>
+    <string name="welcome_message">You are now registered! Let pocket monster be in charge of your pocket money.</string>
 
     <string-array name="filter">
         <item>Everything</item>

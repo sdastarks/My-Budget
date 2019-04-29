@@ -59,13 +59,13 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_CookieMonster);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.v("SettingsActivityLog","imageResId2: "+imageResId);
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Pocket  Monster");
 
         addIncome = findViewById(R.id.floatingActionButton_add);
         outOutcome = findViewById(R.id.floatingActionButton_minus);
@@ -92,6 +92,9 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        ImageView logo =findViewById(R.id.logo);
+        logo.setVisibility(View.VISIBLE);
 
         register_button = findViewById(R.id.user_register_button);
         register_button.setVisibility(View.VISIBLE);

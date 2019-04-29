@@ -31,7 +31,6 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-
             android:background="@color/white">
 
             <TextView
@@ -40,10 +39,10 @@
                 android:layout_height="34dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:fontFamily="sans-serif-medium"
+                style = "@style/TextStyleBody"
                 android:text="Amount"
                 android:textAlignment="textEnd"
-                android:textSize="20dp"
+                android:textSize="22dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/title"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -53,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Date"
-                android:textSize="13sp"
+                style = "@style/TextStyleBody"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/title"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -62,14 +62,13 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
-
+                style = "@style/TextStyleBody"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:fontFamily="sans-serif-medium"
                 android:text="Title"
-                android:textSize="20dp"
+                android:textSize="22dp"
                 app:layout_constraintEnd_toStartOf="@+id/amount"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

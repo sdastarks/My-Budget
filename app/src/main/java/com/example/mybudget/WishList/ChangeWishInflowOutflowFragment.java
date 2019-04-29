@@ -1,13 +1,11 @@
 package com.example.mybudget.WishList;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,9 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
@@ -52,6 +48,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private int balance;
     private GoalReachedDialog goalReached;
     private GoalHalfReachedDialog goalHalfReached;
+    protected FloatingActionButton completed_wishes;
 
     /*
      * Method creates the initial state of the
@@ -60,6 +57,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        completed_wishes = getActivity().findViewById(R.id.completed_wishes);
+        completed_wishes.hide();
 
         view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
 
@@ -209,7 +209,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
-            ((WishlistActivity) getActivity()).db.deleteWish(dbid);
+             //((WishlistActivity) getActivity()).db.deleteWish(dbid);
+            //deleteCompletedWish();
             Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
                 @Override
@@ -228,6 +229,15 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
             exitFragment();
         }
+    }
+
+    public void deleteCompletedWish(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        int favWish_dbID= sharedPref.getInt("favouriteWish",0);
+        if (dbid==favWish_dbID){
+            sharedPref.edit().putInt("favouriteWish", 0).apply();
+        }
+        ((WishlistActivity) getActivity()).db.deleteWish(dbid);
     }
 
     /*
