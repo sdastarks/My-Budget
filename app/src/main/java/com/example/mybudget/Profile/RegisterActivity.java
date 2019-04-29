@@ -128,6 +128,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 }
             }
         }
+        exitRegisterUpdateActivity();
     }
 
     /**
@@ -401,8 +402,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         return sharedPrefs.getInt(USER_ID, 0);
     }
-
-
     private void AllItemsVisibilitySwitch() {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         textInputLayoutFirstName.setVisibility(View.GONE);
@@ -428,7 +427,21 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         FragmentManager fragmentManager = getSupportFragmentManager();
         welcomeFragment = new WelcomeFragmentDialog();
         welcomeFragment.show(fragmentManager, "welcomeFragment");
+    }
 
+    private void exitRegisterUpdateActivity() {
+        btn_exitRegisterActivity.setOnClickListener(new View.OnClickListener() {
+            /*
+             * Method sends the user back to the main menu
+             * when the cancel button is initialised
+             */
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "cancel button initialised");
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
