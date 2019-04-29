@@ -16,10 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
+import com.example.mybudget.SendMailTask;
 
 import java.time.LocalDate;
 import java.util.Timer;
@@ -49,6 +51,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private GoalReachedDialog goalReached;
     private GoalHalfReachedDialog goalHalfReached;
     protected FloatingActionButton completed_wishes;
+    private String userParentEmail;
 
     /*
      * Method creates the initial state of the
@@ -220,6 +223,15 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     startActivity(intent);
                 }
             }, 2000);
+            userParentEmail = "nastasyja@gmail.com";
+            //userParent email should be added and stored in data base
+            // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
+            String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() +" SEK";
+
+            new SendMailTask().execute(userParentEmail, emailBody);
+            Toast toast = Toast.makeText(getActivity(),"Completed wish status is sent to your parents email ",Toast.LENGTH_LONG);
+            toast.show();
+
         } else {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),

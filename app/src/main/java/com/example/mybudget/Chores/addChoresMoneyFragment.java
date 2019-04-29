@@ -41,7 +41,6 @@ public class addChoresMoneyFragment extends Fragment {
     private TextView mBalance;
     private int balance;
     private TextView mFragmentTitle;
-    private String userParentEmail;
 
 
     private Bundle bundle;
@@ -111,16 +110,6 @@ public class addChoresMoneyFragment extends Fragment {
                     } else if (amount > 10000) {
                         mChoresAmount.setError("You kidding?");
                     } else {
-
-                        userParentEmail = "nastasyja@gmail.com";
-                         //userParent email should be added and stored in data base
-                        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
-                        String emailBody = "Your child completed chore: " + mChoresDescription.getText() + " \n Payment for chore: " + mChoresAmount.getText() +
-                                "\n please approve: ";
-                        new SendMailTask().execute(userParentEmail, emailBody);
-                        Toast toast = Toast.makeText(getActivity(),"Completed chore status is sent to your parents email ",Toast.LENGTH_LONG);
-                        toast.show();
-
                         Log.v(TAG, "amount: " + amount);
                         //DATABASE
                         Entry entry = new Entry();
