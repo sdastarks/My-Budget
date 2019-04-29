@@ -2,6 +2,8 @@ package com.example.mybudget.Home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -131,6 +133,9 @@ public class SettingsActivity extends AvatarChangeActivity {
                     //initialise alarm
                     //DialogFragment timePicker = new TimePickerFragment();
                     //timePicker.show(getSupportFragmentManager(), "time picker");
+                    swt_notifications.setText("Daily Reminder Set");
+                    //swt_notifications.setBackgroundColor(getResources().getColor(R.color.white));
+
                 } else {
                     swt_notifications.setText("Set Daily Reminder");
                     //cancelAlarm();
