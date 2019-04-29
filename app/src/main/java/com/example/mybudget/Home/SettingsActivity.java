@@ -49,9 +49,9 @@ public class SettingsActivity extends AvatarChangeActivity {
         swt_telephone = findViewById(R.id.switch_messages);
         imageViewHero = findViewById(R.id.avatarImageSettings);
 
-        dnotification= swt_notifications.getCompoundDrawables();
-        dEmail= swt_email.getCompoundDrawables();
-        dMessages= swt_telephone.getCompoundDrawables();
+        dnotification = swt_notifications.getCompoundDrawables();
+        dEmail = swt_email.getCompoundDrawables();
+        dMessages = swt_telephone.getCompoundDrawables();
 
         setAvatar();
         setPrimarycolor();
@@ -103,22 +103,24 @@ public class SettingsActivity extends AvatarChangeActivity {
      */
     public void previousSwitchStates() {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        Boolean notificationsSet=settings.getBoolean("notification_switch", false);
-        Boolean emailsSet=settings.getBoolean("email_switch", false);
-        Boolean messagesSet=settings.getBoolean("messages_switch", false);
+        Boolean notificationsSet = settings.getBoolean("notification_switch", false);
+        Boolean emailsSet = settings.getBoolean("email_switch", false);
+        Boolean messagesSet = settings.getBoolean("messages_switch", false);
 
         swt_notifications.setChecked(notificationsSet);
         swt_email.setChecked(emailsSet);
         swt_telephone.setChecked(messagesSet);
 
-        if (notificationsSet){
+        if (notificationsSet) {
             dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+
             swt_notifications.setText("Daily Reminder Set");
+
         }
-        if(emailsSet){
+        if (emailsSet) {
             dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
-        if (messagesSet){
+        if (messagesSet) {
             dMessages[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
 /*
