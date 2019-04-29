@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home.SettingsActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/settings_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btn_save_settings"
+            style="@style/NormalTextStyleWhite"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:text="OK"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="371dp"
+            tools:layout_editor_absoluteY="15dp" />
+
+        <Button
+            android:id="@+id/btn_exit_settings"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:background="@drawable/icon_cancel_white" />
+
+        <TextView
+            style="@style/HeadlineTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            tools:layout_editor_absoluteY="14dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/avatarImageSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_toolbar"
+        app:srcCompat="@drawable/cookie" />
+
+    <Switch
+        android:id="@+id/switch_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/button_rounded_corners"
+        android:backgroundTint="?attr/colorPrimaryDark"
+        android:drawableLeft="@drawable/icon_alert"
+        android:drawablePadding="20dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Set Daily Reminder"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextStyleBodyRegular"
+        android:textIsSelectable="false"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/avatarImageSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Switch
+        android:id="@+id/switch_email"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_rounded_corners"
+        android:backgroundTint="?attr/colorPrimaryDark"
+        android:drawableLeft="@drawable/icon_email"
+        android:drawablePadding="20dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Email Monthly Update"
+        android:textAppearance="@style/TextStyleBodyRegular"
+        android:textColor="@color/white"
+        android:textIsSelectable="false"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="446dp"
+        app:layout_constraintTop_toBottomOf="@+id/switch_notifications"/>
+
+    <Switch
+        android:id="@+id/switch_messages"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_rounded_corners"
+        android:backgroundTint="?attr/colorPrimaryDark"
+        android:drawableLeft="@drawable/icon_message"
+        android:drawablePadding="20dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Send Payment Reminders"
+        android:textAppearance="@style/TextStyleBodyRegular"
+        android:textColor="@color/white"
+        android:textIsSelectable="false"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="446dp"
+        app:layout_constraintTop_toBottomOf="@+id/switch_email"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
