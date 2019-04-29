@@ -8,23 +8,12 @@ import android.util.Log;
 @SuppressWarnings("rawtypes")
 public class SendMailTask extends AsyncTask {
 
-//    private ProgressDialog statusDialog;
-//    private Activity sendMailActivity;
 
-    public SendMailTask(/*Activity activity*/) {
-//        sendMailActivity = activity;
+
+    public SendMailTask() {
+
     }
 
-
-//    protected void onPreExecute() {
-//        statusDialog = new ProgressDialog(sendMailActivity);
-//        statusDialog.setMessage("Getting ready...");
-//        statusDialog.setIndeterminate(false);
-//        statusDialog.setCancelable(false);
-//        statusDialog.show();
-//    }
-
-    @SuppressWarnings("unchecked")
     @Override
     //Params... params
     protected Object doInBackground(Object... args) {
@@ -39,26 +28,11 @@ public class SendMailTask extends AsyncTask {
             publishProgress("Email Sent.");
             Log.i("SendMailTask", "Mail Sent.");
 
-            //Config.mailSuccess="1";
-
-
         } catch (Exception e) {
             publishProgress(e.getMessage());
             Log.e("SendMailTask", e.getMessage(), e);
         }
         return null;
     }
-
-
-//    @Override
-//    public void onProgressUpdate(Object... values) {
-//        statusDialog.setMessage(values[0].toString());
-//
-//    }
-
-//    @Override
-//    public void onPostExecute(Object result) {
-//        statusDialog.dismiss();
-//    }
 
 }
