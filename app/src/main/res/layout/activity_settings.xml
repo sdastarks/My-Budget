@@ -15,32 +15,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/btn_save_settings"
-            style="@style/NormalTextStyleWhite"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:background="@android:color/transparent"
-            android:text="OK"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="371dp"
-            tools:layout_editor_absoluteY="15dp" />
 
         <Button
             android:id="@+id/btn_exit_settings"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="left"
-            android:background="@drawable/icon_cancel_white" />
+            android:background="@drawable/ic_baseline_keyboard_backspace_24px" />
+
 
         <TextView
             style="@style/HeadlineTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Settings"
-            tools:layout_editor_absoluteY="14dp" />
+            tools:layout_editor_absoluteY="14dp"
+            android:layout_marginEnd="40dp"/>
+
 
     </android.support.v7.widget.Toolbar>
 

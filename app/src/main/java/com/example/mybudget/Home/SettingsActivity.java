@@ -24,7 +24,6 @@ public class SettingsActivity extends AvatarChangeActivity {
     private static final String TAG = "SettingsActivityLog";
     public static final String PREFS_NAME = "switchPreferences";
 
-    private Button btn_save;
     private Button btn_exit;
     private Switch swt_notifications;
     private Switch swt_email;
@@ -44,22 +43,20 @@ public class SettingsActivity extends AvatarChangeActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        btn_save = findViewById(R.id.btn_save_settings);
         btn_exit = findViewById(R.id.btn_exit_settings);
         swt_notifications = findViewById(R.id.switch_notifications);
         swt_email = findViewById(R.id.switch_email);
         swt_telephone = findViewById(R.id.switch_messages);
         imageViewHero = findViewById(R.id.avatarImageSettings);
 
-        dnotification= swt_notifications.getCompoundDrawables();
-        dEmail= swt_email.getCompoundDrawables();
-        dMessages= swt_telephone.getCompoundDrawables();
+        dnotification = swt_notifications.getCompoundDrawables();
+        dEmail = swt_email.getCompoundDrawables();
+        dMessages = swt_telephone.getCompoundDrawables();
 
         setAvatar();
         setPrimarycolor();
         previousSwitchStates();
         exitSettings();
-        saveSettings();
         notificationsSwitch();
         enableEmailSwitch();
         enableMessagesSwitch();
@@ -106,21 +103,24 @@ public class SettingsActivity extends AvatarChangeActivity {
      */
     public void previousSwitchStates() {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        Boolean notificationsSet=settings.getBoolean("notification_switch", false);
-        Boolean emailsSet=settings.getBoolean("email_switch", false);
-        Boolean messagesSet=settings.getBoolean("messages_switch", false);
+        Boolean notificationsSet = settings.getBoolean("notification_switch", false);
+        Boolean emailsSet = settings.getBoolean("email_switch", false);
+        Boolean messagesSet = settings.getBoolean("messages_switch", false);
 
         swt_notifications.setChecked(notificationsSet);
         swt_email.setChecked(emailsSet);
         swt_telephone.setChecked(messagesSet);
 
-        if (notificationsSet){
+        if (notificationsSet) {
             dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+
+            swt_notifications.setText("Daily Reminder Set");
+
         }
-        if(emailsSet){
+        if (emailsSet) {
             dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
-        if (messagesSet){
+        if (messagesSet) {
             dMessages[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
 /*
@@ -140,21 +140,6 @@ public class SettingsActivity extends AvatarChangeActivity {
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        return true;
-    }
-
-    /**
-     * Method saves the state of the settings
-     */
-    public Boolean saveSettings() {
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //save settings
                 Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
                 startActivity(intent);
             }
