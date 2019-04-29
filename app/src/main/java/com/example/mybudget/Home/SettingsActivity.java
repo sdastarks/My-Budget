@@ -22,6 +22,7 @@ import com.example.mybudget.myDbHelper;
 public class SettingsActivity extends AvatarChangeActivity {
 
     private static final String TAG = "SettingsActivityLog";
+    public static final String PREFS_NAME = "switchPreferences";
 
     private Button btn_save;
     private Button btn_exit;
@@ -29,7 +30,12 @@ public class SettingsActivity extends AvatarChangeActivity {
     private Switch swt_email;
     private Switch swt_telephone;
     private ImageView imageViewHero;
-    private Drawable d;
+    private Drawable avatar;
+    Drawable[] dnotification;
+    Drawable[] dEmail;
+    Drawable[] dMessages;
+    private int primarycolor;
+
 
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
@@ -45,8 +51,12 @@ public class SettingsActivity extends AvatarChangeActivity {
         swt_telephone = findViewById(R.id.switch_messages);
         imageViewHero = findViewById(R.id.avatarImageSettings);
 
+        dnotification= swt_notifications.getCompoundDrawables();
+        dEmail= swt_email.getCompoundDrawables();
+        dMessages= swt_telephone.getCompoundDrawables();
 
         setAvatar();
+        setPrimarycolor();
         previousSwitchStates();
         exitSettings();
         saveSettings();
@@ -64,22 +74,55 @@ public class SettingsActivity extends AvatarChangeActivity {
      */
     public Boolean setAvatar() {
         if (imageResId != -1) {
-            d = getDrawable(imageResId);
-            imageViewHero.setImageDrawable(d);
+            avatar = getDrawable(imageResId);
+            imageViewHero.setImageDrawable(avatar);
             return true;
         }
         return false;
     }
 
     /**
+     * Method sets the primary colour
+     * used to change the colour
+     * of th icons
+     */
+    public void setPrimarycolor() {
+        if (R.style.AppTheme_Science == themeResId) {
+            primarycolor = getResources().getColor(R.color.scienceMonsterColorAccent);
+        } else if (R.style.AppTheme_CookieMonster == themeResId) {
+            primarycolor = getResources().getColor(R.color.cookieMonsterColorAccent);
+        } else if (R.style.AppTheme_GirlMonster == themeResId) {
+            primarycolor = getResources().getColor(R.color.girlMonsterColorAccent);
+        } else if (R.style.AppTheme_CrazyMonster == themeResId) {
+            primarycolor = getResources().getColor(R.color.CrazyMonsterColorAccent);
+        } else {
+            primarycolor = getResources().getColor(R.color.colorAccent);
+        }
+    }
+
+    /**
      * Method sets the state of the switch bars to
      * their original state
      */
-    public void previousSwitchStates(){
-        SharedPreferences settings = getSharedPreferences("switch_state_id", 0);
-        swt_notifications.setChecked(settings.getBoolean("notification_switch",false));
-        swt_email.setChecked(settings.getBoolean("email_switch",false));
-        swt_telephone.setChecked(settings.getBoolean("messages_switch",false));
+    public void previousSwitchStates() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        Boolean notificationsSet=settings.getBoolean("notification_switch", false);
+        Boolean emailsSet=settings.getBoolean("email_switch", false);
+        Boolean messagesSet=settings.getBoolean("messages_switch", false);
+
+        swt_notifications.setChecked(notificationsSet);
+        swt_email.setChecked(emailsSet);
+        swt_telephone.setChecked(messagesSet);
+
+        if (notificationsSet){
+            dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+        }
+        else if(emailsSet){
+            dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+        }
+        else if (messagesSet){
+            dMessages[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+        }
 /*
         reminderSet = settings.getBoolean("notification_switchkey", false);
         if (reminderSet){
@@ -127,16 +170,19 @@ public class SettingsActivity extends AvatarChangeActivity {
      */
     public Boolean notificationsSwitch() {
         swt_notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     //initialise alarm
                     //DialogFragment timePicker = new TimePickerFragment();
                     //timePicker.show(getSupportFragmentManager(), "time picker");
+
+                    dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
                     swt_notifications.setText("Daily Reminder Set");
-                    //swt_notifications.setBackgroundColor(getResources().getColor(R.color.white));
 
                 } else {
+                    dnotification[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
                     swt_notifications.setText("Set Daily Reminder");
                     //cancelAlarm();
                 }
@@ -154,10 +200,15 @@ public class SettingsActivity extends AvatarChangeActivity {
      */
     public Boolean enableEmailSwitch() {
         swt_email.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+
                 } else {
+                    dEmail[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
                 }
                 storeSwitchState("email_switch", isChecked);
             }
@@ -173,10 +224,13 @@ public class SettingsActivity extends AvatarChangeActivity {
      */
     public Boolean enableMessagesSwitch() {
         swt_telephone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    dMessages[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
                 } else {
+                    dMessages[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
                 }
                 storeSwitchState("messages_switch", isChecked);
             }
@@ -190,7 +244,7 @@ public class SettingsActivity extends AvatarChangeActivity {
      * @return if states been saved
      */
     public Boolean storeSwitchState(String switchName, Boolean isChecked) {
-        SharedPreferences settings = getSharedPreferences("switch_state_id", 0);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean(switchName, isChecked);
         editor.commit();
