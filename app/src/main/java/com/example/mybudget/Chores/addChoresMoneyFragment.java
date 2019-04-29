@@ -130,8 +130,12 @@ public class addChoresMoneyFragment extends Fragment {
                         entry.setDesc(description);
                         ((ChoresActivity) getActivity()).db.addEntry(entry);
 
+                        SendSms mFrag = new SendSms();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("desc", mChoresDescription.getText().toString());
+                        bundle.putString("amount", mChoresAmount.getText().toString());
+                        mFrag.setArguments(bundle);
                         FragmentTransaction t = getFragmentManager().beginTransaction();
-                        Fragment mFrag = new SendSms();
                         t.replace(R.id.check, mFrag);
                         t.commit();
                        // startActivity(intent);
