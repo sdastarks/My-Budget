@@ -39,6 +39,11 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".Home.MainActivity"/>
 
+        <activity android:name=".WishList.CompletedWishesActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Home.MainActivity"/>
+
         <activity
             android:name=".Home.MainActivity"
             android:screenOrientation="portrait"
