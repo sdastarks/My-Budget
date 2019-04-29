@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Chores.SendSms"
+    android:background="@drawable/gradient"
+    >
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/Send_sms_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="?attr/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/HeadlineTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="Message"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/Send_sms_toolbar"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="right"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:text="SEND"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Send_sms_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancelTransaction"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancelSend"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/icon_cancel_white"
+        app:layout_constraintBottom_toBottomOf="@+id/Send_sms_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="41dp"
+        android:background="?attr/colorAccent"
+        android:ems="10"
+        android:hint="Enter Phone no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="0dp"
+        android:layout_height="191dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="37dp"
+        android:background="?attr/colorAccent"
+        android:ems="10"
+        android:inputType="textMultiLine|textCapSentences"
+        android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        android:gravity="top|left"
+        />
+
+
+
+</android.support.constraint.ConstraintLayout>
