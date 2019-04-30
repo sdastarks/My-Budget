@@ -7,13 +7,15 @@ package com.example.mybudget.Home;
  * @author Daniel Beadleson
  */
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,13 +23,19 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.mybudget.AlertReceiver;
 import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.R;
 import com.example.mybudget.WishList.RegisterRequestDialog;
 import com.example.mybudget.myDbHelper;
 
-public class SettingsActivity extends AvatarChangeActivity {
+import java.text.DateFormat;
+import java.util.Calendar;
+
+public class SettingsActivity extends AvatarChangeActivity implements TimePickerDialog.OnTimeSetListener{
 
     private static final String TAG = "SettingsActivityLog";
     public static final String PREFS_NAME = "switchPreferences";
@@ -184,8 +192,9 @@ public class SettingsActivity extends AvatarChangeActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     //initialise alarm
-                    //DialogFragment timePicker = new TimePickerFragment();
-                    //timePicker.show(getSupportFragmentManager(), "time picker");
+
+                    DialogFragment timePicker = new TimePickerFragment();
+                    timePicker.show(getSupportFragmentManager(), "time picker");
 
                     dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
                     swt_notifications.setText("Daily Reminder Set");
@@ -193,7 +202,8 @@ public class SettingsActivity extends AvatarChangeActivity {
                 } else {
                     dnotification[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
                     swt_notifications.setText("Set Daily Reminder");
-                    //cancelAlarm();
+                    cancelAlarm();
+
                 }
                 storeSwitchState("notification_switch", isChecked);
             }
@@ -261,4 +271,55 @@ public class SettingsActivity extends AvatarChangeActivity {
     }
 
 
+
+    /*
+     * Method initialises the alarm
+     */
+    private void startAlarm(Calendar calendar){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+    }
+
+    /*
+     * Method cancels the alarm when the
+     * switch is turned off
+     */
+    private void cancelAlarm() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+        alarmManager.cancel(pendingIntent);
+        Toast.makeText(this, "Reminder Cancelled", Toast.LENGTH_SHORT).show();
+    }
+
+    /*
+     * Stores the time in which the
+     * alarm is set by the user
+     */
+    public void storeAlarmTime(String timeText){
+        SharedPreferences settings = getSharedPreferences("reminder_id", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("alarm", timeText);
+        editor.commit();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Log.v(TAG, "onTimeSet initialised");
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        String timeText = "Alarm set for: ";
+        timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar.getTime());
+        Toast.makeText(this, timeText, Toast.LENGTH_SHORT).show();
+        storeAlarmTime(timeText);
+        swt_notifications.setText(timeText);
+
+        startAlarm(calendar);
+    }
 }
