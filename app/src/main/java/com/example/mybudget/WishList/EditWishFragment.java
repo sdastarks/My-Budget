@@ -21,12 +21,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.mybudget.BuildConfig;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +49,16 @@ public class EditWishFragment extends Fragment {
     View view;
     private int drawable;
     private FloatingActionButton completed_wishes;
-
+    private static final int REQUEST_CHOOSE_IMAGE_FROM_GALLERY = 2;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final String IMAGE_DIRECTORY_NAME = "Hello camera";
+    private static final String AUTHORITY=
+            BuildConfig.APPLICATION_ID+".provider";
+    private static final String PHOTOS="photos";
+    private File output=null;
+    private String mCurrentPhotoPath;
+    private Uri fileUri;
+    public static final int MEDIA_TYPE_IMAGE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +90,6 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectImage();
-
             }
         });
 
@@ -191,9 +201,6 @@ public class EditWishFragment extends Fragment {
         return view;
     }
 
-
-
-
     /*
      * Method creates a dialog fragment allowing the user
      * to delete a wish or abort the procedure
@@ -285,6 +292,10 @@ public class EditWishFragment extends Fragment {
         startActivity(intent);
     }
 
+    /*@author Benish
+     * Method for choosing image from gallery
+     * or capture image from camera
+     */
     private void selectImage() {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -294,7 +305,7 @@ public class EditWishFragment extends Fragment {
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Take Photo"))
                 {
-                    Nour();
+                    imageOptionSelection();
                     /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
@@ -313,30 +324,39 @@ public class EditWishFragment extends Fragment {
         builder.show();
     }
 
-    private static final int REQUEST_CHOOSE_IMAGE_FROM_GALLERY = 2;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private void Nour()
+
+    private void imageOptionSelection()
     {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+
+        //fileUri= FileProvider.getUriForFile(getActivity(), AUTHORITY, output);
+
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            // Create the File where the photo should go ther
+            // Create the File where the photo should go
             File photoFile = null;
             try {
                 photoFile = createImageFile();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 // Error occurred while creating the File
                 ex.getStackTrace();
                 Log.i(TAG, "IOException");
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                Uri outPutFileUri = null;
+                File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+                outPutFileUri = Uri.fromFile(new File(storageDir.getPath(),"profile.png"));
+              //  cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outPutFileUri);
+                cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+
+
             }
         }
     }
 
-    private String mCurrentPhotoPath;
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = "22-02-2020";
@@ -366,7 +386,7 @@ public class EditWishFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super.onActivityResult(requestCode, resultCode, data);
 
-        System.out.println("inside activity resukt metgod");
+        System.out.println("inside activity result method");
         System.out.println("ok= " + getActivity().RESULT_OK);
         System.out.println("request code: " + requestCode);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK) {
@@ -388,11 +408,39 @@ public class EditWishFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
+    //create file Uri to store image not functional 
+    public Uri getOutputMediaFileUri(int type) {
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
+    //returning image
+    private File getOutputMediaFile(int type) {
+
+        //External sdcard location
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
+
+        //create the storage directory if it does not exist
+        if(!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                //Log.d(IMAGE_DIRECTORY_NAME, "Failed create" + UserFunctions.IMAGE_DIRECTORY_NAME + "directory");
+                return null;
+            }
+        }
+
+        //Create a media file name
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + ".jpg");
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
   /*  @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
