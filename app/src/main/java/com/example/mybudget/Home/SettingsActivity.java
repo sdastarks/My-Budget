@@ -43,16 +43,16 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
     public static final String USER_ID = "userId";
 
     private Button btn_exit;
-    private Switch swt_notifications;
+    protected static Switch swt_notifications;
     private Switch swt_email;
     private Switch swt_telephone;
     private ImageView imageViewHero;
     private Drawable avatar;
-    private Drawable[] dnotification;
+    protected static Drawable[] dnotification;
     private Drawable[] dEmail;
     private Drawable[] dMessages;
     private int primarycolor;
-    private Boolean timeChosen;
+    protected Boolean timeChosen;
 
 
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -204,6 +204,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
                     cancelAlarm();
 
                 }
+                Log.v(TAG, "time chosen: "+timeChosen);
                 storeSwitchState("notification_switch", isChecked);
             }
         });
