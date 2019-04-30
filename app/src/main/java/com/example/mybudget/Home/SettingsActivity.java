@@ -1,4 +1,11 @@
 package com.example.mybudget.Home;
+/**
+ * Class allows the user to enhance the
+ * usability of the app by enabling notifications,
+ * Monthly email updates and payment reminders
+ *
+ * @author Daniel Beadleson
+ */
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,12 +24,15 @@ import android.widget.Switch;
 
 import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.R;
+import com.example.mybudget.WishList.RegisterRequestDialog;
 import com.example.mybudget.myDbHelper;
 
 public class SettingsActivity extends AvatarChangeActivity {
 
     private static final String TAG = "SettingsActivityLog";
     public static final String PREFS_NAME = "switchPreferences";
+    public static final String USER_PREFS_NAME = "userPreferenceFile";
+    public static final String USER_ID = "userId";
 
     private Button btn_exit;
     private Switch swt_notifications;
@@ -30,9 +40,9 @@ public class SettingsActivity extends AvatarChangeActivity {
     private Switch swt_telephone;
     private ImageView imageViewHero;
     private Drawable avatar;
-    Drawable[] dnotification;
-    Drawable[] dEmail;
-    Drawable[] dMessages;
+    private Drawable[] dnotification;
+    private Drawable[] dEmail;
+    private Drawable[] dMessages;
     private int primarycolor;
 
 
@@ -53,6 +63,7 @@ public class SettingsActivity extends AvatarChangeActivity {
         dEmail = swt_email.getCompoundDrawables();
         dMessages = swt_telephone.getCompoundDrawables();
 
+        checkRegistration();
         setAvatar();
         setPrimarycolor();
         previousSwitchStates();
@@ -61,7 +72,20 @@ public class SettingsActivity extends AvatarChangeActivity {
         enableEmailSwitch();
         enableMessagesSwitch();
 
+    }
 
+    /**
+     * Method checks if the user is
+     * Registered before entering registration
+     */
+    public void checkRegistration() {
+
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
+        if (sharedPrefs.getInt(USER_ID, 0) == 0) {
+            Log.d(TAG, "onAddWish: locking user if not registered");
+            RegisterRequestDialog dialog = new RegisterRequestDialog();
+            dialog.show(getSupportFragmentManager(), "register request dialog");
+        }
     }
 
     /**
