@@ -11,15 +11,33 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/tool_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/titleCompletedWished"
+        style="@style/HeadlineTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Completed Wishes"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_completedWishes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        android:gravity="left"/>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_completedWishes"
         android:layout_width="400dp"
-        android:layout_height="601dp"
+        android:layout_height="509dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
@@ -31,31 +49,30 @@
         app:layout_constraintRight_toRightOf="@+id/content_wishList"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/exitCompletedWishes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="?attr/colorPrimary"
-
-        android:src="@drawable/icon_cancel_white"
-        app:borderWidth="@dimen/default_background_stroke_width"
-        app:elevation="@dimen/default_stroke_width"
-        app:fabSize="auto"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:useCompatPadding="false" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/exitCompletedWishes"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:backgroundTint="?attr/colorPrimary"-->
+        <!--android:src="@drawable/icon_cancel_white"-->
+        <!--app:borderWidth="@dimen/default_background_stroke_width"-->
+        <!--app:elevation="@dimen/default_stroke_width"-->
+        <!--app:fabSize="auto"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:useCompatPadding="false" />-->
 
 
     <FrameLayout
         android:id="@+id/frame_wish_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="572dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"></FrameLayout>
 
 
     <android.support.design.widget.BottomNavigationView
