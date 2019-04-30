@@ -411,7 +411,7 @@ public class EditWishFragment extends Fragment {
         }
     }
 
-    //create file Uri to store image
+    //create file Uri to store image not functional 
     public Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
     }
