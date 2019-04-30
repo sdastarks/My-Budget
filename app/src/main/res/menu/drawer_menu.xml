@@ -15,4 +15,10 @@
                 android:title="Edit Profile" />
         </menu>
     </item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/side_nav_settings"
+            android:icon="@drawable/icon_settings_white"
+            android:title="Settings" />
+    </group>
 </menu>

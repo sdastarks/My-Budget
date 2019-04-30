@@ -3,16 +3,13 @@ package com.example.mybudget.WishList;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,22 +75,26 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
                         break;
 
                     case R.id.nav_wishlist:
-                        break;
-
-                    case R.id.nav_account:
-                        Intent intent2 = new Intent(CompletedWishesActivity.this, AccountActivity.class);
+                        Intent intent2 = new Intent(CompletedWishesActivity.this, WishlistActivity.class);
                         startActivity(intent2);
                         break;
 
-                    case R.id.nav_chores:
-                        Intent intent3 = new Intent(CompletedWishesActivity.this, ChoresActivity.class);
+                    case R.id.nav_account:
+                        Intent intent3 = new Intent(CompletedWishesActivity.this, AccountActivity.class);
                         startActivity(intent3);
                         break;
 
-                    case R.id.nav_avatar_change:
-                        Intent intent4 = new Intent(CompletedWishesActivity.this, AvatarChangeActivity.class);
+                    case R.id.nav_chores:
+                        Intent intent4 = new Intent(CompletedWishesActivity.this, ChoresActivity.class);
                         startActivity(intent4);
                         break;
+
+                    case R.id.nav_avatar_change:
+                        Intent intent5 = new Intent(CompletedWishesActivity.this, AvatarChangeActivity.class);
+                        startActivity(intent5);
+                        break;
+
+
 
                 }
                 return false;
@@ -103,8 +104,6 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
 
         loadDataToRecycle();
         initRecyclerView();
-
-        exitCompletedWishesFuction();
     }
 
     private void initRecyclerView() {
@@ -132,17 +131,6 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
                 mSavingProgress.add(wl.getSaved());
             }
         }
-    }
-
-    public void exitCompletedWishesFuction(){
-        exitCompletedWishes = findViewById(R.id.exitCompletedWishes);
-        exitCompletedWishes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CompletedWishesActivity.this, WishlistActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
