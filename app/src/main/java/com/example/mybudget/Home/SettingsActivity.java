@@ -35,7 +35,7 @@ import com.example.mybudget.myDbHelper;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class SettingsActivity extends AvatarChangeActivity implements TimePickerDialog.OnTimeSetListener{
+public class SettingsActivity extends AvatarChangeActivity implements TimePickerDialog.OnTimeSetListener {
 
     private static final String TAG = "SettingsActivityLog";
     public static final String PREFS_NAME = "switchPreferences";
@@ -146,9 +146,8 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
 
         if (notificationsSet) {
             dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
-
-            swt_notifications.setText("Daily Reminder Set");
-
+            String alarmText = settings.getString("alarm", "Set Daily Reminder");
+            swt_notifications.setText(alarmText);
         }
         if (emailsSet) {
             dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
@@ -156,14 +155,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
         if (messagesSet) {
             dMessages[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
         }
-/*
-        reminderSet = settings.getBoolean("notification_switchkey", false);
-        if (reminderSet){
-            SharedPreferences remindSettings=getSharedPreferences("reminder_id",0);
-            String alarmText=remindSettings.getString("alarm", "Set Daily Reminder");
-            notificationsSwitch.setText(alarmText);
-        }
-*/
+
     }
 
     /**
@@ -204,7 +196,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
                     cancelAlarm();
 
                 }
-                Log.v(TAG, "time chosen: "+timeChosen);
+                Log.v(TAG, "time chosen: " + timeChosen);
                 storeSwitchState("notification_switch", isChecked);
             }
         });
@@ -269,27 +261,29 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
         editor.commit();
         return true;
     }
-
+    /**
+     * Method retreives information from timepicker
+     */
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Log.v(TAG, "onTimeSet initialised");
-        Calendar calendar=Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, 0);
 
-        String timeText = "Alarm set for: ";
+        String timeText = "Reminder Set For: ";
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar.getTime());
-        Toast.makeText(this, timeText, Toast.LENGTH_SHORT).show();
         storeAlarmTime(timeText);
         swt_notifications.setText(timeText);
 
         startAlarm(calendar);
     }
+
     /**
      * Method initialises the alarm
      */
-    private void startAlarm(Calendar calendar){
+    private void startAlarm(Calendar calendar) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
@@ -312,12 +306,11 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
      * Stores the time in which the
      * alarm is set by the user
      */
-    public void storeAlarmTime(String timeText){
-        SharedPreferences settings = getSharedPreferences("reminder_id", 0);
+    public void storeAlarmTime(String timeText) {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("alarm", timeText);
         editor.commit();
     }
-
 
 }

@@ -5,7 +5,6 @@ package com.example.mybudget.Home;
  * a time for the notification
  *
  * @author Daniel Beadleson
- * @author Mahlet Mulu
  */
 import android.app.Dialog;
 import android.app.TimePickerDialog;

@@ -23,6 +23,7 @@ import java.time.LocalDate;
 /**
  * Fragment creates a dialog allowing the user
  * to delete a wish or abort the procedure
+ *
  * @author Daniel Beadleson
  *
  */
