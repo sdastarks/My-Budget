@@ -251,6 +251,7 @@
         app:headerLayout="@layout/side_navigation_header"
         app:itemIconTint="?attr/colorPrimary"
         app:itemTextColor="@drawable/drawer_nav_colors"
+        app:itemTextAppearance="@style/TextStyleBody"
         app:menu="@menu/drawer_menu">
 
     </android.support.design.widget.NavigationView>
