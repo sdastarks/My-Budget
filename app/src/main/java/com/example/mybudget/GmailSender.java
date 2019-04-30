@@ -1,18 +1,31 @@
 package com.example.mybudget;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 
 public class GmailSender {
@@ -56,10 +69,32 @@ public class GmailSender {
         emailMessage.setFrom(new InternetAddress(fromEmail));
         emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
-
         emailMessage.setSubject(emailSubject);
-        emailMessage.setContent(emailBody, "text/html");// for a html email
-        // emailMessage.setText(emailBody);// for a text email
+
+        BodyPart messageBodyPart = new MimeBodyPart();
+
+        // Now set the actual message
+        messageBodyPart.setText(emailBody);
+
+        Multipart multipart = new MimeMultipart();
+
+        // Set text message part
+        multipart.addBodyPart(messageBodyPart);
+
+        // Part two is attachment
+//        String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + <Context>.getResources().getString(R.string.app_name);
+//        String fileName = "logo.png";
+//        File directory = new File(appDirectoryName);
+
+        String filename = "/storage/emulated/0/Pocket Monster/logo.png";
+        File file = new File(filename);
+        messageBodyPart = new MimeBodyPart();
+        DataSource source = new FileDataSource(file);
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName(filename);
+        multipart.addBodyPart(messageBodyPart);
+
+        emailMessage.setContent(multipart);
         Log.i("GmailSender", "Email Message created.");
         return emailMessage;
     }

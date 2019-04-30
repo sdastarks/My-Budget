@@ -7,13 +7,16 @@ package com.example.mybudget.Home;
  * @author Daniel Beadleson
  */
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +43,12 @@ import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.List;
+
 
 public class MainActivity extends AvatarChangeActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,6 +62,8 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
     private Button register_button;
     private Drawable d;
 
+    private FileInputStream fs;
+    private File file;
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -157,6 +168,41 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         setTitle(favWish_dbID);
         updateBalance();
 
+        //https://developer.android.com/training/permissions/requesting.html
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                0);
+
+        try {
+            String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getResources().getString(R.string.app_name);
+            String fileName = "logo.png";
+            File directory = new File(appDirectoryName);
+            if(!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            File fullPath = new File(appDirectoryName, fileName);
+            if(fullPath.isFile()) {
+                fullPath.delete();
+            }
+
+            InputStream inputStream = this.getAssets().open("logo.png");
+            try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
+
+                int read;
+                byte[] bytes = new byte[1024];
+
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+
+            } catch (Exception e)  {
+                e.getMessage();
+            }
+
+        } catch (Exception e)  {
+            e.getMessage();
+        }
 
     }
     /*
