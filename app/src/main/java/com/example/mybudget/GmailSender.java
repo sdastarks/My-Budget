@@ -29,6 +29,7 @@ import javax.mail.internet.MimeMultipart;
 import android.net.Uri;
 import android.os.Environment;
 
+import android.text.Html;
 import android.util.Log;
 
 public class GmailSender {
@@ -64,7 +65,7 @@ public class GmailSender {
     }
 
     public MimeMessage createEmailMessage() throws AddressException,
-            MessagingException, UnsupportedEncodingException {
+            MessagingException, UnsupportedEncodingException, IOException {
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
@@ -78,25 +79,22 @@ public class GmailSender {
         BodyPart messageBodyPart = new MimeBodyPart();
 
         // Now set the actual message
-        messageBodyPart.setText(emailBody);
+        //messageBodyPart.setText(emailBody);
+       // messageBodyPart.setContent(Html.fromHtml("<h1>rdsf</h1>"),"xsd");
 
         Multipart multipart = new MimeMultipart();
 
         // Set text message part
+        messageBodyPart.setContent(Html.toHtml(Html.fromHtml("<h1>"+emailBody+"</h1><img src=\"assets/logo_.jpg\">"))+"<br><br>" , "text/html"); //5
         multipart.addBodyPart(messageBodyPart);
 
-        // Part two is attachment
-//        String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + <Context>.getResources().getString(R.string.app_name);
-//        String fileName = "logo.png";
-//        File directory = new File(appDirectoryName);
-
-
-//        String filename = "/storage/emulated/0/Pocket Monster/logo_pm.png";
-//        File file = new File(filename);
-        //messageBodyPart = new MimeBodyPart();
-//        DataSource source = new FileDataSource(file);
-//        messageBodyPart.setDataHandler(new DataHandler(source));
-//        messageBodyPart.setFileName(filename);
+        String filename = "/storage/emulated/0/Pocket Monster/logo_.jpg";
+        File file = new File(filename);
+        messageBodyPart = new MimeBodyPart();
+        DataSource source = new FileDataSource(file);
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName(filename);
+        messageBodyPart.setDisposition(MimeBodyPart.INLINE);
         multipart.addBodyPart(messageBodyPart);
 
         emailMessage.setContent(multipart);

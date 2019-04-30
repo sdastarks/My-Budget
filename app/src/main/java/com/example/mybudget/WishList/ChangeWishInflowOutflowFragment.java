@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
@@ -218,8 +219,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
-             //((WishlistActivity) getActivity()).db.deleteWish(dbid);
-            //deleteCompletedWish();
+
             Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
                 @Override
@@ -229,11 +229,12 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     startActivity(intent);
                 }
             }, 2000);
-            userParentEmail = "nastasyja@gmail.com";
 
-            //writeTheFileForEmail();
             //userParent email should be added and stored in data base
             // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
+            userParentEmail = "nastasyja@gmail.com";
+
+            writeTheFileForEmail();
             String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() +" SEK";
 
             new SendMailTask().execute(userParentEmail, emailBody);
@@ -294,39 +295,41 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     }
 
 
-//    public void writeTheFileForEmail() {
-//        ActivityCompat.requestPermissions(getActivity(),
-//                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                0);
-//
-//        try {
-//            String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getResources().getString(R.string.app_name);
-//            String fileName = "logo_pm.png";
-//            File directory = new File(appDirectoryName);
-//            if(!directory.exists()) {
-//                directory.mkdirs();
-//
-//            } File fullPath = new File(appDirectoryName, fileName);
-//            if(fullPath.isFile()) {
-//                fullPath.delete();
-//
-//            } InputStream inputStream = getActivity().getAssets().open("logo_pm.png");
-//            try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
-//
-//                int read;
-//                byte[] bytes = new byte[1024];
-//
-//                while ((read = inputStream.read(bytes)) != -1) {
-//                    outputStream.write(bytes, 0, read);
-//                }
-//
-//            } catch (Exception e)  {
-//                e.getMessage();
-//            }
-//
-//        } catch (Exception e)  {
-//            e.getMessage();
-//        }
-//
-//    }
+    public void writeTheFileForEmail() {
+        ActivityCompat.requestPermissions((WishlistActivity) getActivity(),
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                0);
+
+        try {
+            String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getResources().getString(R.string.app_name);
+            String fileName = "logo_.jpg";
+            File directory = new File(appDirectoryName);
+            if(!directory.exists()) {
+                directory.mkdirs();
+                Log.d(TAG, "writeTheFileForEmail:" + directory);
+
+            } File fullPath = new File(appDirectoryName, fileName);
+            if(fullPath.isFile()) {
+                fullPath.delete();
+                Log.d(TAG, "writeTheFileForEmail:" + fullPath);
+
+            } InputStream inputStream = getActivity().getAssets().open("logo_.jpg");
+            try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
+
+                int read;
+                byte[] bytes = new byte[1024];
+
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+
+            } catch (Exception e)  {
+                e.getMessage();
+            }
+
+        } catch (Exception e)  {
+            e.getMessage();
+        }
+
+    }
 }
