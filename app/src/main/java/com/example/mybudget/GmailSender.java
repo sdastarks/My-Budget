@@ -86,12 +86,13 @@ public class GmailSender {
 //        String fileName = "logo.png";
 //        File directory = new File(appDirectoryName);
 
-        String filename = "/storage/emulated/0/Pocket Monster/logo.png";
-        File file = new File(filename);
-        messageBodyPart = new MimeBodyPart();
-        DataSource source = new FileDataSource(file);
-        messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName(filename);
+
+//        String filename = "/storage/emulated/0/Pocket Monster/logo_pm.png";
+//        File file = new File(filename);
+        //messageBodyPart = new MimeBodyPart();
+//        DataSource source = new FileDataSource(file);
+//        messageBodyPart.setDataHandler(new DataHandler(source));
+//        messageBodyPart.setFileName(filename);
         multipart.addBodyPart(messageBodyPart);
 
         emailMessage.setContent(multipart);

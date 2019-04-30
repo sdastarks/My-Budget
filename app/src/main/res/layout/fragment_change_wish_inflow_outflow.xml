@@ -110,7 +110,8 @@ tools:context=".WishList.ChangeWishInflowOutflowFragment">
     app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
     app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
     app:layout_constraintStart_toStartOf="@+id/thinking_frame_small"
-    app:layout_constraintTop_toTopOf="@+id/thinking_frame_small">
+    app:layout_constraintTop_toTopOf="@+id/thinking_frame_small"
+    app:hintEnabled="false">
 
 
     <android.support.design.widget.TextInputEditText
@@ -120,6 +121,8 @@ tools:context=".WishList.ChangeWishInflowOutflowFragment">
         android:layout_height="wrap_content"
         android:inputType="number"
         android:textAlignment="center"
+        android:hint="0.00"
+        android:gravity="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
         android:textCursorDrawable="?attr/colorPrimaryDark"

@@ -1,12 +1,15 @@
 package com.example.mybudget.WishList;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +26,9 @@ import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 import com.example.mybudget.SendMailTask;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -224,6 +230,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 }
             }, 2000);
             userParentEmail = "nastasyja@gmail.com";
+
+            //writeTheFileForEmail();
             //userParent email should be added and stored in data base
             // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
             String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() +" SEK";
@@ -284,4 +292,41 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 .replace(R.id.frame_wish_fragment, new WishFragment())
                 .commit();
     }
+
+
+//    public void writeTheFileForEmail() {
+//        ActivityCompat.requestPermissions(getActivity(),
+//                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                0);
+//
+//        try {
+//            String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getResources().getString(R.string.app_name);
+//            String fileName = "logo_pm.png";
+//            File directory = new File(appDirectoryName);
+//            if(!directory.exists()) {
+//                directory.mkdirs();
+//
+//            } File fullPath = new File(appDirectoryName, fileName);
+//            if(fullPath.isFile()) {
+//                fullPath.delete();
+//
+//            } InputStream inputStream = getActivity().getAssets().open("logo_pm.png");
+//            try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
+//
+//                int read;
+//                byte[] bytes = new byte[1024];
+//
+//                while ((read = inputStream.read(bytes)) != -1) {
+//                    outputStream.write(bytes, 0, read);
+//                }
+//
+//            } catch (Exception e)  {
+//                e.getMessage();
+//            }
+//
+//        } catch (Exception e)  {
+//            e.getMessage();
+//        }
+//
+//    }
 }

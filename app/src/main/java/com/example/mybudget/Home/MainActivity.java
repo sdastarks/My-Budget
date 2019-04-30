@@ -168,41 +168,6 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         setTitle(favWish_dbID);
         updateBalance();
 
-        //https://developer.android.com/training/permissions/requesting.html
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                0);
-
-        try {
-            String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getResources().getString(R.string.app_name);
-            String fileName = "logo.png";
-            File directory = new File(appDirectoryName);
-            if(!directory.exists()) {
-                directory.mkdirs();
-            }
-
-            File fullPath = new File(appDirectoryName, fileName);
-            if(fullPath.isFile()) {
-                fullPath.delete();
-            }
-
-            InputStream inputStream = this.getAssets().open("logo.png");
-            try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
-
-                int read;
-                byte[] bytes = new byte[1024];
-
-                while ((read = inputStream.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
-                }
-
-            } catch (Exception e)  {
-                e.getMessage();
-            }
-
-        } catch (Exception e)  {
-            e.getMessage();
-        }
 
     }
     /*

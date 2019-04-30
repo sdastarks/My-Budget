@@ -12,7 +12,8 @@
             <item
                 android:id="@+id/side_nav_edit_profile"
                 android:icon="@drawable/icon_profile_white"
-                android:title="Edit Profile" />
+                android:title="Edit Profile"
+                style="@style/TextStyleBody"/>
         </menu>
     </item>
 </menu>
