@@ -4,9 +4,7 @@ package com.example.mybudget;
  * Class allows the Android system to receive
  * an event from the application
  *
- * @author Anastasija Gurejeva
  * @author Daniel Beadleson
- * @author Mahlet Mulu
  */
 
 import android.content.BroadcastReceiver;

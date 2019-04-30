@@ -52,6 +52,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
     private Drawable[] dEmail;
     private Drawable[] dMessages;
     private int primarycolor;
+    private Boolean timeChosen;
 
 
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -195,9 +196,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
 
                     DialogFragment timePicker = new TimePickerFragment();
                     timePicker.show(getSupportFragmentManager(), "time picker");
-
                     dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
-                    swt_notifications.setText("Daily Reminder Set");
 
                 } else {
                     dnotification[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
@@ -270,42 +269,6 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
         return true;
     }
 
-
-
-    /*
-     * Method initialises the alarm
-     */
-    private void startAlarm(Calendar calendar){
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-
-    }
-
-    /*
-     * Method cancels the alarm when the
-     * switch is turned off
-     */
-    private void cancelAlarm() {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-        alarmManager.cancel(pendingIntent);
-        Toast.makeText(this, "Reminder Cancelled", Toast.LENGTH_SHORT).show();
-    }
-
-    /*
-     * Stores the time in which the
-     * alarm is set by the user
-     */
-    public void storeAlarmTime(String timeText){
-        SharedPreferences settings = getSharedPreferences("reminder_id", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("alarm", timeText);
-        editor.commit();
-    }
-
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Log.v(TAG, "onTimeSet initialised");
@@ -322,4 +285,38 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
 
         startAlarm(calendar);
     }
+    /**
+     * Method initialises the alarm
+     */
+    private void startAlarm(Calendar calendar){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+    }
+
+    /**
+     * Method cancels the alarm when the
+     * switch is turned off
+     */
+    private void cancelAlarm() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+        alarmManager.cancel(pendingIntent);
+    }
+
+    /**
+     * Stores the time in which the
+     * alarm is set by the user
+     */
+    public void storeAlarmTime(String timeText){
+        SharedPreferences settings = getSharedPreferences("reminder_id", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("alarm", timeText);
+        editor.commit();
+    }
+
+
 }

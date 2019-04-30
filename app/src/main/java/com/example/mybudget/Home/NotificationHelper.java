@@ -3,9 +3,7 @@ package com.example.mybudget.Home;
  *
  * Class defines the state of the notification
  *
- * @author Anastasija Gurejeva
  * @author Daniel Beadleson
- * @author Mahlet Mulu
  */
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
@@ -45,8 +43,8 @@ public class NotificationHelper extends ContextWrapper {
 
     public NotificationCompat.Builder getChannelNotification() {
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle("Water Reminder!")
-                .setContentText("Remember to water your beautiful plants")
-                .setSmallIcon(R.drawable.icon_add);
+                .setContentTitle("Balance Reminder!")
+                .setContentText("Remember to update your balance")
+                .setSmallIcon(R.drawable.ic_avatar);
     }
 }
