@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mybudget">
+  
+<!-- For email approval to work -->
+    <uses-permission android:name="android.permission.INTERNET" /> 
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!--For email approval to work-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -25,6 +25,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,7 +39,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Home.SettingsActivity"></activity>
         <activity
             android:name=".AvatarChangeActivity"
             android:screenOrientation="portrait" />
@@ -55,17 +62,39 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".WishList.CompletedWishesActivity"
-            android:windowSoftInputMode="adjustPan"
+        <activity
+            android:name=".AvatarChangeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Profile.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Profile.RegisterActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".Home.MainActivity"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chores.ChoresActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Account.AccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WishList.WishlistActivity"
+            android:parentActivityName=".Home.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".WishList.CompletedWishesActivity"
+            android:parentActivityName=".Home.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Home.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
