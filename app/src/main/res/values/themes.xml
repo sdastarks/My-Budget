@@ -44,9 +44,10 @@
     </style>
 
     <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@color/colorAccent</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/gradient</item>
+        <item name="android:icon">@drawable/logo</item>
     </style>
+
 
 
 </resources>

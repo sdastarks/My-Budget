@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.R;
 import com.example.mybudget.SendMailTask;
@@ -41,6 +41,7 @@ public class addChoresMoneyFragment extends Fragment {
     private TextView mBalance;
     private int balance;
     private TextView mFragmentTitle;
+    private String userParentEmail;
 
 
     private Bundle bundle;
@@ -106,10 +107,20 @@ public class addChoresMoneyFragment extends Fragment {
                     } else if (description.contains("Specify here!")) {
                         mChoresDescription.setError("Enter a name");
                     } else if (description.length() > 24) {
-                        mChoresDescription.setError("Must be less than 22 characters");
+                        mChoresDescription.setError("Must be less than 24 characters");
                     } else if (amount > 10000) {
                         mChoresAmount.setError("You kidding?");
                     } else {
+
+                        userParentEmail = "nastasyja@gmail.com";
+                         //userParent email should be added and stored in data base
+                        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
+                        String emailBody = "Your child completed chore: " + mChoresDescription.getText() + " \n Payment for chore: " + mChoresAmount.getText() +
+                                "\n please approve: ";
+                        new SendMailTask().execute(userParentEmail, emailBody);
+                        Toast toast = Toast.makeText(getActivity(),"Completed chore status is sent to your parents email ",Toast.LENGTH_LONG);
+                        toast.show();
+
                         Log.v(TAG, "amount: " + amount);
                         //DATABASE
                         Entry entry = new Entry();
@@ -119,8 +130,15 @@ public class addChoresMoneyFragment extends Fragment {
                         entry.setDesc(description);
                         ((ChoresActivity) getActivity()).db.addEntry(entry);
 
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
+                        SendSms mFrag = new SendSms();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("desc", mChoresDescription.getText().toString());
+                        bundle.putString("amount", mChoresAmount.getText().toString());
+                        mFrag.setArguments(bundle);
+                        FragmentTransaction t = getFragmentManager().beginTransaction();
+                        t.replace(R.id.check, mFrag);
+                        t.commit();
+                       // startActivity(intent);
                     }
                 } catch (Exception e) {
                     mChoresAmount.setError("Try Again");

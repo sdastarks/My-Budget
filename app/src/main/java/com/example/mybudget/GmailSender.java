@@ -16,16 +16,19 @@ import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
+
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import android.net.Uri;
 import android.os.Environment;
+
 import android.util.Log;
 
 public class GmailSender {
@@ -69,6 +72,7 @@ public class GmailSender {
         emailMessage.setFrom(new InternetAddress(fromEmail));
         emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
+
         emailMessage.setSubject(emailSubject);
 
         BodyPart messageBodyPart = new MimeBodyPart();
@@ -96,6 +100,7 @@ public class GmailSender {
         multipart.addBodyPart(messageBodyPart);
 
         emailMessage.setContent(multipart);
+
         Log.i("GmailSender", "Email Message created.");
         return emailMessage;
     }
