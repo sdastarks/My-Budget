@@ -2,11 +2,10 @@ package com.example.mybudget.WishList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -36,7 +35,7 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
     private ArrayList <Integer> mImageUrls = new ArrayList<>();
     private ArrayList <Integer> mWishPrices = new ArrayList<>();
     private ArrayList <Integer> mSavingProgress = new ArrayList<>();
-    private ArrayList<Drawable> mDrawable = new ArrayList<>();
+    private ArrayList<String> mDrawable = new ArrayList<>();
 
     private Context mContext;
     private RecyclerViewAdapter.OnWishListener mOnWishListener;
@@ -122,7 +121,10 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
                 mWishId.add(wl.getWishListId());
                 mWishNames.add(wl.getTitle());
                 //TODO maybe try catch better be added DAWNIE
-                mDrawable.add(getDrawable(Integer.parseInt(wl.getImage())));
+                //mDrawable.add(getDrawable(Integer.parseInt(wl.getImage())));
+
+               // mDrawable.add(getDrawable(wl.getImage()));
+                mDrawable.add(wl.getImage());
                 //mImageUrls.add(wl.getImage());
                 mWishPrices.add(wl.getCost());
                 mSavingProgress.add(wl.getSaved());

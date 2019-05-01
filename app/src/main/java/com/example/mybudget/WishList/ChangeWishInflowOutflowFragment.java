@@ -1,12 +1,16 @@
 package com.example.mybudget.WishList;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,14 +20,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.mybudget.Chores.ChoresActivity;
+import com.example.mybudget.Home.SettingsActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.Profile.RegisterActivity;
 import com.example.mybudget.R;
+import com.example.mybudget.SendMailTask;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 
 
 /**
@@ -49,6 +63,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private GoalReachedDialog goalReached;
     private GoalHalfReachedDialog goalHalfReached;
     protected FloatingActionButton completed_wishes;
+    private String userParentEmail;
 
     /*
      * Method creates the initial state of the
@@ -185,7 +200,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     (wish2Update.getCost() - wish2Update.getSaved()) + " SEK");
 
 
-        } else if ( wish2Update.getCost()/2 > wish2Update.getSaved() && (wish2Update.getCost()/2 <= wish2Update.getSaved() + amount) &&
+        } else if (wish2Update.getCost() / 2 > wish2Update.getSaved() && (wish2Update.getCost() / 2 <= wish2Update.getSaved() + amount) &&
                 (wish2Update.getCost() != wish2Update.getSaved() + amount)) {
 
             Log.d(TAG, "addMoney2Wish: cost/2=saved");
@@ -209,10 +224,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     wish2Update.getImage());
             entry.setDesc(entryDescription);
             ((WishlistActivity) getActivity()).db.addEntry(entry);
-             //((WishlistActivity) getActivity()).db.deleteWish(dbid);
-            //deleteCompletedWish();
+
             Timer timer = new Timer();
-                    timer.schedule(new TimerTask() {
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
 //                    exitFragment();
@@ -220,6 +234,14 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     startActivity(intent);
                 }
             }, 2000);
+
+            Boolean emailEnabled = getActivity().getSharedPreferences(SettingsActivity.SETTINGSPREFS_NAME,
+                    0).getBoolean(SettingsActivity.EMAILPREFS, false);
+            if (emailEnabled) {
+                sendEmail();
+            }
+
+
         } else {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
                     , wish2Update.getCost(), amount + wish2Update.getSaved(),
@@ -231,10 +253,32 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         }
     }
 
-    public void deleteCompletedWish(){
+    /**
+     * @author Anastasija Gurejeva
+     * @author Daniel Beadleson
+     */
+    public void sendEmail() {
+        int userGlobalId = getActivity().getSharedPreferences(RegisterActivity.USER_PREFS_NAME,
+                0).getInt(USER_ID, 0);
+        String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
+        String userName = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserFirstName();
+
+        writeTheFileForEmail();
+        String emailBody = userName+" has completed saving for a  " + wish2Update.getTitle()
+                        + ". \n "+userName+" Has successfully saved: " + wish2Update.getCost()
+                        + " SEK, to pay for his/her dream.";
+
+        new SendMailTask().execute(userParentEmail, emailBody);
+
+        Toast.makeText(getActivity(), "Email sent to " + userName + "'s parent", Toast.LENGTH_LONG).show();
+
+
+    }
+
+    public void deleteCompletedWish() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        int favWish_dbID= sharedPref.getInt("favouriteWish",0);
-        if (dbid==favWish_dbID){
+        int favWish_dbID = sharedPref.getInt("favouriteWish", 0);
+        if (dbid == favWish_dbID) {
             sharedPref.edit().putInt("favouriteWish", 0).apply();
         }
         ((WishlistActivity) getActivity()).db.deleteWish(dbid);
@@ -271,5 +315,46 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.frame_wish_fragment, new WishFragment())
                 .commit();
+    }
+
+
+    public void writeTheFileForEmail() {
+        ActivityCompat.requestPermissions((WishlistActivity) getActivity(),
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                0);
+
+        try {
+            String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getResources().getString(R.string.app_name);
+            String fileName = "logo_.jpg";
+            File directory = new File(appDirectoryName);
+            if (!directory.exists()) {
+                directory.mkdirs();
+                Log.d(TAG, "writeTheFileForEmail:" + directory);
+
+            }
+            File fullPath = new File(appDirectoryName, fileName);
+            if (fullPath.isFile()) {
+                fullPath.delete();
+                Log.d(TAG, "writeTheFileForEmail:" + fullPath);
+
+            }
+            InputStream inputStream = getActivity().getAssets().open("logo_.jpg");
+            try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
+
+                int read;
+                byte[] bytes = new byte[1024];
+
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+
+            } catch (Exception e) {
+                e.getMessage();
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
     }
 }

@@ -2,35 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mybudget">
 
+<!-- For email approval to work -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- For email approval to work -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
  <!--For camera and gallery function to work-->
     <uses-feature android:name="android.hardware.camera"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -63,45 +53,34 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".AvatarChangeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Profile.ProfileActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Profile.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Chores.ChoresActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Account.AccountActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".WishList.WishlistActivity"
-            android:parentActivityName=".Home.MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".WishList.CompletedWishesActivity"
             android:parentActivityName=".Home.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Home.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Launcher">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <receiver android:name=".AlertReceiver"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
     </application>
 
 </manifest>

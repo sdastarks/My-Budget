@@ -203,7 +203,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param Id    specifies which wish to be updated
+     * @param Id    specifies which wish to be updatedß
      * @param title new wish title
      * @param cost  new wish cost
      * @param saved already saved money amount
