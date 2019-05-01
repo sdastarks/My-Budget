@@ -66,7 +66,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        settingsSharedPref= getSharedPreferences(SETTINGSPREFS_NAME, 0);
+        settingsSharedPref = getSharedPreferences(SETTINGSPREFS_NAME, 0);
 
         btn_exit = findViewById(R.id.btn_exit_settings);
         swt_notifications = findViewById(R.id.switch_notifications);
@@ -218,27 +218,25 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
     public Boolean enableEmailSwitch() {
         swt_email.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     String userParentEmail = db.getUser(getSharedPreferences(
-                                            RegisterActivity.USER_PREFS_NAME,
-                                        0).getInt(USER_ID, 0)).getUserMail();
+                            RegisterActivity.USER_PREFS_NAME,
+                            0).getInt(USER_ID, 0)).getUserMail();
                     Log.v(TAG, userParentEmail);
-                    if (!userParentEmail.trim().isEmpty()){
+                    if (!userParentEmail.trim().isEmpty()) {
                         settingsSharedPref.edit().putBoolean(EMAILPREFS, true).commit();
                         dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
-                    }
-                    else {
+                    } else {
                         swt_email.setChecked(false);
-                        isChecked=false;
-                        Snackbar.make(buttonView, "Add an email",Snackbar.LENGTH_LONG).
+                        isChecked = false;
+                        Snackbar.make(buttonView, "Add an email", Snackbar.LENGTH_LONG).
                                 setAction("GO", new EditProfileListener()).show();
                     }
 
-
                 } else {
+                    settingsSharedPref.edit().putBoolean(EMAILPREFS, false).commit();
                     dEmail[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
                 }
                 storeSwitchState("email_switch", isChecked);
@@ -246,11 +244,12 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
         });
         return true;
     }
+
     /**
      * Class allows sends the user to Edit profile
      * when selected through the snackbar
      */
-    public class EditProfileListener implements View.OnClickListener{
+    public class EditProfileListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
@@ -295,6 +294,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
         editor.commit();
         return true;
     }
+
     /**
      * Method retreives information from timepicker
      */
