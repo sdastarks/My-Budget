@@ -195,7 +195,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         try {
             switch (view.getId()) {
                 case R.id.appCompatButtonRegister: {
-                    //databaseHelper.deleteUser();
                     if (inputValidation()) {
                         addUser(user);
                         Log.v(TAG, "user added");
@@ -205,6 +204,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 break;
 
                 case R.id.appCompatButtonUpdateUser: {
+                    //deleteUser();
                     if (inputValidation()) {
                         updateUser(user);
                         Log.v(TAG, "user updated");
@@ -443,6 +443,13 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 startActivity(intent);
             }
         });
+    }
+
+    private void deleteUser(){
+        databaseHelper.deleteUser();
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.clear().commit();
     }
 
 }

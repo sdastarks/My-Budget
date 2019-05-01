@@ -107,6 +107,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         ImageView logo =findViewById(R.id.logo);
         logo.setVisibility(View.VISIBLE);
 
+        //Checks if user_id is not 0 so hide registration button from main screen
         sharedPreferences = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         userGlobalId = sharedPreferences.getInt(USER_ID, 0);
@@ -171,8 +172,6 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         setProgressBar(favWish_dbID);
         setTitle(favWish_dbID);
         updateBalance();
-
-
     }
     /*
      * Method gets the database id of the favourite wish
