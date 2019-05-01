@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.SettingsActivity">
+    tools:context=".Home.SettingsActivity"
+    android:background="@color/white">
 
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/settings_toolbar"
@@ -41,7 +42,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +89,7 @@
         android:gravity="left|center_vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Email Monthly Update"
+        android:text="Notify Parent of Wish Completion"
         android:textAppearance="@style/TextStyleBodyRegular"
         android:textColor="@color/white"
         android:textIsSelectable="false"
