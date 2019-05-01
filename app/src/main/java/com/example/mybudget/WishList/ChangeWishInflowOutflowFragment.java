@@ -258,15 +258,15 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
      * @author Daniel Beadleson
      */
     public void sendEmail() {
-        Log.v(TAG, "send email activated");
         int userGlobalId = getActivity().getSharedPreferences(RegisterActivity.USER_PREFS_NAME,
                 0).getInt(USER_ID, 0);
         String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
         String userName = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserFirstName();
-        Log.v(TAG, "user email: " + userParentEmail);
 
         writeTheFileForEmail();
-        String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() + " SEK";
+        String emailBody = userName+" has completed saving for a  " + wish2Update.getTitle()
+                        + ". \n "+userName+" Has successfully saved: " + wish2Update.getCost()
+                        + " SEK, to pay for his/her dream.";
 
         new SendMailTask().execute(userParentEmail, emailBody);
 
