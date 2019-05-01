@@ -69,7 +69,7 @@ public class myDbHelper extends SQLiteOpenHelper {
 
                     + COST + " INTEGER, "
                     + SAVED + " INTEGER, "
-                    + IMAGE + " INTEGER);");
+                    + IMAGE + " TEXT);");
 
 
             db.execSQL("CREATE TABLE IF NOT EXISTS "
@@ -122,7 +122,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             wish.setTitle(cursor.getString(1));
             wish.setCost(cursor.getInt(2));
             wish.setSaved(cursor.getInt(3));
-            wish.setImage(cursor.getInt(4));
+            wish.setImage(cursor.getString(4));
             result.add(wish);
         }
         cursor.close();
@@ -163,7 +163,7 @@ public class myDbHelper extends SQLiteOpenHelper {
         wish.setTitle(cursor.getString(1));
         wish.setCost(cursor.getInt(2));
         wish.setSaved(cursor.getInt(3));
-        wish.setImage(cursor.getInt(4));
+        wish.setImage(cursor.getString(4));
         cursor.close();
         close_db();
         return wish;
@@ -183,7 +183,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             wishList.setTitle(cursor.getString(1));
             wishList.setCost(Integer.parseInt(cursor.getString(2)));
             wishList.setSaved(Integer.parseInt(cursor.getString(3)));
-            wishList.setImage(cursor.getInt(4));
+            wishList.setImage(cursor.getString(4));
         } else {
             wishList = null;
         }
@@ -203,13 +203,13 @@ public class myDbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param Id    specifies which wish to be updated
+     * @param Id    specifies which wish to be updatedß
      * @param title new wish title
      * @param cost  new wish cost
      * @param saved already saved money amount
      * @param image
      */
-    public void updateWish(int Id, String title, int cost, int saved, int image) {
+    public void updateWish(int Id, String title, int cost, int saved, String image) {
         ContentValues args = new ContentValues();
         open_db();
 
