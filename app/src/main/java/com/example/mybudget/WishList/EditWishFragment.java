@@ -27,6 +27,7 @@ import com.example.mybudget.R;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,10 +71,10 @@ public class EditWishFragment extends Fragment {
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Edit = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-        editWishPicture.setImageResource(wish2Edit.getImage());
+        editWishPicture.setImageResource(Integer.parseInt(wish2Edit.getImage()));
         meditTitle.setText(wish2Edit.getTitle());
         meditCost.setText(String.valueOf(wish2Edit.getCost()));
-        drawable = wish2Edit.getImage();
+        drawable = Integer.parseInt(wish2Edit.getImage());
 
         btnchooseCamerOrGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,7 +267,7 @@ public class EditWishFragment extends Fragment {
     public void updateWish() {
         String newTitle = meditTitle.getText().toString();
         int newCost = Integer.parseInt(meditCost.getText().toString());
-        int newDrawable = drawable;
+        String newDrawable = String.valueOf(drawable);
 
         if (meditTitle.getText().toString() == wish2Edit.getTitle())
             newTitle = wish2Edit.getTitle();
@@ -276,9 +277,9 @@ public class EditWishFragment extends Fragment {
             newCost = wish2Edit.getCost();
         else newCost = Integer.parseInt(meditCost.getText().toString());
 
-        if (drawable == wish2Edit.getImage())
-            newDrawable = wish2Edit.getImage();
-        else newDrawable = drawable;
+        if (drawable == Integer.parseInt(wish2Edit.getImage()))
+            newDrawable = String.valueOf(wish2Edit.getImage());
+        else newDrawable = String.valueOf(drawable);
 
         ((WishlistActivity) getActivity()).db.updateWish(dbid, newTitle, newCost, wish2Edit.getSaved(), newDrawable);
         Intent intent = new Intent(getActivity(), WishlistActivity.class);
@@ -388,8 +389,6 @@ public class EditWishFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 

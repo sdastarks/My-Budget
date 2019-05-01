@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.AvatarChangeActivity;
@@ -93,9 +92,6 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
                         Intent intent5 = new Intent(CompletedWishesActivity.this, AvatarChangeActivity.class);
                         startActivity(intent5);
                         break;
-
-
-
                 }
                 return false;
             }
@@ -125,7 +121,8 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
             if (wl.getCost() == wl.getSaved()) {
                 mWishId.add(wl.getWishListId());
                 mWishNames.add(wl.getTitle());
-                mDrawable.add(getDrawable(wl.getImage()));
+                //TODO maybe try catch better be added DAWNIE
+                mDrawable.add(getDrawable(Integer.parseInt(wl.getImage())));
                 //mImageUrls.add(wl.getImage());
                 mWishPrices.add(wl.getCost());
                 mSavingProgress.add(wl.getSaved());

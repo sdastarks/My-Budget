@@ -219,7 +219,7 @@ public class NewWishFragment extends Fragment {
                         wish.setTitle(wishTitle);
                         wish.setCost(cost);
                         wish.setSaved(0);
-                        wish.setImage(drawable);
+                        wish.setImage(String.valueOf(drawable));
                         mNewWishCost.setError(null);
                         ((WishlistActivity) getActivity()).db.addWish(wish);
                         Intent intent = new Intent(getActivity(), WishlistActivity.class);

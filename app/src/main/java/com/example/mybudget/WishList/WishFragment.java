@@ -68,7 +68,7 @@ public class WishFragment extends Fragment {
         //selected wish database id and Wish
         dbid = ((WishlistActivity) getActivity()).id;
         wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-        wish_picture_fragment.setImageResource(wishSelected.getImage());
+        wish_picture_fragment.setImageResource(Integer.parseInt(wishSelected.getImage()));
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
