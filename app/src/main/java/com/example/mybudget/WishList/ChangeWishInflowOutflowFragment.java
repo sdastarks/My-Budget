@@ -230,16 +230,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 }
             }, 2000);
 
-            //userParent email should be added and stored in data base
-            // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
-            userParentEmail = "nastasyja@gmail.com";
+            sendEmail();
 
-            writeTheFileForEmail();
-            String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() +" SEK";
-
-            new SendMailTask().execute(userParentEmail, emailBody);
-            Toast toast = Toast.makeText(getActivity(),"Completed wish status is sent to your parents email ",Toast.LENGTH_LONG);
-            toast.show();
 
         } else {
             ((WishlistActivity) getActivity()).db.updateWish(dbid, wish2Update.getTitle()
@@ -250,6 +242,24 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
             exitFragment();
         }
+    }
+    /**
+     *
+     * @author Anastasija Gurejeva
+     * @author Daniel Beadleson
+     */
+    public void sendEmail(){
+        //userParent email should be added and stored in data base
+        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
+        userParentEmail = "danbeadleson@gmail.com";
+
+        writeTheFileForEmail();
+        String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() +" SEK";
+
+        new SendMailTask().execute(userParentEmail, emailBody);
+        Toast toast = Toast.makeText(getActivity(),"Email sent to your parent",Toast.LENGTH_LONG);
+        toast.show();
+
     }
 
     public void deleteCompletedWish(){
