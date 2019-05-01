@@ -7,13 +7,16 @@ package com.example.mybudget.Home;
  * @author Daniel Beadleson
  */
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,6 +31,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.AvatarChangeActivity;
@@ -39,6 +43,12 @@ import com.example.mybudget.Profile.RegisterActivity;
 import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.List;
 
 
 public class MainActivity extends AvatarChangeActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,6 +63,8 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
     private Button register_button;
     private Drawable d;
 
+    private FileInputStream fs;
+    private File file;
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -244,6 +256,10 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
                 Intent intent2 = new Intent(MainActivity.this, RegisterActivity.class);
                 intent2.putExtra("editProfile", "update");
                 startActivity(intent2);
+                break;
+            case R.id.side_nav_settings:
+                Intent intent3 = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent3);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

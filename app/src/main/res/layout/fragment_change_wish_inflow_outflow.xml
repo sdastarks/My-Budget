@@ -110,7 +110,8 @@ tools:context=".WishList.ChangeWishInflowOutflowFragment">
     app:layout_constraintBottom_toBottomOf="@+id/thinking_frame_small"
     app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
     app:layout_constraintStart_toStartOf="@+id/thinking_frame_small"
-    app:layout_constraintTop_toTopOf="@+id/thinking_frame_small">
+    app:layout_constraintTop_toTopOf="@+id/thinking_frame_small"
+    app:hintEnabled="false">
 
 
     <android.support.design.widget.TextInputEditText
@@ -120,6 +121,8 @@ tools:context=".WishList.ChangeWishInflowOutflowFragment">
         android:layout_height="wrap_content"
         android:inputType="number"
         android:textAlignment="center"
+        android:hint="0.00"
+        android:gravity="center"
         android:textColor="?attr/colorPrimaryDark"
         android:textColorHint="?attr/colorPrimaryDark"
         android:textCursorDrawable="?attr/colorPrimaryDark"
@@ -128,21 +131,21 @@ tools:context=".WishList.ChangeWishInflowOutflowFragment">
 </android.support.design.widget.TextInputLayout>
 
 
-<TextView
-    android:id="@+id/SEK"
-    style="@style/TextStyleBody"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="4dp"
-    android:text="SEK"
-    android:textColor="?attr/colorPrimaryDark"
-    android:textSize="20dp"
-    app:layout_constraintBottom_toBottomOf="@+id/wish_cost_layout"
-    app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toEndOf="@+id/wish_cost_layout" />
+    <TextView
+        android:id="@+id/SEK"
+        style="@style/TextStyleBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="11dp"
+        android:text="SEK"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/wish_cost_layout"
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame_small"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/wish_cost_layout" />
 
 <ImageView
     android:id="@+id/money_image_fragment_wish"

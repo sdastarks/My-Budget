@@ -19,7 +19,7 @@ import com.example.mybudget.WishList.WishlistActivity;
 
 
 public class AvatarChangeActivity extends AppCompatActivity {
-    private static final String TAG = "SettingsActivityLog";
+    private static final String TAG = "AvatarChangeActivityLog";
     public static final String PREFS_NAME = "themePreferenceFile";
     public static final String KEY_THEME_RES_ID = "themeResId";
     public static final String KEY_DRAWABLE_RES_ID = "imageResId";

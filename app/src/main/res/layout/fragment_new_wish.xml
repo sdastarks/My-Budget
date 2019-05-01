@@ -81,6 +81,7 @@ tools:context=".WishList.NewWishFragment">
     <android.support.design.widget.TextInputEditText
         android:id="@+id/wish_title"
         style="@style/InputTextStyleNoColor"
+        android:hint="Enter the name of the wish"
         android:layout_width="341dp"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -107,6 +108,7 @@ tools:context=".WishList.NewWishFragment">
         android:id="@+id/wish_cost"
         style="@style/InputTextStyleNoColor"
         android:layout_width="341dp"
+        android:hint="Enter the price of the wish"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:textSize="22sp" />
