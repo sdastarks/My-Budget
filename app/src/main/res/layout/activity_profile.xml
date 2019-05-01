@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Profile.ProfileActivity"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -92,21 +93,22 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextStyleBodyRegular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Balance"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/profile_balance"
+                        style="@style/TextStyleBody"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="Value"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:text="Value"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,17 +123,18 @@
                         android:layout_height="wrap_content"
                         android:text="Savings"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="15sp" />
+                        style="@style/TextStyleBodyRegular"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/profile_savings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="Value"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        style="@style/TextStyleBody"
+                        android:text="Value"
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -147,6 +150,7 @@
                         android:layout_height="wrap_content"
                         android:text="Spendings"
                         android:textColor="?attr/colorPrimary"
+                        style="@style/TextStyleBodyRegular"
                         android:textSize="15sp" />
 
                     <TextView
@@ -154,10 +158,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="Value"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:text="Value"
+                        style="@style/TextStyleBody"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -194,10 +198,10 @@
                     android:layout_width="309dp"
                     android:layout_height="52dp"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:paddingLeft="20dp"
+                    style="@style/TextStyleBody"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -219,8 +223,8 @@
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    style="@style/TextStyleBody"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -242,8 +246,8 @@
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    style="@style/TextStyleBody"
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

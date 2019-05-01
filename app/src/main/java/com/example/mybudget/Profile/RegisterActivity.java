@@ -3,11 +3,12 @@ package com.example.mybudget.Profile;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.util.Patterns;
@@ -75,7 +76,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     int userGlobalId;
     String userGlobalName;
     private Drawable d;
-
+    private WelcomeFragmentDialog welcomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +128,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 }
             }
         }
-        activateOnExitRegisterActiviy();
+        exitRegisterUpdateActivity();
     }
 
     /**
@@ -143,10 +144,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_avatar, new AvatarFragment());
                 ft.commit();
-                //gridView.setAdapter(new AvatarGridView(this));
-
-                //gridView.setVisibility(View.VISIBLE);
-
             }
         });
     }
@@ -187,16 +184,8 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     private void initializeObjects() {
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
         User user = new User();
+        welcomeFragment = new WelcomeFragmentDialog();
     }
-
-    /**
-     * This method is to initialize listeners
-
-     private void initializeListeners() {
-     initializeViews();
-     appCompatButtonRegister.setOnClickListener(this);
-     appCompatButtonUpdateUser.setOnClickListener(this);
-     }*/
 
     /**
      * @param view This method will execute onClick method depending on which button has been clicked
@@ -210,8 +199,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                     if (inputValidation()) {
                         addUser(user);
                         Log.v(TAG, "user added");
-                        Intent intentLoadMainPage = new Intent (RegisterActivity.this, MainActivity.class);
-                        startActivity(intentLoadMainPage);
+                        showWelcomeDialog();
                     }
                 }
                 break;
@@ -244,7 +232,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 System.out.println("all fields validation");
                 return true;
             }
-
         } catch (NullPointerException e) {
             System.out.println("Email field not validated");
             if (validateFirstname() && validateLastname() && validateAge()) {
@@ -318,7 +305,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
             value1 = valueAgeNotNull != null && !valueAgeNotNull.isEmpty() && !valueAgeNotNull.equals("") ? Integer.parseInt(valueAgeNotNull) : 0;
         }catch (NumberFormatException e){
             e.printStackTrace();
-            textInputEditTextAge.setError("Invalid value");
+            textInputEditTextAge.setError("Enter a valid number");
             valid = false;
         }
         try {
@@ -329,7 +316,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 textInputEditTextAge.setError("Invalid value");
                 valid = false;
             } else if (value1 == 0) {
-                textInputEditTextAge.setError("Invalid value");
+                textInputEditTextAge.setError("Age cannot be 0");
                 valid = false;
             } else {
                 valid = true;
@@ -415,20 +402,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         return sharedPrefs.getInt(USER_ID, 0);
     }
-
-    /**
-     * This method is to delete user record
-     *
-     * @param user public void deleteUser(){
-     *             initializeViews();
-     *             databaseHelper.open_db();
-     *             <p>
-     *             db.delete(USER_PROFILE, values, USERID  + " = ?",
-     *             new String[]{String.valueOf(user.getId())});
-     *             databaseHelper.close();
-     *             }
-     */
-
     private void AllItemsVisibilitySwitch() {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         textInputLayoutFirstName.setVisibility(View.GONE);
@@ -450,17 +423,25 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
 
     }
 
+    private void showWelcomeDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        welcomeFragment = new WelcomeFragmentDialog();
+        welcomeFragment.show(fragmentManager, "welcomeFragment");
+    }
 
-    private void activateOnExitRegisterActiviy() {
-
+    private void exitRegisterUpdateActivity() {
         btn_exitRegisterActivity.setOnClickListener(new View.OnClickListener() {
+            /*
+             * Method sends the user back to the main menu
+             * when the cancel button is initialised
+             */
             @Override
             public void onClick(View v) {
-                Intent intentExitActivity = new Intent (RegisterActivity.this, MainActivity.class);
-                startActivity(intentExitActivity);
+                Log.v(TAG, "cancel button initialised");
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
-
     }
 
 }

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
 
@@ -99,9 +100,16 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/border_button"
         app:itemIconTint="@drawable/bottom_nav_colours"
+        android:theme="@style/Widget.BottomNavigationView"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView"
         app:itemTextColor="?attr/colorAccent"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu">
+
 
     </android.support.design.widget.BottomNavigationView>
 

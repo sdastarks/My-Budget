@@ -1,13 +1,11 @@
-
-
-
-
 <resources>
 
     <!-- Base application theme. -->
 
     <!--default theme-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/logo_startup</item>
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -43,6 +41,11 @@
         <item name="colorPrimaryDark">@color/CrazyMonsterColorPrimaryDark</item>
         <item name="colorAccent">@color/CrazyMonsterColorAccent</item>
         <item name="colorSecondary">@color/CrazyMonsterColorSecondary</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/gradient</item>
+        <item name="android:icon">@drawable/logo</item>
     </style>
 
 

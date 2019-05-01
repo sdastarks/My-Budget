@@ -20,14 +20,16 @@
 
         <Button
             android:id="@+id/btn_save_edit_wish"
-            android:layout_width="30dp"
+            style="@style/NormalTextStyleWhite"
+            android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
-            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
             android:text="OK"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:background="@android:color/transparent" />
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="371dp"
+            tools:layout_editor_absoluteY="15dp" />
 
         <Button
             android:id="@+id/btn_cancel_edit_wish"
@@ -37,27 +39,40 @@
             android:background="@drawable/icon_cancel_white" />
 
         <TextView
+            style="@style/HeadlineTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Edit Wish"
-            style="@style/HeadlineTextStyle" />
+            tools:layout_editor_absoluteY="14dp" />
 
     </android.support.v7.widget.Toolbar>
 
 
     <ImageView
         android:id="@+id/edit_wish_picture"
-        android:layout_width="352dp"
-        android:layout_height="140dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/edit_wish_title_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_wish_toolbar" />
 
+    <ImageButton
+        android:id="@+id/btn_camera_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/ic_baseline_add_a_photo_24px"
+        app:layout_constraintBottom_toTopOf="@+id/edit_wish_title_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/edit_wish_title_layout"
@@ -66,12 +81,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_wish_cost_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_wish_picture">
+        app:layout_constraintTop_toBottomOf="@+id/edit_wish_picture"
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_wish_title"
+            style="@style/InputTextStyleNoColor"
             android:layout_width="341dp"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -85,8 +103,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.413"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +114,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_wish_cost"
+            style="@style/InputTextStyleNoColor"
             android:layout_width="341dp"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -106,25 +127,28 @@
         android:id="@+id/floatingActionButton_delete_wish"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_delete_24px"
         app:fabCustomSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView3" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView3"
-        android:layout_width="395dp"
+        android:layout_width="0dp"
         android:layout_height="105dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton_delete_wish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_wish_cost_layout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/edit_wish_cost_layout">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -149,6 +173,7 @@
                     app:srcCompat="@drawable/button_wish_bike" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -174,6 +199,7 @@
                     app:srcCompat="@drawable/button_wish_clothes" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -199,6 +225,7 @@
                     app:srcCompat="@drawable/button_wish_gadgets" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -223,6 +250,7 @@
                     app:srcCompat="@drawable/button_wish_games" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -247,6 +275,7 @@
                     app:srcCompat="@drawable/button_wish_gift" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -272,6 +301,7 @@
                     app:srcCompat="@drawable/button_wish_holiday" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -297,6 +327,7 @@
                     app:srcCompat="@drawable/button_wish_iceskate" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -321,6 +352,7 @@
                     app:srcCompat="@drawable/button_wish_pets" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -345,6 +377,7 @@
                     app:srcCompat="@drawable/button_wish_scooter" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -369,6 +402,7 @@
                     app:srcCompat="@drawable/button_wish_shoes" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -393,6 +427,7 @@
                     app:srcCompat="@drawable/button_wish_dream" />
 
                 <TextView
+                    style="@style/IconsTextStyleNoColor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="19"
@@ -402,6 +437,7 @@
 
         </LinearLayout>
     </HorizontalScrollView>
+
 
 
 

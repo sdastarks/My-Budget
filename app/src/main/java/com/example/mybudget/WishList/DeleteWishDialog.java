@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 
@@ -22,6 +23,7 @@ import java.time.LocalDate;
 /**
  * Fragment creates a dialog allowing the user
  * to delete a wish or abort the procedure
+ *
  * @author Daniel Beadleson
  *
  */

@@ -76,40 +76,22 @@
 
         <TextView
             android:id="@+id/goal_reached_txt"
+            style="@style/NormalTextStyleWhite"
             android:layout_width="241dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:text="@string/reached_goal_text"
+            android:layout_marginBottom="24dp"
             android:background="?attr/colorAccent"
+            android:text="@string/reached_goal_text"
             android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageHero_goal_reached" />
 
-        <TextView
-            android:id="@+id/txt_points_goal_reached"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="sans-serif-medium"
-            android:text=" "
-            android:textColor="?attr/colorPrimaryDark"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.527"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goal_reached_txt" />
 
         <TextView
             android:id="@+id/txt_congrads"
@@ -119,6 +101,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="@string/congrads"
+            style="@style/HeadlineTextStyle"
             android:background="?attr/colorAccent"
             android:textColor="?attr/colorPrimaryDark"
             android:textSize="50sp"

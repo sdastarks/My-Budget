@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-      <include
+        <include
             android:id="@+id/toolbar"
             layout="@layout/tool_bar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,64 +26,71 @@
         <ImageView
             android:id="@+id/imageViewHero"
             android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="45dp"
-            android:scaleType="fitStart"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="40dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="fitEnd"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toStartOf="@id/speech_frame"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_weight="4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/speech_frame"
+            app:layout_constraintVertical_weight="5"
             app:srcCompat="@drawable/cookie" />
 
         <ImageView
             android:id="@+id/speech_frame"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="80dp"
-            android:scaleType="fitEnd"
-            app:layout_constraintBottom_toBottomOf="@+id/tvBalance"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toTopOf="@+id/tvBalance"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintStart_toEndOf="@id/imageViewHero"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintVertical_weight="3"
             app:srcCompat="@drawable/ic_artboard_1" />
 
         <TextView
             android:id="@+id/tvBalance"
+            style="@style/HeadlineTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="53dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="55dp"
+            android:layout_marginEnd="20dp"
             android:text="200"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="#FFFF"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewHero"
+            android:textSize="38sp"
+            app:layout_constraintVertical_weight="5"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/total_balance"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintStart_toEndOf="@+id/imageViewHero"
+            app:layout_constraintTop_toBottomOf="@id/speech_frame" />
 
         <TextView
             android:id="@+id/total_balance"
+            style="@style/TextStyleBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/imageViewHero"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="22dp"
-            android:layout_marginBottom="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="17dp"
             android:text="@string/total_balance"
+            android:textAlignment="center"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="?attr/colorPrimaryDark"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/speech_frame"
             app:layout_constraintEnd_toEndOf="@+id/speech_frame"
-            app:layout_constraintTop_toTopOf="@+id/speech_frame" />
+            app:layout_constraintStart_toStartOf="@+id/speech_frame"
+            app:layout_constraintTop_toTopOf="@+id/speech_frame"
+            app:layout_constraintVertical_bias="0.0" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton_minus"
@@ -123,62 +130,65 @@
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/NormalTextStyleWhite"
             android:layout_width="0dp"
             android:layout_height="105dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="bottom|center_horizontal"
             android:text="@string/money_received"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewHero" />
+            app:layout_constraintStart_toEndOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/textView3"
+            style="@style/NormalTextStyleWhite"
             android:layout_width="200dp"
             android:layout_height="105dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:gravity="bottom|center_horizontal"
             android:text="@string/money_spent"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintVertical_weight="2"
+            app:layout_constraintBottom_toTopOf="@id/progressBar"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewHero" />
+            app:layout_constraintTop_toBottomOf="@id/imageViewHero" />
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/progressBar"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="16dp"
             app:cpb_background_progressbar_color="?attr/colorAccent"
             app:cpb_background_progressbar_width="5dp"
             app:cpb_progressbar_color="?attr/colorPrimaryDark"
             app:cpb_progressbar_width="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/favWishTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_weight="4" />
 
         <TextView
             android:id="@+id/txt_progressBar"
+            style="@style/NormalTextStyleWhite"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#FFFF"
             android:gravity="center_vertical"
+            android:textAlignment="center"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/progressBar"
             app:layout_constraintEnd_toEndOf="@+id/progressBar"
@@ -188,22 +198,17 @@
 
         <TextView
             android:id="@+id/favWishTitle"
+            style="@style/NormalTextStyleWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="sans-serif-medium"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@id/progressBar" />
 
         <FrameLayout
             android:id="@+id/fragment_placeholder"
@@ -214,7 +219,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/toolbar">
-
         </FrameLayout>
 
         <android.support.design.widget.BottomNavigationView
@@ -222,11 +226,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:labelVisibilityMode="labeled"
             android:background="@drawable/border_button"
             app:itemIconTint="@drawable/bottom_nav_colours"
+            android:theme="@style/Widget.BottomNavigationView"
+            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView"
             app:itemTextColor="?attr/colorAccent"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_menu">
 
         </android.support.design.widget.BottomNavigationView>
@@ -242,6 +251,7 @@
         app:headerLayout="@layout/side_navigation_header"
         app:itemIconTint="?attr/colorPrimary"
         app:itemTextColor="@drawable/drawer_nav_colors"
+        app:itemTextAppearance="@style/TextStyleBody"
         app:menu="@menu/drawer_menu">
 
     </android.support.design.widget.NavigationView>

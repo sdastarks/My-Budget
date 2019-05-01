@@ -29,7 +29,6 @@ import com.example.mybudget.R;
 public class GoalReachedDialog extends  AppCompatDialogFragment {
     private static final String TAG = "GoalReachedDialog";
     private Button mCancelDialog;
-    private TextView points;
     private ImageView mImageHeroGoalReached;
 
 
