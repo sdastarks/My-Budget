@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -256,15 +257,16 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME, 0);
         int userGlobalId = registerSharedPref.getInt(USER_ID, 0);
         String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
-        
+        String userName =((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserFirstName();
         Log.v(TAG, "user email: "+userParentEmail);
 
         writeTheFileForEmail();
         String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() +" SEK";
 
         new SendMailTask().execute(userParentEmail, emailBody);
-        Toast toast = Toast.makeText(getActivity(),"Email sent to your parent",Toast.LENGTH_LONG);
-        toast.show();
+
+        Toast.makeText(getActivity(),"Email sent to "+userName+"'s parent",Toast.LENGTH_LONG).show();
+
 
     }
 
