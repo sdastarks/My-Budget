@@ -114,7 +114,7 @@
         android:gravity="left|center_vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Send Payment Reminders"
+        android:text="Send Chores Payment Reminder"
         android:textAppearance="@style/TextStyleBodyRegular"
         android:textColor="@color/white"
         android:textIsSelectable="false"

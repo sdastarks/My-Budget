@@ -22,11 +22,11 @@
         style="@style/HeadlineTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="16dp"
         android:text="Message"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/Send_sms_toolbar"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
@@ -61,40 +61,43 @@
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
         android:id="@+id/editText"
-        android:layout_width="0dp"
+        android:layout_width="340dp"
         android:layout_height="60dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="41dp"
-        android:background="?attr/colorAccent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_rounded_corners"
         android:ems="10"
         android:hint="Enter Phone no"
         android:inputType="textPersonName"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/Send_sms_toolbar" />
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="0dp"
-        android:layout_height="191dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="37dp"
-        android:background="?attr/colorAccent"
+        android:layout_width="340dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_corners"
         android:ems="10"
+        android:gravity="top|left"
         android:inputType="textMultiLine|textCapSentences"
+        android:padding="15dp"
         android:textColor="?attr/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        android:gravity="top|left"
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 
