@@ -43,9 +43,8 @@ import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 public class SettingsActivity extends AvatarChangeActivity implements TimePickerDialog.OnTimeSetListener {
 
     private static final String TAG = "SettingsActivityLog";
-    public static final String PREFS_NAME = "switchPreferences";
-    public static final String USER_PREFS_NAME = "userPreferenceFile";
-    public static final String USER_ID = "userId";
+    public static final String SETTINGSPREFS_NAME = "switchPreferences";
+    public static final String EMAILPREFS = "email_enabled";
 
     private Button btn_exit;
     protected static Switch swt_notifications;
@@ -58,7 +57,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
     private Drawable[] dMessages;
     private int primarycolor;
     protected Boolean timeChosen;
-
+    private SharedPreferences settingsSharedPref;
 
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
@@ -66,6 +65,8 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        settingsSharedPref= getSharedPreferences(SETTINGSPREFS_NAME, 0);
 
         btn_exit = findViewById(R.id.btn_exit_settings);
         swt_notifications = findViewById(R.id.switch_notifications);
@@ -94,7 +95,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
      */
     public void checkRegistration() {
 
-        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
+        SharedPreferences sharedPrefs = getSharedPreferences(RegisterActivity.USER_PREFS_NAME, 0);
         if (sharedPrefs.getInt(USER_ID, 0) == 0) {
             Log.d(TAG, "onAddWish: locking user if not registered");
             RegisterRequestDialog dialog = new RegisterRequestDialog();
@@ -140,10 +141,10 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
      * their original state
      */
     public void previousSwitchStates() {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        Boolean notificationsSet = settings.getBoolean("notification_switch", false);
-        Boolean emailsSet = settings.getBoolean("email_switch", false);
-        Boolean messagesSet = settings.getBoolean("messages_switch", false);
+
+        Boolean notificationsSet = settingsSharedPref.getBoolean("notification_switch", false);
+        Boolean emailsSet = settingsSharedPref.getBoolean("email_switch", false);
+        Boolean messagesSet = settingsSharedPref.getBoolean("messages_switch", false);
 
         swt_notifications.setChecked(notificationsSet);
         swt_email.setChecked(emailsSet);
@@ -151,7 +152,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
 
         if (notificationsSet) {
             dnotification[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
-            String alarmText = settings.getString("alarm", "Set Daily Reminder");
+            String alarmText = settingsSharedPref.getString("alarm", "Set Daily Reminder");
             swt_notifications.setText(alarmText);
         }
         if (emailsSet) {
@@ -222,10 +223,11 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     String userParentEmail = db.getUser(getSharedPreferences(
-                                            com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME,
+                                            RegisterActivity.USER_PREFS_NAME,
                                         0).getInt(USER_ID, 0)).getUserMail();
                     Log.v(TAG, userParentEmail);
                     if (!userParentEmail.trim().isEmpty()){
+                        settingsSharedPref.edit().putBoolean(EMAILPREFS, true).commit();
                         dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
                     }
                     else {
@@ -288,8 +290,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
      * @return if states been saved
      */
     public Boolean storeSwitchState(String switchName, Boolean isChecked) {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
+        SharedPreferences.Editor editor = settingsSharedPref.edit();
         editor.putBoolean(switchName, isChecked);
         editor.commit();
         return true;
@@ -340,8 +341,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
      * alarm is set by the user
      */
     public void storeAlarmTime(String timeText) {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
+        SharedPreferences.Editor editor = settingsSharedPref.edit();
         editor.putString("alarm", timeText);
         editor.commit();
     }

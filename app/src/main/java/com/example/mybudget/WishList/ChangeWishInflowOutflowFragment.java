@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.Profile.RegisterActivity;
 import com.example.mybudget.R;
 import com.example.mybudget.SendMailTask;
 
@@ -253,8 +254,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
      */
     public void sendEmail(){
         Log.v(TAG, "send email activated");
-        int userGlobalId = getActivity().getSharedPreferences(
-                            com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME,
+        int userGlobalId = getActivity().getSharedPreferences(RegisterActivity.USER_PREFS_NAME,
                             0).getInt(USER_ID, 0);
         String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
         String userName =((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserFirstName();
