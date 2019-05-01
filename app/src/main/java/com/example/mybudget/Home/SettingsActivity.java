@@ -45,6 +45,7 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
     private static final String TAG = "SettingsActivityLog";
     public static final String SETTINGSPREFS_NAME = "switchPreferences";
     public static final String EMAILPREFS = "email_enabled";
+    public static final String MESSAGEPREFS = "messages_enabled";
 
     private Button btn_exit;
     protected static Switch swt_notifications;
@@ -273,8 +274,10 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    settingsSharedPref.edit().putBoolean(MESSAGEPREFS, true).commit();
                     dMessages[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
                 } else {
+                    settingsSharedPref.edit().putBoolean(MESSAGEPREFS, false).commit();
                     dMessages[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
                 }
                 storeSwitchState("messages_switch", isChecked);
