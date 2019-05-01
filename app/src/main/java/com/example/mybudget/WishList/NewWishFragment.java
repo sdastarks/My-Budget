@@ -2,11 +2,7 @@ package com.example.mybudget.WishList;
 
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
@@ -16,21 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.load.engine.Resource;
-import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
-import com.example.mybudget.WishList.WishlistActivity;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Base64;
 
 
 /**
@@ -233,15 +218,20 @@ public class NewWishFragment extends Fragment {
      * @param wishTitle
      * @param cost
      */
-    public void addWishEntry(String wishTitle, int cost){
+    public void addWishEntry(String wishTitle, int cost) {
         WishList wish = new WishList();
         wish.setTitle(wishTitle);
         wish.setCost(cost);
         wish.setSaved(0);
-        wish.setImage(drawable);
+        wish.setImage(getURLForResource(drawable));
         mNewWishCost.setError(null);
         ((WishlistActivity) getActivity()).db.addWish(wish);
         Intent intent = new Intent(getActivity(), WishlistActivity.class);
         startActivity(intent);
+    }
+
+    public String getURLForResource (int resourceId) {
+        return Uri.parse("android.resource://"+R.class.getPackage().getName()+"/" +resourceId).toString();
+
     }
 }
