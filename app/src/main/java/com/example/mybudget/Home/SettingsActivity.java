@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,12 +29,16 @@ import android.widget.Toast;
 
 import com.example.mybudget.AlertReceiver;
 import com.example.mybudget.AvatarChangeActivity;
+import com.example.mybudget.Profile.RegisterActivity;
 import com.example.mybudget.R;
 import com.example.mybudget.WishList.RegisterRequestDialog;
+import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+
+import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 
 public class SettingsActivity extends AvatarChangeActivity implements TimePickerDialog.OnTimeSetListener {
 
@@ -216,7 +221,21 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+                    SharedPreferences registerSharedPref = getSharedPreferences(
+                            com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME, 0);
+                    int userGlobalId = registerSharedPref.getInt(USER_ID, 0);
+                    String userParentEmail = db.getUser(userGlobalId).getUserMail();
+                    Log.v(TAG, "userParentEmail"+userParentEmail);
+                    if (!userParentEmail.trim().isEmpty()){
+                        dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
+                    }
+                    else {
+                        swt_email.setChecked(false);
+                        isChecked=false;
+                        Snackbar.make(buttonView, "Add an email",Snackbar.LENGTH_LONG).
+                                setAction("GO", new EditProfileListener()).show();
+                    }
+
 
                 } else {
                     dEmail[0].setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
@@ -225,6 +244,21 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
             }
         });
         return true;
+    }
+    /**
+     * Class allows sends the user to Edit profile
+     * when selected through the snackbar
+     */
+    public class EditProfileListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
+            Intent intent2 = new Intent(SettingsActivity.this, RegisterActivity.class);
+            intent2.putExtra("editProfile", "update");
+            startActivity(intent2);
+
+        }
     }
 
     /**
