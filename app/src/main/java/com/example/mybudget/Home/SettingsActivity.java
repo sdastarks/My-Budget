@@ -221,11 +221,10 @@ public class SettingsActivity extends AvatarChangeActivity implements TimePicker
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    SharedPreferences registerSharedPref = getSharedPreferences(
-                            com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME, 0);
-                    int userGlobalId = registerSharedPref.getInt(USER_ID, 0);
-                    String userParentEmail = db.getUser(userGlobalId).getUserMail();
-                    Log.v(TAG, "userParentEmail"+userParentEmail);
+                    String userParentEmail = db.getUser(getSharedPreferences(
+                                            com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME,
+                                        0).getInt(USER_ID, 0)).getUserMail();
+                    Log.v(TAG, userParentEmail);
                     if (!userParentEmail.trim().isEmpty()){
                         dEmail[0].setColorFilter(primarycolor, PorterDuff.Mode.SRC_ATOP);
                     }

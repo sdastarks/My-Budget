@@ -253,9 +253,9 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
      */
     public void sendEmail(){
         Log.v(TAG, "send email activated");
-        SharedPreferences registerSharedPref = getActivity().getSharedPreferences(
-                com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME, 0);
-        int userGlobalId = registerSharedPref.getInt(USER_ID, 0);
+        int userGlobalId = getActivity().getSharedPreferences(
+                            com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME,
+                            0).getInt(USER_ID, 0);
         String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
         String userName =((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserFirstName();
         Log.v(TAG, "user email: "+userParentEmail);
