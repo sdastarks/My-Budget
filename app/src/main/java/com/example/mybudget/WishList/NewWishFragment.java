@@ -199,16 +199,9 @@ public class NewWishFragment extends Fragment {
                         mNewWishTitle.setError("Wish already exists");
                     } else if (drawable == 0) {
                         drawable = R.drawable.button_wish_dream;
+                        addWishEntry(wishTitle, cost);
                     } else {
-                        WishList wish = new WishList();
-                        wish.setTitle(wishTitle);
-                        wish.setCost(cost);
-                        wish.setSaved(0);
-                        wish.setImage(getURLForResource(drawable));
-                        mNewWishCost.setError(null);
-                        ((WishlistActivity) getActivity()).db.addWish(wish);
-                        Intent intent = new Intent(getActivity(), WishlistActivity.class);
-                        startActivity(intent);
+                        addWishEntry(wishTitle, cost);
                     }
                 } catch (Exception e) {
                     mNewWishCost.setError("Try Again");
@@ -216,6 +209,25 @@ public class NewWishFragment extends Fragment {
             }
 
         });
+    }
+
+    /**
+     * Method adds a wish entry in
+     * the db
+     *
+     * @param wishTitle
+     * @param cost
+     */
+    public void addWishEntry(String wishTitle, int cost) {
+        WishList wish = new WishList();
+        wish.setTitle(wishTitle);
+        wish.setCost(cost);
+        wish.setSaved(0);
+        wish.setImage(getURLForResource(drawable));
+        mNewWishCost.setError(null);
+        ((WishlistActivity) getActivity()).db.addWish(wish);
+        Intent intent = new Intent(getActivity(), WishlistActivity.class);
+        startActivity(intent);
     }
 
     public String getURLForResource (int resourceId) {
