@@ -34,6 +34,8 @@ import java.time.LocalDate;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
+
 
 /**
  * Fragment allows the user to transfer
@@ -249,9 +251,13 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
      * @author Daniel Beadleson
      */
     public void sendEmail(){
-        //userParent email should be added and stored in data base
-        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
-        userParentEmail = "danbeadleson@gmail.com";
+        Log.v(TAG, "send email activated");
+        SharedPreferences registerSharedPref = getActivity().getSharedPreferences(
+                com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME, 0);
+        int userGlobalId = registerSharedPref.getInt(USER_ID, 0);
+        String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
+        
+        Log.v(TAG, "user email: "+userParentEmail);
 
         writeTheFileForEmail();
         String emailBody = "Your child completed saving for a  " + wish2Update.getTitle() + " \n Amount saved: " + wish2Update.getCost() +" SEK";
