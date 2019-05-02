@@ -1,8 +1,10 @@
 package com.example.mybudget.Profile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +25,7 @@ public class WelcomeFragmentDialog extends  AppCompatDialogFragment {
     private Button cancel_fragment;
     private TextView welcome_msg_txt;
     private ImageView mImageHeroWelcomeScreen;
+    private ImageView mImageHeroRegistered;
 
 
     @Nullable
@@ -30,6 +33,7 @@ public class WelcomeFragmentDialog extends  AppCompatDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_welcome_screen, container, false);
         mImageHeroWelcomeScreen = view.findViewById(R.id.image_welcome_hero);
+        mImageHeroRegistered = view.findViewById(R.id.imageWelcomeMonster);
         cancel_fragment = view.findViewById(R.id.btn_cancel_welcome_fragment);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -43,6 +47,18 @@ public class WelcomeFragmentDialog extends  AppCompatDialogFragment {
             }
         });
 
+        setAvatar();
+
         return view;
+    }
+
+
+    public void setAvatar() {
+        SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
+        int imageResId = settings.getInt("imageResId", -1);
+        if(imageResId != -1){
+            Drawable d=getActivity().getDrawable(imageResId);
+            mImageHeroRegistered.setImageDrawable(d);
+        }
     }
 }
