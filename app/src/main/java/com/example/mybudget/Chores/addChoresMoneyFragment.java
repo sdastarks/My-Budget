@@ -115,7 +115,6 @@ public class addChoresMoneyFragment extends Fragment {
 
                         addEntry(amount, description);
                         checkSMSEnabled();
-
                         //sendEmail();  //TODO: Perhaps delete this sendEMail() method as your using sms???
                     }
                 } catch (Exception e) {
@@ -176,11 +175,9 @@ public class addChoresMoneyFragment extends Fragment {
         if (smsEnabled) {
             sendSMS();
         }
-
         else {
             exit();
         }
-
     }
 
     /**
@@ -196,9 +193,7 @@ public class addChoresMoneyFragment extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.check, mFrag);
         t.commit();
-
         exit();
-
 
     }
 
