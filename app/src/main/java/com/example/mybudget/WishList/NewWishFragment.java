@@ -202,15 +202,6 @@ public class NewWishFragment extends Fragment {
                         addWishEntry(wishTitle, cost);
                     } else {
 
-                        WishList wish = new WishList();
-                        wish.setTitle(wishTitle);
-                        wish.setCost(cost);
-                        wish.setSaved(0);
-                        wish.setImage(String.valueOf(drawable));
-                        mNewWishCost.setError(null);
-                        ((WishlistActivity) getActivity()).db.addWish(wish);
-                        Intent intent = new Intent(getActivity(), WishlistActivity.class);
-                        startActivity(intent);
                         addWishEntry(wishTitle, cost);
                     }
                 } catch (Exception e) {

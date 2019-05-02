@@ -225,9 +225,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         try {
             String valueEmail = textInputEditTextEmail.getText().toString();
             if (valueEmail.isEmpty()) {
-                textInputEditTextEmail.setError("Parent's email is required");
-                return false;
-                //throw new NullPointerException();
+                throw new NullPointerException();
             }
             if (validateEmail() && validateFirstname() && validateLastname() && validateAge()) {
                 System.out.println("all fields validation");
@@ -284,7 +282,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         initializeViews();
         String valueEmail = textInputEditTextEmail.getText().toString();
         if (valueEmail.isEmpty()) {
-            textInputEditTextEmail.setError("Field cannot be empty");
             valid = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(valueEmail).matches()) {
             textInputEditTextEmail.setError("Invalid email address");
