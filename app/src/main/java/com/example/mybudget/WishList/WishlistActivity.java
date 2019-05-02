@@ -151,7 +151,6 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frame_wish_fragment, new NewWishFragment());
             ft.commit();
-
     }
 
     /**
@@ -161,9 +160,6 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
     public void loadDataToRecycle(){
 
         ArrayList<WishList> loadwishes = db.loadWishes();
-
-
-
         for(WishList wl : loadwishes){
             if(wl.getSaved() != wl.getCost()) {
                 mWishId.add(wl.getWishListId());

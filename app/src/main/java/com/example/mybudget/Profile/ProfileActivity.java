@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
@@ -48,19 +48,6 @@ public class ProfileActivity extends AvatarChangeActivity {
     private Drawable d;
     private ImageView hero_profile;
 
-
-    /*
-    private static final int CAMERA_TAKE_REQUEST = 200;
-    private final static int ALL_PERMISSIONS_RESULT = 101;
-    private ImageView imageviewCamera;
-    File file;
-    Uri uri;
-    private Context context;
-    private Activity activity;
-    ArrayList<String> permissions = new ArrayList<>();
-    ArrayList<String> permissionsToRequest;
-    ArrayList<String> permissionsRejected = new ArrayList<>();*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +64,7 @@ public class ProfileActivity extends AvatarChangeActivity {
 
         sharedPreferences = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        userGlobalId = sharedPreferences.getInt(USER_ID, 0);;
+        userGlobalId = sharedPreferences.getInt(USER_ID, 0);
         if (userGlobalId != 0)
             {
             setUserPersonalData(userGlobalId);
@@ -86,15 +73,9 @@ public class ProfileActivity extends AvatarChangeActivity {
             savingsOfUser();
             spendingsOfUser();
 
-            } else Toast.makeText(this, "User is null", Toast.LENGTH_SHORT).show();
+            } else Log.d(TAG, "user: null");
 
         activateOnExitProfileActiviy();
-        /*imageviewCamera = (ImageView)findViewById(R.id.imageviewCamera);
-        context = this;
-        activity = ProfileActivity.this;
-        permissions.add(Manifest.permission.CAMERA);
-        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        permissionsToRequest = findUnAskedPermissions(permissions);*/
 
     }
 

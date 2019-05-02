@@ -33,9 +33,6 @@ import com.example.mybudget.R;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -297,7 +294,6 @@ public class EditWishFragment extends Fragment {
         if (drawable == wish2Edit.getImage()+"")
             newDrawable = String.valueOf(wish2Edit.getImage());
         else newDrawable = String.valueOf(drawable);
-//Todo Fiiiiiiiiiiiixxxxxxmmmmmeeee
         ((WishlistActivity) getActivity()).db.updateWish(dbid, newTitle, newCost, wish2Edit.getSaved(), newDrawable);
         Intent intent = new Intent(getActivity(), WishlistActivity.class);
         startActivity(intent);
