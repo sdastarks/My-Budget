@@ -5,7 +5,7 @@ public class WishList {
     private String title;
     private int cost;
     private int saved;
-    private int image;
+    private String image;
     //private int categoryId;
 
     /**
@@ -37,7 +37,7 @@ public class WishList {
         return saved;
     }
 
-    public int getImage() {return image; }
+    public String getImage() {return image; }
 
 
 //    public int getCategoryId() {
@@ -60,7 +60,7 @@ public class WishList {
         this.saved = saved;
     }
 
-    public void setImage(int image){ this.image = image; }
+    public void setImage(String image){ this.image = image; }
 
 //    public void setCategoryId(int categoryId) {
 //        this.categoryId = categoryId;

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:gravity="center"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
@@ -20,8 +19,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="50dp"
-        app:cardBackgroundColor="@color/colorPrimary"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:textColor="?attr/colorPrimary"
         app:cardCornerRadius="20dp">
 
         <android.support.constraint.ConstraintLayout
@@ -70,6 +70,7 @@
                 android:lineSpacingMultiplier="0.85"
                 android:text="You are now registerd! Let pocket monster be incharge of your pocket money."
                 android:textAlignment="center"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
