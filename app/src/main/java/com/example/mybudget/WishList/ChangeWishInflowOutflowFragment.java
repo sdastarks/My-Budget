@@ -268,21 +268,13 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         String emailBody = userName + " has completed saving for a  " + wish2Update.getTitle()
                 + ". \n " + userName + " Has successfully saved: " + wish2Update.getCost()
                 + " SEK, to pay for his/her dream.";
+        writeTheFileForEmail();
 
         new SendMailTask().execute(userParentEmail, emailBody);
 
         Toast.makeText(getActivity(), "Email sent to " + userName + "'s parent", Toast.LENGTH_LONG).show();
 
 
-    }
-
-    public void deleteCompletedWish() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        int favWish_dbID = sharedPref.getInt("favouriteWish", 0);
-        if (dbid == favWish_dbID) {
-            sharedPref.edit().putInt("favouriteWish", 0).apply();
-        }
-        ((WishlistActivity) getActivity()).db.deleteWish(dbid);
     }
 
     /*
@@ -326,7 +318,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
 
         try {
             String appDirectoryName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getResources().getString(R.string.app_name);
-            String fileName = "logo_.jpg";
+            String fileName = "logo_pm.jpg";
             File directory = new File(appDirectoryName);
 
             if (!directory.exists()) {
@@ -339,8 +331,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 fullPath.delete();
                 Log.d(TAG, "writeTheFileForEmail:" + fullPath);
 
-            }
-            InputStream inputStream = getActivity().getAssets().open("logo_.jpg");
+
+            } InputStream inputStream = getActivity().getAssets().open("logo_pm.jpg");
 
             try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
 
