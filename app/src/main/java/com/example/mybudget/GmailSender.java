@@ -85,10 +85,10 @@ public class GmailSender {
         Multipart multipart = new MimeMultipart();
 
         // Set text message part
-        messageBodyPart.setContent(Html.toHtml(Html.fromHtml("<h1>"+emailBody+"</h1><img src=\"assets/logo_.jpg\">"))+"<br><br>" , "text/html"); //5
+        messageBodyPart.setContent(Html.toHtml(Html.fromHtml("<h1>"+emailBody+"</h1>"))+"<br><br>" , "text/html"); //5
         multipart.addBodyPart(messageBodyPart);
 
-        String filename = "/storage/emulated/0/Pocket Monster/logo_.jpg";
+        String filename = "/storage/emulated/0/Pocket Monster/logo_pm.jpg";
         File file = new File(filename);
         messageBodyPart = new MimeBodyPart();
         DataSource source = new FileDataSource(file);
