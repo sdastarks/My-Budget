@@ -94,7 +94,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
 
             initializeViews();
             initializeObjects();
-            // initializeListeners();
 
             if(frameLayoutNewAvatar != null)
                 frameLayoutNewAvatar.setVisibility(View.GONE);
