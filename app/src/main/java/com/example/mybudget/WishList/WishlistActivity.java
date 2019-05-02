@@ -169,6 +169,7 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
                 mWishId.add(wl.getWishListId());
                 mWishNames.add(wl.getTitle());
 
+                //mDrawable.add(getDrawable(Integer.parseInt(wl.getImage())));
                 mDrawable.add(wl.getImage());
              //   mDrawable.add(getDrawable(wl.getImage()));
 
