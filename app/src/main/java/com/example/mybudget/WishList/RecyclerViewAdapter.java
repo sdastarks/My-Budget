@@ -1,7 +1,7 @@
 package com.example.mybudget.WishList;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.mybudget.R;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Integer> mWishPrices = new ArrayList<>();
     private ArrayList<Integer> mWishImages = new ArrayList<>();
     private ArrayList<Integer> mSavingProgress = new ArrayList<>();
-    private ArrayList<Drawable> mDrawable = new ArrayList<>();
+    private ArrayList<String> mDrawable = new ArrayList<>();
 
     private Context mContext;
     private OnWishListener mOnWishListener;
@@ -41,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public RecyclerViewAdapter(ArrayList<Integer> mWishId ,ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
                                ArrayList<Integer> mWishImages, ArrayList<Integer> mSavingProgress,
-                               Context mContext, OnWishListener onWishListener,ArrayList<Drawable> mDrawable) {
+                               Context mContext, OnWishListener onWishListener,ArrayList<String> mDrawable) {
 
         //added the database instance to retreive all added wished to display
              this.mWishId = mWishId;
@@ -77,7 +76,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //                .load(mWishImages.get(i))
 //                .into(viewHolder.wishImage);
 
-        viewHolder.wishImage.setImageDrawable(mDrawable.get(i));
+        viewHolder.wishImage.setImageURI(Uri.parse(mDrawable.get(i)));
         viewHolder.wishName.setText(mWishNames.get(i));
         viewHolder.wishPrice.setText("Price: " + mWishPrices.get(i) + " sek");
         viewHolder.progressBarHorizontal.setMax(mWishPrices.get(i));

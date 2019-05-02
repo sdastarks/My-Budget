@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mybudget.Home.SettingsActivity;
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.R;
 import com.example.mybudget.SendMailTask;
@@ -87,7 +88,7 @@ public class addChoresMoneyFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
+                /**
                  * Method gets the description and amount of the income
                  */
 
@@ -112,33 +113,9 @@ public class addChoresMoneyFragment extends Fragment {
                         mChoresAmount.setError("You kidding?");
                     } else {
 
-                        userParentEmail = "nastasyja@gmail.com";
-                         //userParent email should be added and stored in data base
-                        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
-                        String emailBody = "Your child completed chore: " + mChoresDescription.getText() + " \n Payment for chore: " + mChoresAmount.getText() +
-                                "\n please approve: ";
-                        new SendMailTask().execute(userParentEmail, emailBody);
-                        Toast toast = Toast.makeText(getActivity(),"Completed chore status is sent to your parents email ",Toast.LENGTH_LONG);
-                        toast.show();
-
-                        Log.v(TAG, "amount: " + amount);
-                        //DATABASE
-                        Entry entry = new Entry();
-                        entry.setTypeOfEntry(3);
-                        entry.setAmount(amount);
-                        entry.setDate(LocalDate.now());
-                        entry.setDesc(description);
-                        ((ChoresActivity) getActivity()).db.addEntry(entry);
-
-                        SendSms mFrag = new SendSms();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("desc", mChoresDescription.getText().toString());
-                        bundle.putString("amount", mChoresAmount.getText().toString());
-                        mFrag.setArguments(bundle);
-                        FragmentTransaction t = getFragmentManager().beginTransaction();
-                        t.replace(R.id.check, mFrag);
-                        t.commit();
-                       // startActivity(intent);
+                        addEntry(amount, description);
+                        checkSMSEnabled();
+                        //sendEmail();  //TODO: Perhaps delete this sendEMail() method as your using sms???
                     }
                 } catch (Exception e) {
                     mChoresAmount.setError("Try Again");
@@ -156,10 +133,67 @@ public class addChoresMoneyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "cancel button initialised");
-                Intent intent = new Intent(getActivity(), ChoresActivity.class);
-                startActivity(intent);
+                exit();
             }
         });
+
+    }
+    /**
+     * Method adds the entry to the database
+     */
+    public void addEntry(int amount, String description){
+        Entry entry = new Entry();
+        entry.setTypeOfEntry(3);
+        entry.setAmount(amount);
+        entry.setDate(LocalDate.now());
+        entry.setDesc(description);
+        ((ChoresActivity) getActivity()).db.addEntry(entry);
+    }
+
+    public void sendEmail() {
+
+        userParentEmail = "nastasyja@gmail.com";
+        //userParent email should be added and stored in data base
+        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
+        String emailBody = "Your child completed chore: " + mChoresDescription.getText() + " \n Payment for chore: " + mChoresAmount.getText() +
+                "\n please approve: ";
+        new SendMailTask().execute(userParentEmail, emailBody);
+        Toast toast = Toast.makeText(getActivity(), "Completed chore status is sent to your parents email ", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    /**
+     * Method checks the setting preferences
+     * to see if the user would like to send
+     * a payment reminder via sms
+     *
+     * @ Daniel Beadleson
+     */
+    public void checkSMSEnabled() {
+        Boolean smsEnabled = getActivity().getSharedPreferences(SettingsActivity.SETTINGSPREFS_NAME,
+                0).getBoolean(SettingsActivity.MESSAGEPREFS, false);
+        if (smsEnabled) {
+            sendSMS();
+        }
+        else {
+            exit();
+        }
+    }
+
+    /**
+     * Method allows the user to send a
+     * payment reminder via sms
+     */
+    public void sendSMS() {
+        SendSms mFrag = new SendSms();
+        Bundle bundle = new Bundle();
+        bundle.putString("desc", mChoresDescription.getText().toString());
+        bundle.putString("amount", mChoresAmount.getText().toString());
+        mFrag.setArguments(bundle);
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.check, mFrag);
+        t.commit();
+        exit();
 
     }
 
@@ -170,5 +204,9 @@ public class addChoresMoneyFragment extends Fragment {
             Drawable d = getActivity().getDrawable(imageResId);
             mImageViewHero.setImageDrawable(d);
         }
+    }
+    public void exit(){
+        Intent intent = new Intent(getActivity(), ChoresActivity.class);
+        startActivity(intent);
     }
 }

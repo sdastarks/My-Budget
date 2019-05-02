@@ -7,48 +7,44 @@ package com.example.mybudget.Home;
  * @author Daniel Beadleson
  */
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.design.widget.BottomNavigationView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mybudget.Account.AccountActivity;
 import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Chores.ChoresActivity;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.Profile.ProfileActivity;
-import com.example.mybudget.R;
 import com.example.mybudget.Profile.RegisterActivity;
+import com.example.mybudget.R;
 import com.example.mybudget.WishList.WishlistActivity;
 import com.example.mybudget.myDbHelper;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.List;
+
+import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
+import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
 
 
 public class MainActivity extends AvatarChangeActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,9 +58,11 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
     private Toolbar toolbar;
     private Button register_button;
     private Drawable d;
-
+    private String userDbName;
     private FileInputStream fs;
     private File file;
+    SharedPreferences sharedPreferences;
+    int userGlobalId;
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
@@ -109,19 +107,25 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         ImageView logo =findViewById(R.id.logo);
         logo.setVisibility(View.VISIBLE);
 
-        register_button = findViewById(R.id.user_register_button);
-        register_button.setVisibility(View.VISIBLE);
-        register_button.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG, "clickable");
-                Intent intent_register = new Intent (MainActivity.this, RegisterActivity.class);
-                intent_register.putExtra("editProfile", "add");
-                startActivity(intent_register);
-
-            }
-        });
+        //Checks if user_id is not 0 so hide registration button from main screen
+        sharedPreferences = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        userGlobalId = sharedPreferences.getInt(USER_ID, 0);
+        if (userGlobalId == 0) {
+            register_button = findViewById(R.id.user_register_button);
+            register_button.setVisibility(View.VISIBLE);
+            register_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.v(TAG, "clickable");
+                    Intent intent_register = new Intent(MainActivity.this, RegisterActivity.class);
+                    intent_register.putExtra("editProfile", "add");
+                    startActivity(intent_register);
+                }
+            });
+        } else   {
+            register_button = findViewById(R.id.user_register_button);
+            register_button.setVisibility(View.GONE);}
 
         /*
          * Method creates a pathway to the other
@@ -168,8 +172,6 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         setProgressBar(favWish_dbID);
         setTitle(favWish_dbID);
         updateBalance();
-
-
     }
     /*
      * Method gets the database id of the favourite wish
