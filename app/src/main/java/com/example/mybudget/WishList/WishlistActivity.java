@@ -168,8 +168,10 @@ public class WishlistActivity extends AvatarChangeActivity implements RecyclerVi
             if(wl.getSaved() != wl.getCost()) {
                 mWishId.add(wl.getWishListId());
                 mWishNames.add(wl.getTitle());
+
                 mDrawable.add(wl.getImage());
              //   mDrawable.add(getDrawable(wl.getImage()));
+
                 //mImageUrls.add(wl.getImage());
                 mWishPrices.add(wl.getCost());
                 mSavingProgress.add(wl.getSaved());

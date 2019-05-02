@@ -91,9 +91,6 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
                         Intent intent5 = new Intent(CompletedWishesActivity.this, AvatarChangeActivity.class);
                         startActivity(intent5);
                         break;
-
-
-
                 }
                 return false;
             }
@@ -122,7 +119,8 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
         for(WishList wl : loadwishes) {
             if (wl.getCost() == wl.getSaved()) {
                 mWishId.add(wl.getWishListId());
-                mWishNames.add(wl.getTitle());
+                //TODO maybe try catch better be added DAWNIE
+                //mDrawable.add(getDrawable(Integer.parseInt(wl.getImage())));
                // mDrawable.add(getDrawable(wl.getImage()));
                 mDrawable.add(wl.getImage());
                 //mImageUrls.add(wl.getImage());
