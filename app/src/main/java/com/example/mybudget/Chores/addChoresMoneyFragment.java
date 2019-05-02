@@ -115,6 +115,7 @@ public class addChoresMoneyFragment extends Fragment {
 
                         addEntry(amount, description);
                         checkSMSEnabled();
+
                         //sendEmail();  //TODO: Perhaps delete this sendEMail() method as your using sms???
                     }
                 } catch (Exception e) {
@@ -133,8 +134,7 @@ public class addChoresMoneyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "cancel button initialised");
-                Intent intent = new Intent(getActivity(), ChoresActivity.class);
-                startActivity(intent);
+                exit();
             }
         });
 
@@ -176,6 +176,11 @@ public class addChoresMoneyFragment extends Fragment {
         if (smsEnabled) {
             sendSMS();
         }
+
+        else {
+            exit();
+        }
+
     }
 
     /**
@@ -192,6 +197,9 @@ public class addChoresMoneyFragment extends Fragment {
         t.replace(R.id.check, mFrag);
         t.commit();
 
+        exit();
+
+
     }
 
     public void setAvatar() {
@@ -201,5 +209,9 @@ public class addChoresMoneyFragment extends Fragment {
             Drawable d = getActivity().getDrawable(imageResId);
             mImageViewHero.setImageDrawable(d);
         }
+    }
+    public void exit(){
+        Intent intent = new Intent(getActivity(), ChoresActivity.class);
+        startActivity(intent);
     }
 }
