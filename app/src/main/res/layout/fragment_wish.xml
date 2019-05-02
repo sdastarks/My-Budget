@@ -60,20 +60,43 @@
         app:layout_constraintTop_toBottomOf="@+id/wish_Details_toolbar" />
 
 
-    <ImageView
-        android:id="@+id/wish_picture_fragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_image_wish"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/button_wish_iceskate"
+        android:elevation="12dp"
+        app:cardCornerRadius="64dp"
+        android:background="?attr/colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar" />
+        app:layout_constraintTop_toTopOf="@+id/progressBar">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="118dp"
+            android:layout_height="118dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="12dp"
+            app:cardCornerRadius="59dp"
+            android:background="?attr/colorAccent">
+
+            <ImageView
+                android:id="@+id/wish_picture_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+
+        </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
 
 
     <android.support.design.widget.FloatingActionButton

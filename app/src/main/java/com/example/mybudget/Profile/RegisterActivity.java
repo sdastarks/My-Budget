@@ -23,6 +23,7 @@ import com.example.mybudget.AvatarChangeActivity;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.Models.User;
 import com.example.mybudget.R;
+import com.example.mybudget.WishList.RegisterRequestDialog;
 import com.example.mybudget.myDbHelper;
 
 
@@ -113,6 +114,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 register_headline.setText("Register");
 
             } else if (switchValue.equals("update")) {
+                checkRegistration();
                 setContentView(R.layout.activity_register);
                 setValues();
                 appCompatButtonRegister.setVisibility(View.GONE);
@@ -129,7 +131,21 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         }
         exitRegisterUpdateActivity();
     }
+    /**
+     * Method checks if the user is
+     * Registered before entering registration
+     *
+     * @ Daniel Beadleson
+     */
+    public void checkRegistration() {
 
+        SharedPreferences sharedPrefs = getSharedPreferences(RegisterActivity.USER_PREFS_NAME, 0);
+        if (sharedPrefs.getInt(USER_ID, 0) == 0) {
+            Log.d(TAG, "onAddWish: locking user if not registered");
+            RegisterRequestDialog dialog = new RegisterRequestDialog();
+            dialog.show(getSupportFragmentManager(), "register request dialog");
+        }
+    }
     /**
      * This method is to initialize Image onClick
      */
