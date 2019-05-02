@@ -2,7 +2,7 @@ package com.example.mybudget.WishList;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -68,7 +68,8 @@ public class WishFragment extends Fragment {
         //selected wish database id and Wish
         dbid = ((WishlistActivity) getActivity()).id;
         wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-        wish_picture_fragment.setImageResource(wishSelected.getImage());
+
+        wish_picture_fragment.setImageURI(Uri.parse(wishSelected.getImage()));
 
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);

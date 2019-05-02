@@ -226,7 +226,9 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         try {
             String valueEmail = textInputEditTextEmail.getText().toString();
             if (valueEmail.isEmpty()) {
-                throw new NullPointerException();
+                textInputEditTextEmail.setError("Parent's email is required");
+                return false;
+                //throw new NullPointerException();
             }
             if (validateEmail() && validateFirstname() && validateLastname() && validateAge()) {
                 System.out.println("all fields validation");

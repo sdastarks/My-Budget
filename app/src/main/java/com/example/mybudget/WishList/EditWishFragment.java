@@ -1,17 +1,23 @@
 package com.example.mybudget.WishList;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +26,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.example.mybudget.BuildConfig;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -47,18 +57,13 @@ public class EditWishFragment extends Fragment {
     private int dbid;
     private WishList wish2Edit;
     View view;
-    private int drawable;
+    private String drawable;
     private FloatingActionButton completed_wishes;
     private static final int REQUEST_CHOOSE_IMAGE_FROM_GALLERY = 2;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final String IMAGE_DIRECTORY_NAME = "Hello camera";
-    private static final String AUTHORITY=
-            BuildConfig.APPLICATION_ID+".provider";
-    private static final String PHOTOS="photos";
-    private File output=null;
+    private static final int REQUEST_IMAGE_CAPTURE = 100;
+    private static final int REQUEST_PERMISSION = 200;
     private String mCurrentPhotoPath;
-    private Uri fileUri;
-    public static final int MEDIA_TYPE_IMAGE = 1;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,10 +86,11 @@ public class EditWishFragment extends Fragment {
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Edit = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-        editWishPicture.setImageResource(wish2Edit.getImage());
+
+        editWishPicture.setImageURI(Uri.parse(wish2Edit.getImage()));
         meditTitle.setText(wish2Edit.getTitle());
         meditCost.setText(String.valueOf(wish2Edit.getCost()));
-        drawable = wish2Edit.getImage();
+        drawable = Integer.parseInt(wish2Edit.getImage());
 
         btnchooseCamerOrGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +105,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_bike);
-                drawable = R.drawable.button_wish_bike;
+                drawable = getURLForResource(R.drawable.button_wish_bike);
             }
         });
 
@@ -108,7 +114,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_clothes);
-                drawable = R.drawable.button_wish_clothes;
+                drawable = getURLForResource(R.drawable.button_wish_clothes);
             }
         });
 
@@ -117,7 +123,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_gadgets);
-                drawable = R.drawable.button_wish_gadgets;
+                drawable = getURLForResource(R.drawable.button_wish_gadgets);
             }
         });
 
@@ -126,7 +132,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_games);
-                drawable = R.drawable.button_wish_games;
+                drawable = getURLForResource(R.drawable.button_wish_games);
             }
         });
 
@@ -135,7 +141,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_gift);
-                drawable = R.drawable.button_wish_gift;
+                drawable = getURLForResource(R.drawable.button_wish_gift);
             }
         });
 
@@ -144,7 +150,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_holiday);
-                drawable = R.drawable.button_wish_holiday;
+                drawable = getURLForResource(R.drawable.button_wish_holiday);
             }
         });
 
@@ -153,7 +159,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_iceskate);
-                drawable = R.drawable.button_wish_iceskate;
+                drawable = getURLForResource(R.drawable.button_wish_iceskate);
             }
         });
 
@@ -163,7 +169,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_pets);
-                drawable = R.drawable.button_wish_pets;
+                drawable = getURLForResource(R.drawable.button_wish_pets);
             }
         });
 
@@ -172,7 +178,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_scooter);
-                drawable = R.drawable.button_wish_scooter;
+                drawable = getURLForResource(R.drawable.button_wish_scooter);
             }
         });
 
@@ -181,7 +187,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_shoes);
-                drawable = R.drawable.button_wish_shoes;
+                drawable = getURLForResource(R.drawable.button_wish_shoes);
             }
         });
 
@@ -190,7 +196,7 @@ public class EditWishFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editWishPicture.setImageResource(R.drawable.button_wish_dream);
-                drawable = R.drawable.button_wish_dream;
+                drawable = getURLForResource(R.drawable.button_wish_dream);
             }
         });
 
@@ -198,6 +204,11 @@ public class EditWishFragment extends Fragment {
         activateOnExitEditWish();
         activateOnSaveEditWish();
         activateDeleteWish();
+
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_PERMISSION);
+        }
         return view;
     }
 
@@ -273,7 +284,7 @@ public class EditWishFragment extends Fragment {
     public void updateWish() {
         String newTitle = meditTitle.getText().toString();
         int newCost = Integer.parseInt(meditCost.getText().toString());
-        int newDrawable = drawable;
+        String newDrawable = String.valueOf(drawable);
 
         if (meditTitle.getText().toString() == wish2Edit.getTitle())
             newTitle = wish2Edit.getTitle();
@@ -283,9 +294,9 @@ public class EditWishFragment extends Fragment {
             newCost = wish2Edit.getCost();
         else newCost = Integer.parseInt(meditCost.getText().toString());
 
-        if (drawable == wish2Edit.getImage())
-            newDrawable = wish2Edit.getImage();
-        else newDrawable = drawable;
+        if (drawable == Integer.parseInt(wish2Edit.getImage()))
+            newDrawable = String.valueOf(wish2Edit.getImage());
+        else newDrawable = String.valueOf(drawable);
 
         ((WishlistActivity) getActivity()).db.updateWish(dbid, newTitle, newCost, wish2Edit.getSaved(), newDrawable);
         Intent intent = new Intent(getActivity(), WishlistActivity.class);
@@ -305,11 +316,7 @@ public class EditWishFragment extends Fragment {
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Take Photo"))
                 {
-                    imageOptionSelection();
-                    /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                    startActivityForResult(intent, 1);*/
+                    openCameraIntent();
                 }
                 else if (options[item].equals("Choose from Gallery"))
                 {
@@ -324,76 +331,59 @@ public class EditWishFragment extends Fragment {
         builder.show();
     }
 
+    public String getURLForResource (int resourceId) {
+        return Uri.parse("android.resource://"+R.class.getPackage().getName()+"/" +resourceId).toString();
+    }
 
-    private void imageOptionSelection()
-    {
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-
-        //fileUri= FileProvider.getUriForFile(getActivity(), AUTHORITY, output);
-
-        if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
+    private void openCameraIntent(){
+        Intent pictureIntent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
+        if(pictureIntent.resolveActivity(getActivity().getPackageManager()) != null){
+            File photoFile = null ;
+            try{
                 photoFile = createImageFile();
-            } catch (Exception ex) {
-                // Error occurred while creating the File
-                ex.getStackTrace();
-                Log.i(TAG, "IOException");
+            }catch (IOException e){
+                e.printStackTrace();
+                return;
             }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri outPutFileUri = null;
-                File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-                outPutFileUri = Uri.fromFile(new File(storageDir.getPath(),"profile.png"));
-              //  cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outPutFileUri);
-                cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+            Uri photoUri = FileProvider.getUriForFile(getActivity().getBaseContext(), getActivity().getPackageName() + ".provider", photoFile);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            pictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
 
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName,".jpg",storageDir);
+        mCurrentPhotoPath =  image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull  int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == REQUEST_PERMISSION && grantResults.length > 0){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast toast = Toast.makeText(getActivity(),"Permission granted ",Toast.LENGTH_LONG);
+                toast.show();
             }
         }
     }
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = "22-02-2020";
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        /*File storageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);*/
-        //File storageDir = new File("storage/emulated/0/DCIM/Camera");
-        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                //getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        System.out.println(storageDir);
-        if (storageDir.exists())
-            System.out.println("directory exist");
-        File image = File.createTempFile(
-                imageFileName,  // prefix
-                ".jpg",         // suffix
-                storageDir      // directory
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-        System.out.println("done creting file");
-        return image;
-    }
-
-    private Bitmap mImageBitmap;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
-        System.out.println("inside activity result method");
-        System.out.println("ok= " + getActivity().RESULT_OK);
-        System.out.println("request code: " + requestCode);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK) {
             try {
-                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), Uri.parse(mCurrentPhotoPath));
-                editWishPicture.setImageBitmap(mImageBitmap);
-            } catch (IOException e) {
+                drawable = mCurrentPhotoPath;
+                editWishPicture.setImageURI(Uri.parse(mCurrentPhotoPath));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -401,100 +391,34 @@ public class EditWishFragment extends Fragment {
         {
             try{
                 final Uri imageUri = data.getData();
-                final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-
-                editWishPicture.setImageBitmap(selectedImage);
-            } catch (IOException e) {
+                mCurrentPhotoPath = getPath(getActivity().getApplicationContext(), imageUri);
+                drawable = mCurrentPhotoPath;
+                editWishPicture.setImageURI(imageUri);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    //create file Uri to store image not functional 
-    public Uri getOutputMediaFileUri(int type) {
-        return Uri.fromFile(getOutputMediaFile(type));
-    }
-
-    //returning image
-    private File getOutputMediaFile(int type) {
-
-        //External sdcard location
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
-
-        //create the storage directory if it does not exist
-        if(!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                //Log.d(IMAGE_DIRECTORY_NAME, "Failed create" + UserFunctions.IMAGE_DIRECTORY_NAME + "directory");
-                return null;
+    public  String getPath(Context context, Uri uri){
+        String result = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null );
+        if(cursor != null){
+            if(cursor.moveToFirst()) {
+                int column_index = cursor.getColumnIndexOrThrow(proj[0]);
+                result = cursor.getString(column_index);
             }
+            cursor.close();
         }
+        if (result == null) {
 
-        //Create a media file name
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator + ".jpg");
-        } else {
-            return null;
+            result = "Not found";
+            Toast toast = Toast.makeText(getActivity(),"Image does not exist ",Toast.LENGTH_LONG);
+            toast.show();
         }
-
-        return mediaFile;
-    }
-  /*  @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-                File f = new File(Environment.getExternalStorageDirectory().toString());
-                for (File temp : f.listFiles()) {
-                    if (temp.getName().equals("temp.jpg")) {
-                        f = temp;
-                        break;
-                    }
-                }
-                try {
-                    Bitmap bitmap;
-                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                            bitmapOptions);
-                    editWishPicture.setImageBitmap(bitmap);
-                    String path = android.os.Environment
-                            .getExternalStorageDirectory()
-                            + File.separator
-                            + "Phoenix" + File.separator + "default";
-                    f.delete();
-                    OutputStream outFile = null;
-                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    try {
-                        outFile = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                        outFile.flush();
-                        outFile.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else if (requestCode == 2) {
-                Uri selectedImage = data.getData();
-                String[] filePath = {MediaStore.Images.Media.DATA};
-                Cursor c = getActivity().getContentResolver().query(selectedImage, filePath, null, null, null);
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePath[0]);
-                String picturePath = c.getString(columnIndex);
-                c.close();
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("path of image from gallery......******************.........", picturePath + "");
-                editWishPicture.setImageBitmap(thumbnail);
-            }
-        }
+        return result;
     }
 
-*/
-    }
+
+}
