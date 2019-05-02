@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -86,7 +87,6 @@ public class EditWishFragment extends Fragment {
 
         dbid = ((WishlistActivity) getActivity()).id;
         wish2Edit = ((WishlistActivity) getActivity()).db.returnWish(dbid);
-
         editWishPicture.setImageURI(Uri.parse(wish2Edit.getImage()));
         meditTitle.setText(wish2Edit.getTitle());
         meditCost.setText(String.valueOf(wish2Edit.getCost()));
@@ -284,7 +284,7 @@ public class EditWishFragment extends Fragment {
     public void updateWish() {
         String newTitle = meditTitle.getText().toString();
         int newCost = Integer.parseInt(meditCost.getText().toString());
-        String newDrawable = String.valueOf(drawable);
+        String newDrawable = drawable;
 
         if (meditTitle.getText().toString() == wish2Edit.getTitle())
             newTitle = wish2Edit.getTitle();
