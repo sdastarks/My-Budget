@@ -91,6 +91,7 @@
                 </android.support.v7.widget.CardView>
             </android.support.v7.widget.CardView>
 
+
             <TextView
                 android:id="@+id/welcome_msg_txt"
                 style="@style/NormalTextStyleWhite"

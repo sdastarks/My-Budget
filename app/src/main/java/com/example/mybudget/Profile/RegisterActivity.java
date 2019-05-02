@@ -71,7 +71,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
 
     public static final String USER_PREFS_NAME = "userPreferenceFile";
     public static final String USER_ID = "userId";
-    public static final String USER_NAME = "userName";
+    public static final String USER_FISRT_NAME = "userName";
     SharedPreferences sharedPreferences;
     int userGlobalId;
     String userGlobalName;
@@ -94,7 +94,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
 
             initializeViews();
             initializeObjects();
-            // initializeListeners();
 
             if(frameLayoutNewAvatar != null)
                 frameLayoutNewAvatar.setVisibility(View.GONE);
@@ -195,7 +194,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         try {
             switch (view.getId()) {
                 case R.id.appCompatButtonRegister: {
-                    //databaseHelper.deleteUser();
                     if (inputValidation()) {
                         addUser(user);
                         Log.v(TAG, "user added");
@@ -205,6 +203,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 break;
 
                 case R.id.appCompatButtonUpdateUser: {
+                    //deleteUser();
                     if (inputValidation()) {
                         updateUser(user);
                         Log.v(TAG, "user updated");
@@ -283,7 +282,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         initializeViews();
         String valueEmail = textInputEditTextEmail.getText().toString();
         if (valueEmail.isEmpty()) {
-            textInputEditTextEmail.setError("Field cannot be empty");
             valid = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(valueEmail).matches()) {
             textInputEditTextEmail.setError("Invalid email address");
@@ -387,15 +385,16 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     private void saveUser(String userName, int userId) {
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString(USER_NAME, userName);
+        editor.putString(USER_FISRT_NAME, userName);
         editor.putInt(USER_ID, userId);
+        editor.putBoolean("isLogged", true);
         editor.apply();
     }
 
     //get user name and id from shared preference
-    private String getUserName() {
+    public String getUserName() {
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
-        return sharedPrefs.getString(USER_NAME, null);
+        return sharedPrefs.getString(USER_FISRT_NAME, null);
     }
 
     private int getUserId() {
@@ -442,6 +441,13 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 startActivity(intent);
             }
         });
+    }
+
+    private void deleteUser(){
+        databaseHelper.deleteUser();
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.clear().commit();
     }
 
 }

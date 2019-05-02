@@ -162,21 +162,21 @@ tools:context=".Home.InflowOutflowFragment">
 
     </android.support.design.widget.TextInputLayout>
 
-<TextView
-    android:id="@+id/choresSEK"
-    style="@style/TextStyleBody"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="4dp"
-    android:text="SEK"
-    android:textColor="?attr/colorPrimaryDark"
-    android:textSize="20dp"
-    app:layout_constraintBottom_toBottomOf="@+id/amount_home_layout"
-    app:layout_constraintEnd_toEndOf="@+id/thinking_frame"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toEndOf="@+id/amount_home_layout" />
+    <TextView
+        android:id="@+id/choresSEK"
+        style="@style/TextStyleBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="11dp"
+        android:text="SEK"
+        android:textColor="?attr/colorPrimaryDark"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/amount_home_layout"
+        app:layout_constraintEnd_toEndOf="@+id/thinking_frame"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/amount_home_layout" />
 
 <ImageView
     android:id="@+id/money_image_fragment_home"
