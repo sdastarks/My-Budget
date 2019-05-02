@@ -176,9 +176,11 @@ public class addChoresMoneyFragment extends Fragment {
         if (smsEnabled) {
             sendSMS();
         }
+
         else {
             exit();
         }
+
     }
 
     /**
@@ -194,7 +196,9 @@ public class addChoresMoneyFragment extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.check, mFrag);
         t.commit();
+
         exit();
+
 
     }
 
