@@ -539,4 +539,16 @@ public class myDbHelper extends SQLiteOpenHelper {
         close_db();
         return user;
     }
+
+    /**
+     * @param userId specifies the user
+     * @return String of parent's email
+     */
+    public String retrieveEmail(int userId){
+        open_db();
+        Cursor cursor = this.db.rawQuery("SELECT * FROM " + USER_PROFILE + " where " + USERID + " = " + userId, null);
+        String email = cursor.getString(3);
+        close_db();
+        return email;
+    }
 }

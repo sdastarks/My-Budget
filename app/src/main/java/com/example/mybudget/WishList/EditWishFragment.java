@@ -33,6 +33,9 @@ import com.example.mybudget.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -87,7 +90,7 @@ public class EditWishFragment extends Fragment {
         editWishPicture.setImageURI(Uri.parse(wish2Edit.getImage()));
         meditTitle.setText(wish2Edit.getTitle());
         meditCost.setText(String.valueOf(wish2Edit.getCost()));
-        drawable = wish2Edit.getImage();
+        drawable = wish2Edit.getImage()+"";
 
         btnchooseCamerOrGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,10 +294,10 @@ public class EditWishFragment extends Fragment {
             newCost = wish2Edit.getCost();
         else newCost = Integer.parseInt(meditCost.getText().toString());
 
-        if (drawable == wish2Edit.getImage())
-            newDrawable = wish2Edit.getImage();
-        else newDrawable = drawable;
-
+        if (drawable == wish2Edit.getImage()+"")
+            newDrawable = String.valueOf(wish2Edit.getImage());
+        else newDrawable = String.valueOf(drawable);
+//Todo Fiiiiiiiiiiiixxxxxxmmmmmeeee
         ((WishlistActivity) getActivity()).db.updateWish(dbid, newTitle, newCost, wish2Edit.getSaved(), newDrawable);
         Intent intent = new Intent(getActivity(), WishlistActivity.class);
         startActivity(intent);
