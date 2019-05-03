@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <Button
             android:id="@+id/btn_saveChoreTransfer"
             android:layout_width="40dp"
@@ -29,7 +28,6 @@
             android:textSize="22sp"
             tools:layout_editor_absoluteX="371dp"
             tools:layout_editor_absoluteY="15dp"  />
-
 
         <Button
             android:id="@+id/btn_cancelChoreFragment"
@@ -47,7 +45,6 @@
             android:textAlignment="center"
             tools:layout_editor_absoluteX="46dp"
             tools:layout_editor_absoluteY="13dp" />
-
     </android.support.v7.widget.Toolbar>
 
     <TextView
@@ -111,7 +108,6 @@
         app:layout_constraintStart_toStartOf="@+id/thinking_frame_chores"
         app:layout_constraintTop_toTopOf="@+id/choresDescription_layout">
 
-
         <android.support.design.widget.TextInputEditText
             android:id="@+id/choresAmount"
             style="@style/InputTextStyleNoColor"
@@ -123,7 +119,6 @@
             android:textColorHint="?attr/colorPrimaryDark"
             android:textCursorDrawable="?attr/colorPrimaryDark"
             android:textSize="20sp" />
-
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -152,7 +147,6 @@
             android:textColorHint="?attr/colorPrimaryDark"
             android:textCursorDrawable="?attr/colorPrimaryDark"
             android:textSize="19sp" />
-
     </android.support.design.widget.TextInputLayout>
 
     <TextView

@@ -3,7 +3,11 @@ package com.example.mybudget.Profile;
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+
+/**
+ * Custom Imageview to display avatars in similar sizes
+ * @author Benish
+ */
 
 public class SquareImageView extends AppCompatImageView {
     public SquareImageView(Context context) {
@@ -17,7 +21,6 @@ public class SquareImageView extends AppCompatImageView {
     public SquareImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

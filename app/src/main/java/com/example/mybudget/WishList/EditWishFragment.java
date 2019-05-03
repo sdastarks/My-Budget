@@ -475,37 +475,4 @@ public class EditWishFragment extends Fragment {
         }
         return result;
     }
-    /**
-     * This method is responsible for solving the rotation issue if exist. Also scale the images to
-     * 1024x1024 resolution
-     *
-     * @param context       The current context
-     * @param selectedImage The Image URI
-     * @return Bitmap image results
-     * @throws IOException
-     */
-    //public static Bitmap handleSamplingAndRotationBitmap(Context context, Uri selectedImage)
-   /*         throws IOException {
-        int MAX_HEIGHT = 1024;
-        int MAX_WIDTH = 1024;
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        InputStream imageStream = context.getContentResolver().openInputStream(selectedImage);
-        BitmapFactory.decodeStream(imageStream, null, options);
-        imageStream.close();
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, MAX_WIDTH, MAX_HEIGHT);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        imageStream = context.getContentResolver().openInputStream(selectedImage);
-        Bitmap img = BitmapFactory.decodeStream(imageStream, null, options);
-
-        img = rotateImageIfRequired(context, img, selectedImage);
-        return img;
-    }*/
-
 }

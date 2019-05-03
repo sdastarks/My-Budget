@@ -6,7 +6,6 @@ public class WishList {
     private int cost;
     private int saved;
     private String image;
-    //private int categoryId;
 
     /**
      * Model holding the info regarding wishes
@@ -18,7 +17,6 @@ public class WishList {
         this.title = title;
         this.cost = cost;
         this.saved = saved;
-//        this.categoryId = categoryId;
     }
 
     public int getWishListId() {
@@ -39,11 +37,6 @@ public class WishList {
 
     public String getImage() {return image; }
 
-
-//    public int getCategoryId() {
-//        return categoryId;
-//    }
-
     public void setWishListId(int wishListId) {
         WishListId = wishListId;
     }
@@ -62,7 +55,4 @@ public class WishList {
 
     public void setImage(String image){ this.image = image; }
 
-//    public void setCategoryId(int categoryId) {
-//        this.categoryId = categoryId;
-//    }
 }

@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".WishList.CompletedWishesActivity">
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_completedWishes"
         android:layout_width="400dp"
@@ -24,22 +23,6 @@
         app:layout_constraintRight_toRightOf="@+id/content_wishList"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/exitCompletedWishes"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:backgroundTint="?attr/colorPrimary"-->
-        <!--android:src="@drawable/icon_cancel_white"-->
-        <!--app:borderWidth="@dimen/default_background_stroke_width"-->
-        <!--app:elevation="@dimen/default_stroke_width"-->
-        <!--app:fabSize="auto"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:useCompatPadding="false" />-->
-
-
     <FrameLayout
         android:id="@+id/frame_wish_fragment"
         android:layout_width="match_parent"
@@ -47,8 +30,8 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></FrameLayout>
-
+        app:layout_constraintStart_toStartOf="parent">
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -62,7 +45,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/bottom_menu">
+    </android.support.design.widget.BottomNavigationView>
 
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/completedwishes_toolbar"
@@ -73,14 +57,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <Button
             android:id="@+id/btn_exit_completed_wishes"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="left"
             android:background="@drawable/ic_baseline_keyboard_backspace_24px" />
-
 
         <TextView
             style="@style/HeadlineTextStyle"
@@ -89,8 +71,6 @@
             android:layout_marginEnd="40dp"
             android:text="Completed Wishes"
             tools:layout_editor_absoluteY="14dp" />
-
-
     </android.support.v7.widget.Toolbar>
 
 </android.support.constraint.ConstraintLayout>
