@@ -23,7 +23,6 @@ import java.util.ArrayList;
  */
 
 
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 
@@ -38,24 +37,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private OnWishListener mOnWishListener;
 
 
-    public RecyclerViewAdapter(ArrayList<Integer> mWishId ,ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
+    public RecyclerViewAdapter(ArrayList<Integer> mWishId, ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
                                ArrayList<Integer> mWishImages, ArrayList<Integer> mSavingProgress,
-                               Context mContext, OnWishListener onWishListener,ArrayList<String> mDrawable) {
+                               Context mContext, OnWishListener onWishListener, ArrayList<String> mDrawable) {
 
-        //added the database instance to retreive all added wished to display
-             this.mWishId = mWishId;
-             this.mWishNames = mWishNames;
-             this.mWishPrices = mWishPrices;
-             this.mWishImages = mWishImages;
-             this.mSavingProgress = mSavingProgress;
-             this.mContext = mContext;
-             this.mOnWishListener = onWishListener;
-             this.mDrawable = mDrawable;
-         }
-
+        this.mWishId = mWishId;
+        this.mWishNames = mWishNames;
+        this.mWishPrices = mWishPrices;
+        this.mWishImages = mWishImages;
+        this.mSavingProgress = mSavingProgress;
+        this.mContext = mContext;
+        this.mOnWishListener = onWishListener;
+        this.mDrawable = mDrawable;
+    }
 
 
-     //Method creates a Layout view for the Wish List
+    /**
+     * Method creates a Layout view for the Wish List
+     *
+     * @param viewGroup
+     * @param i
+     * @return viewholder
+     */
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -65,16 +69,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return viewHolder;
     }
 
+    /**
+     * Method pass Wish values to the wish section
+     *
+     * @param viewHolder
+     * @param i
+     */
 
-     // Method pass Wish values to the wish section
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Log.d(TAG, "onBindViewHolder: called item added");
-
-//        Glide.with(mContext)
-//                .asBitmap()
-//                .load(mWishImages.get(i))
-//                .into(viewHolder.wishImage);
 
         viewHolder.wishImage.setImageURI(Uri.parse(mDrawable.get(i)));
         viewHolder.wishName.setText(mWishNames.get(i));
@@ -85,14 +88,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.progressBarHorizontal.setScaleY(5f);
     }
 
+    /**
+     * Method returns size of the WishList
+     *
+     * @return amount of wishes
+     */
 
-     // Method returns size of the WishList
     @Override
     public int getItemCount() {
         return mWishNames.size();
     }
 
-     //View Holder class initiates elements inside the Wish section
+    /**
+     * View Holder class initiates elements inside the Wish section
+     */
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView wishImage;
@@ -117,15 +127,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(this);
         }
 
-         @Override
-         public void onClick(View v) {
+        @Override
+        public void onClick(View v) {
             onWishListener.onWishClick(getAdapterPosition());
 
-         }
-     }
+        }
+    }
 
     public interface OnWishListener {
-         void onWishClick(int position);
+        void onWishClick(int position);
     }
 }
 
