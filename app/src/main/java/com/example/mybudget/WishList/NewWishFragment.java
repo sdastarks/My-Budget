@@ -238,8 +238,8 @@ public class NewWishFragment extends Fragment {
      * @param resourceId
      * @return URL
      */
-    public String getURLForResource (int resourceId) {
-        return Uri.parse("android.resource://"+R.class.getPackage().getName()+"/" +resourceId).toString();
+    public String getURLForResource(int resourceId) {
+        return Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + resourceId).toString();
 
     }
 }

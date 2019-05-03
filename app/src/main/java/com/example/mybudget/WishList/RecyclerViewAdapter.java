@@ -23,7 +23,6 @@ import java.util.ArrayList;
  */
 
 
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 
@@ -38,19 +37,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private OnWishListener mOnWishListener;
 
 
-    public RecyclerViewAdapter(ArrayList<Integer> mWishId ,ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
+    public RecyclerViewAdapter(ArrayList<Integer> mWishId, ArrayList<String> mWishNames, ArrayList<Integer> mWishPrices,
                                ArrayList<Integer> mWishImages, ArrayList<Integer> mSavingProgress,
-                               Context mContext, OnWishListener onWishListener,ArrayList<String> mDrawable) {
+                               Context mContext, OnWishListener onWishListener, ArrayList<String> mDrawable) {
 
-             this.mWishId = mWishId;
-             this.mWishNames = mWishNames;
-             this.mWishPrices = mWishPrices;
-             this.mWishImages = mWishImages;
-             this.mSavingProgress = mSavingProgress;
-             this.mContext = mContext;
-             this.mOnWishListener = onWishListener;
-             this.mDrawable = mDrawable;
-         }
+        this.mWishId = mWishId;
+        this.mWishNames = mWishNames;
+        this.mWishPrices = mWishPrices;
+        this.mWishImages = mWishImages;
+        this.mSavingProgress = mSavingProgress;
+        this.mContext = mContext;
+        this.mOnWishListener = onWishListener;
+        this.mDrawable = mDrawable;
+    }
 
 
     /**
@@ -128,15 +127,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(this);
         }
 
-         @Override
-         public void onClick(View v) {
+        @Override
+        public void onClick(View v) {
             onWishListener.onWishClick(getAdapterPosition());
 
-         }
-     }
+        }
+    }
 
     public interface OnWishListener {
-         void onWishClick(int position);
+        void onWishClick(int position);
     }
 }
 
