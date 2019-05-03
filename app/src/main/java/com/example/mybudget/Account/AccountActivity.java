@@ -167,8 +167,10 @@ public class AccountActivity extends AvatarChangeActivity {
     /**
      * First stage filter function
      *
-     * @param typeOfEntry a filter taken from spinner position to specify the type of entry
+     * @param typeOfEntry a filter taken from spinner position to specify
+     * the type of entry (income, expense, on wish or from chore)
      * @return an arrayList contains data filtered by type of entry
+     * @auth SAFAR, Deshna
      */
     public ArrayList<Entry> fill_with_data(int typeOfEntry) {
         ArrayList<Entry> entries = new ArrayList<>();
@@ -189,9 +191,8 @@ public class AccountActivity extends AvatarChangeActivity {
 
     /**
      * Sets the number of months to the spinner
-     *
      * @return number of monthes since the user logged an Entry
-     * @auth DAWNIE SAFAR
+     * @auth SAFAR, Deshna
      */
     public int getMonthesOfEntries() {
         int numberOfMonthes = 1;
@@ -211,7 +212,7 @@ public class AccountActivity extends AvatarChangeActivity {
      * @param dataFilteredByTypeOfEntry specifies entries filter by type of entry (income, expenses...)
      * @param spinnerPosition           a date filter as per the spinner position
      * @return data filtered by data and type of entry
-     * @auth Dawnie Safar
+     * @auth SAFAR, Deshna
      */
     public List<AccountsRow> filterEntriesByDate(ArrayList<Entry> dataFilteredByTypeOfEntry, int spinnerPosition) {
         ArrayList<Entry> allEntries = new ArrayList<>();

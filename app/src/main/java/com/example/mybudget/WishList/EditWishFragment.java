@@ -30,13 +30,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
+import com.example.mybudget.Profile.ProfileActivity;
 import com.example.mybudget.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 
@@ -225,6 +228,13 @@ public class EditWishFragment extends Fragment {
                 args.putInt("indexEdit", index);
                 deleteDialog.setArguments(args);
                 deleteDialog.show(getActivity().getSupportFragmentManager(), "delete dialog");
+                //Creating an entry to return money saved to the wish.
+                Entry entry = new Entry();
+                entry.setDesc(wish2Edit.getTitle()+" Deleted");
+                entry.setDate(LocalDate.now());
+                entry.setAmount(- wish2Edit.getSaved());
+                entry.setTypeOfEntry(2);
+                ((WishlistActivity) getActivity()).db.addEntry(entry);
             }
         });
     }

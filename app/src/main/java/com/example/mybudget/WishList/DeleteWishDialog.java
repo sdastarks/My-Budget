@@ -50,7 +50,7 @@ public class DeleteWishDialog extends AppCompatDialogFragment {
                         }
                         else if(wishSelected.getSaved()!=wishSelected.getCost()){
 
-                            returnMoney2Balance(wishSelected);
+                            //returnMoney2Balance(wishSelected);
                         }
                         ((WishlistActivity) getActivity()).db.deleteWish(dbid);
                         Intent intent = new Intent(getActivity(), WishlistActivity.class);
