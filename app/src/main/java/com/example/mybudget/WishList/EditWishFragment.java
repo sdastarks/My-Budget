@@ -428,7 +428,7 @@ public class EditWishFragment extends Fragment {
      * @return Bitmap image results
      * @throws IOException
      */
-    public static Bitmap handleSamplingAndRotationBitmap(Context context, Uri selectedImage)
+    //public static Bitmap handleSamplingAndRotationBitmap(Context context, Uri selectedImage)
    /*         throws IOException {
         int MAX_HEIGHT = 1024;
         int MAX_WIDTH = 1024;

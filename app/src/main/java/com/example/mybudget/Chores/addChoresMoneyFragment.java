@@ -150,18 +150,6 @@ public class addChoresMoneyFragment extends Fragment {
         ((ChoresActivity) getActivity()).db.addEntry(entry);
     }
 
-    public void sendEmail() {
-
-        userParentEmail = "nastasyja@gmail.com";
-        //userParent email should be added and stored in data base
-        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
-        String emailBody = "Your child completed chore: " + mChoresDescription.getText() + " \n Payment for chore: " + mChoresAmount.getText() +
-                "\n please approve: ";
-        new SendMailTask().execute(userParentEmail, emailBody);
-        Toast toast = Toast.makeText(getActivity(), "Completed chore status is sent to your parents email ", Toast.LENGTH_LONG);
-        toast.show();
-    }
-
     /**
      * Method checks the setting preferences
      * to see if the user would like to send
