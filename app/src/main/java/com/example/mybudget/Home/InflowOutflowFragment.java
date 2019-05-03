@@ -1,5 +1,10 @@
 package com.example.mybudget.Home;
-
+/**
+ * Fragment allows the user to enter
+ * an income, that will affect the balance
+ *
+ * @author Daniel Beadleson
+ */
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,12 +30,6 @@ import com.example.mybudget.WishList.WishlistActivity;
 import java.time.LocalDate;
 
 
-/**
- * Fragment allows the user to enter
- * an income, that will affect the balance
- *
- * @author Daniel Beadleson
- */
 public class InflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
@@ -42,19 +41,11 @@ public class InflowOutflowFragment extends Fragment {
     private int balance;
     private TextView mFragmentTitle;
 
-    //myDbHelper db = new myDbHelper(InflowOutflowFragment.this, "myDb.db", null, 1);
-    /*
-     * Method creates the initial state of the
-     * fragment
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_inflow_outflow, container, false);
-
-        // the boolean expression inflow will show if the input by the user
-        //  is an income or spending
 
         inflow = ((MainActivity) getActivity()).inflow;
         mBalance = view.findViewById(R.id.balance_inflow_outflow);
@@ -76,7 +67,7 @@ public class InflowOutflowFragment extends Fragment {
 
     }
 
-    /*
+    /**
      * Method sets the balance
      */
     public void setBalance() {
@@ -90,6 +81,10 @@ public class InflowOutflowFragment extends Fragment {
         }
     }
 
+    /**
+     * Method retreives the input data or exits
+     * the fragment
+     */
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + inflow);
@@ -114,7 +109,7 @@ public class InflowOutflowFragment extends Fragment {
                         mAmount.setError("Field must be filled");
                     } else if (Integer.parseInt(sAmount) <= 0) {
                         mAmount.setError("Must be larger than 0");
-                    }else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() && !inflow) {
+                    } else if (Integer.parseInt(sAmount) > ((MainActivity) getActivity()).db.balance() && !inflow) {
                         mAmount.setError("You don't have enough money in your account");
                     } else if (Integer.parseInt(sAmount) > 10000 && inflow) {
                         mAmount.setError("Are you a high roller");
@@ -158,7 +153,7 @@ public class InflowOutflowFragment extends Fragment {
         });
     }
 
-    /*
+    /**
      * Method sets the avatar image from system
      * preferences
      */
@@ -170,6 +165,12 @@ public class InflowOutflowFragment extends Fragment {
             mImageViewHero.setImageDrawable(d);
         }
     }
+
+    /**
+     * Method adds an entry to the database
+     *
+     * @return database entry
+     */
 
     public Entry addEntry(int amount, String desc, Entry entry) {
         entry.setAmount(amount);

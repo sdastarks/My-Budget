@@ -1,7 +1,7 @@
 package com.example.mybudget.Home;
 /**
  * Main class
- * <p>
+ *
  * Allows the user to add and take away from
  * balance alongside view the progress of
  * their favourite wish. From the drawer menu
@@ -94,7 +94,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
 
     /**
      * Method creates a pathway to the other
-     * activities via a navigation bar
+     * activities via a bottom navigation bar
      */
     public void setBottomNavigation() {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
