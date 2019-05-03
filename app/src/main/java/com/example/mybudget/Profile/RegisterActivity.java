@@ -29,12 +29,11 @@ import com.example.mybudget.myDbHelper;
 
 /**
  * The activity is used to register user
- *
+ * and update user profile
  * @author Benish
  */
 
 public class RegisterActivity extends AvatarChangeActivity implements View.OnClickListener {
-
     private static final String TAG = "RegisterActivityLog";
     private final AppCompatActivity activity = RegisterActivity.this;
     private ScrollView scrollView;
@@ -52,14 +51,11 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
     private AppCompatButton appCompatButtonRegister;
     private AppCompatButton appCompatButtonUpdateUser;
     private Button btn_exitRegisterActivity;
-
     private TextView appCompatTextViewLoginLink;
     private TextView chooseAvatarTextView;
     private TextView register_headline;
-
     private ImageView avatar_image;
     private FrameLayout  frameLayoutNewAvatar;
-
     private myDbHelper databaseHelper;
     User user;
     private String switchValue;
@@ -108,11 +104,9 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
             Log.v(TAG, "switch activity use" + switchValue);
 
             if (switchValue.equals("add")) {
-
                 selectAvatar();
                 appCompatButtonUpdateUser.setVisibility(View.GONE);
                 register_headline.setText("Register");
-
             } else if (switchValue.equals("update")) {
                 checkRegistration();
                 setContentView(R.layout.activity_register);
@@ -131,14 +125,13 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         }
         exitRegisterUpdateActivity();
     }
+
     /**
      * Method checks if the user is
      * Registered before entering registration
-     *
      * @ Daniel Beadleson
      */
     public void checkRegistration() {
-
         SharedPreferences sharedPrefs = getSharedPreferences(RegisterActivity.USER_PREFS_NAME, 0);
         if (sharedPrefs.getInt(USER_ID, 0) == 0) {
             Log.d(TAG, "onAddWish: locking user if not registered");
@@ -146,6 +139,7 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
             dialog.show(getSupportFragmentManager(), "register request dialog");
         }
     }
+
     /**
      * This method is to initialize Image onClick
      */
@@ -172,24 +166,19 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         textInputLayoutLastName = (TextInputLayout) findViewById(R.id.textInputLayoutLastName);
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
         textInputLayoutAge = (TextInputLayout) findViewById(R.id.textInputLayoutAge);
-
         textInputEditTextFirstName = (TextInputEditText) findViewById(R.id.textInputEditTextFirstName);
         textInputEditTextLastName = (TextInputEditText) findViewById(R.id.textInputEditTextLastName);
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.textInputEditTextEmail);
         textInputEditTextAge = (TextInputEditText) findViewById(R.id.textInputEditTextAge);
-
         avatar_image = (ImageView) findViewById(R.id.avatarImage);
-
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
         appCompatButtonUpdateUser = (AppCompatButton) findViewById(R.id.appCompatButtonUpdateUser);
         appCompatTextViewLoginLink = (TextView) findViewById(R.id.appCompatTextViewLoginLink);
         chooseAvatarTextView = (TextView) findViewById(R.id.textView4);
         register_headline = (TextView)findViewById(R.id.register_activity_title);
         btn_exitRegisterActivity = (Button) findViewById(R.id.btn_cancel_register_user);
-
         appCompatButtonRegister.setOnClickListener(this);
         appCompatButtonUpdateUser.setOnClickListener(this);
-
         frameLayoutNewAvatar = (FrameLayout)findViewById(R.id.framelayout_newavatar);
     }
 
@@ -217,7 +206,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                     }
                 }
                 break;
-
                 case R.id.appCompatButtonUpdateUser: {
                     //deleteUser();
                     if (inputValidation()) {
@@ -335,7 +323,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
             } else {
                 valid = true;
             }
-
             return valid;
         } catch (Exception e) {
             e.printStackTrace();
@@ -362,11 +349,9 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         int valueAge1 = Integer.parseInt(valueAge);
         String valueEmail = textInputEditTextEmail.getText().toString();
         User userObj = new User(valueFirstName, valueLastName, valueEmail, valueAge1);
-
         int userId = databaseHelper.addUser(userObj);
         saveUser(valueFirstName, userId);
     }
-
 
     public void updateUser(User user) {
         initializeViews();
@@ -379,9 +364,16 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         String valueEmail = textInputEditTextEmail.getText().toString();
         User userObj = new User(valueFirstName, valueLastName, valueEmail, valueAge1);
         databaseHelper.updateUser(userObj, userGlobalId);
-
     }
 
+    private void deleteUser(){
+        databaseHelper.deleteUser();
+        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.clear().commit();
+    }
+
+    //Switch value of input field when activity will be used to update user information
     private void setValues() {
         initializeViews();
         user = databaseHelper.getUser(userGlobalId);
@@ -389,12 +381,10 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         userLastName = user.getUserLastName();
         userEmail = user.getUserMail();
         userAge = user.getUserAge();
-
         textInputEditTextFirstName.setText(userFirstName);
         textInputEditTextLastName.setText(userLastName);
         textInputEditTextEmail.setText(userEmail);
         textInputEditTextAge.setText("" + userAge);
-
     }
 
     //save user name and id in shared preference
@@ -417,25 +407,22 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         return sharedPrefs.getInt(USER_ID, 0);
     }
+    //Switch the fields input depending on usage of activity as registration or update user
     private void AllItemsVisibilitySwitch() {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         textInputLayoutFirstName.setVisibility(View.GONE);
         textInputLayoutLastName.setVisibility(View.GONE);
         textInputLayoutEmail.setVisibility(View.GONE);
         textInputLayoutAge.setVisibility(View.GONE);
-
         textInputEditTextFirstName.setVisibility(View.GONE);
         textInputEditTextLastName.setVisibility(View.GONE);
         textInputEditTextEmail.setVisibility(View.GONE);
         textInputEditTextAge.setVisibility(View.GONE);
         chooseAvatarTextView.setVisibility(View.GONE);
-
         avatar_image.setVisibility(View.GONE);
-
         appCompatButtonRegister.setVisibility(View.GONE);
         appCompatButtonUpdateUser.setVisibility(View.GONE);
         appCompatTextViewLoginLink.setVisibility(View.GONE);
-
     }
 
     private void showWelcomeDialog() {
@@ -457,13 +444,6 @@ public class RegisterActivity extends AvatarChangeActivity implements View.OnCli
                 startActivity(intent);
             }
         });
-    }
-
-    private void deleteUser(){
-        databaseHelper.deleteUser();
-        SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.clear().commit();
     }
 
 }

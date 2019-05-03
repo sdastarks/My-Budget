@@ -6,7 +6,6 @@
     android:background="@color/white"
     android:layout_height="match_parent">
 
-
     <ImageButton
         android:id="@+id/btn_cookie"
         style="?android:attr/borderlessButtonStyle"
@@ -24,7 +23,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:layout_constraintVertical_bias="0.6"
         app:srcCompat="@drawable/cookie_bg_new" />
-
 
     <ImageButton
         android:id="@+id/btn_crazy"
@@ -65,7 +63,6 @@
 
     <ImageButton
         android:id="@+id/btn_science"
-
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -109,9 +106,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu">
-
-
     </android.support.design.widget.BottomNavigationView>
-
 
 </android.support.constraint.ConstraintLayout>

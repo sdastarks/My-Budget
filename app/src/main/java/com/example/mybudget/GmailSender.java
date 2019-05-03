@@ -32,9 +32,14 @@ import android.os.Environment;
 import android.text.Html;
 import android.util.Log;
 
+/**
+ * Class allows an email to be sent via gmail
+ *
+ * @author Anastasija Gurejeva
+ */
 public class GmailSender {
 
-    final String emailPort = "587";// gmail's smtp port
+    final String emailPort = "587";
     final String smtpAuth = "true";
     final String starttls = "true";
     final String emailHost = "smtp.gmail.com";
@@ -52,8 +57,9 @@ public class GmailSender {
     public GmailSender() {
     }
 
-    @SuppressWarnings("rawtypes")
-    public GmailSender (String toEmail, String emailBody) {
+
+    public GmailSender(String toEmail, String emailBody) {
+
         this.toEmail = toEmail;
         this.emailBody = emailBody;
 
@@ -69,25 +75,16 @@ public class GmailSender {
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
-
         emailMessage.setFrom(new InternetAddress(fromEmail));
         emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-
-
         emailMessage.setSubject(emailSubject);
 
         BodyPart messageBodyPart = new MimeBodyPart();
-
-        // Now set the actual message
-        //messageBodyPart.setText(emailBody);
-       // messageBodyPart.setContent(Html.fromHtml("<h1>rdsf</h1>"),"xsd");
-
         Multipart multipart = new MimeMultipart();
 
-        // Set text message part
-        messageBodyPart.setContent(Html.toHtml(Html.fromHtml("<h1>"+emailBody+"</h1>"))+"<br><br>" , "text/html"); //5
-        multipart.addBodyPart(messageBodyPart);
+        messageBodyPart.setContent(Html.toHtml(Html.fromHtml("<h1>" + emailBody + "</h1>")) + "<br><br>", "text/html"); //5
 
+        multipart.addBodyPart(messageBodyPart);
         String filename = "/storage/emulated/0/Pocket Monster/logo_pm.jpg";
         File file = new File(filename);
         messageBodyPart = new MimeBodyPart();

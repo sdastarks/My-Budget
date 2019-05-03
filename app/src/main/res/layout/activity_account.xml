@@ -76,8 +76,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu">
-
-
     </android.support.design.widget.BottomNavigationView>
 
     <ImageView
@@ -103,6 +101,5 @@
         app:layout_constraintEnd_toEndOf="@+id/spinner_months"
         app:layout_constraintTop_toTopOf="@+id/spinner_months"
         app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24px" />
-
 
 </android.support.constraint.ConstraintLayout>

@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<attr name="PrimaryTextColor"-->
-        <!--format="reference"/>-->
-    <!--<attr name="ButtonNormalColor"-->
-        <!--format="reference"/>-->
-    <!--<attr name="ButtonHighlightColor"-->
-        <!--format="reference"/>-->
-    <!--<attr name="ButtonTextColor"-->
-        <!--format="reference"/>-->
-    <!--<attr name="primaryButtonTheme"-->
-        <!--format="reference"/>-->
     <attr name="ColorSecondary"
    format="reference"/>
-
-
 
 </resources>

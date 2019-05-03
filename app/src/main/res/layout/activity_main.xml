@@ -10,7 +10,6 @@
     android:background="@drawable/gradient">
     <!--tools:openDrawer="start">-->
 
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
@@ -195,7 +194,6 @@
             app:layout_constraintStart_toStartOf="@+id/progressBar"
             app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
-
         <TextView
             android:id="@+id/favWishTitle"
             style="@style/NormalTextStyleWhite"
@@ -237,9 +235,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_menu">
-
         </android.support.design.widget.BottomNavigationView>
-
 
     </android.support.constraint.ConstraintLayout>
 
@@ -253,7 +249,6 @@
         app:itemTextColor="@drawable/drawer_nav_colors"
         app:itemTextAppearance="@style/TextStyleBody"
         app:menu="@menu/drawer_menu">
-
     </android.support.design.widget.NavigationView>
 
 

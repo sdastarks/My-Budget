@@ -383,9 +383,7 @@ public class myDbHelper extends SQLiteOpenHelper {
             }
         }
         return total;
-
     }
-
 
     /**
      * @return total amount spend on wishes

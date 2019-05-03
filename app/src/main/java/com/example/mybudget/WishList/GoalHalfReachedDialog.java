@@ -18,6 +18,7 @@ import com.example.mybudget.R;
 
 /**
  * Dialog fragment, which notifies the user that they are half way to save for their goal
+ *
  * @author Anastasija Gurejeva
  *
  */
@@ -25,8 +26,6 @@ public class GoalHalfReachedDialog extends  AppCompatDialogFragment {
     private static final String TAG = "GoalReachedDialog";
     private Button mCancelHalfWayDialog;
     private ImageView mImageHeroGoalHalfReached;
-
-
 
     @Nullable
     @Override
@@ -49,6 +48,9 @@ public class GoalHalfReachedDialog extends  AppCompatDialogFragment {
         return view;
     }
 
+    /**
+     * Method sets the avatar image
+     */
     public void setAvatar() {
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);

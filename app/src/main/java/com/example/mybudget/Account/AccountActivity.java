@@ -61,18 +61,13 @@ public class AccountActivity extends AvatarChangeActivity {
         setContentView(R.layout.activity_account);
         tvBalance = findViewById(R.id.tvBalance);
         currentlog = db.balance();
-        //tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
 
         //create recycler view
         mRecyclerView = findViewById(R.id.recyclerview);
-
         mySpinner = (findViewById(R.id.spinner1));
 
-
         String[] labels = {"Categories", "Expenses", "Income", "On wish", "Chore Money"};
-
         mySpinnerMonths = (findViewById(R.id.spinner_months));
-
         String[] labelsMonths = {"Months", "January", "February", "March", "April", "May", "June", "July",
                 "August", "September", "October", "November", "December"};
 
@@ -93,9 +88,7 @@ public class AccountActivity extends AvatarChangeActivity {
                     R.layout.spinner_item, labels);
             spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             mySpinner.setAdapter(spinnerAdapter);
-
             mySpinnerOnClick();
-
         }
 
         /*
@@ -118,25 +111,20 @@ public class AccountActivity extends AvatarChangeActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 settingAdapter();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
 
     public void mySpinnerMonthsOnClick() {
-
         mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 settingAdapter();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -179,8 +167,10 @@ public class AccountActivity extends AvatarChangeActivity {
     /**
      * First stage filter function
      *
-     * @param typeOfEntry a filter taken from spinner position to specify the type of entry
-     * @return an arrayList contains filtered data
+     * @param typeOfEntry a filter taken from spinner position to specify
+     * the type of entry (income, expense, on wish or from chore)
+     * @return an arrayList contains data filtered by type of entry
+     * @auth SAFAR, Deshna
      */
     public ArrayList<Entry> fill_with_data(int typeOfEntry) {
         ArrayList<Entry> entries = new ArrayList<>();
@@ -201,9 +191,8 @@ public class AccountActivity extends AvatarChangeActivity {
 
     /**
      * Sets the number of months to the spinner
-     *
      * @return number of monthes since the user logged an Entry
-     * @auth DAWNIE SAFAR
+     * @auth SAFAR, Deshna
      */
     public int getMonthesOfEntries() {
         int numberOfMonthes = 1;
@@ -223,7 +212,7 @@ public class AccountActivity extends AvatarChangeActivity {
      * @param dataFilteredByTypeOfEntry specifies entries filter by type of entry (income, expenses...)
      * @param spinnerPosition           a date filter as per the spinner position
      * @return data filtered by data and type of entry
-     * @auth Dawnie Safar
+     * @auth SAFAR, Deshna
      */
     public List<AccountsRow> filterEntriesByDate(ArrayList<Entry> dataFilteredByTypeOfEntry, int spinnerPosition) {
         ArrayList<Entry> allEntries = new ArrayList<>();

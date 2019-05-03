@@ -10,8 +10,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/fragment_avatar"
@@ -21,8 +20,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-
         </FrameLayout>
 
         <TextView
@@ -36,7 +33,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <Button
             android:id="@+id/btn_cancel_register_user"
@@ -92,7 +88,6 @@
                 style="@style/InputTextStyleNoColor"
                 android:hint="First Name"
                 android:inputType="text" />
-
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -111,7 +106,6 @@
                 style="@style/InputTextStyleNoColor"
                 android:hint="Last Name"
                 android:inputType="text" />
-
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -149,7 +143,6 @@
                 android:layout_marginStart="10dp"
                 android:hint="Age"
                 android:inputType="number" />
-
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -212,11 +205,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
         </GridView>
 
     </android.support.constraint.ConstraintLayout>
-
-
 
 </ScrollView>
