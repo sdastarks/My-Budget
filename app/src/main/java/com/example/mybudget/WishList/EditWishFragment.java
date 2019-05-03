@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,6 +35,7 @@ import com.example.mybudget.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -344,6 +347,7 @@ public class EditWishFragment extends Fragment {
             Uri photoUri = FileProvider.getUriForFile(getActivity().getBaseContext(), getActivity().getPackageName() + ".provider", photoFile);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             pictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
             startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
@@ -415,6 +419,37 @@ public class EditWishFragment extends Fragment {
         }
         return result;
     }
+    /**
+     * This method is responsible for solving the rotation issue if exist. Also scale the images to
+     * 1024x1024 resolution
+     *
+     * @param context       The current context
+     * @param selectedImage The Image URI
+     * @return Bitmap image results
+     * @throws IOException
+     */
+    public static Bitmap handleSamplingAndRotationBitmap(Context context, Uri selectedImage)
+   /*         throws IOException {
+        int MAX_HEIGHT = 1024;
+        int MAX_WIDTH = 1024;
 
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        InputStream imageStream = context.getContentResolver().openInputStream(selectedImage);
+        BitmapFactory.decodeStream(imageStream, null, options);
+        imageStream.close();
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, MAX_WIDTH, MAX_HEIGHT);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        imageStream = context.getContentResolver().openInputStream(selectedImage);
+        Bitmap img = BitmapFactory.decodeStream(imageStream, null, options);
+
+        img = rotateImageIfRequired(context, img, selectedImage);
+        return img;
+    }*/
 
 }

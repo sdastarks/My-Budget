@@ -193,7 +193,7 @@ public class addChoresMoneyFragment extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.check, mFrag);
         t.commit();
-        exit();
+        
 
     }
 
