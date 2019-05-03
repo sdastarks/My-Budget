@@ -6,6 +6,7 @@ public class User {
     private String userLastName;
     private int userAge;
     private String userMail;
+    private String userPhone;
 
     public User(){}
 
@@ -46,4 +47,7 @@ public class User {
     public int getUserAge(){
         return userAge;
     }
+
+    public void setUserPhone(String userPhone){ this.userPhone = userPhone; }
+    public String getUserPhone(){ return userPhone; }
 }
