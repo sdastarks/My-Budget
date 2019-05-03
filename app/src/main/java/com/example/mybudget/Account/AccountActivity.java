@@ -61,18 +61,13 @@ public class AccountActivity extends AvatarChangeActivity {
         setContentView(R.layout.activity_account);
         tvBalance = findViewById(R.id.tvBalance);
         currentlog = db.balance();
-        //tvBalance.setText("Available: " + String.valueOf(currentlog) + " SEK");
 
         //create recycler view
         mRecyclerView = findViewById(R.id.recyclerview);
-
         mySpinner = (findViewById(R.id.spinner1));
 
-
         String[] labels = {"Categories", "Expenses", "Income", "On wish", "Chore Money"};
-
         mySpinnerMonths = (findViewById(R.id.spinner_months));
-
         String[] labelsMonths = {"Months", "January", "February", "March", "April", "May", "June", "July",
                 "August", "September", "October", "November", "December"};
 
@@ -93,9 +88,7 @@ public class AccountActivity extends AvatarChangeActivity {
                     R.layout.spinner_item, labels);
             spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             mySpinner.setAdapter(spinnerAdapter);
-
             mySpinnerOnClick();
-
         }
 
         /*
@@ -118,25 +111,20 @@ public class AccountActivity extends AvatarChangeActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 settingAdapter();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
 
     public void mySpinnerMonthsOnClick() {
-
         mySpinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 settingAdapter();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -180,7 +168,7 @@ public class AccountActivity extends AvatarChangeActivity {
      * First stage filter function
      *
      * @param typeOfEntry a filter taken from spinner position to specify the type of entry
-     * @return an arrayList contains filtered data
+     * @return an arrayList contains data filtered by type of entry
      */
     public ArrayList<Entry> fill_with_data(int typeOfEntry) {
         ArrayList<Entry> entries = new ArrayList<>();
