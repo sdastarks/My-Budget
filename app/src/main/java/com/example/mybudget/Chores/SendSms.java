@@ -33,7 +33,6 @@ import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
 
 /**
  * Send SMS
- *
  * @author Alaa Al Sakka
  */
 
@@ -51,13 +50,14 @@ public class SendSms extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_send_sms, container, false);
-
+    // retreating phone number from the registered user
         sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         userGlobalId = sharedPreferences.getInt(USER_ID, 0);
         if (userGlobalId != 0) {
             userPhone = ((ChoresActivity) getActivity()).db.retrievePhone(userGlobalId);
         }
+
 
         e1 = view.findViewById(R.id.editText);
         if (userPhone == null) {
@@ -70,12 +70,12 @@ public class SendSms extends Fragment {
         String userName = ((ChoresActivity) getActivity()).db.getUser(getActivity()
                 .getSharedPreferences(RegisterActivity.USER_PREFS_NAME,
                         0).getInt(USER_ID, 0)).getUserFirstName();
-
+        // set the text message that will be sent
         e2.setText(userName + " would like to be payed " +
                 getArguments().getString("amount") +
                 "SEK for successfully completing the chore: " +
                 getArguments().getString("desc") + ".");
-        //e2.setText(((ChoresActivity) getActivity()).title + " chore is completed and " + ((ChoresActivity) getActivity()).amount + "  SEK has been added to the balance.");
+
         b1 = view.findViewById(R.id.sendButton);
 
         if (e2.getText().toString().isEmpty())
@@ -94,6 +94,11 @@ public class SendSms extends Fragment {
 
                 String s1 = e1.getText().toString();
                 String s2 = e2.getText().toString();
+
+                /**
+                 * checking for permission and
+                 * constrain the phone number
+                 */
                 if (!TextUtils.isEmpty(s1) && !TextUtils.isEmpty(s2)) {
                     if (s1.trim().length() == 10 && s1.startsWith("0")) {
                         if (checkPermission(Manifest.permission.SEND_SMS)) {
@@ -131,8 +136,11 @@ public class SendSms extends Fragment {
         return view;
     }
 
-    private boolean checkPermission(String sendSms) {
 
+    /**
+     * method to check permission for sending sms
+     */
+    private boolean checkPermission(String sendSms) {
         int checkpermission = ContextCompat.checkSelfPermission(getActivity(), sendSms);
         return checkpermission == PackageManager.PERMISSION_GRANTED;
     }
