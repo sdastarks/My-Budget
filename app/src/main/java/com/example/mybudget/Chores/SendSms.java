@@ -102,7 +102,7 @@ public class SendSms extends Fragment {
                 String s1 = e1.getText().toString();
                 String s2 = e2.getText().toString();
                 if (!TextUtils.isEmpty(s1) && !TextUtils.isEmpty(s2)) {
-                    if(s1.trim().length() == 8 && s1.startsWith("0")) {
+                    if(s1.trim().length() == 10 && s1.startsWith("0")) {
                         if (checkPermission(Manifest.permission.SEND_SMS)) {
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage(s1, null, s2, null, null);
