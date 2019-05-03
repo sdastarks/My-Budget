@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/framelayout_newavatar"
-    >
+    android:id="@+id/framelayout_newavatar">
 
     <GridView
         android:id="@+id/gridview1"
@@ -14,6 +13,4 @@
         android:stretchMode="columnWidth"
         android:layout_marginTop="120dp"
         android:numColumns="2"/>
-
-
 </FrameLayout>

@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
@@ -68,7 +67,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:useCompatPadding="false" />
 
-
     <FrameLayout
         android:id="@+id/frame_wish_fragment"
         android:layout_width="0dp"
@@ -76,8 +74,8 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
-
+        app:layout_constraintTop_toTopOf="parent">
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -95,8 +93,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu">
-
     </android.support.design.widget.BottomNavigationView>
-
 
 </android.support.constraint.ConstraintLayout>

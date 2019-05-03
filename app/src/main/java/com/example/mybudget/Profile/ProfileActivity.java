@@ -21,22 +21,19 @@ import static com.example.mybudget.Profile.RegisterActivity.USER_PREFS_NAME;
 
 /**
  * The activity is used to create user Profile
- *And pick an avatar
+ * And pick an avatar
  * @author Benish
  */
 public class ProfileActivity extends AvatarChangeActivity {
     private static final String TAG = "ProfileActivityLog";
     User userData = new User();
     private myDbHelper databaseHelper;
-
     private TextView textFullName;
     private TextView textEmail;
     private TextView textAge;
-
     private TextView user_profile_balance;
     private TextView user_profile_savings;
     private TextView user_profile_spendings;
-
     private String userFirstName;
     private String userLastName;
     private String userEmail;
@@ -55,7 +52,6 @@ public class ProfileActivity extends AvatarChangeActivity {
 
         databaseHelper = new myDbHelper(this, "userdb.db", null, 1);
         userData = databaseHelper.getUser(userGlobalId);
-
         hero_profile = (ImageView)findViewById(R.id.hero_image_profile);
         if(imageResId != -1){
             d = getDrawable(imageResId);
@@ -72,25 +68,19 @@ public class ProfileActivity extends AvatarChangeActivity {
             updateBalance();
             savingsOfUser();
             spendingsOfUser();
-
             } else Log.d(TAG, "user: null");
-
         activateOnExitProfileActiviy();
-
     }
 
     private void setUserPersonalData(int user_id) {
-
         textFullName = (TextView)findViewById(R.id.full_name_user);
         textAge = (TextView)findViewById(R.id.age_user);
         textEmail = (TextView)findViewById(R.id.email_user);
-
         userData = databaseHelper.getUser(user_id);
         userFirstName = userData.getUserFirstName();
         userLastName = userData.getUserLastName();
         userEmail = userData.getUserMail();
         userAge = userData.getUserAge();
-
         textFullName.setText(userFirstName + " "+ userLastName);
         textEmail.setText(userEmail);
         textAge.setText("" + userAge);
@@ -100,7 +90,6 @@ public class ProfileActivity extends AvatarChangeActivity {
         user_profile_balance = (TextView)findViewById(R.id.profile_balance);
         user_profile_savings = (TextView)findViewById(R.id.profile_savings);
         user_profile_spendings = (TextView)findViewById(R.id.profile_spending);
-
     }
 
     public int updateBalance(){
@@ -140,7 +129,6 @@ public class ProfileActivity extends AvatarChangeActivity {
                 startActivity(intentExitActivity);
             }
         });
-
     }
 
 }
