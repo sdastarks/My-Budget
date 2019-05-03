@@ -82,7 +82,7 @@ public class InflowOutflowFragment extends Fragment {
     }
 
     /**
-     * Method retreives the input data or exits
+     * Method retrieves the input data or exits
      * the fragment
      */
     public void onViewCreated(View view, Bundle savedInstanceState) {
