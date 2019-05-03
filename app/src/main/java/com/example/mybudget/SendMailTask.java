@@ -9,7 +9,6 @@ import android.util.Log;
 public class SendMailTask extends AsyncTask {
 
 
-
     public SendMailTask() {
 
     }
