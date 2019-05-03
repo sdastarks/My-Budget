@@ -20,9 +20,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.mybudget.Home.MainActivity;
+import com.example.mybudget.Profile.RegisterActivity;
 import com.example.mybudget.R;
+import com.example.mybudget.WishList.WishlistActivity;
+import com.example.mybudget.myDbHelper;
 
 import static android.support.constraint.Constraints.TAG;
+import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,11 +49,16 @@ public class SendSms extends Fragment {
 
         //setContentView(R.layout.fragment_send_sms);
         e1 = view.findViewById(R.id.editText);
-
         e2 = view.findViewById(R.id.editText2);
 
-        e2.setText(getArguments().getString("desc") + "chore is completed and "
-         + getArguments().getString("amount") + "SEK has been added to the balance.");
+        String userName = ((ChoresActivity) getActivity()).db.getUser(getActivity()
+                            .getSharedPreferences(RegisterActivity.USER_PREFS_NAME,
+                            0).getInt(USER_ID, 0)).getUserFirstName();
+
+        e2.setText(userName+" would like to be payed "+
+                getArguments().getString("amount") +
+                "SEK for successfully completing the chore: "+
+                getArguments().getString("desc") + ".");
         //e2.setText(((ChoresActivity) getActivity()).title + " chore is completed and " + ((ChoresActivity) getActivity()).amount + "  SEK has been added to the balance.");
         b1 = view.findViewById(R.id.sendButton);
         b1.setEnabled(false);
