@@ -1,8 +1,12 @@
 package com.example.mybudget.Home;
 /**
  * Main class
- * <p>
- * Displays a progress bar
+ *
+ * Allows the user to add and take away from
+ * balance alongside view the progress of
+ * their favourite wish. From the drawer menu
+ * the user can navigate to My profile,
+ * Edit profile and advanced features.
  *
  * @author Daniel Beadleson
  */
@@ -58,10 +62,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
     private Toolbar toolbar;
     private Button register_button;
     private Drawable d;
-    private String userDbName;
-    private FileInputStream fs;
-    private File file;
-    SharedPreferences sharedPreferences;
+    private NavigationView sideNavigation;
     int userGlobalId;
     private static final String TAG = "MainActivityLog";
     protected Boolean inflow;
@@ -72,65 +73,30 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         setTheme(R.style.AppTheme_CookieMonster);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.v("SettingsActivityLog","imageResId2: "+imageResId);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        ImageView logo = findViewById(R.id.logo);
+        logo.setVisibility(View.VISIBLE);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
 
-        addIncome = findViewById(R.id.floatingActionButton_add);
-        outOutcome = findViewById(R.id.floatingActionButton_minus);
-        imageViewHero=findViewById(R.id.imageViewHero);
-        if(imageResId != -1){
-            d = getDrawable(imageResId);
-            imageViewHero.setImageDrawable(d);
-        }
+        setBottomNavigation();
+        setSideNavigation();
+        setAvatar(sideNavigation);
+        setRegisterButtonVisibility();
+        int favWish_dbID = getFavouriteWishID();
+        calcProgress(favWish_dbID);
+        setProgressBar(favWish_dbID);
+        setTitle(favWish_dbID);
+        updateBalance();
+    }
 
-        //Sets the state of the drawer navigation bar
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        drawer = findViewById(R.id.drawer_layout);
-
-        View headView = navigationView.getHeaderView(0);
-        ImageView heroImageNav = headView.findViewById(R.id.hero_image_side_nav);
-        if(imageResId != -1){
-            d = getDrawable(imageResId);
-            heroImageNav.setImageDrawable(d);
-        }
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        ImageView logo =findViewById(R.id.logo);
-        logo.setVisibility(View.VISIBLE);
-
-        //Checks if user_id is not 0 so hide registration button from main screen
-        sharedPreferences = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        userGlobalId = sharedPreferences.getInt(USER_ID, 0);
-        if (userGlobalId == 0) {
-            register_button = findViewById(R.id.user_register_button);
-            register_button.setVisibility(View.VISIBLE);
-            register_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.v(TAG, "clickable");
-                    Intent intent_register = new Intent(MainActivity.this, RegisterActivity.class);
-                    intent_register.putExtra("editProfile", "add");
-                    startActivity(intent_register);
-                }
-            });
-        } else   {
-            register_button = findViewById(R.id.user_register_button);
-            register_button.setVisibility(View.GONE);}
-
-        /*
-         * Method creates a pathway to the other
-         * activities via a navigation bar
-         */
+    /**
+     * Method creates a pathway to the other
+     * activities via a bottom navigation bar
+     */
+    public void setBottomNavigation() {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         Menu menu = navigation.getMenu();
         MenuItem menuItem = menu.getItem(0);
@@ -166,54 +132,115 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
                 return false;
             }
         });
+    }
 
-        int favWish_dbID= getFavouriteWishID();
-        calcProgress(favWish_dbID);
-        setProgressBar(favWish_dbID);
-        setTitle(favWish_dbID);
-        updateBalance();
-    }
-    /*
-     * Method gets the database id of the favourite wish
+    /**
+     * Method sets the state of the side navigation
      */
-    public int getFavouriteWishID(){
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        int favWish_dbID= sharedPref.getInt("favouriteWish",0);
-        Log.v(TAG, "favWish_dbID: "+favWish_dbID);
-        return favWish_dbID;
+    public void setSideNavigation() {
+        sideNavigation = (NavigationView) findViewById(R.id.nav_view);
+        sideNavigation.setNavigationItemSelectedListener(this);
+        drawer = findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
     }
-    /*
-     * Method calculates the progress of the favourite wish
+
+    /**
+     * Method sets the avatar in the home screen
+     * and drawer menu based on the theme
      */
-    public void calcProgress(int favWish_dbID){
-        if (favWish_dbID !=0){
-            WishList favWish = db.returnWish(favWish_dbID);
-            int wishPrice=favWish.getCost();
-            int wishSaved=favWish.getSaved();
-            progress =wishSaved*100/wishPrice;
+    public void setAvatar(NavigationView navigationView) {
+        addIncome = findViewById(R.id.floatingActionButton_add);
+        outOutcome = findViewById(R.id.floatingActionButton_minus);
+        imageViewHero = findViewById(R.id.imageViewHero);
+        if (imageResId != -1) {
+            d = getDrawable(imageResId);
+            imageViewHero.setImageDrawable(d);
+        }
+        View headView = navigationView.getHeaderView(0);
+        ImageView heroImageNav = headView.findViewById(R.id.hero_image_side_nav);
+        if (imageResId != -1) {
+            d = getDrawable(imageResId);
+            heroImageNav.setImageDrawable(d);
         }
     }
 
-    public void setTitle(int favWish_dbID){
-        if (favWish_dbID !=0){
+    /**
+     * Method sets the visibiity of the registration button
+     *
+     * @author Benish
+     */
+
+    public void setRegisterButtonVisibility() {
+        userGlobalId = getApplicationContext().getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE).getInt(USER_ID, 0);
+        if (userGlobalId == 0) {
+            register_button = findViewById(R.id.user_register_button);
+            register_button.setVisibility(View.VISIBLE);
+            register_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.v(TAG, "clickable");
+                    Intent intent_register = new Intent(MainActivity.this, RegisterActivity.class);
+                    intent_register.putExtra("editProfile", "add");
+                    startActivity(intent_register);
+                }
+            });
+        } else {
+            register_button = findViewById(R.id.user_register_button);
+            register_button.setVisibility(View.GONE);
+        }
+
+    }
+
+    /**
+     * Method gets the database id of the favourite wish
+     */
+    public int getFavouriteWishID() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        int favWish_dbID = sharedPref.getInt("favouriteWish", 0);
+        Log.v(TAG, "favWish_dbID: " + favWish_dbID);
+        return favWish_dbID;
+    }
+
+    /**
+     * Method calculates the progress of the favourite wish
+     */
+    public void calcProgress(int favWish_dbID) {
+        if (favWish_dbID != 0) {
+            WishList favWish = db.returnWish(favWish_dbID);
+            int wishPrice = favWish.getCost();
+            int wishSaved = favWish.getSaved();
+            progress = wishSaved * 100 / wishPrice;
+        }
+    }
+
+    /**
+     * Method sets the progress bar title
+     */
+    public void setTitle(int favWish_dbID) {
+        if (favWish_dbID != 0) {
             TextView favWishTitle = findViewById(R.id.favWishTitle);
             WishList favWish = db.returnWish(favWish_dbID);
             favWishTitle.setText("Your savings for " + favWish.getTitle());
         }
     }
 
-    /*
+    /**
      * Method sets the state of the progress bar
      */
     public void setProgressBar(int favWish_dbID) {
-        if (favWish_dbID !=0){
+        if (favWish_dbID != 0) {
             CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.progressBar);
             circularProgressBar.setProgress(progress);
             TextView progresstxt = findViewById(R.id.txt_progressBar);
             progresstxt.setText(progress + "%");
         }
     }
-    /*
+
+    /**
      * Method initialises a fragment allowing the
      * user to enter an inflow
      */
@@ -227,7 +254,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         ft.commit();
     }
 
-    /*
+    /**
      * Method initialises a fragment allowing the
      * user to enter an outflow
      */
@@ -241,8 +268,8 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         ft.commit();
     }
 
-    /*
-     * Method intitialses a process when a item is selected
+    /**
+     * Method intitialses an activity when an item is selected
      * from the drawer navigation bar
      */
     @Override
@@ -268,7 +295,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
         return true;
     }
 
-    /*
+    /**
      * Method closes the drawer navigation bar when the back
      * button is selected
      */
@@ -283,9 +310,10 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
 
     /**
      * Updates the balance with every entry
+     *
      * @auth DAWNIE
      */
-    public int updateBalance(){
+    public int updateBalance() {
         tvBalance = findViewById(R.id.tvBalance);
         int income = db.calcIncome();
         int expense = db.calcExpenses();

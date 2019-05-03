@@ -52,6 +52,7 @@ public class myDbHelper extends SQLiteOpenHelper {
     public static final String USER_EMAIL = "UserEmail";
     public static final String USER_AGE = "UserAge";
     public static final String USER_AVATAR = "UserAvatar";
+    public static final String USER_PHONE = "UserPhone";
 
 
     public myDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int Version) {
@@ -88,7 +89,8 @@ public class myDbHelper extends SQLiteOpenHelper {
                     + USER_LAST_NAME + " TEXT NOT NULL,"
                     + USER_EMAIL + " TEXT ,"
                     + USER_AGE + " INTEGER,"
-                    + USER_AVATAR + "BLOB); ");
+                    + USER_AVATAR + "BLOB, "
+                    + USER_PHONE + " TEXT);");
             this.db = db;
         } catch (SQLException e) {
 
@@ -487,6 +489,7 @@ public class myDbHelper extends SQLiteOpenHelper {
         values.put(USER_LAST_NAME, user.getUserLastName());
         values.put(USER_EMAIL, user.getUserMail());
         values.put(USER_AGE, user.getUserAge());
+        values.put(USER_PHONE, user.getUserPhone());
         //values.put(USER_AVATAR, user.)
         Log.e("data inserted", "in database");
         db.insert(USER_PROFILE, null, values);
@@ -502,6 +505,7 @@ public class myDbHelper extends SQLiteOpenHelper {
         values.put(USER_LAST_NAME, user.getUserLastName());
         values.put(USER_EMAIL, user.getUserMail());
         values.put(USER_AGE, user.getUserAge());
+        values.put(USER_PHONE, user.getUserPhone());
         try {
             // return db.update(USER_PROFILE, values, USER_FISRT_NAME,new String[]{keyValue}) > 0;
 
@@ -532,6 +536,7 @@ public class myDbHelper extends SQLiteOpenHelper {
                 user.setUserLastName(cursor.getString(2));
                 user.setUserMail(cursor.getString(3));
                 user.setUserAge(cursor.getInt(4));
+                user.setUserPhone(cursor.getString(6));
                 //userRecord.add(user);
             }
         }
@@ -550,5 +555,18 @@ public class myDbHelper extends SQLiteOpenHelper {
         String email = cursor.getString(3);
         close_db();
         return email;
+    }
+
+    /**
+     * @param userId specifies the user
+     * @return the phone number of the user
+     */
+    public String retrievePhone(int userId) {
+        open_db();
+        Cursor cursor = this.db.rawQuery("SELECT * FROM " + USER_PROFILE + " where " + USERID + " = " + userId, null);
+        cursor.moveToFirst();
+        String phone = cursor.getString(6);
+        close_db();
+        return phone;
     }
 }

@@ -22,9 +22,9 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 /**
  * Fragment allows user to view information about current status of savings for selected item
- * from here you can call another fragment to chnage saved amount
- * @author Anastasija Gurejeva
+ * from here you can call another fragment to change saved amount
  *
+ * @author Anastasija Gurejeva
  */
 public class WishFragment extends Fragment {
     private static final String TAG = "WishFragment";
@@ -51,7 +51,6 @@ public class WishFragment extends Fragment {
     WishList wishSelected;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class WishFragment extends Fragment {
         msavingProgress = view.findViewById(R.id.saving_progress);
         wish_picture_fragment = view.findViewById(R.id.wish_picture_fragment);
 
-        //selected wish database id and Wish
         dbid = ((WishlistActivity) getActivity()).id;
         wishSelected = ((WishlistActivity) getActivity()).db.returnWish(dbid);
         wish_picture_fragment.setImageURI(Uri.parse(wishSelected.getImage()));
@@ -73,10 +71,10 @@ public class WishFragment extends Fragment {
         onAddSelected = view.findViewById(R.id.floatingActionButton_addTransaction);
         onMinusSelected = view.findViewById(R.id.floatingActionButton_minusTransaction);
 
-        cancelWishFragment = view. findViewById(R.id.btn_cancel_wish_fragment);
-        editWishFragment = view. findViewById(R.id.btn_edit_wish);
+        cancelWishFragment = view.findViewById(R.id.btn_cancel_wish_fragment);
+        editWishFragment = view.findViewById(R.id.btn_edit_wish);
 
-        favouriteWish_btn=view.findViewById(R.id.btn_favourite_wish);
+        favouriteWish_btn = view.findViewById(R.id.btn_favourite_wish);
 
 
         setTitle();
@@ -93,35 +91,40 @@ public class WishFragment extends Fragment {
 
         return view;
     }
-    /*
+
+    /**
      * Method sets the title of the
      * selected wish
      */
-    public void setTitle(){
+    public void setTitle() {
         mwishTitle.setText(wishSelected.getTitle());
     }
-    /*
+
+    /**
      * Method calculates the progress of the
      * selected wish
      */
-    public void calcProgress(){
-        int wishPrice=((WishlistActivity) getActivity()).wishPrice;
-        mwishPrice.setText("price: "+wishPrice+" SEK");
-        int wishSaved= wishSelected.getSaved();
-        progress=wishSaved*100/wishPrice;
-        msavingProgress.setText("savings: "+wishSaved+" SEK ("+progress+"%)");
+    public void calcProgress() {
+        int wishPrice = ((WishlistActivity) getActivity()).wishPrice;
+        mwishPrice.setText("price: " + wishPrice + " SEK");
+        int wishSaved = wishSelected.getSaved();
+        progress = wishSaved * 100 / wishPrice;
+        msavingProgress.setText("savings: " + wishSaved + " SEK (" + progress + "%)");
     }
-    /*
+
+    /**
      * Method sets the state of the progress
      * bar
      */
-    public void setProgressBar(){
+    public void setProgressBar() {
         circularProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
         circularProgressBar.setProgress(progress);
     }
 
-    //Floating button calls a new fragment,
-    // where you can make a transaction to add saved amount
+    /**
+     * Floating button calls a new fragment,
+     * where you can make a transaction to add saved amount
+     */
 
     public void activateOnAddSelected() {
 
@@ -132,23 +135,24 @@ public class WishFragment extends Fragment {
                 inflow = true;
                 ChangeWishInflowOutflowFragment changeWishInflowOutflowFragment = new ChangeWishInflowOutflowFragment();
 
-                //passing data to new fragment
                 Bundle args = new Bundle();
                 args.putBoolean("inflow", true);
                 args.putInt("index", index);
-                //calling new fragment
+
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.frame_wish_fragment, changeWishInflowOutflowFragment)
                         .commit();
                 changeWishInflowOutflowFragment.setArguments(args);
-                Log.d(TAG, "onClick: arguments passed to fragment.");
+
             }
         });
     }
 
-    ///Floating button calls a new fragment,
-    // where you can make a transaction to minus saved amount
+    /**
+     * Floating button calls a new fragment,
+     * where you can make a transaction to minus saved amount
+     */
 
     public void activateOnMinusSelected() {
         onMinusSelected.setOnClickListener(new View.OnClickListener() {
@@ -158,21 +162,22 @@ public class WishFragment extends Fragment {
                 inflow = false;
                 ChangeWishInflowOutflowFragment changeWishInflowOutflowFragment = new ChangeWishInflowOutflowFragment();
 
-                //passing data to new fragment
                 Bundle args = new Bundle();
                 args.putBoolean("inflow", false);
                 args.putInt("index", index);
-                //calling new fragment
+
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.frame_wish_fragment, changeWishInflowOutflowFragment)
                         .commit();
                 changeWishInflowOutflowFragment.setArguments(args);
-                Log.d(TAG, "onClick: arguments passed to fragment.");
             }
         });
     }
 
+    /**
+     * Method exits fragment
+     */
     public void activateCancelWishFragment() {
         cancelWishFragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +188,9 @@ public class WishFragment extends Fragment {
         });
     }
 
+    /**
+     * Method goes top the edit wish fragment
+     */
     public void activateEditWishFragment() {
         editWishFragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,11 +207,17 @@ public class WishFragment extends Fragment {
             }
         });
     }
-    public void activateFavouriteWish(){
+
+    /**
+     * Method sets a wish as favourite
+     *
+     * @Daniel Beadleson
+     */
+    public void activateFavouriteWish() {
         favouriteWish_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v(TAG, "dbid: "+ dbid);
+                Log.v(TAG, "dbid: " + dbid);
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 sharedPref.edit().putInt("favouriteWish", dbid).apply();
                 Toast.makeText(getActivity(), "Your new favourite wish!", Toast.LENGTH_SHORT).show();

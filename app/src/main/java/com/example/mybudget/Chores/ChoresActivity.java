@@ -23,12 +23,12 @@ import com.example.mybudget.myDbHelper;
 
 public class ChoresActivity extends AvatarChangeActivity {
     protected Boolean inflow;
-    private static  final String TAG= "ChoresActivity";
+    private static final String TAG = "ChoresActivity";
     public static final String USER_PREFS_NAME = "userPreferenceFile";
     public static final String USER_ID = "userId";
     myDbHelper db = new myDbHelper(this, "myDb.db", null, 1);
 
-    //Initilaizing ImagesButtons
+    //Initializing ImagesButtons
     ImageButton laundry, dishwashing, readingBook, vacuum, beingNice, petting, grass, mopping,
             goodGrade, cooking, baby, other;
     String title = "";
@@ -39,7 +39,7 @@ public class ChoresActivity extends AvatarChangeActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chores);
 
-        /*
+        /**
          * Method creates a pathway to the other
          * activities via a navigation bar
          */
@@ -80,13 +80,21 @@ public class ChoresActivity extends AvatarChangeActivity {
                 return false;
             }
         });
+
+/**
+ * lock the user from this activity if not registered
+ */
         SharedPreferences sharedPrefs = getSharedPreferences(USER_PREFS_NAME, 0);
         if (sharedPrefs.getInt(USER_ID, 0) == 0) {
             Log.d(TAG, "onAddWish: locking user if not registered");
             RegisterRequestDialog dialog = new RegisterRequestDialog();
             dialog.show(getSupportFragmentManager(), "register request dialog");
 
-        } else {
+        }
+
+        //set the title and the amount of money for every chore
+
+        else {
 
             laundry = findViewById(R.id.laudry);
             laundry.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +209,11 @@ public class ChoresActivity extends AvatarChangeActivity {
         }
     }
 
+
+    /**
+     * addMoney method to call addChoresMoneyFragment
+     * inorder to add the chores money to the balance
+     */
     public void addMoney(String title, int amount) {
 
         addChoresMoneyFragment add = new addChoresMoneyFragment();

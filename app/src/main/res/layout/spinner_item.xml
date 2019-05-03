@@ -3,11 +3,11 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     style="@style/IconsTextStyleNoColor"
-    android:singleLine="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="21sp"
-    android:textStyle="bold"
-    android:textColor="?attr/colorPrimaryDark"
     android:ellipsize="marquee"
-    android:textAlignment="inherit"/>
+    android:singleLine="true"
+    android:textAlignment="inherit"
+    android:textColor="?attr/colorPrimaryDark"
+    android:textSize="21sp"
+    android:textStyle="bold" />

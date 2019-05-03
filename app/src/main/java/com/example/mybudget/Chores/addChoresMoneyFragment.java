@@ -28,7 +28,7 @@ import java.time.LocalDate;
  * Fragment allows the user to enter
  * an income, that will affect the balance
  *
- * @author Daniel Beadleson
+ * @author Alaa Al Sakka
  */
 
 public class addChoresMoneyFragment extends Fragment {
@@ -42,14 +42,12 @@ public class addChoresMoneyFragment extends Fragment {
     private int balance;
     private TextView mFragmentTitle;
     private String userParentEmail;
-
-
     private Bundle bundle;
 
-    /*
-     * Method creates the initial state of the
-     * fragment
+    /**
+     * Method creates the initial state of the fragment
      */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,8 +72,6 @@ public class addChoresMoneyFragment extends Fragment {
         mFragmentTitle = view.findViewById(R.id.title_money_from_chore_fragment);
         mFragmentTitle.setText("Chores Money");
         setAvatar();
-
-
         return view;
 
     }
@@ -90,9 +86,6 @@ public class addChoresMoneyFragment extends Fragment {
                 /**
                  * Method gets the description and amount of the income
                  */
-
-                // TODO: 2019-04-29 Add dialog to submit parents email if it is null and save entry in data base
-
                 try {
                     String description = mChoresDescription.getText().toString().trim();
                     Log.v(TAG, "description: " + description);
@@ -114,7 +107,6 @@ public class addChoresMoneyFragment extends Fragment {
 
                         addEntry(amount, description);
                         checkSMSEnabled();
-                        //sendEmail();  //TODO: Perhaps delete this sendEMail() method as your using sms???
                     }
                 } catch (Exception e) {
                     mChoresAmount.setError("Try Again");
@@ -125,7 +117,7 @@ public class addChoresMoneyFragment extends Fragment {
 
         Button cancelButton = view.findViewById(R.id.btn_cancelChoreFragment);
         cancelButton.setOnClickListener(new View.OnClickListener() {
-            /*
+            /**
              * Method sends the user back to the main menu
              * when the cancel button is initialised
              */
@@ -137,28 +129,17 @@ public class addChoresMoneyFragment extends Fragment {
         });
 
     }
+
     /**
      * Method adds the entry to the database
      */
-    public void addEntry(int amount, String description){
+    public void addEntry(int amount, String description) {
         Entry entry = new Entry();
         entry.setTypeOfEntry(3);
         entry.setAmount(amount);
         entry.setDate(LocalDate.now());
         entry.setDesc(description);
         ((ChoresActivity) getActivity()).db.addEntry(entry);
-    }
-
-    public void sendEmail() {
-
-        userParentEmail = "nastasyja@gmail.com";
-        //userParent email should be added and stored in data base
-        // TODO: 2019-04-29   userParentEmail = ((ChoresActivity) getActivity()).db.getUser().getUserParentsMail()
-        String emailBody = "Your child completed chore: " + mChoresDescription.getText() + " \n Payment for chore: " + mChoresAmount.getText() +
-                "\n please approve: ";
-        new SendMailTask().execute(userParentEmail, emailBody);
-        Toast toast = Toast.makeText(getActivity(), "Completed chore status is sent to your parents email ", Toast.LENGTH_LONG);
-        toast.show();
     }
 
     /**
@@ -173,8 +154,7 @@ public class addChoresMoneyFragment extends Fragment {
                 0).getBoolean(SettingsActivity.MESSAGEPREFS, false);
         if (smsEnabled) {
             sendSMS();
-        }
-        else {
+        } else {
             exit();
         }
     }
@@ -192,10 +172,13 @@ public class addChoresMoneyFragment extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.check, mFrag);
         t.commit();
-        
+
 
     }
 
+    /**
+     * Method to set the theme
+     */
     public void setAvatar() {
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);
@@ -204,7 +187,13 @@ public class addChoresMoneyFragment extends Fragment {
             mImageViewHero.setImageDrawable(d);
         }
     }
-    public void exit(){
+
+    /**
+     * Method to exit the chores and
+     * go the main activity
+     */
+
+    public void exit() {
         Intent intent = new Intent(getActivity(), ChoresActivity.class);
         startActivity(intent);
     }

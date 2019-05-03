@@ -1,5 +1,11 @@
 package com.example.mybudget.WishList;
-
+/**
+ * Fragment allows the user to transfer
+ * money from balance to a wish
+ *
+ * @author Anastasija Gurejeva
+ * @author Daniel Beadleson
+ */
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,9 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -23,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybudget.Home.SettingsActivity;
-
 import com.example.mybudget.Models.Entry;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.Profile.RegisterActivity;
@@ -40,13 +43,6 @@ import java.util.TimerTask;
 import static com.example.mybudget.Profile.RegisterActivity.USER_ID;
 
 
-/**
- * Fragment allows the user to transfer
- * money from balance to wish savings
- *
- * @author Anastasija Gurejeva
- * @author Daniel Beadleson
- */
 public class ChangeWishInflowOutflowFragment extends Fragment {
 
     private static final String TAG = "InflowOutflowFragment";
@@ -63,20 +59,15 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
     private GoalReachedDialog goalReached;
     private GoalHalfReachedDialog goalHalfReached;
     protected FloatingActionButton completed_wishes;
-    private String userParentEmail;
 
-    /*
-     * Method creates the initial state of the
-     * fragment
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
+
         completed_wishes = getActivity().findViewById(R.id.completed_wishes);
         completed_wishes.hide();
-
-        view = inflater.inflate(R.layout.fragment_change_wish_inflow_outflow, container, false);
 
         mfragmentTitle = view.findViewById(R.id.title_change_money_fragment);
         mimageViewHero = view.findViewById(R.id.imageViewHero_wishlist);
@@ -102,7 +93,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         return view;
     }
 
-    /*
+    /**
      * Method sets the balance
      */
     public void setBalance() {
@@ -116,7 +107,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         }
     }
 
-    /*
+    /**
      * Method sets the avatar image from system
      * preferences
      */
@@ -129,6 +120,10 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         }
     }
 
+    /**
+     * Method retrieves the input data or exits
+     * the fragment
+     */
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.v(TAG, "onViewCreated inititialsed");
         Log.v(TAG, "inflow" + addingMoney2Wish);
@@ -153,7 +148,7 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                     } else if (Integer.parseInt(sAmount) > 6000) {
                         mAmount.setError("Single transaction can't be more than 6000");
                     } else {
-                        //Adding an entry to log
+
                         int amount = Integer.parseInt(sAmount);
                         String wishName;
                         Entry entry = new Entry();
@@ -186,7 +181,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         });
     }
 
-    /*
+
+    /**
      * Method adds money to the wish
      * if the amount doesnt exceed the total price
      * of the wish
@@ -229,7 +225,6 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-//                    exitFragment();
                     Intent intent = new Intent(getActivity(), WishlistActivity.class);
                     startActivity(intent);
                 }
@@ -254,30 +249,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         }
     }
 
+
     /**
-     * @author Anastasija Gurejeva
-     * @author Daniel Beadleson
-     */
-    public void sendEmail() {
-        int userGlobalId = getActivity().getSharedPreferences(RegisterActivity.USER_PREFS_NAME,
-                0).getInt(USER_ID, 0);
-        String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
-        String userName = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserFirstName();
-
-        writeTheFileForEmail();
-        String emailBody = userName + " has completed saving for a  " + wish2Update.getTitle()
-                + ". \n " + userName + " Has successfully saved: " + wish2Update.getCost()
-                + " SEK, to pay for his/her dream.";
-        writeTheFileForEmail();
-
-        new SendMailTask().execute(userParentEmail, emailBody);
-
-        Toast.makeText(getActivity(), "Email sent to " + userName + "'s parent", Toast.LENGTH_LONG).show();
-
-
-    }
-
-    /*
      * Method takes away money from the list
      * if the amount doesnt exceed the total
      * amount of money allocated to the wish
@@ -303,13 +276,35 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
         }
     }
 
-    public void exitFragment() {
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_wish_fragment, new WishFragment())
-                .commit();
+    /**
+     * Method sends an email of the completed wish
+     * to the parent email (if enabled via Settings)
+     *
+     * @author Anastasija Gurejeva
+     * @author Daniel Beadleson
+     */
+    public void sendEmail() {
+        int userGlobalId = getActivity().getSharedPreferences(RegisterActivity.USER_PREFS_NAME,
+                0).getInt(USER_ID, 0);
+        String userParentEmail = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserMail();
+        String userName = ((WishlistActivity) getActivity()).db.getUser(userGlobalId).getUserFirstName();
+
+        writeTheFileForEmail();
+        String emailBody = userName + " has completed saving for a  " + wish2Update.getTitle()
+                + ". \n " + userName + " Has successfully saved: " + wish2Update.getCost()
+                + " SEK, to pay for his/her dream.";
+        writeTheFileForEmail();
+
+        new SendMailTask().execute(userParentEmail, emailBody);
+
+        Toast.makeText(getActivity(), "Email sent to " + userName + "'s parent", Toast.LENGTH_LONG).show();
+
+
     }
 
+    /**
+     * Method attaches the logo to the email
+     */
 
     public void writeTheFileForEmail() {
         ActivityCompat.requestPermissions((WishlistActivity) getActivity(),
@@ -332,7 +327,8 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
                 Log.d(TAG, "writeTheFileForEmail:" + fullPath);
 
 
-            } InputStream inputStream = getActivity().getAssets().open("logo_pm.jpg");
+            }
+            InputStream inputStream = getActivity().getAssets().open("logo_pm.jpg");
 
             try (FileOutputStream outputStream = new FileOutputStream(fullPath)) {
 
@@ -353,5 +349,15 @@ public class ChangeWishInflowOutflowFragment extends Fragment {
             e.getMessage();
         }
 
+    }
+
+    /**
+     * Method exits the fragment
+     */
+    public void exitFragment() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_wish_fragment, new WishFragment())
+                .commit();
     }
 }

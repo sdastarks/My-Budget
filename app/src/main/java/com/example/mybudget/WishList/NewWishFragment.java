@@ -174,9 +174,9 @@ public class NewWishFragment extends Fragment {
         });
     }
 
-
-    /*
-     * Method attempts to save a wish
+    /**
+     * Method saves a wish if all constraints
+     * are avoided
      */
 
     private void activateOnSaveNewWish() {
@@ -231,8 +231,15 @@ public class NewWishFragment extends Fragment {
         startActivity(intent);
     }
 
-    public String getURLForResource (int resourceId) {
-        return Uri.parse("android.resource://"+R.class.getPackage().getName()+"/" +resourceId).toString();
+    /**
+     * Method returns an image url
+     * from the app
+     *
+     * @param resourceId
+     * @return URL
+     */
+    public String getURLForResource(int resourceId) {
+        return Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + resourceId).toString();
 
     }
 }
