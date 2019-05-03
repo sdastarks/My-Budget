@@ -106,7 +106,9 @@ public class SendSms extends Fragment {
                         }
                         user.setUserPhone(s1);
                         ((ChoresActivity) getActivity()).db.updateUser(user, userGlobalId);
-                    } else {
+
+                    }
+                    else {
                         Toast.makeText(getActivity(), "Phone number should be 10 digits and starts with 0", Toast.LENGTH_SHORT).show();
                     }
                 }
