@@ -94,7 +94,6 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
             }
         });
 
-
         loadDataToRecycle();
         initRecyclerView();
         exitCompletedWishes();
@@ -111,7 +110,7 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
     /**
      * Loading all wishes in the list from the database
      *
-     * @auth DAWNIE Safar
+     * @auth SAFAR, Deshna
      */
     public void loadDataToRecycle() {
 
@@ -119,21 +118,26 @@ public class CompletedWishesActivity extends AvatarChangeActivity implements Rec
 
         for (WishList wl : loadwishes) {
             if (wl.getCost() == wl.getSaved()) {
+
                 mWishId.add(wl.getWishListId());
-                //TODO maybe try catch better be added DAWNIE
-                //mDrawable.add(getDrawable(Integer.parseInt(wl.getImage())));
-                // mDrawable.add(getDrawable(wl.getImage()));
+                mWishNames.add(wl.getTitle());
                 mDrawable.add(wl.getImage());
-                //mImageUrls.add(wl.getImage());
                 mWishPrices.add(wl.getCost());
                 mSavingProgress.add(wl.getSaved());
+//                mWishId.add(wl.getWishListId());
+//                //TODO maybe try catch better be added DAWNIE
+//                //mDrawable.add(getDrawable(Integer.parseInt(wl.getImage())));
+//                // mDrawable.add(getDrawable(wl.getImage()));
+//                mDrawable.add(wl.getImage());
+//                //mImageUrls.add(wl.getImage());
+//                mWishPrices.add(wl.getCost());
+//                mSavingProgress.add(wl.getSaved());
             }
         }
     }
 
     @Override
     public void onWishClick(int position) {
-
     }
 
     /**
