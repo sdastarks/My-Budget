@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 /**
  * Class shows a list of wishes in a recycled view
+ *
+ * @author Anastasija Gurejeva
  */
 public class WishlistActivity extends AvatarChangeActivity implements RecyclerViewAdapter.OnWishListener {
     private static final String TAG = "WishlistActivity";
