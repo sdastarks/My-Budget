@@ -4,42 +4,41 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="32dp"
-    android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
-    app:cardBackgroundColor="?attr/colorAccent"
+    android:layout_marginRight="10dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/colorAccent"
+    app:cardCornerRadius="32dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:elevation="12dp"
         app:cardCornerRadius="28dp">
-
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             android:background="@color/white">
 
             <TextView
                 android:id="@+id/amount"
+                style="@style/TextStyleBody"
                 android:layout_width="wrap_content"
                 android:layout_height="34dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                style = "@style/TextStyleBody"
                 android:text="Amount"
                 android:textAlignment="textEnd"
                 android:textSize="22dp"
@@ -48,11 +47,11 @@
 
             <TextView
                 android:id="@+id/date"
+                style="@style/TextStyleBody"
                 android:layout_width="83dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Date"
-                style = "@style/TextStyleBody"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/title"
@@ -60,9 +59,9 @@
 
             <TextView
                 android:id="@+id/title"
+                style="@style/TextStyleBody"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
-                style = "@style/TextStyleBody"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"

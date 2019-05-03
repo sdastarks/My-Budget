@@ -20,44 +20,43 @@ import android.widget.TextView;
 import com.example.mybudget.Home.MainActivity;
 import com.example.mybudget.R;
 
-public class WelcomeFragmentDialog extends  AppCompatDialogFragment {
-    private static final String TAG = "Welcome Fragment Dialog";
-    private Button cancel_fragment;
-    private TextView welcome_msg_txt;
-    private ImageView mImageHeroWelcomeScreen;
-    private ImageView mImageHeroRegistered;
+/**
+ * The fragment shows welcome fragment when user registers
+ * @author Benish
+ */
+    public class WelcomeFragmentDialog extends AppCompatDialogFragment {
+        private static final String TAG = "Welcome Fragment Dialog";
+        private Button cancel_fragment;
+        private TextView welcome_msg_txt;
+        private ImageView mImageHeroWelcomeScreen;
+        private ImageView mImageHeroRegistered;
 
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_welcome_screen, container, false);
-        mImageHeroWelcomeScreen = view.findViewById(R.id.image_welcome_hero);
-        mImageHeroRegistered = view.findViewById(R.id.imageWelcomeMonster);
-        cancel_fragment = view.findViewById(R.id.btn_cancel_welcome_fragment);
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        cancel_fragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: closing dialog");
-                getDialog().dismiss();
-                Intent intentLoadMainPage = new Intent (getActivity(), MainActivity.class);
-                startActivity(intentLoadMainPage);
-            }
-        });
-
-        setAvatar();
-
-        return view;
-    }
-
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_welcome_screen, container, false);
+            mImageHeroWelcomeScreen = view.findViewById(R.id.image_welcome_hero);
+            mImageHeroRegistered = view.findViewById(R.id.imageWelcomeMonster);
+            cancel_fragment = view.findViewById(R.id.btn_cancel_welcome_fragment);
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            cancel_fragment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick: closing dialog");
+                    getDialog().dismiss();
+                    Intent intentLoadMainPage = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intentLoadMainPage);
+                }
+            });
+            setAvatar();
+            return view;
+        }
 
     public void setAvatar() {
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);
-        if(imageResId != -1){
-            Drawable d=getActivity().getDrawable(imageResId);
+        if (imageResId != -1) {
+            Drawable d = getActivity().getDrawable(imageResId);
             mImageHeroRegistered.setImageDrawable(d);
         }
     }

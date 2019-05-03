@@ -23,7 +23,6 @@ import com.example.mybudget.R;
 import com.example.mybudget.SendMailTask;
 
 import java.time.LocalDate;
-import java.util.function.ToDoubleBiFunction;
 
 /**
  * Fragment allows the user to enter

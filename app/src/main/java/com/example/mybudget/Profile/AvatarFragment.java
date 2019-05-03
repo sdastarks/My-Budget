@@ -1,6 +1,5 @@
 package com.example.mybudget.Profile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,24 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 
-import com.example.mybudget.Profile.AvatarGridView;
 import com.example.mybudget.R;
-
-import static com.example.mybudget.R.style.AppTheme_GirlMonster;
-
+/**
+ * The fragment shows avatars in registration page
+ * @author Benish
+ */
 public class AvatarFragment extends Fragment {
     private static final String TAG = "Avatar Fragment";
     public static final String PREFS_NAME = "themePreferenceFile";
     public static final String KEY_THEME_RES_ID = "themeResId";
     public static final String KEY_DRAWABLE_RES_ID = "imageResId";
-
     private View view;
     private GridView gridView;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,15 +63,9 @@ public class AvatarFragment extends Fragment {
                     }
                 }
             });
-
-
         return view;
-        //View view = inflater.inflate(R.layout.fragment_avatar_layout, container, false);
-        //gridView = view.findViewById(R.id.grid_view);
-        //GridView gridView = (GridView)findViewById(R.id.fragment_avatar_layout);
-
-        //return view;
     }
+
     private void saveAndSwitchTheme(@StyleRes int themeRes, int imageRes) {
         SharedPreferences sharedPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPrefs.edit();

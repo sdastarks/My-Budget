@@ -11,7 +11,6 @@ public class Entry {
     private int enteryId;
     private LocalDate date;
     private int amount;
-    // expenditures = 0; income = 1; spendOnWish = 2; earnedFromChore = 3;
     private int typeOfEntry;
     private String desc;
 
@@ -23,7 +22,6 @@ public class Entry {
         this.amount = amount;
         this.typeOfEntry = typeOfEntry;
         this.desc = desc;
-
     }
 
     public int getEnteryId() {

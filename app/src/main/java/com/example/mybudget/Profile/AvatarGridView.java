@@ -5,16 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mybudget.R;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-
+/**
+ * Custom Adapter for Gridview to show avatars for theme selection
+ * @author Benish
+ */
 public class AvatarGridView extends BaseAdapter {
 
     private final List<Item> mItems = new ArrayList<Item>();
@@ -23,7 +25,6 @@ public class AvatarGridView extends BaseAdapter {
 
     public AvatarGridView(Context context) {
         mInflater = LayoutInflater.from(context);
-
         mItems.add(new Item(R.drawable.cookie_bg));
         mItems.add(new Item(R.drawable.crazy_bg));
         mItems.add(new Item(R.drawable.girl_bg));
@@ -47,37 +48,23 @@ public class AvatarGridView extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        View v = view;
+        View view1 = view;
         ImageView picture;
         TextView name;
-
-        if (v == null) {
-            v = mInflater.inflate(R.layout.grid_item, viewGroup, false);
-            v.setTag(R.id.picture_avatar, v.findViewById(R.id.picture_avatar));
+        if (view1 == null) {
+            view1 = mInflater.inflate(R.layout.grid_item, viewGroup, false);
+            view1.setTag(R.id.picture_avatar, view1.findViewById(R.id.picture_avatar));
         }
-
-        picture = (ImageView) v.getTag(R.id.picture_avatar);
-
+        picture = (ImageView) view1.getTag(R.id.picture_avatar);
         Item item = getItem(position);
-
         picture.setImageResource(item.drawableId);
-        return v;
-        /*ImageView imageView = new ImageView(context);
-        //imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
-        //imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-      //  imageView.setPadding(8,8,8,8);
-        imageView.setImageResource(thumbImages[position]);
-        return imageView;*/
+        return view1;
     }
 
-    //Add all images to arraylist
-
-
+    //Returns the position and id of image from drawable
     private static class Item {
         public final int drawableId;
-
-        Item(int drawableId) {
-
+            Item(int drawableId) {
             this.drawableId = drawableId;
         }
     }

@@ -20,7 +20,6 @@
         style="@style/HeadlineTextStyle">
         </TextView>
 
-
     <TableLayout
         android:layout_width="413dp"
         android:layout_height="match_parent"
@@ -43,13 +42,8 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="?attr/colorPrimary"
-
-
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/button_white_laundry"
-
-
-                />
+                app:srcCompat="@drawable/button_white_laundry" />
 
             <ImageButton
                 android:id="@+id/dishwashing"
@@ -59,7 +53,6 @@
                 android:adjustViewBounds="true"
                 android:background="?attr/colorPrimary"
                 android:clickable="true"
-
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/button_white_dishwasher" />
 
@@ -71,13 +64,10 @@
                 android:adjustViewBounds="true"
                 android:background="?attr/colorPrimary"
                 android:clickable="true"
-
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/button_white_book"
-
-                />
-
+                app:srcCompat="@drawable/button_white_book" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -91,8 +81,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:text="fixing laundry"
                 android:gravity="center"
-                android:textColor="#fff"
-                />
+                android:textColor="#fff" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -101,9 +90,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:text="dishwasher"
                 android:gravity="center"
-                android:textColor="#fff"
-
-                />
+                android:textColor="#fff" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -112,9 +99,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:paddingTop="3dp"
                 android:textColor="#fff"
-                android:gravity="center"
-                />
-
+                android:gravity="center" />
         </TableRow>
 
         <TableRow
@@ -132,12 +117,10 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_vacuum"
-                />
+                app:srcCompat="@drawable/button_white_vacuum" />
 
             <ImageButton
                 android:id="@+id/beingNice"
-
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
@@ -157,9 +140,8 @@
                 android:clickable="true"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/button_white_dog" />
-
-
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -173,8 +155,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:paddingTop="3dp"
                 android:textColor="#fff"
-                android:gravity="center"
-                />
+                android:gravity="center" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -183,9 +164,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:paddingTop="3dp"
                 android:textColor="#fff"
-                android:gravity="center"
-
-                />
+                android:gravity="center" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -194,9 +173,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:textColor="#fff"
                 android:paddingTop="3dp"
-                android:gravity="center"
-                />
-
+                android:gravity="center" />
         </TableRow>
 
         <TableRow
@@ -204,7 +181,6 @@
             android:layout_height="match_parent"
             android:layout_weight="0"
             android:weightSum="3">
-
 
             <ImageButton
                 android:id="@+id/grass"
@@ -215,8 +191,7 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_grass"
-                />
+                app:srcCompat="@drawable/button_white_grass" />
 
             <ImageButton
                 android:id="@+id/mopping"
@@ -238,9 +213,9 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_goodgrade"
-                />
+                app:srcCompat="@drawable/button_white_goodgrade" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -254,8 +229,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:paddingTop="3dp"
                 android:textColor="#fff"
-                android:gravity="center"
-                />
+                android:gravity="center" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -264,9 +238,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:paddingTop="3dp"
                 android:textColor="#fff"
-                android:gravity="center"
-
-                />
+                android:gravity="center" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -275,11 +247,8 @@
                 style="@style/IconsTextStyleNoColor"
                 android:textColor="#fff"
                 android:paddingTop="3dp"
-                android:gravity="center"
-                />
-
+                android:gravity="center" />
         </TableRow>
-
 
         <TableRow
             android:layout_width="match_parent"
@@ -307,8 +276,7 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_baby"
-                />
+                app:srcCompat="@drawable/button_white_baby" />
 
             <ImageButton
                 android:id="@+id/other"
@@ -320,8 +288,8 @@
                 android:clickable="true"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/button_white_plus" />
-
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -335,8 +303,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:paddingTop="3dp"
                 android:textColor="#fff"
-                android:gravity="center"
-                />
+                android:gravity="center" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -345,9 +312,7 @@
                 style="@style/IconsTextStyleNoColor"
                 android:paddingTop="3dp"
                 android:textColor="#fff"
-                android:gravity="center"
-
-                />
+                android:gravity="center" />
 
             <TextView
                 android:scaleType="fitCenter"
@@ -356,11 +321,8 @@
                 style="@style/IconsTextStyleNoColor"
                 android:textColor="#fff"
                 android:paddingTop="3dp"
-                android:gravity="center"
-                />
-
+                android:gravity="center" />
         </TableRow>
-
     </TableLayout>
 
     <FrameLayout
@@ -369,7 +331,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigation"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="-3dp"></FrameLayout>
+        android:layout_marginBottom="-3dp">
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -388,6 +351,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu">
     </android.support.design.widget.BottomNavigationView>
-
 
 </RelativeLayout>

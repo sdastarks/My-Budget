@@ -1,21 +1,16 @@
 <resources>
     <string name="app_name">Pocket Monster</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="available_balance">Available balance</string>
-
     <string name="costHint">Enter the cost</string>
     <string name="wish_name_hint">Enter the name of your wish</string>
     <string name="currency">SEK</string>
-
     <string name="hint_name">Name</string>
     <string name="hint_email">Email</string>
     <string name="text_register">Register</string>
     <string name="title_activity_base">BaseActivity</string>
-
 
     <string-array name="themes">
         <item>AppThemeCookieMonster</item>
@@ -28,7 +23,6 @@
     <string name="theme_dialog_title">Theme</string>
     <string name="settings">Settings</string>
     <string name="text_update_user">update</string>
-
     <string name="total_balance">Your Total Balance</string>
     <string name="money_spent">Money Spent</string>
     <string name="money_received">Money Received</string>
@@ -47,6 +41,5 @@
         <item>Spend on wish</item>
         <item>Earned from chore</item>
     </string-array>
-
 
 </resources>
