@@ -42,7 +42,8 @@ import java.util.Locale;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment allows the user to edit
+ * a wish
  */
 public class EditWishFragment extends Fragment {
 
@@ -212,7 +213,7 @@ public class EditWishFragment extends Fragment {
         return view;
     }
 
-    /*
+    /**
      * Method creates a dialog fragment allowing the user
      * to delete a wish or abort the procedure
      */
@@ -229,6 +230,9 @@ public class EditWishFragment extends Fragment {
         });
     }
 
+    /**
+     * Method exits the fragment
+     */
     private void activateOnExitEditWish() {
 
         btn_exitEditWish.setOnClickListener(new View.OnClickListener() {
@@ -241,6 +245,9 @@ public class EditWishFragment extends Fragment {
 
     }
 
+    /**
+     * Method validates the inout data
+     */
     private void activateOnSaveEditWish() {
         btn_saveEditWish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,6 +288,10 @@ public class EditWishFragment extends Fragment {
         });
     }
 
+    /**
+     * Method updates the wish details in
+     * the db
+     */
     public void updateWish() {
         String newTitle = meditTitle.getText().toString();
         int newCost = Integer.parseInt(meditCost.getText().toString());
@@ -302,9 +313,10 @@ public class EditWishFragment extends Fragment {
         startActivity(intent);
     }
 
-    /*@author Benish
+    /**
      * Method for choosing image from gallery
      * or capture image from camera
+     *
      */
     private void selectImage() {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
@@ -330,10 +342,20 @@ public class EditWishFragment extends Fragment {
         builder.show();
     }
 
+    /**
+     * Method retrieves the URL of the
+     * image file within the app
+     *
+     * @param resourceId
+     * @return URL
+     */
     public String getURLForResource (int resourceId) {
         return Uri.parse("android.resource://"+R.class.getPackage().getName()+"/" +resourceId).toString();
     }
 
+    /**
+     * Method opens the camera application
+     */
     private void openCameraIntent(){
         Intent pictureIntent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
         if(pictureIntent.resolveActivity(getActivity().getPackageManager()) != null){
@@ -352,7 +374,12 @@ public class EditWishFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Method creates an image file
+     *
+     * @return File
+     * @throws IOException
+     */
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
@@ -363,6 +390,14 @@ public class EditWishFragment extends Fragment {
         return image;
     }
 
+    /**
+     * Method grants permission of
+     * camera application
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull  int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -375,6 +410,14 @@ public class EditWishFragment extends Fragment {
         }
     }
 
+    /**
+     * Method sets the category image if permissions
+     * are accepted
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -399,6 +442,14 @@ public class EditWishFragment extends Fragment {
             }
         }
     }
+
+    /**
+     * Method returns the image URL from the db
+     *
+     * @param context
+     * @param uri
+     * @return ImageURL
+     */
 
     public  String getPath(Context context, Uri uri){
         String result = null;
