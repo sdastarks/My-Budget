@@ -29,7 +29,7 @@ import java.util.function.ToDoubleBiFunction;
  * Fragment allows the user to enter
  * an income, that will affect the balance
  *
- * @author Daniel Beadleson
+ * @author Alaa Al Sakka
  */
 
 public class addChoresMoneyFragment extends Fragment {

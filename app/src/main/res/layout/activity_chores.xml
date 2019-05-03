@@ -2,30 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/check"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true"
-    tools:context=".Chores.ChoresActivity"
-    android:id="@+id/check"
-    android:background="?attr/colorPrimary">
+    tools:context=".Chores.ChoresActivity">
 
     <TextView
         android:id="@+id/textView"
+        style="@style/HeadlineTextStyle"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="false"
         android:background="?attr/colorSecondary"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:text="Earn money with chores!"
-        style="@style/HeadlineTextStyle">
-        </TextView>
+        android:text="Earn money with chores!"></TextView>
 
 
     <TableLayout
         android:layout_width="413dp"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="60dp"
         android:weightSum="4"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
@@ -46,10 +45,7 @@
 
 
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/button_white_laundry"
-
-
-                />
+                app:srcCompat="@drawable/button_white_laundry" />
 
             <ImageButton
                 android:id="@+id/dishwashing"
@@ -73,11 +69,10 @@
                 android:clickable="true"
 
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/button_white_book"
-
-                />
+                app:srcCompat="@drawable/button_white_book" />
 
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -85,35 +80,31 @@
             android:weightSum="3">
 
             <TextView
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:paddingTop="3dp"
                 style="@style/IconsTextStyleNoColor"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="fixing laundry"
-                android:gravity="center"
-                android:textColor="#fff"
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:paddingTop="3dp"
                 style="@style/IconsTextStyleNoColor"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="dishwasher"
-                android:gravity="center"
-                android:textColor="#fff"
-
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:text="reading book"
                 style="@style/IconsTextStyleNoColor"
-                android:paddingTop="3dp"
-                android:textColor="#fff"
+                android:layout_weight="1"
                 android:gravity="center"
-                />
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
+                android:text="reading book"
+                android:textColor="#fff" />
 
         </TableRow>
 
@@ -128,12 +119,11 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="?attr/colorPrimary"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:background="?attr/colorPrimary"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_vacuum"
-                />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/button_white_vacuum" />
 
             <ImageButton
                 android:id="@+id/beingNice"
@@ -160,6 +150,7 @@
 
 
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -167,35 +158,31 @@
             android:weightSum="3">
 
             <TextView
-                android:scaleType="fitCenter"
+                style="@style/IconsTextStyleNoColor"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="vacuum"
-                style="@style/IconsTextStyleNoColor"
-                android:paddingTop="3dp"
-                android:textColor="#fff"
-                android:gravity="center"
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
+                style="@style/IconsTextStyleNoColor"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="being nice"
-                style="@style/IconsTextStyleNoColor"
-                android:paddingTop="3dp"
-                android:textColor="#fff"
-                android:gravity="center"
-
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:text="walk the pet"
                 style="@style/IconsTextStyleNoColor"
-                android:textColor="#fff"
-                android:paddingTop="3dp"
+                android:layout_weight="1"
                 android:gravity="center"
-                />
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
+                android:text="walk the pet"
+                android:textColor="#fff" />
 
         </TableRow>
 
@@ -211,12 +198,11 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="?attr/colorPrimary"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:background="?attr/colorPrimary"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_grass"
-                />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/button_white_grass" />
 
             <ImageButton
                 android:id="@+id/mopping"
@@ -234,13 +220,13 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="?attr/colorPrimary"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:background="?attr/colorPrimary"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_goodgrade"
-                />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/button_white_goodgrade" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -248,35 +234,31 @@
             android:weightSum="3">
 
             <TextView
-                android:scaleType="fitCenter"
+                style="@style/IconsTextStyleNoColor"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="cut the grass"
-                style="@style/IconsTextStyleNoColor"
-                android:paddingTop="3dp"
-                android:textColor="#fff"
-                android:gravity="center"
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
+                style="@style/IconsTextStyleNoColor"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="floor mopping"
-                style="@style/IconsTextStyleNoColor"
-                android:paddingTop="3dp"
-                android:textColor="#fff"
-                android:gravity="center"
-
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:text="excellent grade"
                 style="@style/IconsTextStyleNoColor"
-                android:textColor="#fff"
-                android:paddingTop="3dp"
+                android:layout_weight="1"
                 android:gravity="center"
-                />
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
+                android:text="excellent grade"
+                android:textColor="#fff" />
 
         </TableRow>
 
@@ -303,12 +285,11 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="?attr/colorPrimary"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:background="?attr/colorPrimary"
                 android:clickable="true"
-                app:srcCompat="@drawable/button_white_baby"
-                />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/button_white_baby" />
 
             <ImageButton
                 android:id="@+id/other"
@@ -322,6 +303,7 @@
                 app:srcCompat="@drawable/button_white_plus" />
 
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="107dp"
@@ -329,35 +311,31 @@
             android:weightSum="3">
 
             <TextView
-                android:scaleType="fitCenter"
+                style="@style/IconsTextStyleNoColor"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="cook"
-                style="@style/IconsTextStyleNoColor"
-                android:paddingTop="3dp"
-                android:textColor="#fff"
-                android:gravity="center"
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
+                style="@style/IconsTextStyleNoColor"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
                 android:text="helping sibling"
-                style="@style/IconsTextStyleNoColor"
-                android:paddingTop="3dp"
-                android:textColor="#fff"
-                android:gravity="center"
-
-                />
+                android:textColor="#fff" />
 
             <TextView
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:text="other"
                 style="@style/IconsTextStyleNoColor"
-                android:textColor="#fff"
-                android:paddingTop="3dp"
+                android:layout_weight="1"
                 android:gravity="center"
-                />
+                android:paddingTop="3dp"
+                android:scaleType="fitCenter"
+                android:text="other"
+                android:textColor="#fff" />
 
         </TableRow>
 
@@ -377,8 +355,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/border_button"
-        app:itemIconTint="@drawable/bottom_nav_colours"
         android:theme="@style/Widget.BottomNavigationView"
+        app:itemIconTint="@drawable/bottom_nav_colours"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
         app:itemTextAppearanceInactive="@style/BottomNavigationView"
         app:itemTextColor="?attr/colorAccent"
@@ -386,8 +364,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu">
-    </android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/bottom_menu"></android.support.design.widget.BottomNavigationView>
 
 
 </RelativeLayout>
