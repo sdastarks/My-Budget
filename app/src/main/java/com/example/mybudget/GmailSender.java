@@ -57,7 +57,7 @@ public class GmailSender {
     public GmailSender() {
     }
 
-    public GmailSender (String toEmail, String emailBody) {
+    public GmailSender(String toEmail, String emailBody) {
         this.toEmail = toEmail;
         this.emailBody = emailBody;
 
@@ -79,7 +79,7 @@ public class GmailSender {
 
         BodyPart messageBodyPart = new MimeBodyPart();
         Multipart multipart = new MimeMultipart();
-        messageBodyPart.setContent(Html.toHtml(Html.fromHtml("<h1>"+emailBody+"</h1>"))+"<br><br>" , "text/html"); //5
+        messageBodyPart.setContent(Html.toHtml(Html.fromHtml("<h1>" + emailBody + "</h1>")) + "<br><br>", "text/html"); //5
         multipart.addBodyPart(messageBodyPart);
         String filename = "/storage/emulated/0/Pocket Monster/logo_pm.jpg";
         File file = new File(filename);
