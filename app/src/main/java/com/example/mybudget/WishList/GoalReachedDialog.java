@@ -22,7 +22,8 @@ import android.widget.TextView;
 import com.example.mybudget.Models.WishList;
 import com.example.mybudget.R;
 /**
- * Dialog fragment, which notifies the user that they saved enough moeny for their goal;
+ * Dialog fragment, which notifies the user that they saved enough money for their goal;
+ *
  * @author Anastasija Gurejeva
  *
  */
@@ -51,6 +52,9 @@ public class GoalReachedDialog extends  AppCompatDialogFragment {
         return view;
     }
 
+    /**
+     * Method sets the avatar image
+     */
     public void setAvatar() {
         SharedPreferences settings = getActivity().getSharedPreferences("themePreferenceFile", 0);
         int imageResId = settings.getInt("imageResId", -1);

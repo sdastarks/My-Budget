@@ -66,7 +66,6 @@ public class EditWishFragment extends Fragment {
     private static final int REQUEST_PERMISSION = 200;
     private String mCurrentPhotoPath;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -201,7 +200,6 @@ public class EditWishFragment extends Fragment {
             }
         });
 
-
         activateOnExitEditWish();
         activateOnSaveEditWish();
         activateDeleteWish();
@@ -242,7 +240,6 @@ public class EditWishFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
     /**
@@ -281,9 +278,7 @@ public class EditWishFragment extends Fragment {
                     } else {
                         meditCost.setError("Try Again");
                     }
-
                 }
-
             }
         });
     }

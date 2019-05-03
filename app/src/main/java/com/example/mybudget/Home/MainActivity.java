@@ -150,7 +150,7 @@ public class MainActivity extends AvatarChangeActivity implements NavigationView
 
     /**
      * Method sets the avatar in the home screen
-     * and drawer mnenu based on the theme
+     * and drawer menu based on the theme
      */
     public void setAvatar(NavigationView navigationView) {
         addIncome = findViewById(R.id.floatingActionButton_add);
