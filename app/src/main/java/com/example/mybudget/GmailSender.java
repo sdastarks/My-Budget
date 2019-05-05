@@ -47,7 +47,7 @@ public class GmailSender {
     private String fromEmail = "pocketmonster.sda5@gmail.com";
     private String fromPassword = "SDA5gpPM";
     String toEmail;
-    String emailSubject = "Mocket monster needs your aproval";
+    String emailSubject = "Pocket monster informs...";
     String emailBody;
     @SuppressWarnings("rawtypes")
     Properties emailProperties;
