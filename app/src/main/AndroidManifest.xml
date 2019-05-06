@@ -31,7 +31,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Home.SettingsActivity">
+            android:name=".Home.SettingsActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
